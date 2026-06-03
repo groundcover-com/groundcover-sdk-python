@@ -1,0 +1,5 @@
+# Configuration for openapi-python-client
+# See: https://github.com/openapi-generators/openapi-python-client
+
+project_name_override: groundcover-sdk
+package_name_override: groundcover

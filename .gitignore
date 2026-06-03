@@ -1,0 +1,36 @@
+# NOTE: Unlike the monorepo source tree, generated code
+# (src/groundcover/api, src/groundcover/models, _generated_*.py) is
+# COMMITTED in this repo so it is self-contained and installable. The
+# release workflow refreshes it from the published SDK tarball each release.
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+dist/
+build/
+*.egg
+.eggs/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Testing
+.coverage
+htmlcov/
+.pytest_cache/
+
+# mypy
+.mypy_cache/
+
+# ruff
+.ruff_cache/
