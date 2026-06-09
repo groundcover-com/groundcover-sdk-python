@@ -1,0 +1,173 @@
+name: Release SDK
+
+permissions:
+  contents: write
+  id-token: write # required for PyPI Trusted Publishing (OIDC)
+
+concurrency:
+  group: release-${{ github.workflow }}
+  cancel-in-progress: true
+
+on:
+  workflow_dispatch:
+    inputs:
+      commit_hash:
+        description: 'Monorepo commit hash of the SDK source to release (default: latest)'
+        required: false
+        default: 'latest'
+      isPatchVersion:
+        description: 'Bump patch version instead of minor'
+        required: false
+        type: boolean
+        default: false
+      isMajorVersion:
+        description: 'Bump major version instead of minor'
+        required: false
+        type: boolean
+        default: false
+
+env:
+  SDK_S3_BUCKET_URL: https://groundcover-openapi-sdk-bucket.s3.us-east-1.amazonaws.com
+  VERSION_FILE: src/groundcover/_version.py
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      # Mint a GitHub App token so commits/pushes are attributed to the bot and can
+      # trigger downstream workflows (the default GITHUB_TOKEN cannot).
+      - uses: actions/create-github-app-token@v1
+        id: app-token
+        with:
+          app-id: ${{ vars.GROUNDCOVER_BOT_APP_ID }}
+          private-key: ${{ secrets.GROUNDCOVER_BOT_PRIVATE_KEY }}
+          owner: ${{ github.repository_owner }}
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
+          fetch-depth: 0
+          token: ${{ steps.app-token.outputs.token }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install build tooling
+        run: python -m pip install --upgrade build twine
+
+      - name: Download and Extract SDK
+        env:
+          COMMIT_HASH: ${{ github.event.inputs.commit_hash }}
+        run: |
+          # Guardrail for input combinations
+          if [ "${{ github.event.inputs.isMajorVersion }}" = "true" ] && [ "${{ github.event.inputs.isPatchVersion }}" = "true" ]; then
+            echo "Error: Cannot set both isMajorVersion and isPatchVersion to true. Choose one bump type or neither (minor)."
+            exit 1
+          fi
+
+          # Remove the previously generated code so it is fully replaced by the new artifact.
+          rm -rf src/groundcover/api src/groundcover/models
+          rm -f src/groundcover/_generated_client.py src/groundcover/_generated_errors.py src/groundcover/_generated_types.py
+
+          # Download the published Python SDK tarball (produced by the monorepo publish workflow).
+          FILE_URL="${SDK_S3_BUCKET_URL}/groundcover-sdk-python-${COMMIT_HASH}.tar.gz"
+          echo "Downloading from ${FILE_URL}"
+          curl -fL -o groundcover-sdk-python.tar.gz "${FILE_URL}"
+
+          # The tarball is created with `-C ./sdk-python`, so it extracts at the repo root.
+          tar -xzf groundcover-sdk-python.tar.gz
+          rm groundcover-sdk-python.tar.gz
+
+      - name: Prepare and Bump Version
+        id: version_logic
+        run: |
+          CURRENT_VERSION=$(grep -oP '__version__\s*=\s*"\K[^"]+' "$VERSION_FILE")
+          if [ -z "$CURRENT_VERSION" ]; then
+            echo "Error: could not read __version__ from $VERSION_FILE"
+            exit 1
+          fi
+          echo "Current version: $CURRENT_VERSION"
+
+          IFS='.' read -r -a PARTS <<< "$CURRENT_VERSION"
+          MAJOR=${PARTS[0]:-0}
+          MINOR=${PARTS[1]:-0}
+          PATCH=${PARTS[2]:-0}
+
+          if [ "${{ github.event.inputs.isMajorVersion }}" = "true" ]; then
+            echo "Bumping major version..."
+            MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0
+          elif [ "${{ github.event.inputs.isPatchVersion }}" = "true" ]; then
+            echo "Bumping patch version..."
+            PATCH=$((PATCH + 1))
+          else
+            echo "Bumping minor version..."
+            MINOR=$((MINOR + 1)); PATCH=0
+          fi
+
+          NEW_VERSION="${MAJOR}.${MINOR}.${PATCH}"
+          echo "__version__ = \"${NEW_VERSION}\"" > "$VERSION_FILE"
+          echo "Bumped version to: $NEW_VERSION"
+
+          echo "new_version=$NEW_VERSION" >> "$GITHUB_OUTPUT"
+          echo "current_version=$CURRENT_VERSION" >> "$GITHUB_OUTPUT"
+
+      - name: Commit & Push SDK and Version Changes
+        id: commit_changes
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          # Stage everything except the version file, then check whether the SDK actually
+          # changed. A version-only bump (no SDK changes) should NOT produce a release.
+          git add -A
+          git restore --staged "$VERSION_FILE"
+
+          if git diff --staged --quiet; then
+            echo "No changes to SDK files. Skipping commit, tag, build, and publish."
+            echo "committed=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "Changes detected. Committing and pushing..."
+            git add "$VERSION_FILE"
+            git config --global user.name 'groundcover-bot[bot]'
+            git config --global user.email 'groundcover-bot[bot]@users.noreply.github.com'
+            git commit -m "Update SDK to version ${{ steps.version_logic.outputs.new_version }} (SDK source: ${{ github.event.inputs.commit_hash }})"
+            git push
+            echo "committed=true" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Create and Push Tag
+        if: steps.commit_changes.outputs.committed == 'true'
+        env:
+          GITHUB_TOKEN: ${{ steps.app-token.outputs.token }}
+        run: |
+          NEW_TAG="v${{ steps.version_logic.outputs.new_version }}"
+          echo "Creating and pushing tag: $NEW_TAG"
+          git tag "$NEW_TAG"
+          git push origin "$NEW_TAG"
+
+      - name: Build distribution
+        if: steps.commit_changes.outputs.committed == 'true'
+        run: |
+          rm -rf dist
+          python -m build
+          twine check dist/*
+
+      - name: Create GitHub Release
+        if: steps.commit_changes.outputs.committed == 'true'
+        uses: softprops/action-gh-release@v2
+        with:
+          token: ${{ steps.app-token.outputs.token }}
+          tag_name: v${{ steps.version_logic.outputs.new_version }}
+          name: Release v${{ steps.version_logic.outputs.new_version }}
+          body: |
+            Automated release for version ${{ steps.version_logic.outputs.new_version }}.
+            SDK source commit: ${{ github.event.inputs.commit_hash }}
+            Previous version: ${{ steps.version_logic.outputs.current_version }}
+          files: dist/*
+          draft: false
+
+      - name: Publish to PyPI
+        if: steps.commit_changes.outputs.committed == 'true'
+        uses: pypa/gh-action-pypi-publish@release/v1
