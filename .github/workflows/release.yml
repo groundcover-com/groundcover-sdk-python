@@ -168,6 +168,7 @@ jobs:
           files: dist/*
           draft: false
 
-      - name: Publish to PyPI
-        if: steps.commit_changes.outputs.committed == 'true'
-        uses: pypa/gh-action-pypi-publish@release/v1
+      # Disabled for dry run (AI-23) — re-enable to publish to PyPI.
+      # - name: Publish to PyPI
+      #   if: steps.commit_changes.outputs.committed == 'true'
+      #   uses: pypa/gh-action-pypi-publish@release/v1
