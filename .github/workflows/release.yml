@@ -81,6 +81,13 @@ jobs:
           tar -xzf groundcover-sdk-python.tar.gz
           rm groundcover-sdk-python.tar.gz
 
+          # The tarball carries the monorepo's sdk-python/.gitignore, which ignores the
+          # generated code (api/, models/, _generated_*.py). This external repo must COMMIT
+          # that code to stay self-contained, so restore our own .gitignore and discard the
+          # one from the tarball. Without this, `git add -A` below would skip the generated
+          # files and they would never be committed.
+          git checkout -- .gitignore
+
       - name: Prepare and Bump Version
         id: version_logic
         run: |
