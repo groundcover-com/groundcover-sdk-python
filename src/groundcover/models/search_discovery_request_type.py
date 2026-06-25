@@ -9,6 +9,7 @@ class SearchDiscoveryRequestType(str, Enum):
     EVENTS = "events"
     ISSUES = "issues"
     LOGS = "logs"
+    MONITORS = "monitors"
     TRACES = "traces"
 
     def __str__(self) -> str:

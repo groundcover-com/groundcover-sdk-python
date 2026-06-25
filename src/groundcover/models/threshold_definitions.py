@@ -29,15 +29,15 @@ class ThresholdDefinitions:
     Attributes:
         queries (list[BaseQueryIsTheBaseStructForDifferentQueryTypes]): List of queries defining the data sources for
             the monitor.
+        thresholds (list[ThresholdDefinesAConditionToEvaluateAgainstAReducedValue]): List of thresholds to evaluate
+            against the final reduced value.
         reducers (list[ReducerModelDefinesHowToAggregateOrTransformQueryResults] | Unset): List of reducers to aggregate
             or transform query results.
-        thresholds (list[ThresholdDefinesAConditionToEvaluateAgainstAReducedValue] | Unset): List of thresholds to
-            evaluate against the final reduced value.
     """
 
     queries: list[BaseQueryIsTheBaseStructForDifferentQueryTypes]
+    thresholds: list[ThresholdDefinesAConditionToEvaluateAgainstAReducedValue]
     reducers: list[ReducerModelDefinesHowToAggregateOrTransformQueryResults] | Unset = UNSET
-    thresholds: list[ThresholdDefinesAConditionToEvaluateAgainstAReducedValue] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -46,6 +46,11 @@ class ThresholdDefinitions:
             queries_item = queries_item_data.to_dict()
             queries.append(queries_item)
 
+        thresholds = []
+        for thresholds_item_data in self.thresholds:
+            thresholds_item = thresholds_item_data.to_dict()
+            thresholds.append(thresholds_item)
+
         reducers: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.reducers, Unset):
             reducers = []
@@ -53,24 +58,16 @@ class ThresholdDefinitions:
                 reducers_item = reducers_item_data.to_dict()
                 reducers.append(reducers_item)
 
-        thresholds: list[dict[str, Any]] | Unset = UNSET
-        if not isinstance(self.thresholds, Unset):
-            thresholds = []
-            for thresholds_item_data in self.thresholds:
-                thresholds_item = thresholds_item_data.to_dict()
-                thresholds.append(thresholds_item)
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
                 "queries": queries,
+                "thresholds": thresholds,
             }
         )
         if reducers is not UNSET:
             field_dict["reducers"] = reducers
-        if thresholds is not UNSET:
-            field_dict["thresholds"] = thresholds
 
         return field_dict
 
@@ -94,6 +91,13 @@ class ThresholdDefinitions:
 
             queries.append(queries_item)
 
+        thresholds = []
+        _thresholds = d.pop("thresholds")
+        for thresholds_item_data in _thresholds:
+            thresholds_item = ThresholdDefinesAConditionToEvaluateAgainstAReducedValue.from_dict(thresholds_item_data)
+
+            thresholds.append(thresholds_item)
+
         _reducers = d.pop("reducers", UNSET)
         reducers: list[ReducerModelDefinesHowToAggregateOrTransformQueryResults] | Unset = UNSET
         if _reducers is not UNSET:
@@ -103,21 +107,10 @@ class ThresholdDefinitions:
 
                 reducers.append(reducers_item)
 
-        _thresholds = d.pop("thresholds", UNSET)
-        thresholds: list[ThresholdDefinesAConditionToEvaluateAgainstAReducedValue] | Unset = UNSET
-        if _thresholds is not UNSET:
-            thresholds = []
-            for thresholds_item_data in _thresholds:
-                thresholds_item = ThresholdDefinesAConditionToEvaluateAgainstAReducedValue.from_dict(
-                    thresholds_item_data
-                )
-
-                thresholds.append(thresholds_item)
-
         threshold_definitions = cls(
             queries=queries,
-            reducers=reducers,
             thresholds=thresholds,
+            reducers=reducers,
         )
 
         threshold_definitions.additional_properties = d

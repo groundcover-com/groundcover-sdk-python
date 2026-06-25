@@ -21,11 +21,13 @@ class TraceAttributesResponse:
     """
     Attributes:
         attributes (TraceAttributesResponseAttributes | Unset):
+        resource_truncated (bool | Unset):
         span_id (str | Unset):
         tags (TraceAttributesResponseTags | Unset):
     """
 
     attributes: TraceAttributesResponseAttributes | Unset = UNSET
+    resource_truncated: bool | Unset = UNSET
     span_id: str | Unset = UNSET
     tags: TraceAttributesResponseTags | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -34,6 +36,8 @@ class TraceAttributesResponse:
         attributes: dict[str, Any] | Unset = UNSET
         if not isinstance(self.attributes, Unset):
             attributes = self.attributes.to_dict()
+
+        resource_truncated = self.resource_truncated
 
         span_id = self.span_id
 
@@ -46,6 +50,8 @@ class TraceAttributesResponse:
         field_dict.update({})
         if attributes is not UNSET:
             field_dict["attributes"] = attributes
+        if resource_truncated is not UNSET:
+            field_dict["resourceTruncated"] = resource_truncated
         if span_id is not UNSET:
             field_dict["spanId"] = span_id
         if tags is not UNSET:
@@ -66,6 +72,8 @@ class TraceAttributesResponse:
         else:
             attributes = TraceAttributesResponseAttributes.from_dict(_attributes)
 
+        resource_truncated = d.pop("resourceTruncated", UNSET)
+
         span_id = d.pop("spanId", UNSET)
 
         _tags = d.pop("tags", UNSET)
@@ -77,6 +85,7 @@ class TraceAttributesResponse:
 
         trace_attributes_response = cls(
             attributes=attributes,
+            resource_truncated=resource_truncated,
             span_id=span_id,
             tags=tags,
         )

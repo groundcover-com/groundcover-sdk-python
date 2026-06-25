@@ -6,27 +6,35 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="RouteConnectedAppResponseParams")
+from .._generated_types import UNSET, Unset
+
+T = TypeVar("T", bound="MonitorDetailsResponse")
 
 
 @_attrs_define
-class RouteConnectedAppResponseParams:
-    """Route-specific parameters for this connected app.
-    Slack App routes may include params.channels with the selected Slack channels
-    as {"id":"C123456","name":"#alerts"} objects; name is an optional display name.
-    Connected app types that do not support route params omit this field.
-
-        Example:
-            {'channels': [{'id': 'C123456', 'name': '#alerts'}]}
-
+class MonitorDetailsResponse:
+    """
+    Attributes:
+        data (str | Unset): Monitor definition YAML.
+        is_provisioned (bool | Unset): Whether the monitor is provisioned by IaC.
     """
 
+    data: str | Unset = UNSET
+    is_provisioned: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        data = self.data
+
+        is_provisioned = self.is_provisioned
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if data is not UNSET:
+            field_dict["data"] = data
+        if is_provisioned is not UNSET:
+            field_dict["isProvisioned"] = is_provisioned
 
         return field_dict
 
@@ -40,10 +48,17 @@ class RouteConnectedAppResponseParams:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        route_connected_app_response_params = cls()
+        data = d.pop("data", UNSET)
 
-        route_connected_app_response_params.additional_properties = d
-        return route_connected_app_response_params
+        is_provisioned = d.pop("isProvisioned", UNSET)
+
+        monitor_details_response = cls(
+            data=data,
+            is_provisioned=is_provisioned,
+        )
+
+        monitor_details_response.additional_properties = d
+        return monitor_details_response
 
     @property
     def additional_keys(self) -> list[str]:

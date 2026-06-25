@@ -7,8 +7,10 @@ class SearchValuesRequestType(str, Enum):
     APM = "apm"
     ENTITIES = "entities"
     EVENTS = "events"
+    INGESTION_MEASUREMENTS = "ingestion_measurements"
     ISSUES = "issues"
     LOGS = "logs"
+    MONITORS = "monitors"
     TRACES = "traces"
 
     def __str__(self) -> str:

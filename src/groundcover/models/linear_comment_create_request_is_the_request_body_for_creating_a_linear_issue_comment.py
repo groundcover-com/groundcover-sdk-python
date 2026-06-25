@@ -6,27 +6,29 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="RouteConnectedAppResponseParams")
+T = TypeVar("T", bound="LinearCommentCreateRequestIsTheRequestBodyForCreatingALinearIssueComment")
 
 
 @_attrs_define
-class RouteConnectedAppResponseParams:
-    """Route-specific parameters for this connected app.
-    Slack App routes may include params.channels with the selected Slack channels
-    as {"id":"C123456","name":"#alerts"} objects; name is an optional display name.
-    Connected app types that do not support route params omit this field.
-
-        Example:
-            {'channels': [{'id': 'C123456', 'name': '#alerts'}]}
-
+class LinearCommentCreateRequestIsTheRequestBodyForCreatingALinearIssueComment:
+    """
+    Attributes:
+        body (str):
     """
 
+    body: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        body = self.body
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update(
+            {
+                "body": body,
+            }
+        )
 
         return field_dict
 
@@ -40,10 +42,14 @@ class RouteConnectedAppResponseParams:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        route_connected_app_response_params = cls()
+        body = d.pop("body")
 
-        route_connected_app_response_params.additional_properties = d
-        return route_connected_app_response_params
+        linear_comment_create_request_is_the_request_body_for_creating_a_linear_issue_comment = cls(
+            body=body,
+        )
+
+        linear_comment_create_request_is_the_request_body_for_creating_a_linear_issue_comment.additional_properties = d
+        return linear_comment_create_request_is_the_request_body_for_creating_a_linear_issue_comment
 
     @property
     def additional_keys(self) -> list[str]:

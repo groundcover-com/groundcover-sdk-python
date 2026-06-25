@@ -22,8 +22,10 @@ class RouteConnectedAppRequest:
         id (str): The connected app ID Example: app-123.
         type_ (str): The type of the connected app. Example: slack-app.
         params (RouteConnectedAppRequestParams | Unset): Route-specific parameters for this connected app.
-            Slack App routes require params.channels with at least one channel ID.
-            Connected app types that do not support route params must omit this field. Example: {'channels': ['C123456']}.
+            Slack App routes require params.channels with at least one channel object
+            of the form {"id":"C123456","name":"#alerts"}; name is an optional display name.
+            Connected app types that do not support route params must omit this field. Example: {'channels': [{'id':
+            'C123456', 'name': '#alerts'}]}.
     """
 
     id: str

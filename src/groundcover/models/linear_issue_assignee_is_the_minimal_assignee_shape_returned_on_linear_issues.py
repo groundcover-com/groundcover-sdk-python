@@ -6,27 +6,35 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="RouteConnectedAppResponseParams")
+from .._generated_types import UNSET, Unset
+
+T = TypeVar("T", bound="LinearIssueAssigneeIsTheMinimalAssigneeShapeReturnedOnLinearIssues")
 
 
 @_attrs_define
-class RouteConnectedAppResponseParams:
-    """Route-specific parameters for this connected app.
-    Slack App routes may include params.channels with the selected Slack channels
-    as {"id":"C123456","name":"#alerts"} objects; name is an optional display name.
-    Connected app types that do not support route params omit this field.
-
-        Example:
-            {'channels': [{'id': 'C123456', 'name': '#alerts'}]}
-
+class LinearIssueAssigneeIsTheMinimalAssigneeShapeReturnedOnLinearIssues:
+    """
+    Attributes:
+        id (str | Unset):
+        name (str | Unset):
     """
 
+    id: str | Unset = UNSET
+    name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        id = self.id
+
+        name = self.name
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if id is not UNSET:
+            field_dict["id"] = id
+        if name is not UNSET:
+            field_dict["name"] = name
 
         return field_dict
 
@@ -40,10 +48,17 @@ class RouteConnectedAppResponseParams:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        route_connected_app_response_params = cls()
+        id = d.pop("id", UNSET)
 
-        route_connected_app_response_params.additional_properties = d
-        return route_connected_app_response_params
+        name = d.pop("name", UNSET)
+
+        linear_issue_assignee_is_the_minimal_assignee_shape_returned_on_linear_issues = cls(
+            id=id,
+            name=name,
+        )
+
+        linear_issue_assignee_is_the_minimal_assignee_shape_returned_on_linear_issues.additional_properties = d
+        return linear_issue_assignee_is_the_minimal_assignee_shape_returned_on_linear_issues
 
     @property
     def additional_keys(self) -> list[str]:

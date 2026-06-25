@@ -6,27 +6,29 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="RouteConnectedAppResponseParams")
+from .._generated_types import UNSET, Unset
+
+T = TypeVar("T", bound="UpdateTenantAISettingsResponse400")
 
 
 @_attrs_define
-class RouteConnectedAppResponseParams:
-    """Route-specific parameters for this connected app.
-    Slack App routes may include params.channels with the selected Slack channels
-    as {"id":"C123456","name":"#alerts"} objects; name is an optional display name.
-    Connected app types that do not support route params omit this field.
-
-        Example:
-            {'channels': [{'id': 'C123456', 'name': '#alerts'}]}
-
+class UpdateTenantAISettingsResponse400:
+    """
+    Attributes:
+        message (str | Unset):
     """
 
+    message: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        message = self.message
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if message is not UNSET:
+            field_dict["message"] = message
 
         return field_dict
 
@@ -40,10 +42,14 @@ class RouteConnectedAppResponseParams:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        route_connected_app_response_params = cls()
+        message = d.pop("message", UNSET)
 
-        route_connected_app_response_params.additional_properties = d
-        return route_connected_app_response_params
+        update_tenant_ai_settings_response_400 = cls(
+            message=message,
+        )
+
+        update_tenant_ai_settings_response_400.additional_properties = d
+        return update_tenant_ai_settings_response_400
 
     @property
     def additional_keys(self) -> list[str]:

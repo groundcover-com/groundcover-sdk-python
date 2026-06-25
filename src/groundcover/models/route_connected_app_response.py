@@ -22,8 +22,10 @@ class RouteConnectedAppResponse:
         id (str | Unset): The connected app ID Example: app-123.
         name (str | Unset): The connected app name (resolved) Example: My Slack App.
         params (RouteConnectedAppResponseParams | Unset): Route-specific parameters for this connected app.
-            Slack App routes may include params.channels with selected Slack channel IDs.
-            Connected app types that do not support route params omit this field. Example: {'channels': ['C123456']}.
+            Slack App routes may include params.channels with the selected Slack channels
+            as {"id":"C123456","name":"#alerts"} objects; name is an optional display name.
+            Connected app types that do not support route params omit this field. Example: {'channels': [{'id': 'C123456',
+            'name': '#alerts'}]}.
         type_ (str | Unset): The type of the connected app. Example: slack-app.
     """
 

@@ -12,11 +12,12 @@ T = TypeVar("T", bound="RouteConnectedAppRequestParams")
 @_attrs_define
 class RouteConnectedAppRequestParams:
     """Route-specific parameters for this connected app.
-    Slack App routes require params.channels with at least one channel ID.
+    Slack App routes require params.channels with at least one channel object
+    of the form {"id":"C123456","name":"#alerts"}; name is an optional display name.
     Connected app types that do not support route params must omit this field.
 
         Example:
-            {'channels': ['C123456']}
+            {'channels': [{'id': 'C123456', 'name': '#alerts'}]}
 
     """
 

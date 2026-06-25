@@ -6,27 +6,31 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="RouteConnectedAppResponseParams")
+T = TypeVar("T", bound="AgentCustomInstructionsRequest")
 
 
 @_attrs_define
-class RouteConnectedAppResponseParams:
-    """Route-specific parameters for this connected app.
-    Slack App routes may include params.channels with the selected Slack channels
-    as {"id":"C123456","name":"#alerts"} objects; name is an optional display name.
-    Connected app types that do not support route params omit this field.
+class AgentCustomInstructionsRequest:
+    """AgentCustomInstructionsRequest is forwarded to agent-service for custom
+    instructions upserts.
 
-        Example:
-            {'channels': [{'id': 'C123456', 'name': '#alerts'}]}
-
+        Attributes:
+            instructions (str): The custom instructions text.
     """
 
+    instructions: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        instructions = self.instructions
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update(
+            {
+                "instructions": instructions,
+            }
+        )
 
         return field_dict
 
@@ -40,10 +44,14 @@ class RouteConnectedAppResponseParams:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        route_connected_app_response_params = cls()
+        instructions = d.pop("instructions")
 
-        route_connected_app_response_params.additional_properties = d
-        return route_connected_app_response_params
+        agent_custom_instructions_request = cls(
+            instructions=instructions,
+        )
+
+        agent_custom_instructions_request.additional_properties = d
+        return agent_custom_instructions_request
 
     @property
     def additional_keys(self) -> list[str]:

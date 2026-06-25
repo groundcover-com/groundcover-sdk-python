@@ -6,27 +6,41 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="RouteConnectedAppResponseParams")
+from .._generated_types import UNSET, Unset
+
+T = TypeVar("T", bound="LinearLabelIsALinearIssueLabelForATeam")
 
 
 @_attrs_define
-class RouteConnectedAppResponseParams:
-    """Route-specific parameters for this connected app.
-    Slack App routes may include params.channels with the selected Slack channels
-    as {"id":"C123456","name":"#alerts"} objects; name is an optional display name.
-    Connected app types that do not support route params omit this field.
-
-        Example:
-            {'channels': [{'id': 'C123456', 'name': '#alerts'}]}
-
+class LinearLabelIsALinearIssueLabelForATeam:
+    """
+    Attributes:
+        color (str | Unset):
+        id (str | Unset):
+        name (str | Unset):
     """
 
+    color: str | Unset = UNSET
+    id: str | Unset = UNSET
+    name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        color = self.color
+
+        id = self.id
+
+        name = self.name
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if color is not UNSET:
+            field_dict["color"] = color
+        if id is not UNSET:
+            field_dict["id"] = id
+        if name is not UNSET:
+            field_dict["name"] = name
 
         return field_dict
 
@@ -40,10 +54,20 @@ class RouteConnectedAppResponseParams:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        route_connected_app_response_params = cls()
+        color = d.pop("color", UNSET)
 
-        route_connected_app_response_params.additional_properties = d
-        return route_connected_app_response_params
+        id = d.pop("id", UNSET)
+
+        name = d.pop("name", UNSET)
+
+        linear_label_is_a_linear_issue_label_for_a_team = cls(
+            color=color,
+            id=id,
+            name=name,
+        )
+
+        linear_label_is_a_linear_issue_label_for_a_team.additional_properties = d
+        return linear_label_is_a_linear_issue_label_for_a_team
 
     @property
     def additional_keys(self) -> list[str]:

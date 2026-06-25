@@ -6,27 +6,29 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="RouteConnectedAppResponseParams")
+from .._generated_types import UNSET, Unset
+
+T = TypeVar("T", bound="LinearResolveIssueRequestIsTheOptionalRequestBodyForResolvingALinearIssue")
 
 
 @_attrs_define
-class RouteConnectedAppResponseParams:
-    """Route-specific parameters for this connected app.
-    Slack App routes may include params.channels with the selected Slack channels
-    as {"id":"C123456","name":"#alerts"} objects; name is an optional display name.
-    Connected app types that do not support route params omit this field.
-
-        Example:
-            {'channels': [{'id': 'C123456', 'name': '#alerts'}]}
-
+class LinearResolveIssueRequestIsTheOptionalRequestBodyForResolvingALinearIssue:
+    """
+    Attributes:
+        state_id (str | Unset):
     """
 
+    state_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        state_id = self.state_id
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update({})
+        if state_id is not UNSET:
+            field_dict["state_id"] = state_id
 
         return field_dict
 
@@ -40,10 +42,14 @@ class RouteConnectedAppResponseParams:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        route_connected_app_response_params = cls()
+        state_id = d.pop("state_id", UNSET)
 
-        route_connected_app_response_params.additional_properties = d
-        return route_connected_app_response_params
+        linear_resolve_issue_request_is_the_optional_request_body_for_resolving_a_linear_issue = cls(
+            state_id=state_id,
+        )
+
+        linear_resolve_issue_request_is_the_optional_request_body_for_resolving_a_linear_issue.additional_properties = d
+        return linear_resolve_issue_request_is_the_optional_request_body_for_resolving_a_linear_issue
 
     @property
     def additional_keys(self) -> list[str]:

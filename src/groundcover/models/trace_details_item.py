@@ -51,6 +51,7 @@ class TraceDetailsItem:
         request (TraceDetailsRequestInfo | Unset):
         resource (str | Unset):
         resource_id (str | Unset):
+        resource_truncated (bool | Unset):
         response (TraceDetailsResponseInfo | Unset):
         role (str | Unset):
         server (str | Unset):
@@ -96,6 +97,7 @@ class TraceDetailsItem:
     request: TraceDetailsRequestInfo | Unset = UNSET
     resource: str | Unset = UNSET
     resource_id: str | Unset = UNSET
+    resource_truncated: bool | Unset = UNSET
     response: TraceDetailsResponseInfo | Unset = UNSET
     role: str | Unset = UNSET
     server: str | Unset = UNSET
@@ -171,6 +173,8 @@ class TraceDetailsItem:
         resource = self.resource
 
         resource_id = self.resource_id
+
+        resource_truncated = self.resource_truncated
 
         response: dict[str, Any] | Unset = UNSET
         if not isinstance(self.response, Unset):
@@ -275,6 +279,8 @@ class TraceDetailsItem:
             field_dict["resource"] = resource
         if resource_id is not UNSET:
             field_dict["resourceId"] = resource_id
+        if resource_truncated is not UNSET:
+            field_dict["resourceTruncated"] = resource_truncated
         if response is not UNSET:
             field_dict["response"] = response
         if role is not UNSET:
@@ -377,6 +383,8 @@ class TraceDetailsItem:
 
         resource_id = d.pop("resourceId", UNSET)
 
+        resource_truncated = d.pop("resourceTruncated", UNSET)
+
         _response = d.pop("response", UNSET)
         response: TraceDetailsResponseInfo | Unset
         if isinstance(_response, Unset) or _response is None:
@@ -462,6 +470,7 @@ class TraceDetailsItem:
             request=request,
             resource=resource,
             resource_id=resource_id,
+            resource_truncated=resource_truncated,
             response=response,
             role=role,
             server=server,

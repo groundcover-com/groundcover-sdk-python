@@ -9,26 +9,26 @@ from attrs import field as _attrs_field
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.connected_app_channel_identifies_a_slack_channel_for_slack_app_delivery import (
-        ConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery,
+    from ..models.test_monitor_connected_app_channel_identifies_a_slack_channel_for_slack_app_delivery import (
+        TestMonitorConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery,
     )
 
 
-T = TypeVar("T", bound="ConnectedAppDeliveryOptions")
+T = TypeVar("T", bound="TestMonitorConnectedAppDeliveryOptions")
 
 
 @_attrs_define
-class ConnectedAppDeliveryOptions:
-    """ConnectedAppDeliveryOptions carries per-app delivery options for direct-to-connected-app
-    monitor notifications. Fields are app-type specific; unrelated fields are ignored.
+class TestMonitorConnectedAppDeliveryOptions:
+    """TestMonitorConnectedAppDeliveryOptions carries per-app delivery options for a direct
+    connected-app test notification. Fields are app-type specific; unrelated fields are ignored.
 
         Attributes:
-            channels (list[ConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery] | Unset): Channels lists Slack
-                channels to post to (slack-app connected apps).
-                Multiple channels result in one notification per channel via dispatch-center fanout.
+            channels (list[TestMonitorConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery] | Unset): Channels
+                lists the Slack channels to post to (slack-app connected apps).
+                Multiple channels result in one test notification per channel.
     """
 
-    channels: list[ConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery] | Unset = UNSET
+    channels: list[TestMonitorConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -49,28 +49,28 @@ class ConnectedAppDeliveryOptions:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.connected_app_channel_identifies_a_slack_channel_for_slack_app_delivery import (
-            ConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery,
+        from ..models.test_monitor_connected_app_channel_identifies_a_slack_channel_for_slack_app_delivery import (
+            TestMonitorConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery,
         )
 
         d = dict(src_dict)
         _channels = d.pop("channels", UNSET)
-        channels: list[ConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery] | Unset = UNSET
+        channels: list[TestMonitorConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery] | Unset = UNSET
         if _channels is not UNSET:
             channels = []
             for channels_item_data in _channels:
-                channels_item = ConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery.from_dict(
+                channels_item = TestMonitorConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery.from_dict(
                     channels_item_data
                 )
 
                 channels.append(channels_item)
 
-        connected_app_delivery_options = cls(
+        test_monitor_connected_app_delivery_options = cls(
             channels=channels,
         )
 
-        connected_app_delivery_options.additional_properties = d
-        return connected_app_delivery_options
+        test_monitor_connected_app_delivery_options.additional_properties = d
+        return test_monitor_connected_app_delivery_options
 
     @property
     def additional_keys(self) -> list[str]:

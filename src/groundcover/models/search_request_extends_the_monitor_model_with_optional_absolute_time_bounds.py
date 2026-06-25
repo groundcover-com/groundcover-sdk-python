@@ -72,7 +72,7 @@ class SearchRequestExtendsTheMonitorModelWithOptionalAbsoluteTimeBounds:
                 enter if no data is returned.
             notification_settings (NotificationSettingsDefinesTheNotificationSettingsForTheMonitor | Unset):
             routing (list[str] | Unset): Routing information.
-            severity (str | Unset): Severity level (e.g., critical, warning, info).
+            severity (str | Unset): Severity level (free-form; used as a notification/display label, not validated).
             start (datetime.datetime | Unset): Absolute start time for query execution (ISO 8601). Overrides
                 RelativeTimerange.
             team (str | Unset): Team associated with the monitor.
