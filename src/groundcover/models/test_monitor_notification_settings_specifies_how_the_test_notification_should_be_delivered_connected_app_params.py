@@ -18,9 +18,10 @@ T = TypeVar(
 @_attrs_define
 class TestMonitorNotificationSettingsSpecifiesHowTheTestNotificationShouldBeDeliveredConnectedAppParams:
     """ConnectedAppParams provides per-app delivery options keyed by connected app ID.
-    For slack-app connected apps it supplies the channels the test notification is
-    posted to. Keys should reference IDs present in ConnectedApps; apps not listed
-    here use default delivery. Mirrors the monitor connectedAppParams field.
+    Slack App options supply channels; Linear options supply team_id, optional
+    project_id, label_ids, assignee_id, resolved_status_id, and auto_resolve.
+    Keys should reference IDs present in ConnectedApps; apps not listed here use
+    default delivery. Mirrors the monitor connectedAppParams field.
 
     """
 

@@ -14,6 +14,9 @@ class RouteConnectedAppRequestParams:
     """Route-specific parameters for this connected app.
     Slack App routes require params.channels with at least one channel object
     of the form {"id":"C123456","name":"#alerts"}; name is an optional display name.
+    Linear routes require params.team_id and, when auto_resolve is true or unset,
+    params.resolved_status_id; optional params include project_id, label_ids,
+    assignee_id, and auto_resolve (defaults to true).
     Connected app types that do not support route params must omit this field.
 
         Example:
