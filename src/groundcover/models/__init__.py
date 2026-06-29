@@ -12,6 +12,15 @@ from .agent_custom_instructions_request import AgentCustomInstructionsRequest
 from .agent_tool_default_request_is_forwarded_to_agent_service_for_resource_default_upserts import (
     AgentToolDefaultRequestIsForwardedToAgentServiceForResourceDefaultUpserts,
 )
+from .agent_tool_policy_batch_delete_request_is_the_delete_group_for_batched_tool_policy_mutations import (
+    AgentToolPolicyBatchDeleteRequestIsTheDeleteGroupForBatchedToolPolicyMutations,
+)
+from .agent_tool_policy_batch_request_is_forwarded_to_agent_service_for_batched_tool_policy_mutations import (
+    AgentToolPolicyBatchRequestIsForwardedToAgentServiceForBatchedToolPolicyMutations,
+)
+from .agent_tool_policy_batch_upsert_request_is_the_upsert_group_for_batched_tool_policy_mutations import (
+    AgentToolPolicyBatchUpsertRequestIsTheUpsertGroupForBatchedToolPolicyMutations,
+)
 from .agent_tool_policy_request_is_forwarded_to_agent_service_for_tool_policy_upserts import (
     AgentToolPolicyRequestIsForwardedToAgentServiceForToolPolicyUpserts,
 )
@@ -1181,6 +1190,9 @@ __all__ = (
     "AgentCustomInstructions",
     "AgentCustomInstructionsRequest",
     "AgentToolDefaultRequestIsForwardedToAgentServiceForResourceDefaultUpserts",
+    "AgentToolPolicyBatchDeleteRequestIsTheDeleteGroupForBatchedToolPolicyMutations",
+    "AgentToolPolicyBatchRequestIsForwardedToAgentServiceForBatchedToolPolicyMutations",
+    "AgentToolPolicyBatchUpsertRequestIsTheUpsertGroupForBatchedToolPolicyMutations",
     "AgentToolPolicyRequestIsForwardedToAgentServiceForToolPolicyUpserts",
     "ApiKeyPolicyRef",
     "ApmMeasurementsSearchRequest",

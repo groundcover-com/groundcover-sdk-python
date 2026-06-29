@@ -35,7 +35,6 @@ class TracesRequest:
         enable_stream (bool | Unset):
         group (Group | Unset):
         limit (int | Unset):
-        optimize_search (bool | Unset):
         order (str | Unset):
         order_by (SearchOrderByDefinesTheOrderForASearchPipeline | Unset):
         query (str | Unset):
@@ -51,7 +50,6 @@ class TracesRequest:
     enable_stream: bool | Unset = UNSET
     group: Group | Unset = UNSET
     limit: int | Unset = UNSET
-    optimize_search: bool | Unset = UNSET
     order: str | Unset = UNSET
     order_by: SearchOrderByDefinesTheOrderForASearchPipeline | Unset = UNSET
     query: str | Unset = UNSET
@@ -80,8 +78,6 @@ class TracesRequest:
             group = self.group.to_dict()
 
         limit = self.limit
-
-        optimize_search = self.optimize_search
 
         order = self.order
 
@@ -125,8 +121,6 @@ class TracesRequest:
             field_dict["group"] = group
         if limit is not UNSET:
             field_dict["limit"] = limit
-        if optimize_search is not UNSET:
-            field_dict["optimizeSearch"] = optimize_search
         if order is not UNSET:
             field_dict["order"] = order
         if order_by is not UNSET:
@@ -182,8 +176,6 @@ class TracesRequest:
 
         limit = d.pop("limit", UNSET)
 
-        optimize_search = d.pop("optimizeSearch", UNSET)
-
         order = d.pop("order", UNSET)
 
         _order_by = d.pop("orderBy", UNSET)
@@ -224,7 +216,6 @@ class TracesRequest:
             enable_stream=enable_stream,
             group=group,
             limit=limit,
-            optimize_search=optimize_search,
             order=order,
             order_by=order_by,
             query=query,

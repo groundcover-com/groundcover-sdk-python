@@ -33,7 +33,6 @@ class LogsVelocityRequestParams:
         enable_estimate (bool | Unset):
         enable_stream (bool | Unset):
         group (Group | Unset):
-        optimize_search (bool | Unset):
         query (str | Unset):
         sources (list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset):
     """
@@ -46,7 +45,6 @@ class LogsVelocityRequestParams:
     enable_estimate: bool | Unset = UNSET
     enable_stream: bool | Unset = UNSET
     group: Group | Unset = UNSET
-    optimize_search: bool | Unset = UNSET
     query: str | Unset = UNSET
     sources: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -74,8 +72,6 @@ class LogsVelocityRequestParams:
         group: dict[str, Any] | Unset = UNSET
         if not isinstance(self.group, Unset):
             group = self.group.to_dict()
-
-        optimize_search = self.optimize_search
 
         query = self.query
 
@@ -106,8 +102,6 @@ class LogsVelocityRequestParams:
             field_dict["enableStream"] = enable_stream
         if group is not UNSET:
             field_dict["group"] = group
-        if optimize_search is not UNSET:
-            field_dict["optimizeSearch"] = optimize_search
         if query is not UNSET:
             field_dict["query"] = query
         if sources is not UNSET:
@@ -153,8 +147,6 @@ class LogsVelocityRequestParams:
         else:
             group = Group.from_dict(_group)
 
-        optimize_search = d.pop("optimizeSearch", UNSET)
-
         query = d.pop("query", UNSET)
 
         _sources = d.pop("sources", UNSET)
@@ -175,7 +167,6 @@ class LogsVelocityRequestParams:
             enable_estimate=enable_estimate,
             enable_stream=enable_stream,
             group=group,
-            optimize_search=optimize_search,
             query=query,
             sources=sources,
         )

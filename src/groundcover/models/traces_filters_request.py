@@ -34,7 +34,6 @@ class TracesFiltersRequest:
         enable_stream (bool | Unset):
         group (Group | Unset):
         limit_per_category (int | Unset):
-        optimize_search (bool | Unset):
         query (str | Unset):
         required (list[ColumnDefinesASearchableColumnAndItsProperties] | Unset):
         sources (list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset):
@@ -46,7 +45,6 @@ class TracesFiltersRequest:
     enable_stream: bool | Unset = UNSET
     group: Group | Unset = UNSET
     limit_per_category: int | Unset = UNSET
-    optimize_search: bool | Unset = UNSET
     query: str | Unset = UNSET
     required: list[ColumnDefinesASearchableColumnAndItsProperties] | Unset = UNSET
     sources: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
@@ -71,8 +69,6 @@ class TracesFiltersRequest:
             group = self.group.to_dict()
 
         limit_per_category = self.limit_per_category
-
-        optimize_search = self.optimize_search
 
         query = self.query
 
@@ -106,8 +102,6 @@ class TracesFiltersRequest:
             field_dict["group"] = group
         if limit_per_category is not UNSET:
             field_dict["limitPerCategory"] = limit_per_category
-        if optimize_search is not UNSET:
-            field_dict["optimizeSearch"] = optimize_search
         if query is not UNSET:
             field_dict["query"] = query
         if required is not UNSET:
@@ -154,8 +148,6 @@ class TracesFiltersRequest:
 
         limit_per_category = d.pop("limitPerCategory", UNSET)
 
-        optimize_search = d.pop("optimizeSearch", UNSET)
-
         query = d.pop("query", UNSET)
 
         _required = d.pop("required", UNSET)
@@ -183,7 +175,6 @@ class TracesFiltersRequest:
             enable_stream=enable_stream,
             group=group,
             limit_per_category=limit_per_category,
-            optimize_search=optimize_search,
             query=query,
             required=required,
             sources=sources,

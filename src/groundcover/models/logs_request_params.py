@@ -32,7 +32,6 @@ class LogsRequestParams:
         enable_stream (bool | Unset):
         group (Group | Unset):
         limit (int | Unset):
-        optimize_search (bool | Unset):
         query (str | Unset):
         selectors (list[Selector] | Unset):
         skip (int | Unset):
@@ -47,7 +46,6 @@ class LogsRequestParams:
     enable_stream: bool | Unset = UNSET
     group: Group | Unset = UNSET
     limit: int | Unset = UNSET
-    optimize_search: bool | Unset = UNSET
     query: str | Unset = UNSET
     selectors: list[Selector] | Unset = UNSET
     skip: int | Unset = UNSET
@@ -75,8 +73,6 @@ class LogsRequestParams:
             group = self.group.to_dict()
 
         limit = self.limit
-
-        optimize_search = self.optimize_search
 
         query = self.query
 
@@ -116,8 +112,6 @@ class LogsRequestParams:
             field_dict["group"] = group
         if limit is not UNSET:
             field_dict["limit"] = limit
-        if optimize_search is not UNSET:
-            field_dict["optimizeSearch"] = optimize_search
         if query is not UNSET:
             field_dict["query"] = query
         if selectors is not UNSET:
@@ -168,8 +162,6 @@ class LogsRequestParams:
 
         limit = d.pop("limit", UNSET)
 
-        optimize_search = d.pop("optimizeSearch", UNSET)
-
         query = d.pop("query", UNSET)
 
         _selectors = d.pop("selectors", UNSET)
@@ -203,7 +195,6 @@ class LogsRequestParams:
             enable_stream=enable_stream,
             group=group,
             limit=limit,
-            optimize_search=optimize_search,
             query=query,
             selectors=selectors,
             skip=skip,
