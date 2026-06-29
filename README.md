@@ -4,8 +4,16 @@ Official Python SDK for the [groundcover](https://groundcover.com) API.
 
 ## Installation
 
+### 1. Install uv (skip if you already have it)
 ```bash
-uv add groundcover-sdk
+curl -LsSf https://astral.sh/uv/install.sh | sh
+```
+
+### 2. Install the SDK
+
+```bash
+uv init   # skip if you already have a pyproject.toml
+uv add "git+https://github.com/groundcover-com/groundcover-sdk-python.git"
 ```
 
 ## Requirements
