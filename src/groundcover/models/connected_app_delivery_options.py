@@ -28,6 +28,7 @@ class ConnectedAppDeliveryOptions:
             channels (list[ConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery] | Unset): Channels lists Slack
                 channels to post to (slack-app connected apps).
                 Multiple channels result in one notification per channel via dispatch-center fanout.
+            delegate_id (str | Unset): DelegateID optionally delegates created/updated Linear issues to an agent.
             label_ids (list[str] | Unset): LabelIDs optionally assigns Linear labels to created/updated issues.
             project_id (str | Unset): ProjectID optionally assigns created/updated Linear issues to a project.
             resolved_status_id (str | Unset): ResolvedStatusID optionally selects the Linear status used for auto-resolve.
@@ -37,6 +38,7 @@ class ConnectedAppDeliveryOptions:
     assignee_id: str | Unset = UNSET
     auto_resolve: bool | Unset = UNSET
     channels: list[ConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery] | Unset = UNSET
+    delegate_id: str | Unset = UNSET
     label_ids: list[str] | Unset = UNSET
     project_id: str | Unset = UNSET
     resolved_status_id: str | Unset = UNSET
@@ -54,6 +56,8 @@ class ConnectedAppDeliveryOptions:
             for channels_item_data in self.channels:
                 channels_item = channels_item_data.to_dict()
                 channels.append(channels_item)
+
+        delegate_id = self.delegate_id
 
         label_ids: list[str] | Unset = UNSET
         if not isinstance(self.label_ids, Unset):
@@ -74,6 +78,8 @@ class ConnectedAppDeliveryOptions:
             field_dict["auto_resolve"] = auto_resolve
         if channels is not UNSET:
             field_dict["channels"] = channels
+        if delegate_id is not UNSET:
+            field_dict["delegate_id"] = delegate_id
         if label_ids is not UNSET:
             field_dict["label_ids"] = label_ids
         if project_id is not UNSET:
@@ -107,6 +113,8 @@ class ConnectedAppDeliveryOptions:
 
                 channels.append(channels_item)
 
+        delegate_id = d.pop("delegate_id", UNSET)
+
         label_ids = cast(list[str], d.pop("label_ids", UNSET))
 
         project_id = d.pop("project_id", UNSET)
@@ -119,6 +127,7 @@ class ConnectedAppDeliveryOptions:
             assignee_id=assignee_id,
             auto_resolve=auto_resolve,
             channels=channels,
+            delegate_id=delegate_id,
             label_ids=label_ids,
             project_id=project_id,
             resolved_status_id=resolved_status_id,

@@ -26,7 +26,8 @@ class TestMonitorNotificationSettingsSpecifiesHowTheTestNotificationShouldBeDeli
             (TestMonitorNotificationSettingsSpecifiesHowTheTestNotificationShouldBeDeliveredConnectedAppParams | Unset):
             ConnectedAppParams provides per-app delivery options keyed by connected app ID.
             Slack App options supply channels; Linear options supply team_id, optional
-            project_id, label_ids, assignee_id, resolved_status_id, and auto_resolve.
+            project_id, label_ids, assignee_id, delegate_id, resolved_status_id,
+            and auto_resolve.
             Keys should reference IDs present in ConnectedApps; apps not listed here use
             default delivery. Mirrors the monitor connectedAppParams field.
         connected_apps (list[str] | Unset): List of connected app IDs to send test notifications to directly,

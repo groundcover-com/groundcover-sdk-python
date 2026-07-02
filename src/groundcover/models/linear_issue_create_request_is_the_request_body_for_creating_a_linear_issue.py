@@ -18,6 +18,7 @@ class LinearIssueCreateRequestIsTheRequestBodyForCreatingALinearIssue:
         team_id (str):
         title (str):
         assignee_id (str | Unset):
+        delegate_id (str | Unset):
         description (str | Unset):
         label_ids (list[str] | Unset):
         priority (int | Unset):
@@ -28,6 +29,7 @@ class LinearIssueCreateRequestIsTheRequestBodyForCreatingALinearIssue:
     team_id: str
     title: str
     assignee_id: str | Unset = UNSET
+    delegate_id: str | Unset = UNSET
     description: str | Unset = UNSET
     label_ids: list[str] | Unset = UNSET
     priority: int | Unset = UNSET
@@ -41,6 +43,8 @@ class LinearIssueCreateRequestIsTheRequestBodyForCreatingALinearIssue:
         title = self.title
 
         assignee_id = self.assignee_id
+
+        delegate_id = self.delegate_id
 
         description = self.description
 
@@ -64,6 +68,8 @@ class LinearIssueCreateRequestIsTheRequestBodyForCreatingALinearIssue:
         )
         if assignee_id is not UNSET:
             field_dict["assignee_id"] = assignee_id
+        if delegate_id is not UNSET:
+            field_dict["delegate_id"] = delegate_id
         if description is not UNSET:
             field_dict["description"] = description
         if label_ids is not UNSET:
@@ -93,6 +99,8 @@ class LinearIssueCreateRequestIsTheRequestBodyForCreatingALinearIssue:
 
         assignee_id = d.pop("assignee_id", UNSET)
 
+        delegate_id = d.pop("delegate_id", UNSET)
+
         description = d.pop("description", UNSET)
 
         label_ids = cast(list[str], d.pop("label_ids", UNSET))
@@ -107,6 +115,7 @@ class LinearIssueCreateRequestIsTheRequestBodyForCreatingALinearIssue:
             team_id=team_id,
             title=title,
             assignee_id=assignee_id,
+            delegate_id=delegate_id,
             description=description,
             label_ids=label_ids,
             priority=priority,
