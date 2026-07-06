@@ -9,6 +9,9 @@ from attrs import field as _attrs_field
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.connected_app_params_maps_each_connected_app_id_to_its_per_app_delivery_options import (
+        ConnectedAppParamsMapsEachConnectedAppIDToItsPerAppDeliveryOptions,
+    )
     from ..models.synthetic_monitor_eval_interval_represents_the_evaluation_interval_for_a_synthetic_monitor import (
         SyntheticMonitorEvalIntervalRepresentsTheEvaluationIntervalForASyntheticMonitor,
     )
@@ -22,6 +25,9 @@ class SyntheticMonitorConfigRepresentsOptionalMonitorConfigurationOverridesForAS
     """Fields left empty use the default values when creating the monitor.
 
     Attributes:
+        connected_app_params (ConnectedAppParamsMapsEachConnectedAppIDToItsPerAppDeliveryOptions | Unset): Requires
+            backend version >= 1.11.916; older backends reject this field with a
+            validation error rather than silently dropping the configured options.
         connected_apps (list[str] | Unset): ConnectedApps lists connected app IDs for direct notification delivery
             (requires method "connectedApps").
         disable_renotification (bool | Unset): DisableRenotification disables repeated notifications for the same issue.
@@ -43,6 +49,7 @@ class SyntheticMonitorConfigRepresentsOptionalMonitorConfigurationOverridesForAS
             method "connectedApps").
     """
 
+    connected_app_params: ConnectedAppParamsMapsEachConnectedAppIDToItsPerAppDeliveryOptions | Unset = UNSET
     connected_apps: list[str] | Unset = UNSET
     disable_renotification: bool | Unset = UNSET
     enabled_workflows: list[str] | Unset = UNSET
@@ -61,6 +68,10 @@ class SyntheticMonitorConfigRepresentsOptionalMonitorConfigurationOverridesForAS
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        connected_app_params: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.connected_app_params, Unset):
+            connected_app_params = self.connected_app_params.to_dict()
+
         connected_apps: list[str] | Unset = UNSET
         if not isinstance(self.connected_apps, Unset):
             connected_apps = self.connected_apps
@@ -102,6 +113,8 @@ class SyntheticMonitorConfigRepresentsOptionalMonitorConfigurationOverridesForAS
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if connected_app_params is not UNSET:
+            field_dict["connectedAppParams"] = connected_app_params
         if connected_apps is not UNSET:
             field_dict["connectedApps"] = connected_apps
         if disable_renotification is not UNSET:
@@ -137,11 +150,23 @@ class SyntheticMonitorConfigRepresentsOptionalMonitorConfigurationOverridesForAS
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.connected_app_params_maps_each_connected_app_id_to_its_per_app_delivery_options import (
+            ConnectedAppParamsMapsEachConnectedAppIDToItsPerAppDeliveryOptions,
+        )
         from ..models.synthetic_monitor_eval_interval_represents_the_evaluation_interval_for_a_synthetic_monitor import (
             SyntheticMonitorEvalIntervalRepresentsTheEvaluationIntervalForASyntheticMonitor,
         )
 
         d = dict(src_dict)
+        _connected_app_params = d.pop("connectedAppParams", UNSET)
+        connected_app_params: ConnectedAppParamsMapsEachConnectedAppIDToItsPerAppDeliveryOptions | Unset
+        if isinstance(_connected_app_params, Unset) or _connected_app_params is None:
+            connected_app_params = UNSET
+        else:
+            connected_app_params = ConnectedAppParamsMapsEachConnectedAppIDToItsPerAppDeliveryOptions.from_dict(
+                _connected_app_params
+            )
+
         connected_apps = cast(list[str], d.pop("connectedApps", UNSET))
 
         disable_renotification = d.pop("disableRenotification", UNSET)
@@ -182,6 +207,7 @@ class SyntheticMonitorConfigRepresentsOptionalMonitorConfigurationOverridesForAS
         status_filters = cast(list[str], d.pop("statusFilters", UNSET))
 
         synthetic_monitor_config_represents_optional_monitor_configuration_overrides_for_a_synthetic_test = cls(
+            connected_app_params=connected_app_params,
             connected_apps=connected_apps,
             disable_renotification=disable_renotification,
             enabled_workflows=enabled_workflows,
