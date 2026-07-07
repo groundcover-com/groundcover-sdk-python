@@ -33,6 +33,7 @@ class BaseQueryIsTheBaseStructForDifferentQueryTypes:
         data_type (str | Unset):
         datasource_id (str | Unset):
         datasource_type (str | Unset):
+        evaluation_delay (int | Unset):
         expression (str | Unset):
         filters (str | Unset):
         instant_rollup (str | Unset):
@@ -52,6 +53,7 @@ class BaseQueryIsTheBaseStructForDifferentQueryTypes:
     data_type: str | Unset = UNSET
     datasource_id: str | Unset = UNSET
     datasource_type: str | Unset = UNSET
+    evaluation_delay: int | Unset = UNSET
     expression: str | Unset = UNSET
     filters: str | Unset = UNSET
     instant_rollup: str | Unset = UNSET
@@ -78,6 +80,8 @@ class BaseQueryIsTheBaseStructForDifferentQueryTypes:
         datasource_id = self.datasource_id
 
         datasource_type = self.datasource_type
+
+        evaluation_delay = self.evaluation_delay
 
         expression = self.expression
 
@@ -116,6 +120,8 @@ class BaseQueryIsTheBaseStructForDifferentQueryTypes:
             field_dict["datasourceID"] = datasource_id
         if datasource_type is not UNSET:
             field_dict["datasourceType"] = datasource_type
+        if evaluation_delay is not UNSET:
+            field_dict["evaluationDelay"] = evaluation_delay
         if expression is not UNSET:
             field_dict["expression"] = expression
         if filters is not UNSET:
@@ -171,6 +177,8 @@ class BaseQueryIsTheBaseStructForDifferentQueryTypes:
 
         datasource_type = d.pop("datasourceType", UNSET)
 
+        evaluation_delay = d.pop("evaluationDelay", UNSET)
+
         expression = d.pop("expression", UNSET)
 
         filters = d.pop("filters", UNSET)
@@ -220,6 +228,7 @@ class BaseQueryIsTheBaseStructForDifferentQueryTypes:
             data_type=data_type,
             datasource_id=datasource_id,
             datasource_type=datasource_type,
+            evaluation_delay=evaluation_delay,
             expression=expression,
             filters=filters,
             instant_rollup=instant_rollup,
