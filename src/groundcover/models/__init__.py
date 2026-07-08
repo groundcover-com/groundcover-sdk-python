@@ -9,6 +9,8 @@ from .advanced_data_scope_defines_fine_grained_data_scoping_rules import (
 )
 from .agent_custom_instructions import AgentCustomInstructions
 from .agent_custom_instructions_request import AgentCustomInstructionsRequest
+from .agent_llm_provider_config import AgentLLMProviderConfig
+from .agent_llm_provider_config_request import AgentLLMProviderConfigRequest
 from .agent_tool_default_request_is_forwarded_to_agent_service_for_resource_default_upserts import (
     AgentToolDefaultRequestIsForwardedToAgentServiceForResourceDefaultUpserts,
 )
@@ -1189,6 +1191,8 @@ __all__ = (
     "AdvancedDataScopeDefinesFineGrainedDataScopingRules",
     "AgentCustomInstructions",
     "AgentCustomInstructionsRequest",
+    "AgentLLMProviderConfig",
+    "AgentLLMProviderConfigRequest",
     "AgentToolDefaultRequestIsForwardedToAgentServiceForResourceDefaultUpserts",
     "AgentToolPolicyBatchDeleteRequestIsTheDeleteGroupForBatchedToolPolicyMutations",
     "AgentToolPolicyBatchRequestIsForwardedToAgentServiceForBatchedToolPolicyMutations",
