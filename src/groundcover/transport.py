@@ -12,6 +12,7 @@ import httpx
 from tenacity import (
     RetryError,
     retry,
+    retry_if_exception,
     retry_if_result,
     stop_after_attempt,
     wait_exponential_jitter,
@@ -37,6 +38,25 @@ def _is_monitor_get_path(path: str) -> bool:
         return False
     segment = path.rstrip("/").rsplit("/", 1)[-1]
     return segment not in _MONITOR_NON_ID_SEGMENTS
+
+
+# HTTP methods that are safe to replay after the server has already responded
+# with a retryable status.
+_IDEMPOTENT_RETRY_METHODS = frozenset({"GET", "HEAD", "OPTIONS", "TRACE"})
+
+
+def _make_retry_condition(request: httpx.Request, retry_statuses: set[int]):
+    """Return a tenacity retry condition that, for idempotent methods only,
+    retries on either a retryable response status or a transport-level error."""
+    idempotent = request.method.upper() in _IDEMPOTENT_RETRY_METHODS
+
+    def _retry_status(response: httpx.Response) -> bool:
+        return idempotent and response.status_code in retry_statuses
+
+    def _retry_transport_error(exc: BaseException) -> bool:
+        return idempotent and isinstance(exc, httpx.TransportError)
+
+    return retry_if_result(_retry_status) | retry_if_exception(_retry_transport_error)
 
 
 class GroundcoverTransport(httpx.BaseTransport):
@@ -101,7 +121,7 @@ class GroundcoverTransport(httpx.BaseTransport):
                 initial=self._config.min_retry_wait,
                 max=self._config.max_retry_wait,
             ),
-            retry=retry_if_result(lambda resp: resp.status_code in retry_statuses),
+            retry=_make_retry_condition(request, retry_statuses),
             reraise=True,
         )
         def _do_send() -> httpx.Response:
@@ -172,12 +192,12 @@ class AsyncGroundcoverTransport(httpx.AsyncBaseTransport):
                     initial=self._config.min_retry_wait,
                     max=self._config.max_retry_wait,
                 ),
-                retry=retry_if_result(lambda resp: resp.status_code in retry_statuses),
+                retry=_make_retry_condition(request, retry_statuses),
                 reraise=True,
             ):
                 with attempt:
                     last_response = await self._inner.handle_async_request(request)
-                attempt.retry_state.set_result(last_response)
+                    attempt.retry_state.set_result(last_response)
         except RetryError as e:
             if e.last_attempt.failed:
                 raise e.last_attempt.result()
