@@ -111,6 +111,9 @@ from .batch_get_monitors_error import BatchGetMonitorsError
 from .batch_get_monitors_request import BatchGetMonitorsRequest
 from .batch_get_monitors_response import BatchGetMonitorsResponse
 from .batch_get_monitors_response_monitors import BatchGetMonitorsResponseMonitors
+from .catalog_install_request_is_the_optional_body_for_a_catalog_install import (
+    CatalogInstallRequestIsTheOptionalBodyForACatalogInstall,
+)
 from .catalog_model_holds_metadata_if_the_monitor_originated_from_a_catalog import (
     CatalogModelHoldsMetadataIfTheMonitorOriginatedFromACatalog,
 )
@@ -143,6 +146,10 @@ from .connected_app_params_maps_each_connected_app_id_to_its_per_app_delivery_op
 )
 from .connected_app_response import ConnectedAppResponse
 from .connection_configuration import ConnectionConfiguration
+from .connector_catalog_entry import ConnectorCatalogEntry
+from .connector_catalog_response_is_the_connector_catalog_listing import (
+    ConnectorCatalogResponseIsTheConnectorCatalogListing,
+)
 from .connector_data_request_wraps_provider_specific_connector_data import (
     ConnectorDataRequestWrapsProviderSpecificConnectorData,
 )
@@ -1340,6 +1347,7 @@ __all__ = (
     "BatchGetMonitorsRequest",
     "BatchGetMonitorsResponse",
     "BatchGetMonitorsResponseMonitors",
+    "CatalogInstallRequestIsTheOptionalBodyForACatalogInstall",
     "CatalogModelHoldsMetadataIfTheMonitorOriginatedFromACatalog",
     "CheckoutSessionRequest",
     "CheckoutSessionResponse",
@@ -1361,6 +1369,8 @@ __all__ = (
     "ConnectedAppParamsMapsEachConnectedAppIDToItsPerAppDeliveryOptions",
     "ConnectedAppResponse",
     "ConnectionConfiguration",
+    "ConnectorCatalogEntry",
+    "ConnectorCatalogResponseIsTheConnectorCatalogListing",
     "ConnectorDataRequestWrapsProviderSpecificConnectorData",
     "ConnectorDataRequestWrapsProviderSpecificConnectorDataData",
     "ConnectorEnableResponseIsTheResponseAfterEnablingAConnector",
