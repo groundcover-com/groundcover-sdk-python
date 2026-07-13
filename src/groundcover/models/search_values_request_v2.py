@@ -30,6 +30,9 @@ class SearchValuesRequestV2:
         filter_value (str | Unset): Filter value to search for values
         limit (int | Unset): Limit is the maximum number of results to return
         metric_names (list[str] | Unset): Metric names to get values for
+        query (str | Unset): Query is an optional GCQL filter expression (filters only, no pipes).
+            Takes precedence over any other filter inputs.
+            Returns 400 if the expression fails to parse or contains pipes/stats.
         sources (list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset): Sources is a list of sources
             to filter the values by
         start (datetime.datetime | Unset): Start time for the search
@@ -41,6 +44,7 @@ class SearchValuesRequestV2:
     filter_value: str | Unset = UNSET
     limit: int | Unset = UNSET
     metric_names: list[str] | Unset = UNSET
+    query: str | Unset = UNSET
     sources: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
     start: datetime.datetime | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -61,6 +65,8 @@ class SearchValuesRequestV2:
         metric_names: list[str] | Unset = UNSET
         if not isinstance(self.metric_names, Unset):
             metric_names = self.metric_names
+
+        query = self.query
 
         sources: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.sources, Unset):
@@ -89,6 +95,8 @@ class SearchValuesRequestV2:
             field_dict["limit"] = limit
         if metric_names is not UNSET:
             field_dict["metricNames"] = metric_names
+        if query is not UNSET:
+            field_dict["query"] = query
         if sources is not UNSET:
             field_dict["sources"] = sources
         if start is not UNSET:
@@ -120,6 +128,8 @@ class SearchValuesRequestV2:
 
         metric_names = cast(list[str], d.pop("metricNames", UNSET))
 
+        query = d.pop("query", UNSET)
+
         _sources = d.pop("sources", UNSET)
         sources: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
         if _sources is not UNSET:
@@ -143,6 +153,7 @@ class SearchValuesRequestV2:
             filter_value=filter_value,
             limit=limit,
             metric_names=metric_names,
+            query=query,
             sources=sources,
             start=start,
         )
