@@ -7,10 +7,47 @@ from .add_label_config_add_label import AddLabelConfigAddLabel
 from .advanced_data_scope_defines_fine_grained_data_scoping_rules import (
     AdvancedDataScopeDefinesFineGrainedDataScopingRules,
 )
+from .agent_create_skill_response_200 import AgentCreateSkillResponse200
+from .agent_create_skill_response_400 import AgentCreateSkillResponse400
+from .agent_create_skill_response_401 import AgentCreateSkillResponse401
+from .agent_create_skill_response_403 import AgentCreateSkillResponse403
+from .agent_create_skill_response_409 import AgentCreateSkillResponse409
+from .agent_create_skill_response_413 import AgentCreateSkillResponse413
+from .agent_create_skill_response_422 import AgentCreateSkillResponse422
+from .agent_create_skill_response_500 import AgentCreateSkillResponse500
+from .agent_create_skill_response_502 import AgentCreateSkillResponse502
+from .agent_create_skill_response_503 import AgentCreateSkillResponse503
 from .agent_custom_instructions import AgentCustomInstructions
 from .agent_custom_instructions_request import AgentCustomInstructionsRequest
+from .agent_delete_skill_response_200 import AgentDeleteSkillResponse200
+from .agent_delete_skill_response_400 import AgentDeleteSkillResponse400
+from .agent_delete_skill_response_401 import AgentDeleteSkillResponse401
+from .agent_delete_skill_response_403 import AgentDeleteSkillResponse403
+from .agent_delete_skill_response_404 import AgentDeleteSkillResponse404
+from .agent_delete_skill_response_500 import AgentDeleteSkillResponse500
+from .agent_delete_skill_response_502 import AgentDeleteSkillResponse502
+from .agent_delete_skill_response_503 import AgentDeleteSkillResponse503
+from .agent_get_skill_response_200 import AgentGetSkillResponse200
+from .agent_get_skill_response_400 import AgentGetSkillResponse400
+from .agent_get_skill_response_401 import AgentGetSkillResponse401
+from .agent_get_skill_response_404 import AgentGetSkillResponse404
+from .agent_get_skill_response_500 import AgentGetSkillResponse500
+from .agent_get_skill_response_502 import AgentGetSkillResponse502
+from .agent_get_skill_response_503 import AgentGetSkillResponse503
+from .agent_list_skills_response_200 import AgentListSkillsResponse200
+from .agent_list_skills_response_400 import AgentListSkillsResponse400
+from .agent_list_skills_response_401 import AgentListSkillsResponse401
+from .agent_list_skills_response_500 import AgentListSkillsResponse500
+from .agent_list_skills_response_502 import AgentListSkillsResponse502
+from .agent_list_skills_response_503 import AgentListSkillsResponse503
 from .agent_llm_provider_config import AgentLLMProviderConfig
 from .agent_llm_provider_config_request import AgentLLMProviderConfigRequest
+from .agent_skill_request_is_forwarded_to_agent_service_for_skill_creation_and_updates import (
+    AgentSkillRequestIsForwardedToAgentServiceForSkillCreationAndUpdates,
+)
+from .agent_skill_summary_is_the_compact_skill_representation_returned_by_list_ap_is import (
+    AgentSkillSummaryIsTheCompactSkillRepresentationReturnedByListAPIs,
+)
 from .agent_tool_default_request_is_forwarded_to_agent_service_for_resource_default_upserts import (
     AgentToolDefaultRequestIsForwardedToAgentServiceForResourceDefaultUpserts,
 )
@@ -26,6 +63,17 @@ from .agent_tool_policy_batch_upsert_request_is_the_upsert_group_for_batched_too
 from .agent_tool_policy_request_is_forwarded_to_agent_service_for_tool_policy_upserts import (
     AgentToolPolicyRequestIsForwardedToAgentServiceForToolPolicyUpserts,
 )
+from .agent_update_skill_response_200 import AgentUpdateSkillResponse200
+from .agent_update_skill_response_400 import AgentUpdateSkillResponse400
+from .agent_update_skill_response_401 import AgentUpdateSkillResponse401
+from .agent_update_skill_response_403 import AgentUpdateSkillResponse403
+from .agent_update_skill_response_404 import AgentUpdateSkillResponse404
+from .agent_update_skill_response_409 import AgentUpdateSkillResponse409
+from .agent_update_skill_response_413 import AgentUpdateSkillResponse413
+from .agent_update_skill_response_422 import AgentUpdateSkillResponse422
+from .agent_update_skill_response_500 import AgentUpdateSkillResponse500
+from .agent_update_skill_response_502 import AgentUpdateSkillResponse502
+from .agent_update_skill_response_503 import AgentUpdateSkillResponse503
 from .api_key_policy_ref import ApiKeyPolicyRef
 from .apm_measurements_search_request import ApmMeasurementsSearchRequest
 from .apm_measurements_search_time_series_request import ApmMeasurementsSearchTimeSeriesRequest
@@ -1184,20 +1232,65 @@ from .workloads_list_request import WorkloadsListRequest
 from .workloads_list_response import WorkloadsListResponse
 from .workloads_list_response_400 import WorkloadsListResponse400
 from .workloads_list_response_500 import WorkloadsListResponse500
+from .write_ap_is import WriteAPIs
 
 __all__ = (
     "AddLabelConfig",
     "AddLabelConfigAddLabel",
     "AdvancedDataScopeDefinesFineGrainedDataScopingRules",
+    "AgentCreateSkillResponse200",
+    "AgentCreateSkillResponse400",
+    "AgentCreateSkillResponse401",
+    "AgentCreateSkillResponse403",
+    "AgentCreateSkillResponse409",
+    "AgentCreateSkillResponse413",
+    "AgentCreateSkillResponse422",
+    "AgentCreateSkillResponse500",
+    "AgentCreateSkillResponse502",
+    "AgentCreateSkillResponse503",
     "AgentCustomInstructions",
     "AgentCustomInstructionsRequest",
+    "AgentDeleteSkillResponse200",
+    "AgentDeleteSkillResponse400",
+    "AgentDeleteSkillResponse401",
+    "AgentDeleteSkillResponse403",
+    "AgentDeleteSkillResponse404",
+    "AgentDeleteSkillResponse500",
+    "AgentDeleteSkillResponse502",
+    "AgentDeleteSkillResponse503",
+    "AgentGetSkillResponse200",
+    "AgentGetSkillResponse400",
+    "AgentGetSkillResponse401",
+    "AgentGetSkillResponse404",
+    "AgentGetSkillResponse500",
+    "AgentGetSkillResponse502",
+    "AgentGetSkillResponse503",
+    "AgentListSkillsResponse200",
+    "AgentListSkillsResponse400",
+    "AgentListSkillsResponse401",
+    "AgentListSkillsResponse500",
+    "AgentListSkillsResponse502",
+    "AgentListSkillsResponse503",
     "AgentLLMProviderConfig",
     "AgentLLMProviderConfigRequest",
+    "AgentSkillRequestIsForwardedToAgentServiceForSkillCreationAndUpdates",
+    "AgentSkillSummaryIsTheCompactSkillRepresentationReturnedByListAPIs",
     "AgentToolDefaultRequestIsForwardedToAgentServiceForResourceDefaultUpserts",
     "AgentToolPolicyBatchDeleteRequestIsTheDeleteGroupForBatchedToolPolicyMutations",
     "AgentToolPolicyBatchRequestIsForwardedToAgentServiceForBatchedToolPolicyMutations",
     "AgentToolPolicyBatchUpsertRequestIsTheUpsertGroupForBatchedToolPolicyMutations",
     "AgentToolPolicyRequestIsForwardedToAgentServiceForToolPolicyUpserts",
+    "AgentUpdateSkillResponse200",
+    "AgentUpdateSkillResponse400",
+    "AgentUpdateSkillResponse401",
+    "AgentUpdateSkillResponse403",
+    "AgentUpdateSkillResponse404",
+    "AgentUpdateSkillResponse409",
+    "AgentUpdateSkillResponse413",
+    "AgentUpdateSkillResponse422",
+    "AgentUpdateSkillResponse500",
+    "AgentUpdateSkillResponse502",
+    "AgentUpdateSkillResponse503",
     "ApiKeyPolicyRef",
     "ApmMeasurementsSearchRequest",
     "ApmMeasurementsSearchTimeSeriesRequest",
@@ -2042,4 +2135,5 @@ __all__ = (
     "WorkloadsListResponse",
     "WorkloadsListResponse400",
     "WorkloadsListResponse500",
+    "WriteAPIs",
 )
