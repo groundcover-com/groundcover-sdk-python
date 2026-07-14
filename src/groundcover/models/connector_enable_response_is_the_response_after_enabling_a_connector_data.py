@@ -11,7 +11,7 @@ T = TypeVar("T", bound="ConnectorEnableResponseIsTheResponseAfterEnablingAConnec
 
 @_attrs_define
 class ConnectorEnableResponseIsTheResponseAfterEnablingAConnectorData:
-    """Provider-specific connector metadata. Install responses can include setup data such as Slack manifest_json and
+    """Provider-specific connector metadata. Install responses can include provider setup data such as manifest_json and
     manifest_url.
 
     """

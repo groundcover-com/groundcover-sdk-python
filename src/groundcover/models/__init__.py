@@ -599,6 +599,9 @@ from .linear_label_is_a_linear_issue_label_for_a_team import LinearLabelIsALinea
 from .linear_label_list_response_contains_linear_label_picker_results import (
     LinearLabelListResponseContainsLinearLabelPickerResults,
 )
+from .linear_manifest_response_contains_the_linear_o_auth_app_manifest_and_app_creation_url import (
+    LinearManifestResponseContainsTheLinearOAuthAppManifestAndAppCreationURL,
+)
 from .linear_project_is_a_linear_project_for_a_team import LinearProjectIsALinearProjectForATeam
 from .linear_project_list_response_contains_linear_project_picker_results import (
     LinearProjectListResponseContainsLinearProjectPickerResults,
@@ -1697,6 +1700,7 @@ __all__ = (
     "LinearIssueUpdateRequestIsTheRequestBodyForUpdatingALinearIssue",
     "LinearLabelIsALinearIssueLabelForATeam",
     "LinearLabelListResponseContainsLinearLabelPickerResults",
+    "LinearManifestResponseContainsTheLinearOAuthAppManifestAndAppCreationURL",
     "LinearProjectIsALinearProjectForATeam",
     "LinearProjectListResponseContainsLinearProjectPickerResults",
     "LinearResolveIssueRequestIsTheOptionalRequestBodyForResolvingALinearIssue",

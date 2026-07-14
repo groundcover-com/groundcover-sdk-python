@@ -22,7 +22,7 @@ class ConnectorEnableResponseIsTheResponseAfterEnablingAConnector:
     """
     Attributes:
         data (ConnectorEnableResponseIsTheResponseAfterEnablingAConnectorData | Unset): Provider-specific connector
-            metadata. Install responses can include setup data such as Slack manifest_json and manifest_url.
+            metadata. Install responses can include provider setup data such as manifest_json and manifest_url.
         id (str | Unset): The credential ID of the org-level enablement Example: 550e8400-e29b-41d4-a716-446655440000.
         name (str | Unset): The credential name Example: org.
         provider (str | Unset): The provider name Example: cursor.
