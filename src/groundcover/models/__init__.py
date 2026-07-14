@@ -111,12 +111,17 @@ from .batch_get_monitors_error import BatchGetMonitorsError
 from .batch_get_monitors_request import BatchGetMonitorsRequest
 from .batch_get_monitors_response import BatchGetMonitorsResponse
 from .batch_get_monitors_response_monitors import BatchGetMonitorsResponseMonitors
+from .catalog import Catalog
 from .catalog_install_request_is_the_optional_body_for_a_catalog_install import (
     CatalogInstallRequestIsTheOptionalBodyForACatalogInstall,
 )
 from .catalog_model_holds_metadata_if_the_monitor_originated_from_a_catalog import (
     CatalogModelHoldsMetadataIfTheMonitorOriginatedFromACatalog,
 )
+from .catalog_template_list_item_is_a_thin_per_tenant_view_of_a_catalog_template import (
+    CatalogTemplateListItemIsAThinPerTenantViewOfACatalogTemplate,
+)
+from .catalog_template_response import CatalogTemplateResponse
 from .checkout_session_request import CheckoutSessionRequest
 from .checkout_session_response import CheckoutSessionResponse
 from .clusters_list_request import ClustersListRequest
@@ -396,6 +401,8 @@ from .delete_workflow_response_400 import DeleteWorkflowResponse400
 from .delete_workflow_response_401 import DeleteWorkflowResponse401
 from .delete_workflow_response_500 import DeleteWorkflowResponse500
 from .description import Description
+from .detection import Detection
+from .detection_signal import DetectionSignal
 from .discovery_response import DiscoveryResponse
 from .discovery_result import DiscoveryResult
 from .display_model_controls_how_the_monitor_is_presented import DisplayModelControlsHowTheMonitorIsPresented
@@ -775,6 +782,9 @@ from .org_connector_update_request_wraps_mutable_org_connector_fields_data impor
 )
 from .ottl_from_logs_response import OttlFromLogsResponse
 from .ottl_stats_entry import OttlStatsEntry
+from .pack_is_a_rail_grouping_for_the_catalog_browse_ui_authored_in_packs_json import (
+    PackIsARailGroupingForTheCatalogBrowseUIAuthoredInPacksJson,
+)
 from .pager_duty_data import PagerDutyData
 from .pager_duty_data_response import PagerDutyDataResponse
 from .pager_duty_data_response_severity_mapping import PagerDutyDataResponseSeverityMapping
@@ -985,6 +995,8 @@ from .synthetics_check_input_defines_model_for_synthetics_check_input import (
     SyntheticsCheckInputDefinesModelForSyntheticsCheckInput,
 )
 from .tcp_request_defines_model_for_tcp_request import TcpRequestDefinesModelForTcpRequest
+from .template_widget import TemplateWidget
+from .template_widget_kind import TemplateWidgetKind
 from .tenant_ai_settings_response import TenantAISettingsResponse
 from .tenant_info import TenantInfo
 from .tenant_response import TenantResponse
@@ -1350,8 +1362,11 @@ __all__ = (
     "BatchGetMonitorsRequest",
     "BatchGetMonitorsResponse",
     "BatchGetMonitorsResponseMonitors",
+    "Catalog",
     "CatalogInstallRequestIsTheOptionalBodyForACatalogInstall",
     "CatalogModelHoldsMetadataIfTheMonitorOriginatedFromACatalog",
+    "CatalogTemplateListItemIsAThinPerTenantViewOfACatalogTemplate",
+    "CatalogTemplateResponse",
     "CheckoutSessionRequest",
     "CheckoutSessionResponse",
     "ClustersListRequest",
@@ -1545,6 +1560,8 @@ __all__ = (
     "DeleteWorkflowResponse401",
     "DeleteWorkflowResponse500",
     "Description",
+    "Detection",
+    "DetectionSignal",
     "DiscoveryResponse",
     "DiscoveryResult",
     "DisplayModelControlsHowTheMonitorIsPresented",
@@ -1848,6 +1865,7 @@ __all__ = (
     "OrgConnectorUpdateRequestWrapsMutableOrgConnectorFieldsData",
     "OttlFromLogsResponse",
     "OttlStatsEntry",
+    "PackIsARailGroupingForTheCatalogBrowseUIAuthoredInPacksJson",
     "PagerDutyData",
     "PagerDutyDataResponse",
     "PagerDutyDataResponseSeverityMapping",
@@ -1984,6 +2002,8 @@ __all__ = (
     "SyntheticTestMonitor",
     "SyntheticTestUpdateResponse",
     "TcpRequestDefinesModelForTcpRequest",
+    "TemplateWidget",
+    "TemplateWidgetKind",
     "TenantAISettingsResponse",
     "TenantInfo",
     "TenantResponse",
