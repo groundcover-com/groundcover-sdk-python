@@ -6,39 +6,48 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="LinearManifestResponseContainsTheLinearOAuthAppManifestAndAppCreationURL")
+from .._generated_types import UNSET, Unset
+
+T = TypeVar("T", bound="MCPJSONRPCRequestIsAJSONRPC20RequestForwardedToAnMCPServer")
 
 
 @_attrs_define
-class LinearManifestResponseContainsTheLinearOAuthAppManifestAndAppCreationURL:
+class MCPJSONRPCRequestIsAJSONRPC20RequestForwardedToAnMCPServer:
     """
     Attributes:
-        icon_url (str): Absolute icon URL embedded in the Linear OAuth app manifest.
-        manifest_json (str): JSON manifest for creating the Linear OAuth app.
-        manifest_url (str): Linear URL that opens the OAuth app creation form prefilled with the manifest.
+        jsonrpc (str): JSON-RPC protocol version. Example: 2.0.
+        method (str): MCP method name. Example: tools/list.
+        id (Any | Unset): Request identifier. Omitted for notifications.
+        params (Any | Unset): Method-specific parameters.
     """
 
-    icon_url: str
-    manifest_json: str
-    manifest_url: str
+    jsonrpc: str
+    method: str
+    id: Any | Unset = UNSET
+    params: Any | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        icon_url = self.icon_url
+        jsonrpc = self.jsonrpc
 
-        manifest_json = self.manifest_json
+        method = self.method
 
-        manifest_url = self.manifest_url
+        id = self.id
+
+        params = self.params
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "icon_url": icon_url,
-                "manifest_json": manifest_json,
-                "manifest_url": manifest_url,
+                "jsonrpc": jsonrpc,
+                "method": method,
             }
         )
+        if id is not UNSET:
+            field_dict["id"] = id
+        if params is not UNSET:
+            field_dict["params"] = params
 
         return field_dict
 
@@ -52,20 +61,23 @@ class LinearManifestResponseContainsTheLinearOAuthAppManifestAndAppCreationURL:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        icon_url = d.pop("icon_url")
+        jsonrpc = d.pop("jsonrpc")
 
-        manifest_json = d.pop("manifest_json")
+        method = d.pop("method")
 
-        manifest_url = d.pop("manifest_url")
+        id = d.pop("id", UNSET)
 
-        linear_manifest_response_contains_the_linear_o_auth_app_manifest_and_app_creation_url = cls(
-            icon_url=icon_url,
-            manifest_json=manifest_json,
-            manifest_url=manifest_url,
+        params = d.pop("params", UNSET)
+
+        mcpjsonrpc_request_is_ajsonrpc20_request_forwarded_to_an_mcp_server = cls(
+            jsonrpc=jsonrpc,
+            method=method,
+            id=id,
+            params=params,
         )
 
-        linear_manifest_response_contains_the_linear_o_auth_app_manifest_and_app_creation_url.additional_properties = d
-        return linear_manifest_response_contains_the_linear_o_auth_app_manifest_and_app_creation_url
+        mcpjsonrpc_request_is_ajsonrpc20_request_forwarded_to_an_mcp_server.additional_properties = d
+        return mcpjsonrpc_request_is_ajsonrpc20_request_forwarded_to_an_mcp_server
 
     @property
     def additional_keys(self) -> list[str]:

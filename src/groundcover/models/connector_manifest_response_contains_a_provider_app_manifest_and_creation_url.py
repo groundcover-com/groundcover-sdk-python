@@ -8,19 +8,21 @@ from attrs import field as _attrs_field
 
 from .._generated_types import UNSET, Unset
 
-T = TypeVar("T", bound="SlackManifestResponseContainsTheSlackAppManifestAndAppCreationURL")
+T = TypeVar("T", bound="ConnectorManifestResponseContainsAProviderAppManifestAndCreationURL")
 
 
 @_attrs_define
-class SlackManifestResponseContainsTheSlackAppManifestAndAppCreationURL:
+class ConnectorManifestResponseContainsAProviderAppManifestAndCreationURL:
     """
     Attributes:
-        manifest_json (str | Unset): Raw Slack app manifest JSON.
-        manifest_url (str | Unset): Slack app creation URL with the manifest embedded as a query parameter.
+        manifest_json (str): JSON manifest for creating the provider app.
+        manifest_url (str): URL that opens the provider app creation flow.
+        icon_url (str | Unset):
     """
 
-    manifest_json: str | Unset = UNSET
-    manifest_url: str | Unset = UNSET
+    manifest_json: str
+    manifest_url: str
+    icon_url: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -28,13 +30,18 @@ class SlackManifestResponseContainsTheSlackAppManifestAndAppCreationURL:
 
         manifest_url = self.manifest_url
 
+        icon_url = self.icon_url
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
-        if manifest_json is not UNSET:
-            field_dict["manifest_json"] = manifest_json
-        if manifest_url is not UNSET:
-            field_dict["manifest_url"] = manifest_url
+        field_dict.update(
+            {
+                "manifest_json": manifest_json,
+                "manifest_url": manifest_url,
+            }
+        )
+        if icon_url is not UNSET:
+            field_dict["icon_url"] = icon_url
 
         return field_dict
 
@@ -48,17 +55,20 @@ class SlackManifestResponseContainsTheSlackAppManifestAndAppCreationURL:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        manifest_json = d.pop("manifest_json", UNSET)
+        manifest_json = d.pop("manifest_json")
 
-        manifest_url = d.pop("manifest_url", UNSET)
+        manifest_url = d.pop("manifest_url")
 
-        slack_manifest_response_contains_the_slack_app_manifest_and_app_creation_url = cls(
+        icon_url = d.pop("icon_url", UNSET)
+
+        connector_manifest_response_contains_a_provider_app_manifest_and_creation_url = cls(
             manifest_json=manifest_json,
             manifest_url=manifest_url,
+            icon_url=icon_url,
         )
 
-        slack_manifest_response_contains_the_slack_app_manifest_and_app_creation_url.additional_properties = d
-        return slack_manifest_response_contains_the_slack_app_manifest_and_app_creation_url
+        connector_manifest_response_contains_a_provider_app_manifest_and_creation_url.additional_properties = d
+        return connector_manifest_response_contains_a_provider_app_manifest_and_creation_url
 
     @property
     def additional_keys(self) -> list[str]:

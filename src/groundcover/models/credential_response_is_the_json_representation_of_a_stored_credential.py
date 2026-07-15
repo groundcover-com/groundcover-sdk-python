@@ -9,6 +9,9 @@ from attrs import field as _attrs_field
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.connector_capabilities_contains_optional_provider_owned_feature_metadata import (
+        ConnectorCapabilitiesContainsOptionalProviderOwnedFeatureMetadata,
+    )
     from ..models.credential_response_is_the_json_representation_of_a_stored_credential_data import (
         CredentialResponseIsTheJSONRepresentationOfAStoredCredentialData,
     )
@@ -22,6 +25,7 @@ class CredentialResponseIsTheJSONRepresentationOfAStoredCredential:
     """
     Attributes:
         auth_type (str | Unset): The authentication type Example: api_key.
+        capabilities (ConnectorCapabilitiesContainsOptionalProviderOwnedFeatureMetadata | Unset):
         created_at (str | Unset): Creation timestamp Example: 2026-03-15 12:20:55+00:00.
         data (CredentialResponseIsTheJSONRepresentationOfAStoredCredentialData | Unset): Provider-specific metadata
         description (str | Unset): Optional description for this credential
@@ -39,6 +43,7 @@ class CredentialResponseIsTheJSONRepresentationOfAStoredCredential:
     """
 
     auth_type: str | Unset = UNSET
+    capabilities: ConnectorCapabilitiesContainsOptionalProviderOwnedFeatureMetadata | Unset = UNSET
     created_at: str | Unset = UNSET
     data: CredentialResponseIsTheJSONRepresentationOfAStoredCredentialData | Unset = UNSET
     description: str | Unset = UNSET
@@ -56,6 +61,10 @@ class CredentialResponseIsTheJSONRepresentationOfAStoredCredential:
 
     def to_dict(self) -> dict[str, Any]:
         auth_type = self.auth_type
+
+        capabilities: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.capabilities, Unset):
+            capabilities = self.capabilities.to_dict()
 
         created_at = self.created_at
 
@@ -90,6 +99,8 @@ class CredentialResponseIsTheJSONRepresentationOfAStoredCredential:
         field_dict.update({})
         if auth_type is not UNSET:
             field_dict["auth_type"] = auth_type
+        if capabilities is not UNSET:
+            field_dict["capabilities"] = capabilities
         if created_at is not UNSET:
             field_dict["created_at"] = created_at
         if data is not UNSET:
@@ -121,12 +132,22 @@ class CredentialResponseIsTheJSONRepresentationOfAStoredCredential:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.connector_capabilities_contains_optional_provider_owned_feature_metadata import (
+            ConnectorCapabilitiesContainsOptionalProviderOwnedFeatureMetadata,
+        )
         from ..models.credential_response_is_the_json_representation_of_a_stored_credential_data import (
             CredentialResponseIsTheJSONRepresentationOfAStoredCredentialData,
         )
 
         d = dict(src_dict)
         auth_type = d.pop("auth_type", UNSET)
+
+        _capabilities = d.pop("capabilities", UNSET)
+        capabilities: ConnectorCapabilitiesContainsOptionalProviderOwnedFeatureMetadata | Unset
+        if isinstance(_capabilities, Unset) or _capabilities is None:
+            capabilities = UNSET
+        else:
+            capabilities = ConnectorCapabilitiesContainsOptionalProviderOwnedFeatureMetadata.from_dict(_capabilities)
 
         created_at = d.pop("created_at", UNSET)
 
@@ -161,6 +182,7 @@ class CredentialResponseIsTheJSONRepresentationOfAStoredCredential:
 
         credential_response_is_the_json_representation_of_a_stored_credential = cls(
             auth_type=auth_type,
+            capabilities=capabilities,
             created_at=created_at,
             data=data,
             description=description,

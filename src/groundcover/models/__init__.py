@@ -104,6 +104,8 @@ from .assets_summary_holds_asset_counts_for_the_unified_summary_by_type import (
 from .assets_summary_response import AssetsSummaryResponse
 from .associated_filter import AssociatedFilter
 from .associated_request_v2 import AssociatedRequestV2
+from .aws_cur_search_request import AwsCurSearchRequest
+from .aws_cur_search_time_series_request import AwsCurSearchTimeSeriesRequest
 from .backend_settings import BackendSettings
 from .backend_settings_gcp_pubsub_topic import BackendSettingsGcpPubsubTopic
 from .base_query_is_the_base_struct_for_different_query_types import BaseQueryIsTheBaseStructForDifferentQueryTypes
@@ -151,6 +153,9 @@ from .connected_app_params_maps_each_connected_app_id_to_its_per_app_delivery_op
 )
 from .connected_app_response import ConnectedAppResponse
 from .connection_configuration import ConnectionConfiguration
+from .connector_capabilities_contains_optional_provider_owned_feature_metadata import (
+    ConnectorCapabilitiesContainsOptionalProviderOwnedFeatureMetadata,
+)
 from .connector_catalog_entry import ConnectorCatalogEntry
 from .connector_catalog_response_is_the_connector_catalog_listing import (
     ConnectorCatalogResponseIsTheConnectorCatalogListing,
@@ -169,6 +174,12 @@ from .connector_enable_response_is_the_response_after_enabling_a_connector_data 
 )
 from .connector_list_response_is_the_list_response_keyed_by_provider_name import (
     ConnectorListResponseIsTheListResponseKeyedByProviderName,
+)
+from .connector_manifest_response_contains_a_provider_app_manifest_and_creation_url import (
+    ConnectorManifestResponseContainsAProviderAppManifestAndCreationURL,
+)
+from .connector_mcp_capability_describes_an_mcp_source_exposed_by_a_first_class_connector import (
+    ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector,
 )
 from .connector_o_auth_start_response_contains_the_provider_authorization_url import (
     ConnectorOAuthStartResponseContainsTheProviderAuthorizationURL,
@@ -607,9 +618,6 @@ from .linear_label_is_a_linear_issue_label_for_a_team import LinearLabelIsALinea
 from .linear_label_list_response_contains_linear_label_picker_results import (
     LinearLabelListResponseContainsLinearLabelPickerResults,
 )
-from .linear_manifest_response_contains_the_linear_o_auth_app_manifest_and_app_creation_url import (
-    LinearManifestResponseContainsTheLinearOAuthAppManifestAndAppCreationURL,
-)
 from .linear_project_is_a_linear_project_for_a_team import LinearProjectIsALinearProjectForATeam
 from .linear_project_list_response_contains_linear_project_picker_results import (
     LinearProjectListResponseContainsLinearProjectPickerResults,
@@ -706,6 +714,9 @@ from .mapping_response_provider import MappingResponseProvider
 from .matcher_models_the_matching_of_a_label import MatcherModelsTheMatchingOfALabel
 from .matching_route import MatchingRoute
 from .math_expression import MathExpression
+from .mcpjsonrpc_request_is_ajsonrpc20_request_forwarded_to_an_mcp_server import (
+    MCPJSONRPCRequestIsAJSONRPC20RequestForwardedToAnMCPServer,
+)
 from .member_tenants import MemberTenants
 from .member_view import MemberView
 from .member_views_request import MemberViewsRequest
@@ -944,9 +955,6 @@ from .slack_chat_post_message_response_is_the_proxied_slack_chat_post_message_re
 )
 from .slack_chat_post_message_response_is_the_proxied_slack_chat_post_message_response_message import (
     SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponseMessage,
-)
-from .slack_manifest_response_contains_the_slack_app_manifest_and_app_creation_url import (
-    SlackManifestResponseContainsTheSlackAppManifestAndAppCreationURL,
 )
 from .slack_webhook_data import SlackWebhookData
 from .slack_webhook_data_response import SlackWebhookDataResponse
@@ -1351,6 +1359,8 @@ __all__ = (
     "AssetSummaryResponseItem",
     "AssociatedFilter",
     "AssociatedRequestV2",
+    "AwsCurSearchRequest",
+    "AwsCurSearchTimeSeriesRequest",
     "BackendSettings",
     "BackendSettingsGcpPubsubTopic",
     "BaseQueryIsTheBaseStructForDifferentQueryTypes",
@@ -1383,6 +1393,7 @@ __all__ = (
     "ConnectedAppParamsMapsEachConnectedAppIDToItsPerAppDeliveryOptions",
     "ConnectedAppResponse",
     "ConnectionConfiguration",
+    "ConnectorCapabilitiesContainsOptionalProviderOwnedFeatureMetadata",
     "ConnectorCatalogEntry",
     "ConnectorCatalogResponseIsTheConnectorCatalogListing",
     "ConnectorDataRequestWrapsProviderSpecificConnectorData",
@@ -1390,6 +1401,8 @@ __all__ = (
     "ConnectorEnableResponseIsTheResponseAfterEnablingAConnector",
     "ConnectorEnableResponseIsTheResponseAfterEnablingAConnectorData",
     "ConnectorListResponseIsTheListResponseKeyedByProviderName",
+    "ConnectorManifestResponseContainsAProviderAppManifestAndCreationURL",
+    "ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector",
     "ConnectorOAuthStartResponseContainsTheProviderAuthorizationURL",
     "ConnectorStatusRepresentsASingleProvidersStateAndCredentials",
     "ConnMetadata",
@@ -1714,7 +1727,6 @@ __all__ = (
     "LinearIssueUpdateRequestIsTheRequestBodyForUpdatingALinearIssue",
     "LinearLabelIsALinearIssueLabelForATeam",
     "LinearLabelListResponseContainsLinearLabelPickerResults",
-    "LinearManifestResponseContainsTheLinearOAuthAppManifestAndAppCreationURL",
     "LinearProjectIsALinearProjectForATeam",
     "LinearProjectListResponseContainsLinearProjectPickerResults",
     "LinearResolveIssueRequestIsTheOptionalRequestBodyForResolvingALinearIssue",
@@ -1795,6 +1807,7 @@ __all__ = (
     "MatcherModelsTheMatchingOfALabel",
     "MatchingRoute",
     "MathExpression",
+    "MCPJSONRPCRequestIsAJSONRPC20RequestForwardedToAnMCPServer",
     "MemberTenants",
     "MemberView",
     "MemberViewsRequest",
@@ -1970,7 +1983,6 @@ __all__ = (
     "SlackChatPostMessageRequestBlocks",
     "SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponse",
     "SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponseMessage",
-    "SlackManifestResponseContainsTheSlackAppManifestAndAppCreationURL",
     "SlackWebhookData",
     "SlackWebhookDataResponse",
     "SourceMapUploadResponseIsTheJSONSuccessBodyReturnedByTheUploadHandler",
