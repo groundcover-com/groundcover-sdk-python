@@ -6,37 +6,30 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="SlackAppSecretStoresNonSecretSlackOrgConnectorMetadataUsedByDispatchCenter")
+T = TypeVar("T", bound="LinearData")
 
 
 @_attrs_define
-class SlackAppSecretStoresNonSecretSlackOrgConnectorMetadataUsedByDispatchCenter:
-    """
-    Attributes:
-        connector_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
-        team_id (str):  Example: T123456.
-        team_name (str):  Example: Engineering.
+class LinearData:
+    """LinearSecret stores the comm-hub Linear org connector id. All Linear
+    functionality is keyed off the connector id; workspace metadata lives in
+    comm-hub and is not needed here.
+
+        Attributes:
+            connector_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
     """
 
     connector_id: str
-    team_id: str
-    team_name: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         connector_id = self.connector_id
-
-        team_id = self.team_id
-
-        team_name = self.team_name
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
                 "connector_id": connector_id,
-                "team_id": team_id,
-                "team_name": team_name,
             }
         )
 
@@ -54,18 +47,12 @@ class SlackAppSecretStoresNonSecretSlackOrgConnectorMetadataUsedByDispatchCenter
         d = dict(src_dict)
         connector_id = d.pop("connector_id")
 
-        team_id = d.pop("team_id")
-
-        team_name = d.pop("team_name")
-
-        slack_app_secret_stores_non_secret_slack_org_connector_metadata_used_by_dispatch_center = cls(
+        linear_data = cls(
             connector_id=connector_id,
-            team_id=team_id,
-            team_name=team_name,
         )
 
-        slack_app_secret_stores_non_secret_slack_org_connector_metadata_used_by_dispatch_center.additional_properties = d
-        return slack_app_secret_stores_non_secret_slack_org_connector_metadata_used_by_dispatch_center
+        linear_data.additional_properties = d
+        return linear_data
 
     @property
     def additional_keys(self) -> list[str]:

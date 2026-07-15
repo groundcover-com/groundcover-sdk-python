@@ -17,31 +17,19 @@ class SlackAppDataResponse:
     Attributes:
         connector_id (str | Unset): Comm-hub Slack org connector ID used by dispatch-center. Example:
             550e8400-e29b-41d4-a716-446655440000.
-        team_id (str | Unset): Slack workspace team ID. Example: T123456.
-        team_name (str | Unset): Slack workspace team name. Example: Engineering.
     """
 
     connector_id: str | Unset = UNSET
-    team_id: str | Unset = UNSET
-    team_name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         connector_id = self.connector_id
-
-        team_id = self.team_id
-
-        team_name = self.team_name
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if connector_id is not UNSET:
             field_dict["connector_id"] = connector_id
-        if team_id is not UNSET:
-            field_dict["team_id"] = team_id
-        if team_name is not UNSET:
-            field_dict["team_name"] = team_name
 
         return field_dict
 
@@ -57,14 +45,8 @@ class SlackAppDataResponse:
         d = dict(src_dict)
         connector_id = d.pop("connector_id", UNSET)
 
-        team_id = d.pop("team_id", UNSET)
-
-        team_name = d.pop("team_name", UNSET)
-
         slack_app_data_response = cls(
             connector_id=connector_id,
-            team_id=team_id,
-            team_name=team_name,
         )
 
         slack_app_data_response.additional_properties = d

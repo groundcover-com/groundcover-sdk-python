@@ -16,37 +16,19 @@ class LinearDataResponse:
     """
     Attributes:
         connector_id (str | Unset): Comm-hub Linear org connector ID. Example: 550e8400-e29b-41d4-a716-446655440000.
-        workspace_id (str | Unset): Linear workspace ID. Example: 0f806c8d-2e37-4b1a-b2f9-6f42fd7f6d87.
-        workspace_name (str | Unset): Linear workspace name. Example: groundcover.
-        workspace_url_key (str | Unset): Linear workspace URL key. Example: groundcover.
     """
 
     connector_id: str | Unset = UNSET
-    workspace_id: str | Unset = UNSET
-    workspace_name: str | Unset = UNSET
-    workspace_url_key: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         connector_id = self.connector_id
-
-        workspace_id = self.workspace_id
-
-        workspace_name = self.workspace_name
-
-        workspace_url_key = self.workspace_url_key
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
         if connector_id is not UNSET:
             field_dict["connector_id"] = connector_id
-        if workspace_id is not UNSET:
-            field_dict["workspace_id"] = workspace_id
-        if workspace_name is not UNSET:
-            field_dict["workspace_name"] = workspace_name
-        if workspace_url_key is not UNSET:
-            field_dict["workspace_url_key"] = workspace_url_key
 
         return field_dict
 
@@ -62,17 +44,8 @@ class LinearDataResponse:
         d = dict(src_dict)
         connector_id = d.pop("connector_id", UNSET)
 
-        workspace_id = d.pop("workspace_id", UNSET)
-
-        workspace_name = d.pop("workspace_name", UNSET)
-
-        workspace_url_key = d.pop("workspace_url_key", UNSET)
-
         linear_data_response = cls(
             connector_id=connector_id,
-            workspace_id=workspace_id,
-            workspace_name=workspace_name,
-            workspace_url_key=workspace_url_key,
         )
 
         linear_data_response.additional_properties = d

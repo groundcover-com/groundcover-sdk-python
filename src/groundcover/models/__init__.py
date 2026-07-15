@@ -589,6 +589,7 @@ from .linear_comment_create_request_is_the_request_body_for_creating_a_linear_is
 from .linear_comment_is_a_comment_returned_by_the_typed_linear_connector_api import (
     LinearCommentIsACommentReturnedByTheTypedLinearConnectorAPI,
 )
+from .linear_data import LinearData
 from .linear_data_response import LinearDataResponse
 from .linear_issue_assignee_is_the_minimal_assignee_shape_returned_on_linear_issues import (
     LinearIssueAssigneeIsTheMinimalAssigneeShapeReturnedOnLinearIssues,
@@ -615,9 +616,6 @@ from .linear_project_list_response_contains_linear_project_picker_results import
 )
 from .linear_resolve_issue_request_is_the_optional_request_body_for_resolving_a_linear_issue import (
     LinearResolveIssueRequestIsTheOptionalRequestBodyForResolvingALinearIssue,
-)
-from .linear_secret_stores_non_secret_linear_org_connector_metadata import (
-    LinearSecretStoresNonSecretLinearOrgConnectorMetadata,
 )
 from .linear_team_is_a_linear_team_returned_by_the_team_picker_api import (
     LinearTeamIsALinearTeamReturnedByTheTeamPickerAPI,
@@ -930,10 +928,8 @@ from .silence import Silence
 from .silence_matcher import SilenceMatcher
 from .simulation_request import SimulationRequest
 from .simulation_response import SimulationResponse
+from .slack_app_data import SlackAppData
 from .slack_app_data_response import SlackAppDataResponse
-from .slack_app_secret_stores_non_secret_slack_org_connector_metadata_used_by_dispatch_center import (
-    SlackAppSecretStoresNonSecretSlackOrgConnectorMetadataUsedByDispatchCenter,
-)
 from .slack_channel_picker_channel_is_a_slack_channel_returned_by_the_channel_picker_api import (
     SlackChannelPickerChannelIsASlackChannelReturnedByTheChannelPickerAPI,
 )
@@ -1710,6 +1706,7 @@ __all__ = (
     "LimitByDefinesPerGroupLimitingForSQLQueriesEGLIMITBY",
     "LinearCommentCreateRequestIsTheRequestBodyForCreatingALinearIssueComment",
     "LinearCommentIsACommentReturnedByTheTypedLinearConnectorAPI",
+    "LinearData",
     "LinearDataResponse",
     "LinearIssueAssigneeIsTheMinimalAssigneeShapeReturnedOnLinearIssues",
     "LinearIssueCreateRequestIsTheRequestBodyForCreatingALinearIssue",
@@ -1721,7 +1718,6 @@ __all__ = (
     "LinearProjectIsALinearProjectForATeam",
     "LinearProjectListResponseContainsLinearProjectPickerResults",
     "LinearResolveIssueRequestIsTheOptionalRequestBodyForResolvingALinearIssue",
-    "LinearSecretStoresNonSecretLinearOrgConnectorMetadata",
     "LinearTeamIsALinearTeamReturnedByTheTeamPickerAPI",
     "LinearTeamListResponseContainsLinearTeamPickerResults",
     "LinearUserIsALinearUserReturnedByTheTypedLinearConnectorAPI",
@@ -1965,8 +1961,8 @@ __all__ = (
     "SilenceMatcher",
     "SimulationRequest",
     "SimulationResponse",
+    "SlackAppData",
     "SlackAppDataResponse",
-    "SlackAppSecretStoresNonSecretSlackOrgConnectorMetadataUsedByDispatchCenter",
     "SlackChannelPickerChannelIsASlackChannelReturnedByTheChannelPickerAPI",
     "SlackChannelsResponseContainsChannelPickerResultsForASlackConnector",
     "SlackChatPostMessageRequest",
