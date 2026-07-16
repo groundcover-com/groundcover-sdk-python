@@ -10,6 +10,7 @@ from ... import _generated_errors as errors
 from ..._generated_client import AuthenticatedClient, Client
 from ...models.get_dashboard_response_400 import GetDashboardResponse400
 from ...models.get_dashboard_response_404 import GetDashboardResponse404
+from ...models.get_dashboard_response_410 import GetDashboardResponse410
 from ...models.get_dashboard_response_500 import GetDashboardResponse500
 from ...models.view import View
 from ..._generated_types import UNSET, Response, Unset
@@ -40,7 +41,9 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse500 | View | None:
+) -> (
+    GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse410 | GetDashboardResponse500 | View | None
+):
     if response.status_code == 200:
         response_200 = View.from_dict(response.json()) if response.content else None
 
@@ -56,6 +59,11 @@ def _parse_response(
 
         return response_404
 
+    if response.status_code == 410:
+        response_410 = GetDashboardResponse410.from_dict(response.json()) if response.content else None
+
+        return response_410
+
     if response.status_code == 500:
         response_500 = GetDashboardResponse500.from_dict(response.json()) if response.content else None
 
@@ -69,7 +77,9 @@ def _parse_response(
 
 def _build_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse500 | View]:
+) -> Response[
+    GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse410 | GetDashboardResponse500 | View
+]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -83,7 +93,9 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     exclude_preset: bool | Unset = UNSET,
-) -> Response[GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse500 | View]:
+) -> Response[
+    GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse410 | GetDashboardResponse500 | View
+]:
     """Get Dashboard by ID
 
     Args:
@@ -95,7 +107,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse500 | View]
+        Response[GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse410 | GetDashboardResponse500 | View]
     """
 
     kwargs = _get_kwargs(
@@ -115,7 +127,9 @@ def sync(
     *,
     client: AuthenticatedClient | Client,
     exclude_preset: bool | Unset = UNSET,
-) -> GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse500 | View | None:
+) -> (
+    GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse410 | GetDashboardResponse500 | View | None
+):
     """Get Dashboard by ID
 
     Args:
@@ -127,7 +141,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse500 | View
+        GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse410 | GetDashboardResponse500 | View
     """
 
     return sync_detailed(
@@ -142,7 +156,9 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     exclude_preset: bool | Unset = UNSET,
-) -> Response[GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse500 | View]:
+) -> Response[
+    GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse410 | GetDashboardResponse500 | View
+]:
     """Get Dashboard by ID
 
     Args:
@@ -154,7 +170,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse500 | View]
+        Response[GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse410 | GetDashboardResponse500 | View]
     """
 
     kwargs = _get_kwargs(
@@ -172,7 +188,9 @@ async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     exclude_preset: bool | Unset = UNSET,
-) -> GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse500 | View | None:
+) -> (
+    GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse410 | GetDashboardResponse500 | View | None
+):
     """Get Dashboard by ID
 
     Args:
@@ -184,7 +202,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse500 | View
+        GetDashboardResponse400 | GetDashboardResponse404 | GetDashboardResponse410 | GetDashboardResponse500 | View
     """
 
     return (

@@ -10,6 +10,7 @@ from ... import _generated_errors as errors
 from ..._generated_client import AuthenticatedClient, Client
 from ...models.archive_dashboard_response_400 import ArchiveDashboardResponse400
 from ...models.archive_dashboard_response_404 import ArchiveDashboardResponse404
+from ...models.archive_dashboard_response_409 import ArchiveDashboardResponse409
 from ...models.archive_dashboard_response_500 import ArchiveDashboardResponse500
 from ...models.view import View
 from ..._generated_types import UNSET, Response
@@ -40,7 +41,14 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse500 | View | None:
+) -> (
+    ArchiveDashboardResponse400
+    | ArchiveDashboardResponse404
+    | ArchiveDashboardResponse409
+    | ArchiveDashboardResponse500
+    | View
+    | None
+):
     if response.status_code == 202:
         response_202 = View.from_dict(response.json()) if response.content else None
 
@@ -56,6 +64,11 @@ def _parse_response(
 
         return response_404
 
+    if response.status_code == 409:
+        response_409 = ArchiveDashboardResponse409.from_dict(response.json()) if response.content else None
+
+        return response_409
+
     if response.status_code == 500:
         response_500 = ArchiveDashboardResponse500.from_dict(response.json()) if response.content else None
 
@@ -69,7 +82,13 @@ def _parse_response(
 
 def _build_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse500 | View]:
+) -> Response[
+    ArchiveDashboardResponse400
+    | ArchiveDashboardResponse404
+    | ArchiveDashboardResponse409
+    | ArchiveDashboardResponse500
+    | View
+]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -83,7 +102,13 @@ def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
     current_revision: int,
-) -> Response[ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse500 | View]:
+) -> Response[
+    ArchiveDashboardResponse400
+    | ArchiveDashboardResponse404
+    | ArchiveDashboardResponse409
+    | ArchiveDashboardResponse500
+    | View
+]:
     """Archive Dashboard
 
     Args:
@@ -95,7 +120,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse500 | View]
+        Response[ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse409 | ArchiveDashboardResponse500 | View]
     """
 
     kwargs = _get_kwargs(
@@ -115,7 +140,14 @@ def sync(
     *,
     client: AuthenticatedClient | Client,
     current_revision: int,
-) -> ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse500 | View | None:
+) -> (
+    ArchiveDashboardResponse400
+    | ArchiveDashboardResponse404
+    | ArchiveDashboardResponse409
+    | ArchiveDashboardResponse500
+    | View
+    | None
+):
     """Archive Dashboard
 
     Args:
@@ -127,7 +159,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse500 | View
+        ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse409 | ArchiveDashboardResponse500 | View
     """
 
     return sync_detailed(
@@ -142,7 +174,13 @@ async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
     current_revision: int,
-) -> Response[ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse500 | View]:
+) -> Response[
+    ArchiveDashboardResponse400
+    | ArchiveDashboardResponse404
+    | ArchiveDashboardResponse409
+    | ArchiveDashboardResponse500
+    | View
+]:
     """Archive Dashboard
 
     Args:
@@ -154,7 +192,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse500 | View]
+        Response[ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse409 | ArchiveDashboardResponse500 | View]
     """
 
     kwargs = _get_kwargs(
@@ -172,7 +210,14 @@ async def asyncio(
     *,
     client: AuthenticatedClient | Client,
     current_revision: int,
-) -> ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse500 | View | None:
+) -> (
+    ArchiveDashboardResponse400
+    | ArchiveDashboardResponse404
+    | ArchiveDashboardResponse409
+    | ArchiveDashboardResponse500
+    | View
+    | None
+):
     """Archive Dashboard
 
     Args:
@@ -184,7 +229,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse500 | View
+        ArchiveDashboardResponse400 | ArchiveDashboardResponse404 | ArchiveDashboardResponse409 | ArchiveDashboardResponse500 | View
     """
 
     return (

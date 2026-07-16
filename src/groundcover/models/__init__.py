@@ -83,6 +83,7 @@ from .apply_policy_response_404 import ApplyPolicyResponse404
 from .apply_policy_response_500 import ApplyPolicyResponse500
 from .archive_dashboard_response_400 import ArchiveDashboardResponse400
 from .archive_dashboard_response_404 import ArchiveDashboardResponse404
+from .archive_dashboard_response_409 import ArchiveDashboardResponse409
 from .archive_dashboard_response_500 import ArchiveDashboardResponse500
 from .assertion_defines_model_for_assertion import AssertionDefinesModelForAssertion
 from .asset_fetch_result import AssetFetchResult
@@ -486,6 +487,7 @@ from .get_connected_app_response_500 import GetConnectedAppResponse500
 from .get_current_plan_response import GetCurrentPlanResponse
 from .get_dashboard_response_400 import GetDashboardResponse400
 from .get_dashboard_response_404 import GetDashboardResponse404
+from .get_dashboard_response_410 import GetDashboardResponse410
 from .get_dashboard_response_500 import GetDashboardResponse500
 from .get_dashboard_revisions_request_defines_the_request_structure_for_getting_dashboard_revisions_list import (
     GetDashboardRevisionsRequestDefinesTheRequestStructureForGettingDashboardRevisionsList,
@@ -494,8 +496,8 @@ from .get_dashboard_revisions_response_defines_the_response_structure_for_gettin
     GetDashboardRevisionsResponseDefinesTheResponseStructureForGettingDashboardRevisionsList,
 )
 from .get_dashboards_response_400 import GetDashboardsResponse400
-from .get_dashboards_response_404 import GetDashboardsResponse404
 from .get_dashboards_response_500 import GetDashboardsResponse500
+from .get_dashboards_source import GetDashboardsSource
 from .get_discovery_response_400 import GetDiscoveryResponse400
 from .get_discovery_response_500 import GetDiscoveryResponse500
 from .get_event_metadata_request import GetEventMetadataRequest
@@ -570,6 +572,7 @@ from .ingestion_measurements_search_time_series_request import IngestionMeasurem
 from .install_all_assets_response import InstallAllAssetsResponse
 from .install_assets_request import InstallAssetsRequest
 from .install_assets_response import InstallAssetsResponse
+from .install_catalog_dashboard_request import InstallCatalogDashboardRequest
 from .install_integration_response import InstallIntegrationResponse
 from .integration_count_holds_an_integration_name_and_its_count_for_sorted_output import (
     IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput,
@@ -1123,6 +1126,7 @@ from .update_connected_app_response_500 import UpdateConnectedAppResponse500
 from .update_dashboard_request import UpdateDashboardRequest
 from .update_dashboard_response_400 import UpdateDashboardResponse400
 from .update_dashboard_response_404 import UpdateDashboardResponse404
+from .update_dashboard_response_409 import UpdateDashboardResponse409
 from .update_dashboard_response_500 import UpdateDashboardResponse500
 from .update_data_integration_config_request import UpdateDataIntegrationConfigRequest
 from .update_data_integration_config_request_tags import UpdateDataIntegrationConfigRequestTags
@@ -1340,6 +1344,7 @@ __all__ = (
     "ApplyPolicyResponse500",
     "ArchiveDashboardResponse400",
     "ArchiveDashboardResponse404",
+    "ArchiveDashboardResponse409",
     "ArchiveDashboardResponse500",
     "AssertionDefinesModelForAssertion",
     "AssetFetchResult",
@@ -1625,12 +1630,13 @@ __all__ = (
     "GetCurrentPlanResponse",
     "GetDashboardResponse400",
     "GetDashboardResponse404",
+    "GetDashboardResponse410",
     "GetDashboardResponse500",
     "GetDashboardRevisionsRequestDefinesTheRequestStructureForGettingDashboardRevisionsList",
     "GetDashboardRevisionsResponseDefinesTheResponseStructureForGettingDashboardRevisionsList",
     "GetDashboardsResponse400",
-    "GetDashboardsResponse404",
     "GetDashboardsResponse500",
+    "GetDashboardsSource",
     "GetDiscoveryResponse400",
     "GetDiscoveryResponse500",
     "GetEventMetadataRequest",
@@ -1697,6 +1703,7 @@ __all__ = (
     "InstallAllAssetsResponse",
     "InstallAssetsRequest",
     "InstallAssetsResponse",
+    "InstallCatalogDashboardRequest",
     "InstallIntegrationResponse",
     "IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput",
     "Integrations",
@@ -2084,6 +2091,7 @@ __all__ = (
     "UpdateDashboardRequest",
     "UpdateDashboardResponse400",
     "UpdateDashboardResponse404",
+    "UpdateDashboardResponse409",
     "UpdateDashboardResponse500",
     "UpdateDataIntegrationConfigRequest",
     "UpdateDataIntegrationConfigRequestTags",

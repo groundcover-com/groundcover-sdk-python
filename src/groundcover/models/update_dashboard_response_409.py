@@ -8,11 +8,11 @@ from attrs import field as _attrs_field
 
 from .._generated_types import UNSET, Unset
 
-T = TypeVar("T", bound="GetDashboardsResponse404")
+T = TypeVar("T", bound="UpdateDashboardResponse409")
 
 
 @_attrs_define
-class GetDashboardsResponse404:
+class UpdateDashboardResponse409:
     """
     Attributes:
         message (str | Unset):
@@ -44,12 +44,12 @@ class GetDashboardsResponse404:
         d = dict(src_dict)
         message = d.pop("message", UNSET)
 
-        get_dashboards_response_404 = cls(
+        update_dashboard_response_409 = cls(
             message=message,
         )
 
-        get_dashboards_response_404.additional_properties = d
-        return get_dashboards_response_404
+        update_dashboard_response_409.additional_properties = d
+        return update_dashboard_response_409
 
     @property
     def additional_keys(self) -> list[str]:
