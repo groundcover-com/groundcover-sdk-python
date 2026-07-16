@@ -127,6 +127,38 @@ from .catalog_template_list_item_is_a_thin_per_tenant_view_of_a_catalog_template
 from .catalog_template_response import CatalogTemplateResponse
 from .checkout_session_request import CheckoutSessionRequest
 from .checkout_session_response import CheckoutSessionResponse
+from .claude_create_session_request import ClaudeCreateSessionRequest
+from .claude_create_session_response import ClaudeCreateSessionResponse
+from .claude_event_content import ClaudeEventContent
+from .claude_get_agent_response_is_the_response_for_the_get_agent_endpoint import (
+    ClaudeGetAgentResponseIsTheResponseForTheGetAgentEndpoint,
+)
+from .claude_get_environment_response_is_the_response_for_the_get_environment_endpoint import (
+    ClaudeGetEnvironmentResponseIsTheResponseForTheGetEnvironmentEndpoint,
+)
+from .claude_get_session_response import ClaudeGetSessionResponse
+from .claude_inbound_event_is_a_single_event_returned_when_listing_session_events import (
+    ClaudeInboundEventIsASingleEventReturnedWhenListingSessionEvents,
+)
+from .claude_inbound_event_is_a_single_event_returned_when_listing_session_events_input import (
+    ClaudeInboundEventIsASingleEventReturnedWhenListingSessionEventsInput,
+)
+from .claude_list_events_response_is_the_paginated_response_when_listing_session_events import (
+    ClaudeListEventsResponseIsThePaginatedResponseWhenListingSessionEvents,
+)
+from .claude_send_event_request_is_the_request_body_for_sending_a_session_event import (
+    ClaudeSendEventRequestIsTheRequestBodyForSendingASessionEvent,
+)
+from .claude_send_event_request_is_the_request_body_for_sending_a_session_event_result import (
+    ClaudeSendEventRequestIsTheRequestBodyForSendingASessionEventResult,
+)
+from .claude_send_event_request_is_the_request_body_for_sending_a_session_event_type import (
+    ClaudeSendEventRequestIsTheRequestBodyForSendingASessionEventType,
+)
+from .claude_send_event_response_is_the_response_after_sending_a_session_event import (
+    ClaudeSendEventResponseIsTheResponseAfterSendingASessionEvent,
+)
+from .claude_stop_reason import ClaudeStopReason
 from .clusters_list_request import ClustersListRequest
 from .clusters_list_response import ClustersListResponse
 from .clusters_list_response_400 import ClustersListResponse400
@@ -1380,6 +1412,20 @@ __all__ = (
     "CatalogTemplateResponse",
     "CheckoutSessionRequest",
     "CheckoutSessionResponse",
+    "ClaudeCreateSessionRequest",
+    "ClaudeCreateSessionResponse",
+    "ClaudeEventContent",
+    "ClaudeGetAgentResponseIsTheResponseForTheGetAgentEndpoint",
+    "ClaudeGetEnvironmentResponseIsTheResponseForTheGetEnvironmentEndpoint",
+    "ClaudeGetSessionResponse",
+    "ClaudeInboundEventIsASingleEventReturnedWhenListingSessionEvents",
+    "ClaudeInboundEventIsASingleEventReturnedWhenListingSessionEventsInput",
+    "ClaudeListEventsResponseIsThePaginatedResponseWhenListingSessionEvents",
+    "ClaudeSendEventRequestIsTheRequestBodyForSendingASessionEvent",
+    "ClaudeSendEventRequestIsTheRequestBodyForSendingASessionEventResult",
+    "ClaudeSendEventRequestIsTheRequestBodyForSendingASessionEventType",
+    "ClaudeSendEventResponseIsTheResponseAfterSendingASessionEvent",
+    "ClaudeStopReason",
     "ClustersListRequest",
     "ClustersListResponse",
     "ClustersListResponse400",
