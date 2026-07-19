@@ -6,24 +6,34 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from .._generated_types import UNSET, Unset
+
 T = TypeVar("T", bound="SlackAppData")
 
 
 @_attrs_define
 class SlackAppData:
-    """SlackAppSecret stores the comm-hub Slack org connector id. All Slack
-    functionality is keyed off the connector id; workspace metadata lives in
-    comm-hub and is not needed here.
+    """SlackAppSecret stores the comm-hub Slack org connector id, which all Slack
+    functionality keys off of. TeamID/TeamName are optional legacy metadata written
+    only for older backends; Validate ignores them.
 
         Attributes:
             connector_id (str):  Example: 550e8400-e29b-41d4-a716-446655440000.
+            team_id (str | Unset):  Example: T0123456789.
+            team_name (str | Unset):  Example: Engineering.
     """
 
     connector_id: str
+    team_id: str | Unset = UNSET
+    team_name: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         connector_id = self.connector_id
+
+        team_id = self.team_id
+
+        team_name = self.team_name
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -32,6 +42,10 @@ class SlackAppData:
                 "connector_id": connector_id,
             }
         )
+        if team_id is not UNSET:
+            field_dict["team_id"] = team_id
+        if team_name is not UNSET:
+            field_dict["team_name"] = team_name
 
         return field_dict
 
@@ -47,8 +61,14 @@ class SlackAppData:
         d = dict(src_dict)
         connector_id = d.pop("connector_id")
 
+        team_id = d.pop("team_id", UNSET)
+
+        team_name = d.pop("team_name", UNSET)
+
         slack_app_data = cls(
             connector_id=connector_id,
+            team_id=team_id,
+            team_name=team_name,
         )
 
         slack_app_data.additional_properties = d
