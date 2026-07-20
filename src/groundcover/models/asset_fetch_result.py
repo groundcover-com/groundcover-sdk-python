@@ -20,7 +20,13 @@ class AssetFetchResult:
         fetched_assets (int | Unset): The number of assets fetched.
         required_permissions (list[str] | Unset): Required permissions for this asset type when fetch fails due to
             missing scopes.
-        skipped_assets (int | Unset): The number of assets skipped during fetch (e.g., malformed data).
+        skip_reason (str | Unset): SkipReason explains why the asset type was skipped (status and message).
+        skipped (bool | Unset): Skipped is true when the entire asset type was skipped because its list
+            endpoint reported the type as absent (404). The run still succeeds. A
+            missing scope (403) is reported as a failure with RequiredPermissions
+            instead, not as a skip.
+        skipped_assets (int | Unset): The number of individual assets skipped during fetch (e.g., a private
+            dashboard the Application Key cannot read).
         status (str | Unset): The status of the fetch operation ("success" or "failed").
         type_ (str | Unset): The type of asset (e.g., "monitors").
     """
@@ -29,6 +35,8 @@ class AssetFetchResult:
     error_message: str | Unset = UNSET
     fetched_assets: int | Unset = UNSET
     required_permissions: list[str] | Unset = UNSET
+    skip_reason: str | Unset = UNSET
+    skipped: bool | Unset = UNSET
     skipped_assets: int | Unset = UNSET
     status: str | Unset = UNSET
     type_: str | Unset = UNSET
@@ -44,6 +52,10 @@ class AssetFetchResult:
         required_permissions: list[str] | Unset = UNSET
         if not isinstance(self.required_permissions, Unset):
             required_permissions = self.required_permissions
+
+        skip_reason = self.skip_reason
+
+        skipped = self.skipped
 
         skipped_assets = self.skipped_assets
 
@@ -62,6 +74,10 @@ class AssetFetchResult:
             field_dict["fetchedAssets"] = fetched_assets
         if required_permissions is not UNSET:
             field_dict["requiredPermissions"] = required_permissions
+        if skip_reason is not UNSET:
+            field_dict["skipReason"] = skip_reason
+        if skipped is not UNSET:
+            field_dict["skipped"] = skipped
         if skipped_assets is not UNSET:
             field_dict["skippedAssets"] = skipped_assets
         if status is not UNSET:
@@ -89,6 +105,10 @@ class AssetFetchResult:
 
         required_permissions = cast(list[str], d.pop("requiredPermissions", UNSET))
 
+        skip_reason = d.pop("skipReason", UNSET)
+
+        skipped = d.pop("skipped", UNSET)
+
         skipped_assets = d.pop("skippedAssets", UNSET)
 
         status = d.pop("status", UNSET)
@@ -100,6 +120,8 @@ class AssetFetchResult:
             error_message=error_message,
             fetched_assets=fetched_assets,
             required_permissions=required_permissions,
+            skip_reason=skip_reason,
+            skipped=skipped,
             skipped_assets=skipped_assets,
             status=status,
             type_=type_,
