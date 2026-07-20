@@ -268,7 +268,7 @@ class TestSSLSyntheticsLifecycle:
                         ),
                         execution_policy=ExecutionPolicyDefinesModelForExecutionPolicy(
                             assertions=[
-                                AssertionDefinesModelForAssertion(source="ssl", operator="exists", target="true"),
+                                AssertionDefinesModelForAssertion(source="ssl", operator="eq", target="true"),
                             ],
                         ),
                         tracing=TracingDefinesModelForTracing(),
