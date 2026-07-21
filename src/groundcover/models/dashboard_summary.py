@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -19,6 +19,7 @@ class DashboardSummary:
         name (str | Unset):
         origin_id (str | Unset):
         origin_type (str | Unset):
+        tags (list[str] | Unset):
         uuid (str | Unset):
     """
 
@@ -26,6 +27,7 @@ class DashboardSummary:
     name: str | Unset = UNSET
     origin_id: str | Unset = UNSET
     origin_type: str | Unset = UNSET
+    tags: list[str] | Unset = UNSET
     uuid: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -37,6 +39,10 @@ class DashboardSummary:
         origin_id = self.origin_id
 
         origin_type = self.origin_type
+
+        tags: list[str] | Unset = UNSET
+        if not isinstance(self.tags, Unset):
+            tags = self.tags
 
         uuid = self.uuid
 
@@ -51,6 +57,8 @@ class DashboardSummary:
             field_dict["originId"] = origin_id
         if origin_type is not UNSET:
             field_dict["originType"] = origin_type
+        if tags is not UNSET:
+            field_dict["tags"] = tags
         if uuid is not UNSET:
             field_dict["uuid"] = uuid
 
@@ -74,6 +82,8 @@ class DashboardSummary:
 
         origin_type = d.pop("originType", UNSET)
 
+        tags = cast(list[str], d.pop("tags", UNSET))
+
         uuid = d.pop("uuid", UNSET)
 
         dashboard_summary = cls(
@@ -81,6 +91,7 @@ class DashboardSummary:
             name=name,
             origin_id=origin_id,
             origin_type=origin_type,
+            tags=tags,
             uuid=uuid,
         )
 

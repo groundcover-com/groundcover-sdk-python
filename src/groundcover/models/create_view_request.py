@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,6 +18,7 @@ class CreateViewRequest:
         description (str | Unset):
         name (str | Unset):
         preset (str | Unset):
+        tags (list[str] | Unset):
         team (str | Unset):
         view_type (str | Unset):
     """
@@ -25,6 +26,7 @@ class CreateViewRequest:
     description: str | Unset = UNSET
     name: str | Unset = UNSET
     preset: str | Unset = UNSET
+    tags: list[str] | Unset = UNSET
     team: str | Unset = UNSET
     view_type: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -35,6 +37,10 @@ class CreateViewRequest:
         name = self.name
 
         preset = self.preset
+
+        tags: list[str] | Unset = UNSET
+        if not isinstance(self.tags, Unset):
+            tags = self.tags
 
         team = self.team
 
@@ -49,6 +55,8 @@ class CreateViewRequest:
             field_dict["name"] = name
         if preset is not UNSET:
             field_dict["preset"] = preset
+        if tags is not UNSET:
+            field_dict["tags"] = tags
         if team is not UNSET:
             field_dict["team"] = team
         if view_type is not UNSET:
@@ -72,6 +80,8 @@ class CreateViewRequest:
 
         preset = d.pop("preset", UNSET)
 
+        tags = cast(list[str], d.pop("tags", UNSET))
+
         team = d.pop("team", UNSET)
 
         view_type = d.pop("viewType", UNSET)
@@ -80,6 +90,7 @@ class CreateViewRequest:
             description=description,
             name=name,
             preset=preset,
+            tags=tags,
             team=team,
             view_type=view_type,
         )

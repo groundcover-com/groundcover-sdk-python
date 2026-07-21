@@ -4,7 +4,7 @@ import datetime
 
 from .._datetime_compat import parse_datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -31,6 +31,7 @@ class MemberView:
         preset (str | Unset):
         revision_number (int | Unset):
         status (str | Unset):
+        tags (list[str] | Unset):
         team (str | Unset):
         tenant_uuid (str | Unset):
         updated_by (str | Unset):
@@ -52,6 +53,7 @@ class MemberView:
     preset: str | Unset = UNSET
     revision_number: int | Unset = UNSET
     status: str | Unset = UNSET
+    tags: list[str] | Unset = UNSET
     team: str | Unset = UNSET
     tenant_uuid: str | Unset = UNSET
     updated_by: str | Unset = UNSET
@@ -90,6 +92,10 @@ class MemberView:
         revision_number = self.revision_number
 
         status = self.status
+
+        tags: list[str] | Unset = UNSET
+        if not isinstance(self.tags, Unset):
+            tags = self.tags
 
         team = self.team
 
@@ -134,6 +140,8 @@ class MemberView:
             field_dict["revisionNumber"] = revision_number
         if status is not UNSET:
             field_dict["status"] = status
+        if tags is not UNSET:
+            field_dict["tags"] = tags
         if team is not UNSET:
             field_dict["team"] = team
         if tenant_uuid is not UNSET:
@@ -195,6 +203,8 @@ class MemberView:
 
         status = d.pop("status", UNSET)
 
+        tags = cast(list[str], d.pop("tags", UNSET))
+
         team = d.pop("team", UNSET)
 
         tenant_uuid = d.pop("tenantUuid", UNSET)
@@ -226,6 +236,7 @@ class MemberView:
             preset=preset,
             revision_number=revision_number,
             status=status,
+            tags=tags,
             team=team,
             tenant_uuid=tenant_uuid,
             updated_by=updated_by,

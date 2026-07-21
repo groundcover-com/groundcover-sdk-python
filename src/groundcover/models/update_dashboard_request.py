@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -21,6 +21,8 @@ class UpdateDashboardRequest:
         name (str | Unset):
         override (bool | Unset):
         preset (str | Unset):
+        tags (list[str] | Unset): Tags to attach to the dashboard (array of free-text strings; whitespace-trimmed,
+            original casing preserved)
         team (str | Unset):
     """
 
@@ -30,6 +32,7 @@ class UpdateDashboardRequest:
     name: str | Unset = UNSET
     override: bool | Unset = UNSET
     preset: str | Unset = UNSET
+    tags: list[str] | Unset = UNSET
     team: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -45,6 +48,10 @@ class UpdateDashboardRequest:
         override = self.override
 
         preset = self.preset
+
+        tags: list[str] | Unset = UNSET
+        if not isinstance(self.tags, Unset):
+            tags = self.tags
 
         team = self.team
 
@@ -63,6 +70,8 @@ class UpdateDashboardRequest:
             field_dict["override"] = override
         if preset is not UNSET:
             field_dict["preset"] = preset
+        if tags is not UNSET:
+            field_dict["tags"] = tags
         if team is not UNSET:
             field_dict["team"] = team
 
@@ -90,6 +99,8 @@ class UpdateDashboardRequest:
 
         preset = d.pop("preset", UNSET)
 
+        tags = cast(list[str], d.pop("tags", UNSET))
+
         team = d.pop("team", UNSET)
 
         update_dashboard_request = cls(
@@ -99,6 +110,7 @@ class UpdateDashboardRequest:
             name=name,
             override=override,
             preset=preset,
+            tags=tags,
             team=team,
         )
 
