@@ -18,7 +18,7 @@ class AgentSkillRequestIsForwardedToAgentServiceForSkillCreationAndUpdates:
         instructions (str):
         name (str):
         when_to_use (str):
-        description (str | Unset):
+        description (None | str | Unset):
         is_organizational (bool | None | Unset): Whether the Skill is available to the whole organization. Defaults to
             false. Admin only.
             Nullable: true
@@ -27,7 +27,7 @@ class AgentSkillRequestIsForwardedToAgentServiceForSkillCreationAndUpdates:
     instructions: str
     name: str
     when_to_use: str
-    description: str | Unset = UNSET
+    description: None | str | Unset = UNSET
     is_organizational: bool | None | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -38,7 +38,11 @@ class AgentSkillRequestIsForwardedToAgentServiceForSkillCreationAndUpdates:
 
         when_to_use = self.when_to_use
 
-        description = self.description
+        description: None | str | Unset
+        if isinstance(self.description, Unset):
+            description = UNSET
+        else:
+            description = self.description
 
         is_organizational: bool | None | Unset
         if isinstance(self.is_organizational, Unset):
@@ -78,7 +82,14 @@ class AgentSkillRequestIsForwardedToAgentServiceForSkillCreationAndUpdates:
 
         when_to_use = d.pop("when_to_use")
 
-        description = d.pop("description", UNSET)
+        def _parse_description(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        description = _parse_description(d.pop("description", UNSET))
 
         def _parse_is_organizational(data: object) -> bool | None | Unset:
             if data is None:

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -21,13 +21,20 @@ class WriteAPIs:
         is_organizational (bool):
         is_provisioned (bool):
         name (str):
+        owner_user_id (str):
         revision (int):
         updated_at (str):
         when_to_use (str):
-        created_by (str | Unset):
-        description (str | Unset):
-        identifier (str | Unset):
-        updated_by (str | Unset):
+        created_by (None | str | Unset): Audit identity that created the Skill.
+            Nullable: true
+        description (None | str | Unset): Optional human-readable Skill description.
+            Nullable: true
+        identifier (None | str | Unset): Optional stable Skill identifier.
+            Nullable: true
+        owner_email (None | str | Unset): Owner email used for user-facing attribution when available.
+            Nullable: true
+        updated_by (None | str | Unset): Audit identity that most recently updated the Skill.
+            Nullable: true
     """
 
     created_at: str
@@ -36,13 +43,15 @@ class WriteAPIs:
     is_organizational: bool
     is_provisioned: bool
     name: str
+    owner_user_id: str
     revision: int
     updated_at: str
     when_to_use: str
-    created_by: str | Unset = UNSET
-    description: str | Unset = UNSET
-    identifier: str | Unset = UNSET
-    updated_by: str | Unset = UNSET
+    created_by: None | str | Unset = UNSET
+    description: None | str | Unset = UNSET
+    identifier: None | str | Unset = UNSET
+    owner_email: None | str | Unset = UNSET
+    updated_by: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -58,19 +67,43 @@ class WriteAPIs:
 
         name = self.name
 
+        owner_user_id = self.owner_user_id
+
         revision = self.revision
 
         updated_at = self.updated_at
 
         when_to_use = self.when_to_use
 
-        created_by = self.created_by
+        created_by: None | str | Unset
+        if isinstance(self.created_by, Unset):
+            created_by = UNSET
+        else:
+            created_by = self.created_by
 
-        description = self.description
+        description: None | str | Unset
+        if isinstance(self.description, Unset):
+            description = UNSET
+        else:
+            description = self.description
 
-        identifier = self.identifier
+        identifier: None | str | Unset
+        if isinstance(self.identifier, Unset):
+            identifier = UNSET
+        else:
+            identifier = self.identifier
 
-        updated_by = self.updated_by
+        owner_email: None | str | Unset
+        if isinstance(self.owner_email, Unset):
+            owner_email = UNSET
+        else:
+            owner_email = self.owner_email
+
+        updated_by: None | str | Unset
+        if isinstance(self.updated_by, Unset):
+            updated_by = UNSET
+        else:
+            updated_by = self.updated_by
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -82,6 +115,7 @@ class WriteAPIs:
                 "is_organizational": is_organizational,
                 "is_provisioned": is_provisioned,
                 "name": name,
+                "owner_user_id": owner_user_id,
                 "revision": revision,
                 "updated_at": updated_at,
                 "when_to_use": when_to_use,
@@ -93,6 +127,8 @@ class WriteAPIs:
             field_dict["description"] = description
         if identifier is not UNSET:
             field_dict["identifier"] = identifier
+        if owner_email is not UNSET:
+            field_dict["owner_email"] = owner_email
         if updated_by is not UNSET:
             field_dict["updated_by"] = updated_by
 
@@ -120,19 +156,58 @@ class WriteAPIs:
 
         name = d.pop("name")
 
+        owner_user_id = d.pop("owner_user_id")
+
         revision = d.pop("revision")
 
         updated_at = d.pop("updated_at")
 
         when_to_use = d.pop("when_to_use")
 
-        created_by = d.pop("created_by", UNSET)
+        def _parse_created_by(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        description = d.pop("description", UNSET)
+        created_by = _parse_created_by(d.pop("created_by", UNSET))
 
-        identifier = d.pop("identifier", UNSET)
+        def _parse_description(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        updated_by = d.pop("updated_by", UNSET)
+        description = _parse_description(d.pop("description", UNSET))
+
+        def _parse_identifier(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        identifier = _parse_identifier(d.pop("identifier", UNSET))
+
+        def _parse_owner_email(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        owner_email = _parse_owner_email(d.pop("owner_email", UNSET))
+
+        def _parse_updated_by(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        updated_by = _parse_updated_by(d.pop("updated_by", UNSET))
 
         write_ap_is = cls(
             created_at=created_at,
@@ -141,12 +216,14 @@ class WriteAPIs:
             is_organizational=is_organizational,
             is_provisioned=is_provisioned,
             name=name,
+            owner_user_id=owner_user_id,
             revision=revision,
             updated_at=updated_at,
             when_to_use=when_to_use,
             created_by=created_by,
             description=description,
             identifier=identifier,
+            owner_email=owner_email,
             updated_by=updated_by,
         )
 

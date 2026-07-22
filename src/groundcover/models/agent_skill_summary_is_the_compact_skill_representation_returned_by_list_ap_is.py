@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -23,8 +23,10 @@ class AgentSkillSummaryIsTheCompactSkillRepresentationReturnedByListAPIs:
         revision (int):
         updated_at (str):
         when_to_use (str):
-        description (str | Unset):
-        identifier (str | Unset):
+        description (None | str | Unset): Optional human-readable Skill description.
+            Nullable: true
+        identifier (None | str | Unset): Optional stable Skill identifier.
+            Nullable: true
     """
 
     created_at: str
@@ -35,8 +37,8 @@ class AgentSkillSummaryIsTheCompactSkillRepresentationReturnedByListAPIs:
     revision: int
     updated_at: str
     when_to_use: str
-    description: str | Unset = UNSET
-    identifier: str | Unset = UNSET
+    description: None | str | Unset = UNSET
+    identifier: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -56,9 +58,17 @@ class AgentSkillSummaryIsTheCompactSkillRepresentationReturnedByListAPIs:
 
         when_to_use = self.when_to_use
 
-        description = self.description
+        description: None | str | Unset
+        if isinstance(self.description, Unset):
+            description = UNSET
+        else:
+            description = self.description
 
-        identifier = self.identifier
+        identifier: None | str | Unset
+        if isinstance(self.identifier, Unset):
+            identifier = UNSET
+        else:
+            identifier = self.identifier
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -107,9 +117,23 @@ class AgentSkillSummaryIsTheCompactSkillRepresentationReturnedByListAPIs:
 
         when_to_use = d.pop("when_to_use")
 
-        description = d.pop("description", UNSET)
+        def _parse_description(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
 
-        identifier = d.pop("identifier", UNSET)
+        description = _parse_description(d.pop("description", UNSET))
+
+        def _parse_identifier(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        identifier = _parse_identifier(d.pop("identifier", UNSET))
 
         agent_skill_summary_is_the_compact_skill_representation_returned_by_list_ap_is = cls(
             created_at=created_at,
