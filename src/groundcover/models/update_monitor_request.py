@@ -44,6 +44,7 @@ class UpdateMonitorRequest:
         display (DisplayModelControlsHowTheMonitorIsPresented | Unset):
         evaluation_interval (EvaluationIntervalDefinesTheEvaluationFrequencyAndPendingDuration | Unset):
         execution_error_state (UpdateMonitorRequestExecutionErrorState | Unset): State to enter if execution fails.
+        hide_slack_preview_graph (bool | Unset): Whether Slack notifications should omit the issue graph preview.
         is_paused (bool | Unset): Whether the monitor is paused.
         labels (UpdateMonitorRequestLabels | Unset): Labels to attach to the monitor/alert.
         measurement_type (UpdateMonitorRequestMeasurementType | Unset): Type of measurement (state or event).
@@ -63,6 +64,7 @@ class UpdateMonitorRequest:
     display: DisplayModelControlsHowTheMonitorIsPresented | Unset = UNSET
     evaluation_interval: EvaluationIntervalDefinesTheEvaluationFrequencyAndPendingDuration | Unset = UNSET
     execution_error_state: UpdateMonitorRequestExecutionErrorState | Unset = UNSET
+    hide_slack_preview_graph: bool | Unset = UNSET
     is_paused: bool | Unset = UNSET
     labels: UpdateMonitorRequestLabels | Unset = UNSET
     measurement_type: UpdateMonitorRequestMeasurementType | Unset = UNSET
@@ -100,6 +102,8 @@ class UpdateMonitorRequest:
         execution_error_state: str | Unset = UNSET
         if not isinstance(self.execution_error_state, Unset):
             execution_error_state = self.execution_error_state.value
+
+        hide_slack_preview_graph = self.hide_slack_preview_graph
 
         is_paused = self.is_paused
 
@@ -152,6 +156,8 @@ class UpdateMonitorRequest:
             field_dict["evaluationInterval"] = evaluation_interval
         if execution_error_state is not UNSET:
             field_dict["executionErrorState"] = execution_error_state
+        if hide_slack_preview_graph is not UNSET:
+            field_dict["hideSlackPreviewGraph"] = hide_slack_preview_graph
         if is_paused is not UNSET:
             field_dict["isPaused"] = is_paused
         if labels is not UNSET:
@@ -235,6 +241,8 @@ class UpdateMonitorRequest:
         else:
             execution_error_state = UpdateMonitorRequestExecutionErrorState(_execution_error_state)
 
+        hide_slack_preview_graph = d.pop("hideSlackPreviewGraph", UNSET)
+
         is_paused = d.pop("isPaused", UNSET)
 
         _labels = d.pop("labels", UNSET)
@@ -289,6 +297,7 @@ class UpdateMonitorRequest:
             display=display,
             evaluation_interval=evaluation_interval,
             execution_error_state=execution_error_state,
+            hide_slack_preview_graph=hide_slack_preview_graph,
             is_paused=is_paused,
             labels=labels,
             measurement_type=measurement_type,
