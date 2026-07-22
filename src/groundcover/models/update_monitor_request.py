@@ -45,7 +45,8 @@ class UpdateMonitorRequest:
         evaluation_interval (EvaluationIntervalDefinesTheEvaluationFrequencyAndPendingDuration | Unset):
         execution_error_state (UpdateMonitorRequestExecutionErrorState | Unset): State to enter if execution fails.
         hide_slack_preview_graph (bool | Unset): Whether Slack notifications should omit the issue graph preview.
-        is_paused (bool | Unset): Whether the monitor is paused.
+        is_paused (bool | None | Unset): Whether the monitor is paused.
+            Nullable: true
         labels (UpdateMonitorRequestLabels | Unset): Labels to attach to the monitor/alert.
         measurement_type (UpdateMonitorRequestMeasurementType | Unset): Type of measurement (state or event).
         model (ThresholdDefinitions | Unset):
@@ -65,7 +66,7 @@ class UpdateMonitorRequest:
     evaluation_interval: EvaluationIntervalDefinesTheEvaluationFrequencyAndPendingDuration | Unset = UNSET
     execution_error_state: UpdateMonitorRequestExecutionErrorState | Unset = UNSET
     hide_slack_preview_graph: bool | Unset = UNSET
-    is_paused: bool | Unset = UNSET
+    is_paused: bool | None | Unset = UNSET
     labels: UpdateMonitorRequestLabels | Unset = UNSET
     measurement_type: UpdateMonitorRequestMeasurementType | Unset = UNSET
     model: ThresholdDefinitions | Unset = UNSET
@@ -105,7 +106,11 @@ class UpdateMonitorRequest:
 
         hide_slack_preview_graph = self.hide_slack_preview_graph
 
-        is_paused = self.is_paused
+        is_paused: bool | None | Unset
+        if isinstance(self.is_paused, Unset):
+            is_paused = UNSET
+        else:
+            is_paused = self.is_paused
 
         labels: dict[str, Any] | Unset = UNSET
         if not isinstance(self.labels, Unset):
@@ -243,7 +248,14 @@ class UpdateMonitorRequest:
 
         hide_slack_preview_graph = d.pop("hideSlackPreviewGraph", UNSET)
 
-        is_paused = d.pop("isPaused", UNSET)
+        def _parse_is_paused(data: object) -> bool | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(bool | None | Unset, data)
+
+        is_paused = _parse_is_paused(d.pop("isPaused", UNSET))
 
         _labels = d.pop("labels", UNSET)
         labels: UpdateMonitorRequestLabels | Unset
