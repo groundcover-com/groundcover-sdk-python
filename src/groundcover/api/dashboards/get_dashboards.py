@@ -18,6 +18,7 @@ def _get_kwargs(
     *,
     status: str | Unset = UNSET,
     source: GetDashboardsSource | Unset = UNSET,
+    query: str | Unset = UNSET,
 ) -> dict[str, Any]:
 
     params: dict[str, Any] = {}
@@ -29,6 +30,8 @@ def _get_kwargs(
         json_source = source.value
 
     params["source"] = json_source
+
+    params["query"] = query
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -88,12 +91,14 @@ def sync_detailed(
     client: AuthenticatedClient | Client,
     status: str | Unset = UNSET,
     source: GetDashboardsSource | Unset = UNSET,
+    query: str | Unset = UNSET,
 ) -> Response[GetDashboardsResponse400 | GetDashboardsResponse500 | list[View]]:
     """Get Dashboards
 
     Args:
         status (str | Unset):
         source (GetDashboardsSource | Unset):
+        query (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -106,6 +111,7 @@ def sync_detailed(
     kwargs = _get_kwargs(
         status=status,
         source=source,
+        query=query,
     )
 
     response = client.get_httpx_client().request(
@@ -120,12 +126,14 @@ def sync(
     client: AuthenticatedClient | Client,
     status: str | Unset = UNSET,
     source: GetDashboardsSource | Unset = UNSET,
+    query: str | Unset = UNSET,
 ) -> GetDashboardsResponse400 | GetDashboardsResponse500 | list[View] | None:
     """Get Dashboards
 
     Args:
         status (str | Unset):
         source (GetDashboardsSource | Unset):
+        query (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -139,6 +147,7 @@ def sync(
         client=client,
         status=status,
         source=source,
+        query=query,
     ).parsed
 
 
@@ -147,12 +156,14 @@ async def asyncio_detailed(
     client: AuthenticatedClient | Client,
     status: str | Unset = UNSET,
     source: GetDashboardsSource | Unset = UNSET,
+    query: str | Unset = UNSET,
 ) -> Response[GetDashboardsResponse400 | GetDashboardsResponse500 | list[View]]:
     """Get Dashboards
 
     Args:
         status (str | Unset):
         source (GetDashboardsSource | Unset):
+        query (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -165,6 +176,7 @@ async def asyncio_detailed(
     kwargs = _get_kwargs(
         status=status,
         source=source,
+        query=query,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -177,12 +189,14 @@ async def asyncio(
     client: AuthenticatedClient | Client,
     status: str | Unset = UNSET,
     source: GetDashboardsSource | Unset = UNSET,
+    query: str | Unset = UNSET,
 ) -> GetDashboardsResponse400 | GetDashboardsResponse500 | list[View] | None:
     """Get Dashboards
 
     Args:
         status (str | Unset):
         source (GetDashboardsSource | Unset):
+        query (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -197,5 +211,6 @@ async def asyncio(
             client=client,
             status=status,
             source=source,
+            query=query,
         )
     ).parsed
