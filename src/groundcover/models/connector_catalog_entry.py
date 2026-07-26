@@ -17,7 +17,11 @@ class ConnectorCatalogEntry:
     first-class MCP-backed preset identified by catalog id).
 
         Attributes:
-            auth_mode (str | Unset):
+            auth_mode (str | Unset): AuthMode is the install-time auth flow: `none`, `token`, `oauth`
+                (dynamic client registration), `oauth_static` (admin supplies a
+                pre-registered client; the server has no registration endpoint) or
+                `token_or_oauth` (admin selects per-user token, or OAuth by supplying a
+                pre-registered client; changeable after install).
             description (str | Unset):
             display_name (str | Unset):
             icon_domain (str | Unset):
