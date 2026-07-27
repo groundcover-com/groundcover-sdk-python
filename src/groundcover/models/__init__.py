@@ -1056,6 +1056,8 @@ from .synthetic_test_update_response import SyntheticTestUpdateResponse
 from .synthetics_check_input_defines_model_for_synthetics_check_input import (
     SyntheticsCheckInputDefinesModelForSyntheticsCheckInput,
 )
+from .tags_payload_existing_tag_names import TagsPayloadExistingTagNames
+from .tags_request_body_optional_prefix_and_limit import TagsRequestBodyOptionalPrefixAndLimit
 from .tcp_request_defines_model_for_tcp_request import TcpRequestDefinesModelForTcpRequest
 from .template_widget import TemplateWidget
 from .template_widget_kind import TemplateWidgetKind
@@ -2094,6 +2096,8 @@ __all__ = (
     "SyntheticTestListResponse",
     "SyntheticTestMonitor",
     "SyntheticTestUpdateResponse",
+    "TagsPayloadExistingTagNames",
+    "TagsRequestBodyOptionalPrefixAndLimit",
     "TcpRequestDefinesModelForTcpRequest",
     "TemplateWidget",
     "TemplateWidgetKind",
