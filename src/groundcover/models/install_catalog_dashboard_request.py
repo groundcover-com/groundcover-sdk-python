@@ -21,7 +21,8 @@ class InstallCatalogDashboardRequest:
     display name, description and team.
 
         Attributes:
-            description (str | Unset): Optional description for the installed dashboard.
+            description (str | Unset): Description for the installed dashboard. Defaults to the catalog
+                template's description when omitted or empty.
             name (str | Unset): Display name for the installed dashboard. Defaults to the catalog
                 template's displayName when omitted.
             team (str | Unset): Optional team to scope the installed dashboard to.
