@@ -1068,6 +1068,7 @@ from .test_connected_app_request import TestConnectedAppRequest
 from .test_connected_app_request_data import TestConnectedAppRequestData
 from .test_connected_app_request_type import TestConnectedAppRequestType
 from .test_connected_app_response import TestConnectedAppResponse
+from .test_connection_response import TestConnectionResponse
 from .test_monitor_connected_app_channel_identifies_a_slack_channel_for_slack_app_delivery import (
     TestMonitorConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery,
 )
@@ -2108,6 +2109,7 @@ __all__ = (
     "TestConnectedAppRequestData",
     "TestConnectedAppRequestType",
     "TestConnectedAppResponse",
+    "TestConnectionResponse",
     "TestMonitorConnectedAppChannelIdentifiesASlackChannelForSlackAppDelivery",
     "TestMonitorConnectedAppDeliveryOptions",
     "TestMonitorDisplayControlsHowTheTestNotificationIsPresented",
