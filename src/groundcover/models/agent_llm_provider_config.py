@@ -17,6 +17,7 @@ class AgentLLMProviderConfig:
     endpoints. It never exposes the secret ref or the key.
 
         Attributes:
+            base_url (str | Unset): Provider-compatible endpoint base URL, if configured.
             is_secret_ref_set (bool | Unset): Whether an API key secret ref is configured.
             provider (str | Unset): The configured provider ("" when unset).
             updated_at (str | Unset): When the config was last updated (ISO-8601), if set.
@@ -24,6 +25,7 @@ class AgentLLMProviderConfig:
             version (int | Unset): Monotonic version, bumped on every write.
     """
 
+    base_url: str | Unset = UNSET
     is_secret_ref_set: bool | Unset = UNSET
     provider: str | Unset = UNSET
     updated_at: str | Unset = UNSET
@@ -32,6 +34,8 @@ class AgentLLMProviderConfig:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        base_url = self.base_url
+
         is_secret_ref_set = self.is_secret_ref_set
 
         provider = self.provider
@@ -45,6 +49,8 @@ class AgentLLMProviderConfig:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if base_url is not UNSET:
+            field_dict["baseUrl"] = base_url
         if is_secret_ref_set is not UNSET:
             field_dict["isSecretRefSet"] = is_secret_ref_set
         if provider is not UNSET:
@@ -68,6 +74,8 @@ class AgentLLMProviderConfig:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
+        base_url = d.pop("baseUrl", UNSET)
+
         is_secret_ref_set = d.pop("isSecretRefSet", UNSET)
 
         provider = d.pop("provider", UNSET)
@@ -79,6 +87,7 @@ class AgentLLMProviderConfig:
         version = d.pop("version", UNSET)
 
         agent_llm_provider_config = cls(
+            base_url=base_url,
             is_secret_ref_set=is_secret_ref_set,
             provider=provider,
             updated_at=updated_at,

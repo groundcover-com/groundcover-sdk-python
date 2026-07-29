@@ -17,17 +17,22 @@ class AgentLLMProviderConfigRequest:
     LLM provider config. The raw key is never sent here — only the Fleet Manager ref.
 
         Attributes:
-            provider (str): The LLM provider to use (anthropic, azure, vertex, bedrock).
+            provider (str): The LLM provider to use (anthropic, anthropic_compatible_endpoint, azure, vertex, bedrock).
+            base_url (str | Unset): Provider-compatible endpoint base URL. Conditionally required when provider is
+                anthropic_compatible_endpoint; enforced by agent-service validation.
             secret_ref (str | Unset): Fleet Manager secret ref (secretRef::store::<id>) for the provider's API key.
                 Omit for providers that authenticate via ambient identity.
     """
 
     provider: str
+    base_url: str | Unset = UNSET
     secret_ref: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         provider = self.provider
+
+        base_url = self.base_url
 
         secret_ref = self.secret_ref
 
@@ -38,6 +43,8 @@ class AgentLLMProviderConfigRequest:
                 "provider": provider,
             }
         )
+        if base_url is not UNSET:
+            field_dict["baseUrl"] = base_url
         if secret_ref is not UNSET:
             field_dict["secretRef"] = secret_ref
 
@@ -55,10 +62,13 @@ class AgentLLMProviderConfigRequest:
         d = dict(src_dict)
         provider = d.pop("provider")
 
+        base_url = d.pop("baseUrl", UNSET)
+
         secret_ref = d.pop("secretRef", UNSET)
 
         agent_llm_provider_config_request = cls(
             provider=provider,
+            base_url=base_url,
             secret_ref=secret_ref,
         )
 

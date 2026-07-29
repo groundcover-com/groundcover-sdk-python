@@ -522,6 +522,7 @@ from .fetch_assets_request_provider import FetchAssetsRequestProvider
 from .fetch_assets_response import FetchAssetsResponse
 from .filter_represents_an_operation_and_value_for_a_condition import FilterRepresentsAnOperationAndValueForACondition
 from .filters_map_response import FiltersMapResponse
+from .filters_request_body import FiltersRequestBody
 from .filters_with_estimated_item import FiltersWithEstimatedItem
 from .filters_with_estimated_map_response import FiltersWithEstimatedMapResponse
 from .finding_represents_a_single_preflight_validation_finding import FindingRepresentsASinglePreflightValidationFinding
@@ -1695,6 +1696,7 @@ __all__ = (
     "FetchAssetsResponse",
     "FilterRepresentsAnOperationAndValueForACondition",
     "FiltersMapResponse",
+    "FiltersRequestBody",
     "FiltersWithEstimatedItem",
     "FiltersWithEstimatedMapResponse",
     "FindingRepresentsASinglePreflightValidationFinding",
