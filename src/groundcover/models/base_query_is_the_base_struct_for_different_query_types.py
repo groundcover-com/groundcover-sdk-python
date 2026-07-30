@@ -33,7 +33,9 @@ class BaseQueryIsTheBaseStructForDifferentQueryTypes:
         data_type (str | Unset):
         datasource_id (str | Unset):
         datasource_type (str | Unset):
-        evaluation_delay (int | Unset):
+        evaluation_delay (int | Unset): Shifts the evaluated window back by this many seconds, for sources that backfill
+            recent data. Up to 7 days. aws_cur queries must set exactly 172800 (48h): CUR
+            lands 24-48h after the usage it bills, so a fresher window reads no rows.
         expression (str | Unset):
         filters (str | Unset):
         instant_rollup (str | Unset):
