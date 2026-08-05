@@ -113,12 +113,17 @@ with groundcover.Client() as client:
     delete_monitor.sync_detailed("monitor-id", client=client)
 ```
 
-## Workflows (text/plain)
+## Workflow SDK removal
 
-```python
-with groundcover.Client() as client:
-    client.create_workflow(workflow_definition_text)
-```
+> **Breaking change (AI-461):** The public Python SDK no longer exposes workflow
+> create, list, or delete operations for `POST /api/workflows/create`,
+> `POST /api/workflows/list`, and `DELETE /api/workflows/{id}`. This removes
+> `Client.create_workflow()`, `AsyncClient.create_workflow()`, and the generated
+> workflow list/delete operations. For temporary compatibility, the unchanged
+> endpoints can be called directly through REST. Workflows are deprecated;
+> migrate notification automation to [Destinations](https://docs.groundcover.com/integrations/connected-apps)
+> and [Notification Routes](https://docs.groundcover.com/use-groundcover/monitors/notification-routes) using
+> the [workflow migration guide](https://docs.groundcover.com/use-groundcover/workflows#migration-steps).
 
 ## Condition Builder
 

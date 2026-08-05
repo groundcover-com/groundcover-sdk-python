@@ -147,10 +147,6 @@ class AsyncClient:
             **kwargs,
         )
 
-    async def create_workflow(self, workflow_text: str, **kwargs: Any) -> httpx.Response:
-        """Create a workflow. The transport automatically sets Content-Type to text/plain."""
-        return await self.post("/api/workflows/create", content=workflow_text, **kwargs)
-
     # -- Context manager --
 
     async def aclose(self) -> None:

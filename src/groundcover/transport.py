@@ -67,9 +67,8 @@ class GroundcoverTransport(httpx.BaseTransport):
     2. Inject X-Backend-Id: {backend_id}
     3. Inject User-Agent: groundcover-python-sdk
     4. Inject optional traceparent header
-    5. Fix Content-Type to text/plain for POST /api/workflows/create
-    6. Fix response Content-Type to application/x-yaml for GET /api/monitors/{id}
-    7. Retry on configured status codes with exponential backoff + jitter
+    5. Fix response Content-Type to application/x-yaml for GET /api/monitors/{id}
+    6. Retry on configured status codes with exponential backoff + jitter
     """
 
     def __init__(self, config: ClientConfig) -> None:
@@ -78,7 +77,6 @@ class GroundcoverTransport(httpx.BaseTransport):
 
     def handle_request(self, request: httpx.Request) -> httpx.Response:
         self._inject_headers(request)
-        self._fix_request_content_type(request)
 
         response = self._send_with_retry(request)
 
@@ -99,11 +97,6 @@ class GroundcoverTransport(httpx.BaseTransport):
             request.headers[HEADER_TRACEPARENT] = traceparent
         elif self._config.traceparent:
             request.headers[HEADER_TRACEPARENT] = self._config.traceparent
-
-    def _fix_request_content_type(self, request: httpx.Request) -> None:
-        path = request.url.raw_path.decode("ascii", errors="ignore").rstrip("/")
-        if request.method == "POST" and path == "/api/workflows/create":
-            request.headers["Content-Type"] = "text/plain"
 
     def _fix_response_content_type(self, request: httpx.Request, response: httpx.Response) -> None:
         path = request.url.raw_path.decode("ascii", errors="ignore")
@@ -145,7 +138,6 @@ class AsyncGroundcoverTransport(httpx.AsyncBaseTransport):
 
     async def handle_async_request(self, request: httpx.Request) -> httpx.Response:
         self._inject_headers(request)
-        self._fix_request_content_type(request)
 
         response = await self._send_with_retry(request)
 
@@ -165,11 +157,6 @@ class AsyncGroundcoverTransport(httpx.AsyncBaseTransport):
             request.headers[HEADER_TRACEPARENT] = traceparent
         elif self._config.traceparent:
             request.headers[HEADER_TRACEPARENT] = self._config.traceparent
-
-    def _fix_request_content_type(self, request: httpx.Request) -> None:
-        path = request.url.raw_path.decode("ascii", errors="ignore").rstrip("/")
-        if request.method == "POST" and path == "/api/workflows/create":
-            request.headers["Content-Type"] = "text/plain"
 
     def _fix_response_content_type(self, request: httpx.Request, response: httpx.Response) -> None:
         path = request.url.raw_path.decode("ascii", errors="ignore")

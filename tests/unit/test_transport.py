@@ -3,7 +3,6 @@
 HIGH PRIORITY: These tests verify the most critical integration points:
 - Auth header injection
 - Monitor YAML content-type fix
-- Workflow text/plain content-type fix
 - Retry behavior
 """
 
@@ -117,30 +116,6 @@ class TestGroundcoverTransport:
         transport._inject_headers(request)
 
         assert HEADER_TRACEPARENT not in request.headers
-
-    def test_workflow_content_type_fix(self, config: ClientConfig) -> None:
-        transport = GroundcoverTransport(config)
-        request = httpx.Request(
-            "POST",
-            "https://api.test.com/api/workflows/create",
-            content=b"workflow body",
-        )
-        transport._fix_request_content_type(request)
-
-        assert request.headers["Content-Type"] == "text/plain"
-
-    def test_workflow_content_type_not_applied_to_other_paths(self, config: ClientConfig) -> None:
-        transport = GroundcoverTransport(config)
-        request = httpx.Request(
-            "POST",
-            "https://api.test.com/api/dashboards",
-            json={"name": "test"},
-        )
-        original_ct = request.headers.get("Content-Type", "")
-        transport._fix_request_content_type(request)
-
-        # Content-Type should not be changed
-        assert request.headers.get("Content-Type", "") == original_ct
 
     def test_monitor_response_content_type_fix(self, config: ClientConfig) -> None:
         transport = GroundcoverTransport(config)
