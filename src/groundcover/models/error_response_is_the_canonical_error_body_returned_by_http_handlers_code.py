@@ -10,6 +10,7 @@ class ErrorResponseIsTheCanonicalErrorBodyReturnedByHTTPHandlersCode(str, Enum):
     MONITOR_DUPLICATE_TITLE = "MONITOR_DUPLICATE_TITLE"
     MONITOR_EVAL_FAILED = "MONITOR_EVAL_FAILED"
     MONITOR_VALIDATION_FAILED = "MONITOR_VALIDATION_FAILED"
+    VIEW_REVISION_CONFLICT = "VIEW_REVISION_CONFLICT"
 
     def __str__(self) -> str:
         return str(self.value)

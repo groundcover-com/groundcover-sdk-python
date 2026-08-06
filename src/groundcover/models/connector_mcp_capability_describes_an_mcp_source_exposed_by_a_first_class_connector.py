@@ -21,6 +21,8 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
         auth_state (str | Unset):
         icon (str | Unset):
         org_discovery_path (str | Unset):
+        scope_status (str | Unset): Whether the connected credential holds all grantable user scopes ("full")
+            or a re-consent could grant more ("partial"). Empty when not applicable.
         setup_guidance (str | Unset):
         user_proxy_path (str | Unset):
     """
@@ -31,6 +33,7 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
     auth_state: str | Unset = UNSET
     icon: str | Unset = UNSET
     org_discovery_path: str | Unset = UNSET
+    scope_status: str | Unset = UNSET
     setup_guidance: str | Unset = UNSET
     user_proxy_path: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -47,6 +50,8 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
         icon = self.icon
 
         org_discovery_path = self.org_discovery_path
+
+        scope_status = self.scope_status
 
         setup_guidance = self.setup_guidance
 
@@ -67,6 +72,8 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
             field_dict["icon"] = icon
         if org_discovery_path is not UNSET:
             field_dict["orgDiscoveryPath"] = org_discovery_path
+        if scope_status is not UNSET:
+            field_dict["scopeStatus"] = scope_status
         if setup_guidance is not UNSET:
             field_dict["setupGuidance"] = setup_guidance
         if user_proxy_path is not UNSET:
@@ -96,6 +103,8 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
 
         org_discovery_path = d.pop("orgDiscoveryPath", UNSET)
 
+        scope_status = d.pop("scopeStatus", UNSET)
+
         setup_guidance = d.pop("setupGuidance", UNSET)
 
         user_proxy_path = d.pop("userProxyPath", UNSET)
@@ -107,6 +116,7 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
             auth_state=auth_state,
             icon=icon,
             org_discovery_path=org_discovery_path,
+            scope_status=scope_status,
             setup_guidance=setup_guidance,
             user_proxy_path=user_proxy_path,
         )
