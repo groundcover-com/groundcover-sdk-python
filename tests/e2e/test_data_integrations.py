@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import time
 
 import groundcover
 from groundcover.api.integrations import (
@@ -18,6 +17,8 @@ from groundcover.exceptions import APIError
 from groundcover.models.create_data_integration_config_request import (
     CreateDataIntegrationConfigRequest,
 )
+
+from ._cleanup import ResourceTracker
 
 CLOUDWATCH_CONFIG = """{
   "version": 1,
@@ -99,77 +100,66 @@ def test_describe_data_integration_type(gc_client: groundcover.Client) -> None:
 class TestCloudwatchLifecycle:
     """Full CRUD lifecycle for CloudWatch data integration."""
 
-    def test_cloudwatch_crud(self, gc_client: groundcover.Client) -> None:
-        unique_name = f"sdk-e2e-test-cloudwatch-{time.time_ns()}"
-        config_id = None
+    def test_cloudwatch_crud(self, gc_client: groundcover.Client, tracker: ResourceTracker) -> None:
+        integration = tracker.new("data-integration", type="cloudwatch")
 
+        # Create
+        create_result = create_data_integration_config.sync_detailed(
+            "cloudwatch",
+            client=gc_client,
+            body=CreateDataIntegrationConfigRequest(
+                config=CLOUDWATCH_CONFIG,
+                name=integration.name,
+            ),
+        )
+        assert create_result.status_code == 201
+        create_data = json.loads(create_result.content)
+        integration.resource_id = create_data["id"]
+        config_id = integration.resource_id
+        assert config_id
+        assert create_data["config"] == CLOUDWATCH_CONFIG
+        assert create_data["update_timestamp"]
+        assert create_data.get("is_archived") is not True
+        original_timestamp = create_data["update_timestamp"]
+
+        # Get - verify config
+        get_result = get_data_integration_config.sync_detailed("cloudwatch", config_id, client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["config"] == CLOUDWATCH_CONFIG
+        assert get_data.get("is_archived") is not True
+
+        # Update - change region and concurrency
+        update_result = update_data_integration_config.sync_detailed(
+            "cloudwatch",
+            config_id,
+            client=gc_client,
+            body=CreateDataIntegrationConfigRequest(
+                config=CLOUDWATCH_CONFIG_UPDATED,
+                name=integration.name,
+            ),
+        )
+        assert update_result.status_code == 200
+        update_data = json.loads(update_result.content)
+        assert update_data["config"] == CLOUDWATCH_CONFIG_UPDATED
+        assert update_data["update_timestamp"]
+        assert update_data["update_timestamp"] > original_timestamp
+
+        # Get - verify updated config
+        get_result = get_data_integration_config.sync_detailed("cloudwatch", config_id, client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["config"] == CLOUDWATCH_CONFIG_UPDATED
+        assert get_data.get("is_archived") is not True
+
+        # Delete
+        delete_data_integration_config.sync_detailed("cloudwatch", config_id, client=gc_client)
+        tracker.forget(integration)
+
+        # Verify deletion - should return error
         try:
-            # Create
-            create_result = create_data_integration_config.sync_detailed(
-                "cloudwatch",
-                client=gc_client,
-                body=CreateDataIntegrationConfigRequest(
-                    config=CLOUDWATCH_CONFIG,
-                    name=unique_name,
-                ),
-            )
-            assert create_result.status_code == 201
-            create_data = json.loads(create_result.content)
-            assert create_data["config"] == CLOUDWATCH_CONFIG
-            assert create_data["id"]
-            assert create_data["update_timestamp"]
-            assert create_data.get("is_archived") is not True
-            config_id = create_data["id"]
-            original_timestamp = create_data["update_timestamp"]
-
-            # Get - verify config
             get_result = get_data_integration_config.sync_detailed("cloudwatch", config_id, client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["config"] == CLOUDWATCH_CONFIG
-            assert get_data.get("is_archived") is not True
-
-            # Update - change region and concurrency
-            update_result = update_data_integration_config.sync_detailed(
-                "cloudwatch",
-                config_id,
-                client=gc_client,
-                body=CreateDataIntegrationConfigRequest(
-                    config=CLOUDWATCH_CONFIG_UPDATED,
-                    name=unique_name,
-                ),
-            )
-            assert update_result.status_code == 200
-            update_data = json.loads(update_result.content)
-            assert update_data["config"] == CLOUDWATCH_CONFIG_UPDATED
-            assert update_data["update_timestamp"]
-            assert update_data["update_timestamp"] > original_timestamp
-
-            # Get - verify updated config
-            get_result = get_data_integration_config.sync_detailed("cloudwatch", config_id, client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["config"] == CLOUDWATCH_CONFIG_UPDATED
-            assert get_data.get("is_archived") is not True
-
-            # Delete
-            delete_data_integration_config.sync_detailed("cloudwatch", config_id, client=gc_client)
-
-            # Verify deletion - should return error
-            try:
-                get_result = get_data_integration_config.sync_detailed("cloudwatch", config_id, client=gc_client)
-                # If no exception, check for error status
-                assert get_result.status_code in (404, 400), (
-                    f"Expected 404 after deletion, got {get_result.status_code}"
-                )
-            except APIError:
-                pass  # Expected
-
-            config_id = None
-
-        finally:
-            if config_id:
-                try:
-                    delete_data_integration_config.sync_detailed("cloudwatch", config_id, client=gc_client)
-                except Exception:
-                    pass
+            # If no exception, check for error status
+            assert get_result.status_code in (404, 400), f"Expected 404 after deletion, got {get_result.status_code}"
+        except APIError:
+            pass  # Expected

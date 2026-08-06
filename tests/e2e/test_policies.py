@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import time
 
 import groundcover
 from groundcover.api.policies import (
@@ -25,6 +24,8 @@ from groundcover.models.role_map_defines_the_mapping_of_roles_to_permissions imp
 )
 from groundcover.models.update_policy_request import UpdatePolicyRequest
 
+from ._cleanup import ResourceTracker
+
 
 def _make_role(mapping: dict[str, str]) -> RoleMapDefinesTheMappingOfRolesToPermissions:
     role = RoleMapDefinesTheMappingOfRolesToPermissions()
@@ -33,15 +34,24 @@ def _make_role(mapping: dict[str, str]) -> RoleMapDefinesTheMappingOfRolesToPerm
     return role
 
 
-def test_policy_crud(gc_client: groundcover.Client) -> None:
-    """Create, list, get, update, apply, audit trail, and delete a policy."""
-    policy_name = f"sdk-e2e-test-policy-{time.time_ns()}"
+def test_policy_crud(gc_client: groundcover.Client, tracker: ResourceTracker) -> None:
+    """Create, list, get, update, apply, audit trail, and delete a policy.
 
+    KNOWN LEAK: the ``apply_policy`` step below binds the policy to a user and
+    that binding is not cleanable through the SDK. It writes a durable
+    ``entity_policies`` row (``internal/rbac/policies/entity_policies_queries.go``),
+    and no unapply route is exposed -- ``scripts/swagger/sdk_routes.yaml`` has only
+    list/{id}/auditTrail/apply/create, and ``apply`` requires at least one policy
+    UUID so it cannot clear a binding either. Deleting the policy does not
+    demonstrably remove the row. Every run of this test leaves one behind until a
+    backend route exists -- tracked in BE-2716.
+    """
     # Create
+    policy = tracker.new("policy")
     create_result = create_policy.sync_detailed(
         client=gc_client,
         body=CreatePolicyRequest(
-            name=policy_name,
+            name=policy.name,
             description="E2E test policy",
             role=_make_role({"write": ""}),
             data_scope=DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions(),
@@ -49,69 +59,72 @@ def test_policy_crud(gc_client: groundcover.Client) -> None:
     )
     assert create_result.status_code == 201
     create_data = json.loads(create_result.content)
-    policy_uuid = create_data["uuid"]
+    policy.resource_id = create_data["uuid"]
+    policy_uuid = policy.resource_id
     assert policy_uuid
 
-    try:
-        # List
-        list_result = list_policies.sync_detailed(client=gc_client)
-        assert list_result.status_code == 200
-        list_data = json.loads(list_result.content)
-        if isinstance(list_data, dict):
-            list_data = list_data.get("policies", list_data.get("items", []))
-        found = any(p.get("uuid") == policy_uuid for p in (list_data or []))
-        assert found, f"Policy {policy_uuid} not found in list"
+    # List
+    list_result = list_policies.sync_detailed(client=gc_client)
+    assert list_result.status_code == 200
+    list_data = json.loads(list_result.content)
+    if isinstance(list_data, dict):
+        list_data = list_data.get("policies", list_data.get("items", []))
+    found = any(p.get("uuid") == policy_uuid for p in (list_data or []))
+    assert found, f"Policy {policy_uuid} not found in list"
 
-        # Get
-        get_result = get_policy.sync_detailed(policy_uuid, client=gc_client)
-        assert get_result.status_code == 200
-        get_data = json.loads(get_result.content)
-        assert get_data["uuid"] == policy_uuid
-        assert get_data["name"] == policy_name
+    # Get
+    get_result = get_policy.sync_detailed(policy_uuid, client=gc_client)
+    assert get_result.status_code == 200
+    get_data = json.loads(get_result.content)
+    assert get_data["uuid"] == policy_uuid
+    assert get_data["name"] == policy.name
 
-        # Update - change description and role
-        updated_desc = "E2E test policy - updated"
-        update_result = update_policy.sync_detailed(
-            policy_uuid,
-            client=gc_client,
-            body=UpdatePolicyRequest(
-                name=policy_name,
-                description=updated_desc,
-                role=_make_role({"admin": ""}),
-                data_scope=DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions(),
-                current_revision=1,
-            ),
-        )
-        assert update_result.status_code in (200, 202)
+    # Update - change description and role
+    updated_desc = "E2E test policy - updated"
+    update_result = update_policy.sync_detailed(
+        policy_uuid,
+        client=gc_client,
+        body=UpdatePolicyRequest(
+            name=policy.name,
+            description=updated_desc,
+            role=_make_role({"admin": ""}),
+            data_scope=DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions(),
+            current_revision=1,
+        ),
+    )
+    assert update_result.status_code in (200, 202)
 
-        # Verify update via Get
-        get_result = get_policy.sync_detailed(policy_uuid, client=gc_client)
-        assert get_result.status_code == 200
-        get_data = json.loads(get_result.content)
-        assert get_data["uuid"] == policy_uuid
-        assert get_data["name"] == policy_name
+    # Verify update via Get
+    get_result = get_policy.sync_detailed(policy_uuid, client=gc_client)
+    assert get_result.status_code == 200
+    get_data = json.loads(get_result.content)
+    assert get_data["uuid"] == policy_uuid
+    assert get_data["name"] == policy.name
+    # The description is what the update actually changed, so assert it: without
+    # this the step passes even if the backend drops the change.
+    assert get_data["description"] == updated_desc
 
-        # Apply policy to a test email
-        apply_result = apply_policy.sync_detailed(
-            client=gc_client,
-            body=ApplyPolicyRequest(
-                policy_uui_ds=[policy_uuid],
-                emails=["e2e-test@example.com"],
-                override=False,
-            ),
-        )
-        assert apply_result.status_code == 200
+    # Apply policy to a test email (see KNOWN LEAK in the docstring)
+    apply_result = apply_policy.sync_detailed(
+        client=gc_client,
+        body=ApplyPolicyRequest(
+            policy_uui_ds=[policy_uuid],
+            emails=["e2e-test@example.com"],
+            override=False,
+        ),
+    )
+    assert apply_result.status_code == 200
 
-        # Get audit trail
-        audit_result = get_policy_audit_trail.sync_detailed(policy_uuid, client=gc_client)
-        assert audit_result.status_code == 200
-        audit_data = json.loads(audit_result.content)
-        if isinstance(audit_data, list):
-            assert len(audit_data) > 0, "Audit trail should not be empty"
-        else:
-            # May be wrapped in a dict
-            assert audit_data, "Audit trail response should not be empty"
+    # Get audit trail
+    audit_result = get_policy_audit_trail.sync_detailed(policy_uuid, client=gc_client)
+    assert audit_result.status_code == 200
+    audit_data = json.loads(audit_result.content)
+    if isinstance(audit_data, list):
+        assert len(audit_data) > 0, "Audit trail should not be empty"
+    else:
+        # May be wrapped in a dict
+        assert audit_data, "Audit trail response should not be empty"
 
-    finally:
-        # Delete
-        delete_policy.sync_detailed(policy_uuid, client=gc_client)
+    # Delete
+    delete_policy.sync_detailed(policy_uuid, client=gc_client)
+    tracker.forget(policy)

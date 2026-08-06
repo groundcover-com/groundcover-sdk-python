@@ -45,6 +45,8 @@ from groundcover.models.worker_request_defines_model_for_worker_request import (
     WorkerRequestDefinesModelForWorkerRequest,
 )
 
+from ._cleanup import ResourceTracker
+
 
 def _poll_list_for_synthetic(
     gc_client: groundcover.Client,
@@ -104,267 +106,235 @@ def _make_http_check(name: str) -> WorkerRequestDefinesModelForWorkerRequest:
 class TestHTTPSyntheticsLifecycle:
     """Full CRUD lifecycle for HTTP synthetic tests."""
 
-    def test_http_synthetic_crud(self, gc_client: groundcover.Client) -> None:
-        synthetic_name = f"sdk-e2e-test-http-synthetic-{time.time_ns()}"
-        created_id = None
+    def test_http_synthetic_crud(self, gc_client: groundcover.Client, tracker: ResourceTracker) -> None:
+        synthetic = tracker.new("http-synthetic")
+        synthetic_name = synthetic.name
 
-        try:
-            # Create
-            create_result = create_synthetic_test.sync_detailed(
-                client=gc_client,
-                body=SyntheticTestCreateRequest(
-                    name=synthetic_name,
-                    version=1,
-                    enabled=True,
-                    interval="5m",
-                    check_config=_make_http_check(synthetic_name),
-                ),
-            )
-            assert create_result.status_code == 201
-            create_data = json.loads(create_result.content)
-            created_id = create_data["id"]
-            assert created_id
+        # Create
+        create_result = create_synthetic_test.sync_detailed(
+            client=gc_client,
+            body=SyntheticTestCreateRequest(
+                name=synthetic_name,
+                version=1,
+                enabled=True,
+                interval="5m",
+                check_config=_make_http_check(synthetic_name),
+            ),
+        )
+        assert create_result.status_code == 201
+        create_data = json.loads(create_result.content)
+        synthetic.resource_id = create_data["id"]
+        assert synthetic.resource_id
 
-            # List - poll until visible
-            _poll_list_for_synthetic(gc_client, created_id, should_exist=True)
+        # List - poll until visible
+        _poll_list_for_synthetic(gc_client, synthetic.resource_id, should_exist=True)
 
-            # Get
-            get_result = get_synthetic_test.sync_detailed(created_id, client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["name"] == synthetic_name
+        # Get
+        get_result = get_synthetic_test.sync_detailed(synthetic.resource_id, client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["name"] == synthetic_name
 
-            # Update - change name and interval
-            updated_name = synthetic_name + "-updated"
-            update_result = update_synthetic_test.sync_detailed(
-                created_id,
-                client=gc_client,
-                body=SyntheticTestCreateRequest(
-                    name=updated_name,
-                    version=1,
-                    enabled=True,
-                    interval="10m",
-                    check_config=_make_http_check(updated_name),
-                ),
-            )
-            assert update_result.status_code == 200
+        # Update - change name and interval
+        updated_name = synthetic_name + "-updated"
+        update_result = update_synthetic_test.sync_detailed(
+            synthetic.resource_id,
+            client=gc_client,
+            body=SyntheticTestCreateRequest(
+                name=updated_name,
+                version=1,
+                enabled=True,
+                interval="10m",
+                check_config=_make_http_check(updated_name),
+            ),
+        )
+        assert update_result.status_code == 200
 
-            # Poll list until updated name visible
-            _poll_list_for_synthetic(gc_client, created_id, should_exist=True, expected_name=updated_name)
+        # Poll list until updated name visible
+        _poll_list_for_synthetic(gc_client, synthetic.resource_id, should_exist=True, expected_name=updated_name)
 
-            # Verify update via Get
-            get_result = get_synthetic_test.sync_detailed(created_id, client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["name"] == updated_name
-            assert get_data["interval"] == "10m"
-            assert get_data["checkConfig"]["kind"] == "http"
-            assert get_data["checkConfig"]["request"]["http"]["method"] == "GET"
-            assert get_data["checkConfig"]["request"]["http"]["url"] == "https://httpbin.org/get"
+        # Verify update via Get
+        get_result = get_synthetic_test.sync_detailed(synthetic.resource_id, client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["name"] == updated_name
+        assert get_data["interval"] == "10m"
+        assert get_data["checkConfig"]["kind"] == "http"
+        assert get_data["checkConfig"]["request"]["http"]["method"] == "GET"
+        assert get_data["checkConfig"]["request"]["http"]["url"] == "https://httpbin.org/get"
 
-            # Delete
-            delete_result = delete_synthetic_test.sync_detailed(created_id, client=gc_client)
-            assert delete_result.status_code == 204
+        # Delete
+        delete_result = delete_synthetic_test.sync_detailed(synthetic.resource_id, client=gc_client)
+        assert delete_result.status_code == 204
+        tracker.forget(synthetic)
 
-            # Poll until removed
-            _poll_list_for_synthetic(gc_client, created_id, should_exist=False)
-            created_id = None
-
-        finally:
-            if created_id:
-                try:
-                    delete_synthetic_test.sync_detailed(created_id, client=gc_client)
-                except Exception:
-                    pass
+        # Poll until removed
+        _poll_list_for_synthetic(gc_client, synthetic.resource_id, should_exist=False)
 
 
 class TestTCPSyntheticsLifecycle:
     """CRUD lifecycle for TCP synthetic tests."""
 
-    def test_tcp_synthetic_crud(self, gc_client: groundcover.Client) -> None:
-        synthetic_name = f"sdk-e2e-test-tcp-synthetic-{time.time_ns()}"
-        created_id = None
+    def test_tcp_synthetic_crud(self, gc_client: groundcover.Client, tracker: ResourceTracker) -> None:
+        synthetic = tracker.new("tcp-synthetic")
+        synthetic_name = synthetic.name
 
-        try:
-            # Create
-            create_result = create_synthetic_test.sync_detailed(
-                client=gc_client,
-                body=SyntheticTestCreateRequest(
-                    name=synthetic_name,
-                    version=1,
-                    enabled=True,
-                    interval="5m",
-                    check_config=WorkerRequestDefinesModelForWorkerRequest(
-                        kind="tcp",
-                        metadata=MetadataDefinesModelForMetadata(synthetic_name=synthetic_name),
-                        request=RequestCheckRequestConfigurationOnlyOneFieldShouldBeSetBasedOnTheCheckKind(
-                            tcp=TcpRequestDefinesModelForTcpRequest(
-                                kind="tcp",
-                                host="google.com",
-                                port=80,
-                            ),
+        # Create
+        create_result = create_synthetic_test.sync_detailed(
+            client=gc_client,
+            body=SyntheticTestCreateRequest(
+                name=synthetic_name,
+                version=1,
+                enabled=True,
+                interval="5m",
+                check_config=WorkerRequestDefinesModelForWorkerRequest(
+                    kind="tcp",
+                    metadata=MetadataDefinesModelForMetadata(synthetic_name=synthetic_name),
+                    request=RequestCheckRequestConfigurationOnlyOneFieldShouldBeSetBasedOnTheCheckKind(
+                        tcp=TcpRequestDefinesModelForTcpRequest(
+                            kind="tcp",
+                            host="google.com",
+                            port=80,
                         ),
-                        execution_policy=ExecutionPolicyDefinesModelForExecutionPolicy(
-                            assertions=[
-                                AssertionDefinesModelForAssertion(source="tcp", operator="exists", target="true"),
-                            ],
-                        ),
-                        tracing=TracingDefinesModelForTracing(),
                     ),
+                    execution_policy=ExecutionPolicyDefinesModelForExecutionPolicy(
+                        assertions=[
+                            AssertionDefinesModelForAssertion(source="tcp", operator="exists", target="true"),
+                        ],
+                    ),
+                    tracing=TracingDefinesModelForTracing(),
                 ),
-            )
-            assert create_result.status_code == 201
-            create_data = json.loads(create_result.content)
-            created_id = create_data["id"]
-            assert created_id
+            ),
+        )
+        assert create_result.status_code == 201
+        create_data = json.loads(create_result.content)
+        synthetic.resource_id = create_data["id"]
+        assert synthetic.resource_id
 
-            # Get - verify TCP config
-            get_result = get_synthetic_test.sync_detailed(created_id, client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["name"] == synthetic_name
-            assert get_data["checkConfig"]["kind"] == "tcp"
-            assert get_data["checkConfig"]["request"]["tcp"]["host"] == "google.com"
-            assert get_data["checkConfig"]["request"]["tcp"]["port"] == 80
+        # Get - verify TCP config
+        get_result = get_synthetic_test.sync_detailed(synthetic.resource_id, client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["name"] == synthetic_name
+        assert get_data["checkConfig"]["kind"] == "tcp"
+        assert get_data["checkConfig"]["request"]["tcp"]["host"] == "google.com"
+        assert get_data["checkConfig"]["request"]["tcp"]["port"] == 80
 
-            # Delete
-            delete_result = delete_synthetic_test.sync_detailed(created_id, client=gc_client)
-            assert delete_result.status_code == 204
-            created_id = None
-
-        finally:
-            if created_id:
-                try:
-                    delete_synthetic_test.sync_detailed(created_id, client=gc_client)
-                except Exception:
-                    pass
+        # Delete
+        delete_result = delete_synthetic_test.sync_detailed(synthetic.resource_id, client=gc_client)
+        assert delete_result.status_code == 204
+        tracker.forget(synthetic)
 
 
 class TestSSLSyntheticsLifecycle:
     """CRUD lifecycle for SSL synthetic tests."""
 
-    def test_ssl_synthetic_crud(self, gc_client: groundcover.Client) -> None:
-        synthetic_name = f"sdk-e2e-test-ssl-synthetic-{time.time_ns()}"
-        created_id = None
+    def test_ssl_synthetic_crud(self, gc_client: groundcover.Client, tracker: ResourceTracker) -> None:
+        synthetic = tracker.new("ssl-synthetic")
+        synthetic_name = synthetic.name
 
-        try:
-            # Create
-            create_result = create_synthetic_test.sync_detailed(
-                client=gc_client,
-                body=SyntheticTestCreateRequest(
-                    name=synthetic_name,
-                    version=1,
-                    enabled=True,
-                    interval="5m",
-                    check_config=WorkerRequestDefinesModelForWorkerRequest(
-                        kind="ssl",
-                        metadata=MetadataDefinesModelForMetadata(synthetic_name=synthetic_name),
-                        request=RequestCheckRequestConfigurationOnlyOneFieldShouldBeSetBasedOnTheCheckKind(
-                            ssl=SslRequestDefinesModelForSslRequest(
-                                kind="ssl",
-                                host="google.com",
-                                port=443,
-                            ),
+        # Create
+        create_result = create_synthetic_test.sync_detailed(
+            client=gc_client,
+            body=SyntheticTestCreateRequest(
+                name=synthetic_name,
+                version=1,
+                enabled=True,
+                interval="5m",
+                check_config=WorkerRequestDefinesModelForWorkerRequest(
+                    kind="ssl",
+                    metadata=MetadataDefinesModelForMetadata(synthetic_name=synthetic_name),
+                    request=RequestCheckRequestConfigurationOnlyOneFieldShouldBeSetBasedOnTheCheckKind(
+                        ssl=SslRequestDefinesModelForSslRequest(
+                            kind="ssl",
+                            host="google.com",
+                            port=443,
                         ),
-                        execution_policy=ExecutionPolicyDefinesModelForExecutionPolicy(
-                            assertions=[
-                                AssertionDefinesModelForAssertion(source="ssl", operator="eq", target="true"),
-                            ],
-                        ),
-                        tracing=TracingDefinesModelForTracing(),
                     ),
+                    execution_policy=ExecutionPolicyDefinesModelForExecutionPolicy(
+                        assertions=[
+                            AssertionDefinesModelForAssertion(source="ssl", operator="eq", target="true"),
+                        ],
+                    ),
+                    tracing=TracingDefinesModelForTracing(),
                 ),
-            )
-            assert create_result.status_code == 201
-            create_data = json.loads(create_result.content)
-            created_id = create_data["id"]
-            assert created_id
+            ),
+        )
+        assert create_result.status_code == 201
+        create_data = json.loads(create_result.content)
+        synthetic.resource_id = create_data["id"]
+        assert synthetic.resource_id
 
-            # Get - verify SSL config
-            get_result = get_synthetic_test.sync_detailed(created_id, client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["name"] == synthetic_name
-            assert get_data["checkConfig"]["kind"] == "ssl"
-            assert get_data["checkConfig"]["request"]["ssl"]["host"] == "google.com"
-            assert get_data["checkConfig"]["request"]["ssl"]["port"] == 443
+        # Get - verify SSL config
+        get_result = get_synthetic_test.sync_detailed(synthetic.resource_id, client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["name"] == synthetic_name
+        assert get_data["checkConfig"]["kind"] == "ssl"
+        assert get_data["checkConfig"]["request"]["ssl"]["host"] == "google.com"
+        assert get_data["checkConfig"]["request"]["ssl"]["port"] == 443
 
-            # Delete
-            delete_result = delete_synthetic_test.sync_detailed(created_id, client=gc_client)
-            assert delete_result.status_code == 204
-            created_id = None
-
-        finally:
-            if created_id:
-                try:
-                    delete_synthetic_test.sync_detailed(created_id, client=gc_client)
-                except Exception:
-                    pass
+        # Delete
+        delete_result = delete_synthetic_test.sync_detailed(synthetic.resource_id, client=gc_client)
+        assert delete_result.status_code == 204
+        tracker.forget(synthetic)
 
 
 class TestDNSSyntheticsLifecycle:
     """CRUD lifecycle for DNS synthetic tests."""
 
-    def test_dns_synthetic_crud(self, gc_client: groundcover.Client) -> None:
-        synthetic_name = f"sdk-e2e-test-dns-synthetic-{time.time_ns()}"
-        created_id = None
+    def test_dns_synthetic_crud(self, gc_client: groundcover.Client, tracker: ResourceTracker) -> None:
+        synthetic = tracker.new("dns-synthetic")
+        synthetic_name = synthetic.name
 
-        try:
-            # Create
-            create_result = create_synthetic_test.sync_detailed(
-                client=gc_client,
-                body=SyntheticTestCreateRequest(
-                    name=synthetic_name,
-                    version=1,
-                    enabled=True,
-                    interval="5m",
-                    check_config=WorkerRequestDefinesModelForWorkerRequest(
-                        kind="dns",
-                        metadata=MetadataDefinesModelForMetadata(synthetic_name=synthetic_name),
-                        request=RequestCheckRequestConfigurationOnlyOneFieldShouldBeSetBasedOnTheCheckKind(
-                            dns=DnsRequestDefinesModelForDnsRequest(
-                                kind="dns",
-                                domain="google.com",
-                                resolver="8.8.8.8",
-                                port=53,
-                                record_type="A",
-                                timeout="30s",
-                            ),
+        # Create
+        create_result = create_synthetic_test.sync_detailed(
+            client=gc_client,
+            body=SyntheticTestCreateRequest(
+                name=synthetic_name,
+                version=1,
+                enabled=True,
+                interval="5m",
+                check_config=WorkerRequestDefinesModelForWorkerRequest(
+                    kind="dns",
+                    metadata=MetadataDefinesModelForMetadata(synthetic_name=synthetic_name),
+                    request=RequestCheckRequestConfigurationOnlyOneFieldShouldBeSetBasedOnTheCheckKind(
+                        dns=DnsRequestDefinesModelForDnsRequest(
+                            kind="dns",
+                            domain="google.com",
+                            resolver="8.8.8.8",
+                            port=53,
+                            record_type="A",
+                            timeout="30s",
                         ),
-                        execution_policy=ExecutionPolicyDefinesModelForExecutionPolicy(
-                            assertions=[
-                                AssertionDefinesModelForAssertion(source="dnsAnswer", operator="exists", target="true"),
-                            ],
-                        ),
-                        tracing=TracingDefinesModelForTracing(),
                     ),
+                    execution_policy=ExecutionPolicyDefinesModelForExecutionPolicy(
+                        assertions=[
+                            AssertionDefinesModelForAssertion(source="dnsAnswer", operator="exists", target="true"),
+                        ],
+                    ),
+                    tracing=TracingDefinesModelForTracing(),
                 ),
-            )
-            assert create_result.status_code == 201
-            create_data = json.loads(create_result.content)
-            created_id = create_data["id"]
-            assert created_id
+            ),
+        )
+        assert create_result.status_code == 201
+        create_data = json.loads(create_result.content)
+        synthetic.resource_id = create_data["id"]
+        assert synthetic.resource_id
 
-            # Get - verify DNS config
-            get_result = get_synthetic_test.sync_detailed(created_id, client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["name"] == synthetic_name
-            assert get_data["checkConfig"]["kind"] == "dns"
-            dns_req = get_data["checkConfig"]["request"]["dns"]
-            assert dns_req["domain"] == "google.com"
-            assert dns_req["resolver"] == "8.8.8.8"
-            assert dns_req["port"] == 53
-            assert dns_req["recordType"] == "A"
+        # Get - verify DNS config
+        get_result = get_synthetic_test.sync_detailed(synthetic.resource_id, client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["name"] == synthetic_name
+        assert get_data["checkConfig"]["kind"] == "dns"
+        dns_req = get_data["checkConfig"]["request"]["dns"]
+        assert dns_req["domain"] == "google.com"
+        assert dns_req["resolver"] == "8.8.8.8"
+        assert dns_req["port"] == 53
+        assert dns_req["recordType"] == "A"
 
-            # Delete
-            delete_result = delete_synthetic_test.sync_detailed(created_id, client=gc_client)
-            assert delete_result.status_code == 204
-            created_id = None
-
-        finally:
-            if created_id:
-                try:
-                    delete_synthetic_test.sync_detailed(created_id, client=gc_client)
-                except Exception:
-                    pass
+        # Delete
+        delete_result = delete_synthetic_test.sync_detailed(synthetic.resource_id, client=gc_client)
+        assert delete_result.status_code == 204
+        tracker.forget(synthetic)

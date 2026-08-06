@@ -38,33 +38,36 @@ from groundcover.models.create_update_traces_pipeline_config_request import (
 from groundcover.models.relabel_config import RelabelConfig
 from groundcover.models.relabel_config_add_label import RelabelConfigAddLabel
 
+from . import _singletons
+from ._singletons import SingletonFixture
+
 LOGS_CONFIG = """ottlRules:
-- ruleName: example-rule
+- ruleName: sdk-e2e-test-rule
   conditions:
     - container_name == "nginx"
   statements:
-    - set(attributes["test.key"], "test-value")"""
+    - set(attributes["sdk_e2e_test.key"], "test-value")"""
 
 LOGS_CONFIG_UPDATED = """ottlRules:
-- ruleName: example-rule-updated
+- ruleName: sdk-e2e-test-rule-updated
   conditions:
     - container_name == "nginx"
   statements:
-    - set(attributes["test.key"], "test-value-updated")"""
+    - set(attributes["sdk_e2e_test.key"], "test-value-updated")"""
 
 TRACES_CONFIG = """ottlRules:
-- ruleName: example-rule
+- ruleName: sdk-e2e-test-rule
   conditions:
     - workload == "nginx"
   statements:
-    - set(attributes["test.key"], "test-value")"""
+    - set(attributes["sdk_e2e_test.key"], "test-value")"""
 
 TRACES_CONFIG_UPDATED = """ottlRules:
-- ruleName: example-rule-updated
+- ruleName: sdk-e2e-test-rule-updated
   conditions:
     - workload == "nginx"
   statements:
-    - set(attributes["test.key"], "test-value-updated")"""
+    - set(attributes["sdk_e2e_test.key"], "test-value-updated")"""
 
 
 def _make_add_label(labels: dict[str, str]) -> RelabelConfigAddLabel:
@@ -77,46 +80,49 @@ def _make_add_label(labels: dict[str, str]) -> RelabelConfigAddLabel:
 class TestLogsPipelineLifecycle:
     """Full CRUD lifecycle for logs pipeline configuration."""
 
-    def test_logs_pipeline_crud(self, gc_client: groundcover.Client) -> None:
-        try:
-            # Create
-            create_result = create_logs_pipeline_config.sync_detailed(
-                client=gc_client,
-                body=CreateUpdateLogsPipelineConfigRequest(value=LOGS_CONFIG),
-            )
-            assert create_result.status_code == 201
-            create_data = json.loads(create_result.content)
-            assert create_data["value"] == LOGS_CONFIG
-            assert create_data["uuid"]
-            assert create_data["created_timestamp"]
-            original_timestamp = create_data["created_timestamp"]
+    def test_logs_pipeline_crud(self, gc_client: groundcover.Client, singleton: SingletonFixture) -> None:
+        # Tenant-wide config with no id: snapshot and restore instead of
+        # deleting, which would destroy the tenant's real configuration.
+        singleton("logs-pipeline", markers=_singletons.SUITE_MARKERS)
 
-            # Get - verify value matches
-            get_result = get_logs_pipeline_config.sync_detailed(client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["value"] == LOGS_CONFIG
+        # Create
+        create_result = create_logs_pipeline_config.sync_detailed(
+            client=gc_client,
+            body=CreateUpdateLogsPipelineConfigRequest(value=LOGS_CONFIG),
+        )
+        assert create_result.status_code == 201
+        create_data = json.loads(create_result.content)
+        assert create_data["value"] == LOGS_CONFIG
+        assert create_data["uuid"]
+        assert create_data["created_timestamp"]
+        original_timestamp = create_data["created_timestamp"]
 
-            # Update
-            update_result = update_logs_pipeline_config.sync_detailed(
-                client=gc_client,
-                body=CreateUpdateLogsPipelineConfigRequest(value=LOGS_CONFIG_UPDATED),
-            )
-            assert update_result.status_code == 200
-            update_data = json.loads(update_result.content)
-            assert update_data["value"] == LOGS_CONFIG_UPDATED
-            assert update_data["created_timestamp"]
-            assert update_data["created_timestamp"] > original_timestamp
+        # Get - verify value matches
+        get_result = get_logs_pipeline_config.sync_detailed(client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["value"] == LOGS_CONFIG
 
-            # Get - verify updated value
-            get_result = get_logs_pipeline_config.sync_detailed(client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["value"] == LOGS_CONFIG_UPDATED
+        # Update
+        update_result = update_logs_pipeline_config.sync_detailed(
+            client=gc_client,
+            body=CreateUpdateLogsPipelineConfigRequest(value=LOGS_CONFIG_UPDATED),
+        )
+        assert update_result.status_code == 200
+        update_data = json.loads(update_result.content)
+        assert update_data["value"] == LOGS_CONFIG_UPDATED
+        assert update_data["created_timestamp"]
+        assert update_data["created_timestamp"] > original_timestamp
 
-        finally:
-            # Delete
-            delete_logs_pipeline_config.sync_detailed(client=gc_client)
+        # Get - verify updated value
+        get_result = get_logs_pipeline_config.sync_detailed(client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["value"] == LOGS_CONFIG_UPDATED
+
+        # Delete - the backend implements delete as a new empty revision; the
+        # singleton fixture restores the snapshot afterwards.
+        delete_logs_pipeline_config.sync_detailed(client=gc_client)
 
         # Verify deletion - should return empty value
         get_result = get_logs_pipeline_config.sync_detailed(client=gc_client)
@@ -128,46 +134,49 @@ class TestLogsPipelineLifecycle:
 class TestTracesPipelineLifecycle:
     """Full CRUD lifecycle for traces pipeline configuration."""
 
-    def test_traces_pipeline_crud(self, gc_client: groundcover.Client) -> None:
-        try:
-            # Create
-            create_result = create_traces_pipeline_config.sync_detailed(
-                client=gc_client,
-                body=CreateUpdateTracesPipelineConfigRequest(value=TRACES_CONFIG),
-            )
-            assert create_result.status_code == 201
-            create_data = json.loads(create_result.content)
-            assert create_data["value"] == TRACES_CONFIG
-            assert create_data["uuid"]
-            assert create_data["created_timestamp"]
-            original_timestamp = create_data["created_timestamp"]
+    def test_traces_pipeline_crud(self, gc_client: groundcover.Client, singleton: SingletonFixture) -> None:
+        # Tenant-wide config with no id: snapshot and restore instead of
+        # deleting, which would destroy the tenant's real configuration.
+        singleton("traces-pipeline", markers=_singletons.SUITE_MARKERS)
 
-            # Get - verify value matches
-            get_result = get_traces_pipeline_config.sync_detailed(client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["value"] == TRACES_CONFIG
+        # Create
+        create_result = create_traces_pipeline_config.sync_detailed(
+            client=gc_client,
+            body=CreateUpdateTracesPipelineConfigRequest(value=TRACES_CONFIG),
+        )
+        assert create_result.status_code == 201
+        create_data = json.loads(create_result.content)
+        assert create_data["value"] == TRACES_CONFIG
+        assert create_data["uuid"]
+        assert create_data["created_timestamp"]
+        original_timestamp = create_data["created_timestamp"]
 
-            # Update
-            update_result = update_traces_pipeline_config.sync_detailed(
-                client=gc_client,
-                body=CreateUpdateTracesPipelineConfigRequest(value=TRACES_CONFIG_UPDATED),
-            )
-            assert update_result.status_code == 200
-            update_data = json.loads(update_result.content)
-            assert update_data["value"] == TRACES_CONFIG_UPDATED
-            assert update_data["created_timestamp"]
-            assert update_data["created_timestamp"] > original_timestamp
+        # Get - verify value matches
+        get_result = get_traces_pipeline_config.sync_detailed(client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["value"] == TRACES_CONFIG
 
-            # Get - verify updated value
-            get_result = get_traces_pipeline_config.sync_detailed(client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["value"] == TRACES_CONFIG_UPDATED
+        # Update
+        update_result = update_traces_pipeline_config.sync_detailed(
+            client=gc_client,
+            body=CreateUpdateTracesPipelineConfigRequest(value=TRACES_CONFIG_UPDATED),
+        )
+        assert update_result.status_code == 200
+        update_data = json.loads(update_result.content)
+        assert update_data["value"] == TRACES_CONFIG_UPDATED
+        assert update_data["created_timestamp"]
+        assert update_data["created_timestamp"] > original_timestamp
 
-        finally:
-            # Delete
-            delete_traces_pipeline_config.sync_detailed(client=gc_client)
+        # Get - verify updated value
+        get_result = get_traces_pipeline_config.sync_detailed(client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["value"] == TRACES_CONFIG_UPDATED
+
+        # Delete - the backend implements delete as a new empty revision; the
+        # singleton fixture restores the snapshot afterwards.
+        delete_traces_pipeline_config.sync_detailed(client=gc_client)
 
         # Verify deletion - should return empty value
         get_result = get_traces_pipeline_config.sync_detailed(client=gc_client)
@@ -179,69 +188,72 @@ class TestTracesPipelineLifecycle:
 class TestMetricsPipelineLifecycle:
     """Full CRUD lifecycle for metrics pipeline configuration."""
 
-    def test_metrics_pipeline_crud(self, gc_client: groundcover.Client) -> None:
-        try:
-            # Create with rules
-            create_result = create_metrics_pipeline_config.sync_detailed(
-                client=gc_client,
-                body=CreateUpdateMetricsPipelineConfigRequest(
-                    rules=RelabelConfig(
-                        keep_regex=["http_requests_total", "process_cpu_seconds_total"],
-                        add_label=_make_add_label({"team": "platform"}),
-                    ),
+    def test_metrics_pipeline_crud(self, gc_client: groundcover.Client, singleton: SingletonFixture) -> None:
+        # Tenant-wide config with no id: snapshot and restore instead of
+        # deleting, which would destroy the tenant's real configuration.
+        singleton("metrics-pipeline", markers=_singletons.SUITE_MARKERS)
+
+        # Create with rules
+        create_result = create_metrics_pipeline_config.sync_detailed(
+            client=gc_client,
+            body=CreateUpdateMetricsPipelineConfigRequest(
+                rules=RelabelConfig(
+                    keep_regex=["http_requests_total", "process_cpu_seconds_total"],
+                    add_label=_make_add_label({"team": "platform", "sdk_e2e_test": "true"}),
                 ),
-            )
-            assert create_result.status_code == 201
-            create_data = json.loads(create_result.content)
-            assert create_data["rules"]["keepRegex"] == [
-                "http_requests_total",
-                "process_cpu_seconds_total",
-            ]
-            assert create_data["rules"]["addLabel"] == {"team": "platform"}
-            assert create_data["uuid"]
-            assert create_data["created_timestamp"]
-            original_timestamp = create_data["created_timestamp"]
+            ),
+        )
+        assert create_result.status_code == 201
+        create_data = json.loads(create_result.content)
+        assert create_data["rules"]["keepRegex"] == [
+            "http_requests_total",
+            "process_cpu_seconds_total",
+        ]
+        assert create_data["rules"]["addLabel"] == {"team": "platform", "sdk_e2e_test": "true"}
+        assert create_data["uuid"]
+        assert create_data["created_timestamp"]
+        original_timestamp = create_data["created_timestamp"]
 
-            # Get - verify rules
-            get_result = get_metrics_pipeline_config.sync_detailed(client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["rules"]["keepRegex"] == [
-                "http_requests_total",
-                "process_cpu_seconds_total",
-            ]
-            assert get_data["rules"]["addLabel"] == {"team": "platform"}
+        # Get - verify rules
+        get_result = get_metrics_pipeline_config.sync_detailed(client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["rules"]["keepRegex"] == [
+            "http_requests_total",
+            "process_cpu_seconds_total",
+        ]
+        assert get_data["rules"]["addLabel"] == {"team": "platform", "sdk_e2e_test": "true"}
 
-            # Update - change keep_regex, add drop_regex, update add_label
-            update_result = update_metrics_pipeline_config.sync_detailed(
-                client=gc_client,
-                body=CreateUpdateMetricsPipelineConfigRequest(
-                    rules=RelabelConfig(
-                        keep_regex=["http_requests_total", "node_cpu_seconds_total"],
-                        drop_regex=["go_.*"],
-                        add_label=_make_add_label({"team": "platform", "env": "staging"}),
-                    ),
+        # Update - change keep_regex, add drop_regex, update add_label
+        update_result = update_metrics_pipeline_config.sync_detailed(
+            client=gc_client,
+            body=CreateUpdateMetricsPipelineConfigRequest(
+                rules=RelabelConfig(
+                    keep_regex=["http_requests_total", "node_cpu_seconds_total"],
+                    drop_regex=["go_.*"],
+                    add_label=_make_add_label({"team": "platform", "env": "staging", "sdk_e2e_test": "true"}),
                 ),
-            )
-            assert update_result.status_code == 200
-            update_data = json.loads(update_result.content)
-            assert update_data["rules"]["keepRegex"] == [
-                "http_requests_total",
-                "node_cpu_seconds_total",
-            ]
-            assert update_data["rules"]["dropRegex"] == ["go_.*"]
-            assert update_data["rules"]["addLabel"] == {"team": "platform", "env": "staging"}
-            assert update_data["created_timestamp"] > original_timestamp
+            ),
+        )
+        assert update_result.status_code == 200
+        update_data = json.loads(update_result.content)
+        assert update_data["rules"]["keepRegex"] == [
+            "http_requests_total",
+            "node_cpu_seconds_total",
+        ]
+        assert update_data["rules"]["dropRegex"] == ["go_.*"]
+        assert update_data["rules"]["addLabel"] == {"team": "platform", "env": "staging", "sdk_e2e_test": "true"}
+        assert update_data["created_timestamp"] > original_timestamp
 
-            # Get - verify updated rules
-            get_result = get_metrics_pipeline_config.sync_detailed(client=gc_client)
-            assert get_result.status_code == 200
-            get_data = json.loads(get_result.content)
-            assert get_data["rules"]["dropRegex"] == ["go_.*"]
+        # Get - verify updated rules
+        get_result = get_metrics_pipeline_config.sync_detailed(client=gc_client)
+        assert get_result.status_code == 200
+        get_data = json.loads(get_result.content)
+        assert get_data["rules"]["dropRegex"] == ["go_.*"]
 
-        finally:
-            # Delete
-            delete_metrics_pipeline_config.sync_detailed(client=gc_client)
+        # Delete - the backend implements delete as a new empty revision; the
+        # singleton fixture restores the snapshot afterwards.
+        delete_metrics_pipeline_config.sync_detailed(client=gc_client)
 
         # Verify deletion - should return nil/no rules
         get_result = get_metrics_pipeline_config.sync_detailed(client=gc_client)

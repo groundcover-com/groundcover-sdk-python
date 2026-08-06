@@ -2,13 +2,13 @@
 
 from __future__ import annotations
 
-import random
-
 import pytest
 
 import groundcover
 from groundcover.api.monitors import delete_monitor
 from groundcover.exceptions import ConflictError
+
+from ._cleanup import ResourceTracker
 
 MONITOR_YAML_TEMPLATE = """
 title: "{title}"
@@ -62,10 +62,10 @@ evaluationInterval:
 class TestMonitorsLifecycle:
     """CRUD lifecycle for monitors with YAML content-type handling."""
 
-    def test_monitor_crud(self, gc_client: groundcover.Client) -> None:
-        random_suffix = random.randint(0, 10_000_000)
-        title = f"E2E Test - K8s Pod Not Healthy Monitor - {random_suffix}"
-        header = f"E2E Test - K8s Pod Not Healthy - {random_suffix}"
+    def test_monitor_crud(self, gc_client: groundcover.Client, tracker: ResourceTracker) -> None:
+        monitor = tracker.new("monitor")
+        title = monitor.name
+        header = f"{monitor.name}-header"
 
         monitor_yaml = MONITOR_YAML_TEMPLATE.format(title=title, header=header)
 
@@ -73,32 +73,42 @@ class TestMonitorsLifecycle:
         create_resp = gc_client.create_monitor(monitor_yaml)
         assert create_resp.status_code == 200
         create_payload = create_resp.json()
-        monitor_id = create_payload["monitorId"]
+        monitor.resource_id = create_payload["monitorId"]
+        monitor_id = monitor.resource_id
 
-        try:
-            # Get monitor (hand-written helper — YAML response)
-            monitor_data = gc_client.get_monitor(monitor_id)
-            assert monitor_data["title"] == title
+        # Get monitor (hand-written helper — YAML response)
+        monitor_data = gc_client.get_monitor(monitor_id)
+        assert monitor_data["title"] == title
 
-            # Verify pendingFor is preserved as 0s
-            eval_interval = monitor_data.get("evaluationInterval", {})
-            assert eval_interval.get("pendingFor") == "0s", (
-                f"Expected pendingFor '0s', got '{eval_interval.get('pendingFor')}'"
-            )
+        # Verify pendingFor is preserved as 0s
+        eval_interval = monitor_data.get("evaluationInterval", {})
+        assert eval_interval.get("pendingFor") == "0s", (
+            f"Expected pendingFor '0s', got '{eval_interval.get('pendingFor')}'"
+        )
 
-            # Update monitor (hand-written helper — change severity to warning)
-            updated_yaml = monitor_yaml.replace("severity: critical", "severity: warning", 1)
-            gc_client.update_monitor(monitor_id, updated_yaml)
+        # Update monitor (hand-written helper — change severity to warning)
+        updated_yaml = monitor_yaml.replace("severity: critical", "severity: warning", 1)
+        gc_client.update_monitor(monitor_id, updated_yaml)
 
-            # Verify update
-            updated_data = gc_client.get_monitor(monitor_id)
-            assert updated_data["severity"] == "warning"
-            assert updated_data["title"] == title
+        # Verify update
+        updated_data = gc_client.get_monitor(monitor_id)
+        assert updated_data["severity"] == "warning"
+        assert updated_data["title"] == title
 
-            # Test duplicate creation (should fail with 409)
-            with pytest.raises(ConflictError):
-                gc_client.create_monitor(monitor_yaml)
+        # Test duplicate creation (should fail with 409). Tracked under the same
+        # title so that if it unexpectedly succeeds, the extra monitor is still
+        # cleaned up rather than orphaned -- the create response is discarded here,
+        # so the tracker has to recover it by name.
+        duplicate = tracker.new("monitor", name=title)
+        with pytest.raises(ConflictError):
+            gc_client.create_monitor(monitor_yaml)
+        # A 409 means nothing was created, so stop tracking it. Left registered, the
+        # handle never gets an id and teardown pages the entire monitor list looking
+        # for a resource that by construction does not exist. If the create instead
+        # succeeds, pytest.raises fails first and this line never runs, so the
+        # unexpected-success case is still cleaned up.
+        tracker.forget(duplicate)
 
-        finally:
-            # Delete monitor (generated typed API)
-            delete_monitor.sync_detailed(monitor_id, client=gc_client)
+        # Delete monitor (generated typed API)
+        delete_monitor.sync_detailed(monitor_id, client=gc_client)
+        tracker.forget(monitor)
