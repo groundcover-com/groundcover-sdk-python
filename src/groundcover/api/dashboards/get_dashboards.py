@@ -10,7 +10,7 @@ from ..._generated_client import AuthenticatedClient, Client
 from ...models.get_dashboards_response_400 import GetDashboardsResponse400
 from ...models.get_dashboards_response_500 import GetDashboardsResponse500
 from ...models.get_dashboards_source import GetDashboardsSource
-from ...models.view import View
+from ...models.member_view import MemberView
 from ..._generated_types import UNSET, Response, Unset
 
 
@@ -46,14 +46,14 @@ def _get_kwargs(
 
 def _parse_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> GetDashboardsResponse400 | GetDashboardsResponse500 | list[View] | None:
+) -> GetDashboardsResponse400 | GetDashboardsResponse500 | list[MemberView] | None:
     if response.status_code == 200:
         response_200 = []
         _response_200 = response.json() if response.content else None
         if _response_200 is None:
             _response_200 = []
         for response_200_item_data in _response_200:
-            response_200_item = View.from_dict(response_200_item_data)
+            response_200_item = MemberView.from_dict(response_200_item_data)
 
             response_200.append(response_200_item)
 
@@ -77,7 +77,7 @@ def _parse_response(
 
 def _build_response(
     *, client: AuthenticatedClient | Client, response: httpx.Response
-) -> Response[GetDashboardsResponse400 | GetDashboardsResponse500 | list[View]]:
+) -> Response[GetDashboardsResponse400 | GetDashboardsResponse500 | list[MemberView]]:
     return Response(
         status_code=HTTPStatus(response.status_code),
         content=response.content,
@@ -92,7 +92,7 @@ def sync_detailed(
     status: str | Unset = UNSET,
     source: GetDashboardsSource | Unset = UNSET,
     query: str | Unset = UNSET,
-) -> Response[GetDashboardsResponse400 | GetDashboardsResponse500 | list[View]]:
+) -> Response[GetDashboardsResponse400 | GetDashboardsResponse500 | list[MemberView]]:
     """Get Dashboards
 
     Args:
@@ -105,7 +105,7 @@ def sync_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[GetDashboardsResponse400 | GetDashboardsResponse500 | list[View]]
+        Response[GetDashboardsResponse400 | GetDashboardsResponse500 | list[MemberView]]
     """
 
     kwargs = _get_kwargs(
@@ -127,7 +127,7 @@ def sync(
     status: str | Unset = UNSET,
     source: GetDashboardsSource | Unset = UNSET,
     query: str | Unset = UNSET,
-) -> GetDashboardsResponse400 | GetDashboardsResponse500 | list[View] | None:
+) -> GetDashboardsResponse400 | GetDashboardsResponse500 | list[MemberView] | None:
     """Get Dashboards
 
     Args:
@@ -140,7 +140,7 @@ def sync(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        GetDashboardsResponse400 | GetDashboardsResponse500 | list[View]
+        GetDashboardsResponse400 | GetDashboardsResponse500 | list[MemberView]
     """
 
     return sync_detailed(
@@ -157,7 +157,7 @@ async def asyncio_detailed(
     status: str | Unset = UNSET,
     source: GetDashboardsSource | Unset = UNSET,
     query: str | Unset = UNSET,
-) -> Response[GetDashboardsResponse400 | GetDashboardsResponse500 | list[View]]:
+) -> Response[GetDashboardsResponse400 | GetDashboardsResponse500 | list[MemberView]]:
     """Get Dashboards
 
     Args:
@@ -170,7 +170,7 @@ async def asyncio_detailed(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        Response[GetDashboardsResponse400 | GetDashboardsResponse500 | list[View]]
+        Response[GetDashboardsResponse400 | GetDashboardsResponse500 | list[MemberView]]
     """
 
     kwargs = _get_kwargs(
@@ -190,7 +190,7 @@ async def asyncio(
     status: str | Unset = UNSET,
     source: GetDashboardsSource | Unset = UNSET,
     query: str | Unset = UNSET,
-) -> GetDashboardsResponse400 | GetDashboardsResponse500 | list[View] | None:
+) -> GetDashboardsResponse400 | GetDashboardsResponse500 | list[MemberView] | None:
     """Get Dashboards
 
     Args:
@@ -203,7 +203,7 @@ async def asyncio(
         httpx.TimeoutException: If the request takes longer than Client.timeout.
 
     Returns:
-        GetDashboardsResponse400 | GetDashboardsResponse500 | list[View]
+        GetDashboardsResponse400 | GetDashboardsResponse500 | list[MemberView]
     """
 
     return (
