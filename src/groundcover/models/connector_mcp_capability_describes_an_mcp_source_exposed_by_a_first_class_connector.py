@@ -1,12 +1,18 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from .._generated_types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.connector_mcp_setup_describes_provider_setup_readiness import (
+        ConnectorMCPSetupDescribesProviderSetupReadiness,
+    )
+
 
 T = TypeVar("T", bound="ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector")
 
@@ -23,6 +29,7 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
         org_discovery_path (str | Unset):
         scope_status (str | Unset): Whether the connected credential holds all grantable user scopes ("full")
             or a re-consent could grant more ("partial"). Empty when not applicable.
+        setup (ConnectorMCPSetupDescribesProviderSetupReadiness | Unset):
         setup_guidance (str | Unset):
         user_proxy_path (str | Unset):
     """
@@ -34,6 +41,7 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
     icon: str | Unset = UNSET
     org_discovery_path: str | Unset = UNSET
     scope_status: str | Unset = UNSET
+    setup: ConnectorMCPSetupDescribesProviderSetupReadiness | Unset = UNSET
     setup_guidance: str | Unset = UNSET
     user_proxy_path: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -52,6 +60,10 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
         org_discovery_path = self.org_discovery_path
 
         scope_status = self.scope_status
+
+        setup: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.setup, Unset):
+            setup = self.setup.to_dict()
 
         setup_guidance = self.setup_guidance
 
@@ -74,6 +86,8 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
             field_dict["orgDiscoveryPath"] = org_discovery_path
         if scope_status is not UNSET:
             field_dict["scopeStatus"] = scope_status
+        if setup is not UNSET:
+            field_dict["setup"] = setup
         if setup_guidance is not UNSET:
             field_dict["setupGuidance"] = setup_guidance
         if user_proxy_path is not UNSET:
@@ -83,13 +97,10 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        if isinstance(src_dict, str):
-            if not src_dict.strip():
-                src_dict = {}
-            else:
-                import json
+        from ..models.connector_mcp_setup_describes_provider_setup_readiness import (
+            ConnectorMCPSetupDescribesProviderSetupReadiness,
+        )
 
-                src_dict = json.loads(src_dict)
         d = dict(src_dict)
         display_name = d.pop("displayName")
 
@@ -105,6 +116,13 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
 
         scope_status = d.pop("scopeStatus", UNSET)
 
+        _setup = d.pop("setup", UNSET)
+        setup: ConnectorMCPSetupDescribesProviderSetupReadiness | Unset
+        if isinstance(_setup, Unset) or _setup is None:
+            setup = UNSET
+        else:
+            setup = ConnectorMCPSetupDescribesProviderSetupReadiness.from_dict(_setup)
+
         setup_guidance = d.pop("setupGuidance", UNSET)
 
         user_proxy_path = d.pop("userProxyPath", UNSET)
@@ -117,6 +135,7 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
             icon=icon,
             org_discovery_path=org_discovery_path,
             scope_status=scope_status,
+            setup=setup,
             setup_guidance=setup_guidance,
             user_proxy_path=user_proxy_path,
         )
