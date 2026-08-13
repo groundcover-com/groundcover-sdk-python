@@ -1146,6 +1146,9 @@ from .transform_represents_a_column_transform_that_registers_in_the_alias_regist
 )
 from .trigger import Trigger
 from .udp_request_defines_model_for_udp_request import UdpRequestDefinesModelForUdpRequest
+from .unfurl_slowest_span import UnfurlSlowestSpan
+from .unfurl_trace_request import UnfurlTraceRequest
+from .unfurl_trace_summary import UnfurlTraceSummary
 from .unified_summary_is_the_single_hierarchical_summary_included_in_json_output import (
     UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutput,
 )
@@ -2154,6 +2157,9 @@ __all__ = (
     "TransformRepresentsAColumnTransformThatRegistersInTheAliasRegistryTransformsDontCreateSubqueriesTheyRegisterHandlersThatResolveAliasesToSQLExpressionsType",
     "Trigger",
     "UdpRequestDefinesModelForUdpRequest",
+    "UnfurlSlowestSpan",
+    "UnfurlTraceRequest",
+    "UnfurlTraceSummary",
     "UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutput",
     "UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAffectedAssetsByType",
     "UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAffectedAssetsByTypeAdditionalProperty",
