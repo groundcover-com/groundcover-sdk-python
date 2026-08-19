@@ -1146,6 +1146,9 @@ from .transform_represents_a_column_transform_that_registers_in_the_alias_regist
 )
 from .trigger import Trigger
 from .udp_request_defines_model_for_udp_request import UdpRequestDefinesModelForUdpRequest
+from .unfurl_card import UnfurlCard
+from .unfurl_card_field import UnfurlCardField
+from .unfurl_request import UnfurlRequest
 from .unfurl_slowest_span import UnfurlSlowestSpan
 from .unfurl_trace_request import UnfurlTraceRequest
 from .unfurl_trace_summary import UnfurlTraceSummary
@@ -2157,6 +2160,9 @@ __all__ = (
     "TransformRepresentsAColumnTransformThatRegistersInTheAliasRegistryTransformsDontCreateSubqueriesTheyRegisterHandlersThatResolveAliasesToSQLExpressionsType",
     "Trigger",
     "UdpRequestDefinesModelForUdpRequest",
+    "UnfurlCard",
+    "UnfurlCardField",
+    "UnfurlRequest",
     "UnfurlSlowestSpan",
     "UnfurlTraceRequest",
     "UnfurlTraceSummary",
