@@ -5,10 +5,17 @@ Every name this suite mints looks like::
     sdk-e2e-test-<kind>-<run_id>-p<pid>n<counter>
 
 The ``sdk-e2e-test-`` prefix is what makes a resource identifiable as suite
-debris after the fact, and it is what ``scripts/sweep-orphaned-e2e-synthetics.sh``
-matches on. That script's regex is ``^(sdk-)?e2e-test-(.*-)?synthetic-``, so
-synthetic kinds MUST keep a ``...-synthetic`` kind token (``http-synthetic``,
-``tcp-synthetic``, ...) or the janitor silently stops recognising them.
+debris after the fact, and it is what the name-based janitor in
+``sdk-python/tools/gc_e2e_janitor`` matches on. Renaming a kind token here is
+therefore not a local change: the janitor stops recognising that kind's debris,
+silently, because an unmatched name is simply not swept and the sweep still
+reports success. That is not a hypothetical -- Go's bare ``e2e-test-synthetic-``
+names went unrecognised from the janitor's introduction until 099b431aa2.
+
+This used to be a warning asking you to remember. It is now enforced:
+``tests/unit/test_janitor_registry.py`` feeds ``unique_name()`` for every kind in
+``_cleanup.SPECS`` through the janitor's real patterns, so a rename fails CI here
+rather than quietly stranding resources on a shared tenant.
 
 ``run_id`` groups every resource from one test run, which is what lets you ask
 "did this run leave anything behind?" and what lets a sweeper tell a finished

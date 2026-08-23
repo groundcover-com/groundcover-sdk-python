@@ -9,7 +9,6 @@ the create response was never seen.
 from __future__ import annotations
 
 import itertools
-import re
 from typing import Any, Dict, List, Optional
 
 import pytest
@@ -459,16 +458,25 @@ def test_names_are_unique_and_suite_identifiable() -> None:
     assert not _names.belongs_to_suite("some-customer-dashboard")
 
 
-def test_synthetic_names_still_match_the_orphan_sweeper_regex() -> None:
-    """Guards scripts/sweep-orphaned-e2e-synthetics.sh, which matches by name.
+def test_synthetic_names_are_still_recognised_by_the_janitor() -> None:
+    """Guards the name-based janitor in tools/gc_e2e_janitor.
 
     If a rename breaks this, the janitor silently stops recognising leaked
     synthetics -- and there is no server-side TTL on them.
+
+    This asks the real registry rather than a copy of its regex. The copy is how
+    this drifted before: the sweeper's pattern lived in a bash script nothing
+    imported, so widening it (099b431aa2) and renaming a kind were separate
+    events that nothing tied together. tests/unit/test_janitor_registry.py now
+    makes the same assertion for every kind, not just synthetics.
     """
-    sweeper_regex = re.compile(r"^(sdk-)?e2e-test-(.*-)?synthetic-")
+    from gc_e2e_janitor import registry
+    from gc_e2e_janitor.sweep import matches_kind
+
     for kind in ("http-synthetic", "tcp-synthetic", "ssl-synthetic", "dns-synthetic"):
         assert kind in _cleanup.SPECS, f"{kind} is not a declared resource kind"
-        assert sweeper_regex.match(_names.unique_name(kind)), f"{kind} names no longer match the sweeper"
+        name = _names.unique_name(kind)
+        assert matches_kind(registry.KINDS["synthetic"], name), f"{kind} names no longer match the janitor"
 
 
 def test_run_id_prefers_an_explicit_override(monkeypatch: pytest.MonkeyPatch) -> None:

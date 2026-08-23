@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import datetime
+
+from .._datetime_compat import parse_datetime
 from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
@@ -15,6 +18,7 @@ if TYPE_CHECKING:
     from ..models.finding_represents_a_single_preflight_validation_finding import (
         FindingRepresentsASinglePreflightValidationFinding,
     )
+    from ..models.funnel_by_asset import FunnelByAsset
     from ..models.integration_count_holds_an_integration_name_and_its_count_for_sorted_output import (
         IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput,
     )
@@ -34,6 +38,14 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
     """
     Attributes:
         coverage_plan (CoveragePlanProvidesAPrioritizedPathToImproveQuerySuccessRate | Unset):
+        funnel_by_asset (FunnelByAsset | Unset): FunnelByAsset is the per-asset view of the funnel: every monitor and
+            every
+            dashboard widget, with the stage it terminated at.
+        generated_at (datetime.datetime | Unset): GeneratedAt is when this report was produced, set once right before it
+            is
+            written out. A report is often diffed against a later rerun after a fix, so
+            the file needs to say for itself when it was taken without relying on
+            filesystem mtimes, which a copy or a git checkout does not preserve.
         integrations_summary (list[IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput] | Unset):
         raw_findings (list[FindingRepresentsASinglePreflightValidationFinding] | Unset):
         summary (UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutput | Unset):
@@ -41,6 +53,8 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
     """
 
     coverage_plan: CoveragePlanProvidesAPrioritizedPathToImproveQuerySuccessRate | Unset = UNSET
+    funnel_by_asset: FunnelByAsset | Unset = UNSET
+    generated_at: datetime.datetime | Unset = UNSET
     integrations_summary: list[IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput] | Unset = UNSET
     raw_findings: list[FindingRepresentsASinglePreflightValidationFinding] | Unset = UNSET
     summary: UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutput | Unset = UNSET
@@ -51,6 +65,14 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
         coverage_plan: dict[str, Any] | Unset = UNSET
         if not isinstance(self.coverage_plan, Unset):
             coverage_plan = self.coverage_plan.to_dict()
+
+        funnel_by_asset: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.funnel_by_asset, Unset):
+            funnel_by_asset = self.funnel_by_asset.to_dict()
+
+        generated_at: str | Unset = UNSET
+        if not isinstance(self.generated_at, Unset):
+            generated_at = self.generated_at.isoformat()
 
         integrations_summary: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.integrations_summary, Unset):
@@ -79,6 +101,10 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
         field_dict.update({})
         if coverage_plan is not UNSET:
             field_dict["coverage_plan"] = coverage_plan
+        if funnel_by_asset is not UNSET:
+            field_dict["funnel_by_asset"] = funnel_by_asset
+        if generated_at is not UNSET:
+            field_dict["generated_at"] = generated_at
         if integrations_summary is not UNSET:
             field_dict["integrations_summary"] = integrations_summary
         if raw_findings is not UNSET:
@@ -98,6 +124,7 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
         from ..models.finding_represents_a_single_preflight_validation_finding import (
             FindingRepresentsASinglePreflightValidationFinding,
         )
+        from ..models.funnel_by_asset import FunnelByAsset
         from ..models.integration_count_holds_an_integration_name_and_its_count_for_sorted_output import (
             IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput,
         )
@@ -115,6 +142,20 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
             coverage_plan = UNSET
         else:
             coverage_plan = CoveragePlanProvidesAPrioritizedPathToImproveQuerySuccessRate.from_dict(_coverage_plan)
+
+        _funnel_by_asset = d.pop("funnel_by_asset", UNSET)
+        funnel_by_asset: FunnelByAsset | Unset
+        if isinstance(_funnel_by_asset, Unset) or _funnel_by_asset is None:
+            funnel_by_asset = UNSET
+        else:
+            funnel_by_asset = FunnelByAsset.from_dict(_funnel_by_asset)
+
+        _generated_at = d.pop("generated_at", UNSET)
+        generated_at: datetime.datetime | Unset
+        if isinstance(_generated_at, Unset) or _generated_at is None:
+            generated_at = UNSET
+        else:
+            generated_at = parse_datetime(_generated_at)
 
         _integrations_summary = d.pop("integrations_summary", UNSET)
         integrations_summary: list[IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput] | Unset = UNSET
@@ -152,6 +193,8 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
 
         preflight_report_is_the_top_level_structured_output_of_a_preflight_validation_run = cls(
             coverage_plan=coverage_plan,
+            funnel_by_asset=funnel_by_asset,
+            generated_at=generated_at,
             integrations_summary=integrations_summary,
             raw_findings=raw_findings,
             summary=summary,

@@ -13,7 +13,7 @@ Four deliberate departures from the Go harness:
   commits server-side while the client sees a 502 is still cleaned up: teardown
   recovers the id by listing and matching the unique name. Registering after the
   create (Go's ``Track*``) structurally cannot catch that case -- it is the
-  orphan class ``scripts/sweep-orphaned-e2e-synthetics.sh`` exists to mop up.
+  orphan class ``sdk-python/tools/gc_e2e_janitor`` exists to mop up.
 * **No ``untrack``.** "Already gone" is swallowed, so a test deleting its own
   resource needs no bookkeeping and a redundant delete is a no-op.
 * **LIFO within a dependency rank, not FIFO.** Go drains in creation order

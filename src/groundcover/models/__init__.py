@@ -87,6 +87,13 @@ from .archive_dashboard_response_409 import ArchiveDashboardResponse409
 from .archive_dashboard_response_500 import ArchiveDashboardResponse500
 from .assertion_defines_model_for_assertion import AssertionDefinesModelForAssertion
 from .asset_fetch_result import AssetFetchResult
+from .asset_funnel_is_the_wet_mode_hierarchical_breakdown_for_one_asset_type import (
+    AssetFunnelIsTheWetModeHierarchicalBreakdownForOneAssetType,
+)
+from .asset_gap_detail import AssetGapDetail
+from .asset_gap_detail_keys_by_datasource import AssetGapDetailKeysByDatasource
+from .asset_gap_detail_keys_by_metric import AssetGapDetailKeysByMetric
+from .asset_gap_detail_values_by_metric import AssetGapDetailValuesByMetric
 from .asset_install_result import AssetInstallResult
 from .asset_install_result_status import AssetInstallResultStatus
 from .asset_item import AssetItem
@@ -233,6 +240,7 @@ from .convert_assets_request import ConvertAssetsRequest
 from .convert_assets_response import ConvertAssetsResponse
 from .convert_monitor_request import ConvertMonitorRequest
 from .convert_monitor_response import ConvertMonitorResponse
+from .count_pct_is_a_count_with_percentage_of_its_parent_total import CountPctIsACountWithPercentageOfItsParentTotal
 from .coverage_action_defines_an_actionable_step_and_its_estimated_query_impact import (
     CoverageActionDefinesAnActionableStepAndItsEstimatedQueryImpact,
 )
@@ -404,6 +412,12 @@ from .data_integration_config_tags import DataIntegrationConfigTags
 from .data_scope_contains_either_simple_or_advanced_scope_definitions import (
     DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions,
 )
+from .data_set_available_bucket_is_converted_units_whose_underlying_dataset_exists_in_gc import (
+    DataSetAvailableBucketIsConvertedUnitsWhoseUnderlyingDatasetExistsInGC,
+)
+from .datasource_key_gap_aggregates_missing_field_keys_for_one_search_datasource import (
+    DatasourceKeyGapAggregatesMissingFieldKeysForOneSearchDatasource,
+)
 from .delete_api_key_response_400 import DeleteApiKeyResponse400
 from .delete_api_key_response_404 import DeleteApiKeyResponse404
 from .delete_api_key_response_500 import DeleteApiKeyResponse500
@@ -487,6 +501,10 @@ from .events_search_request import EventsSearchRequest
 from .events_search_response_400 import EventsSearchResponse400
 from .events_search_response_500 import EventsSearchResponse500
 from .events_search_time_series_request import EventsSearchTimeSeriesRequest
+from .excluded_bucket import ExcludedBucket
+from .executed_query_is_the_evidence_for_a_units_wet_outcome_the_query_that_ran import (
+    ExecutedQueryIsTheEvidenceForAUnitsWetOutcomeTheQueryThatRan,
+)
 from .execution_policy_defines_model_for_execution_policy import ExecutionPolicyDefinesModelForExecutionPolicy
 from .execution_policy_defines_model_for_execution_policy_retries import (
     ExecutionPolicyDefinesModelForExecutionPolicyRetries,
@@ -532,6 +550,9 @@ from .finding_represents_a_single_preflight_validation_finding_evidence import (
 from .finding_represents_a_single_preflight_validation_finding_labels_used import (
     FindingRepresentsASinglePreflightValidationFindingLabelsUsed,
 )
+from .funnel_asset_entry import FunnelAssetEntry
+from .funnel_by_asset import FunnelByAsset
+from .funnel_by_asset_by_stage import FunnelByAssetByStage
 from .generic_filters_item import GenericFiltersItem
 from .get_all_recurring_silences_response_400 import GetAllRecurringSilencesResponse400
 from .get_all_recurring_silences_response_500 import GetAllRecurringSilencesResponse500
@@ -630,6 +651,12 @@ from .install_assets_request import InstallAssetsRequest
 from .install_assets_response import InstallAssetsResponse
 from .install_catalog_dashboard_request import InstallCatalogDashboardRequest
 from .install_integration_response import InstallIntegrationResponse
+from .integration_count_bucket_counts_units_per_data_source_mapping import (
+    IntegrationCountBucketCountsUnitsPerDataSourceMapping,
+)
+from .integration_count_bucket_counts_units_per_data_source_mapping_by_integration import (
+    IntegrationCountBucketCountsUnitsPerDataSourceMappingByIntegration,
+)
 from .integration_count_holds_an_integration_name_and_its_count_for_sorted_output import (
     IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput,
 )
@@ -645,6 +672,7 @@ from .json_unpack_defines_ajson_unpack_prefix_registration import JsonUnpackDefi
 from .keep_config import KeepConfig
 from .key_item import KeyItem
 from .key_mapping import KeyMapping
+from .key_missing_breakdown_groups_units_with_missing_keys import KeyMissingBreakdownGroupsUnitsWithMissingKeys
 from .keys_response import KeysResponse
 from .keys_response_item import KeysResponseItem
 from .known_pipelines import KnownPipelines
@@ -748,10 +776,12 @@ from .log_record_attributes import LogRecordAttributes
 from .log_record_tags import LogRecordTags
 from .log_response import LogResponse
 from .logs_context_request_params import LogsContextRequestParams
+from .logs_datasets import LogsDatasets
 from .logs_error_velocity_peak import LogsErrorVelocityPeak
 from .logs_error_velocity_peak_response import LogsErrorVelocityPeakResponse
 from .logs_filters_request_params import LogsFiltersRequestParams
 from .logs_insights_request_params import LogsInsightsRequestParams
+from .logs_missing_bucket import LogsMissingBucket
 from .logs_pattern_param_distribution_response import LogsPatternParamDistributionResponse
 from .logs_patterns_param_distribution_request_params import LogsPatternsParamDistributionRequestParams
 from .logs_patterns_request_params import LogsPatternsRequestParams
@@ -780,10 +810,19 @@ from .member_views_request import MemberViewsRequest
 from .member_with_role_response import MemberWithRoleResponse
 from .metadata_defines_model_for_metadata import MetadataDefinesModelForMetadata
 from .metadata_defines_model_for_metadata_labels import MetadataDefinesModelForMetadataLabels
+from .metric_key_gap_aggregates_missing_label_keys_for_one_metric_across_units import (
+    MetricKeyGapAggregatesMissingLabelKeysForOneMetricAcrossUnits,
+)
 from .metric_keys_request_v2 import MetricKeysRequestV2
 from .metric_keys_response_v2 import MetricKeysResponseV2
 from .metric_labels import MetricLabels
+from .metric_list_bucket_counts_units_and_lists_the_metrics_responsible import (
+    MetricListBucketCountsUnitsAndListsTheMetricsResponsible,
+)
 from .metric_mapping import MetricMapping
+from .metric_value_gap_aggregates_missing_label_values_for_one_metric import (
+    MetricValueGapAggregatesMissingLabelValuesForOneMetric,
+)
 from .metric_values_request_v2 import MetricValuesRequestV2
 from .metric_values_response_v2 import MetricValuesResponseV2
 from .metric_velocity import MetricVelocity
@@ -809,6 +848,12 @@ from .migration_data_source_item import MigrationDataSourceItem
 from .migration_data_source_item_status import MigrationDataSourceItemStatus
 from .migration_data_source_item_support_type import MigrationDataSourceItemSupportType
 from .migration_detected_integration import MigrationDetectedIntegration
+from .missing_data_set_bucket_covers_converted_units_whose_underlying_dataset_is_absent import (
+    MissingDataSetBucketCoversConvertedUnitsWhoseUnderlyingDatasetIsAbsent,
+)
+from .missing_metrics_breakdown_splits_missing_metrics_into_mutually_exclusive_buckets import (
+    MissingMetricsBreakdownSplitsMissingMetricsIntoMutuallyExclusiveBuckets,
+)
 from .monitor import Monitor
 from .monitor_details_response import MonitorDetailsResponse
 from .monitor_list_item import MonitorListItem
@@ -822,6 +867,21 @@ from .monitor_variable import MonitorVariable
 from .monitor_variable_compute import MonitorVariableCompute
 from .ms_teams_data import MSTeamsData
 from .ms_teams_data_response import MSTeamsDataResponse
+from .no_data_breakdown_drills_into_units_that_did_not_come_back_fully_working import (
+    NoDataBreakdownDrillsIntoUnitsThatDidNotComeBackFullyWorking,
+)
+from .no_data_needed_bucket_counts_units_that_need_no_query_to_render import (
+    NoDataNeededBucketCountsUnitsThatNeedNoQueryToRender,
+)
+from .no_data_needed_bucket_counts_units_that_need_no_query_to_render_by_type import (
+    NoDataNeededBucketCountsUnitsThatNeedNoQueryToRenderByType,
+)
+from .not_supported_bucket_covers_unsupported_types_bucketed_by_type import (
+    NotSupportedBucketCoversUnsupportedTypesBucketedByType,
+)
+from .not_supported_bucket_covers_unsupported_types_bucketed_by_type_by_type import (
+    NotSupportedBucketCoversUnsupportedTypesBucketedByTypeByType,
+)
 from .notification_route_list_item_response import NotificationRouteListItemResponse
 from .notification_route_list_response import NotificationRouteListResponse
 from .notification_route_response import NotificationRouteResponse
@@ -862,6 +922,7 @@ from .policy_defines_an_access_control_policy import PolicyDefinesAnAccessContro
 from .policy_with_entity_count_includes_the_policy_details_along_with_the_count_of_entities_its_applied_to import (
     PolicyWithEntityCountIncludesThePolicyDetailsAlongWithTheCountOfEntitiesItsAppliedTo,
 )
+from .positive_no_data_bucket import PositiveNoDataBucket
 from .preflight_report_is_the_top_level_structured_output_of_a_preflight_validation_run import (
     PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun,
 )
@@ -1045,6 +1106,18 @@ from .subject_holds_both_datadog_and_gc_names_for_explainability import (
 from .suggestion_proposes_an_alternative_for_a_missing_resource import (
     SuggestionProposesAnAlternativeForAMissingResource,
 )
+from .suggestion_reason_is_one_scoring_signal_that_contributed_to_a_suggestion import (
+    SuggestionReasonIsOneScoringSignalThatContributedToASuggestion,
+)
+from .supported_converted_bucket_covers_units_that_converted_successfully import (
+    SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully,
+)
+from .supported_not_converted_bucket_covers_supported_types_that_failed_conversion import (
+    SupportedNotConvertedBucketCoversSupportedTypesThatFailedConversion,
+)
+from .supported_not_converted_bucket_covers_supported_types_that_failed_conversion_by_error import (
+    SupportedNotConvertedBucketCoversSupportedTypesThatFailedConversionByError,
+)
 from .synthetic_monitor_config_represents_optional_monitor_configuration_overrides_for_a_synthetic_test import (
     SyntheticMonitorConfigRepresentsOptionalMonitorConfigurationOverridesForASyntheticTest,
 )
@@ -1060,6 +1133,9 @@ from .synthetic_test_monitor import SyntheticTestMonitor
 from .synthetic_test_update_response import SyntheticTestUpdateResponse
 from .synthetics_check_input_defines_model_for_synthetics_check_input import (
     SyntheticsCheckInputDefinesModelForSyntheticsCheckInput,
+)
+from .tagged_metric_names_a_metric_plus_every_classification_that_applies_to_it import (
+    TaggedMetricNamesAMetricPlusEveryClassificationThatAppliesToIt,
 )
 from .tags_payload_existing_tag_names import TagsPayloadExistingTagNames
 from .tags_request_body_optional_prefix_and_limit import TagsRequestBodyOptionalPrefixAndLimit
@@ -1163,11 +1239,11 @@ from .unfurl_trace_summary import UnfurlTraceSummary
 from .unified_summary_is_the_single_hierarchical_summary_included_in_json_output import (
     UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutput,
 )
-from .unified_summary_is_the_single_hierarchical_summary_included_in_json_output_affected_assets_by_type import (
-    UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAffectedAssetsByType,
+from .unified_summary_is_the_single_hierarchical_summary_included_in_json_output_assets_by_finding_type import (
+    UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAssetsByFindingType,
 )
-from .unified_summary_is_the_single_hierarchical_summary_included_in_json_output_affected_assets_by_type_additional_property import (
-    UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAffectedAssetsByTypeAdditionalProperty,
+from .unified_summary_is_the_single_hierarchical_summary_included_in_json_output_assets_by_finding_type_additional_property import (
+    UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAssetsByFindingTypeAdditionalProperty,
 )
 from .union_defines_a_union_operation_between_two_pipelines_unionall import (
     UnionDefinesAUnionOperationBetweenTwoPipelinesUNIONALL,
@@ -1284,6 +1360,9 @@ from .v2_update_silence_response_400 import V2UpdateSilenceResponse400
 from .v2_update_silence_response_404 import V2UpdateSilenceResponse404
 from .v2_update_silence_response_500 import V2UpdateSilenceResponse500
 from .value_item import ValueItem
+from .value_missing_bucket_lists_units_whose_filter_values_are_absent_in_groundcover import (
+    ValueMissingBucketListsUnitsWhoseFilterValuesAreAbsentInGroundcover,
+)
 from .values_distribution_request import ValuesDistributionRequest
 from .values_distribution_result import ValuesDistributionResult
 from .values_response import ValuesResponse
@@ -1419,6 +1498,11 @@ __all__ = (
     "ArchiveDashboardResponse500",
     "AssertionDefinesModelForAssertion",
     "AssetFetchResult",
+    "AssetFunnelIsTheWetModeHierarchicalBreakdownForOneAssetType",
+    "AssetGapDetail",
+    "AssetGapDetailKeysByDatasource",
+    "AssetGapDetailKeysByMetric",
+    "AssetGapDetailValuesByMetric",
     "AssetInstallResult",
     "AssetInstallResultStatus",
     "AssetItem",
@@ -1507,6 +1591,7 @@ __all__ = (
     "ConvertAssetsResponse",
     "ConvertMonitorRequest",
     "ConvertMonitorResponse",
+    "CountPctIsACountWithPercentageOfItsParentTotal",
     "CoverageActionDefinesAnActionableStepAndItsEstimatedQueryImpact",
     "CoveragePlanProvidesAPrioritizedPathToImproveQuerySuccessRate",
     "CoverageStepIsASelectedActionWithCumulativeProjectionMetadata",
@@ -1616,6 +1701,8 @@ __all__ = (
     "DataIntegrationConfig",
     "DataIntegrationConfigTags",
     "DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions",
+    "DataSetAvailableBucketIsConvertedUnitsWhoseUnderlyingDatasetExistsInGC",
+    "DatasourceKeyGapAggregatesMissingFieldKeysForOneSearchDatasource",
     "DeleteApiKeyResponse400",
     "DeleteApiKeyResponse404",
     "DeleteApiKeyResponse500",
@@ -1687,6 +1774,8 @@ __all__ = (
     "EventsSearchResponse400",
     "EventsSearchResponse500",
     "EventsSearchTimeSeriesRequest",
+    "ExcludedBucket",
+    "ExecutedQueryIsTheEvidenceForAUnitsWetOutcomeTheQueryThatRan",
     "ExecutionPolicyDefinesModelForExecutionPolicy",
     "ExecutionPolicyDefinesModelForExecutionPolicyRetries",
     "ExportAuthBodyRepresentsTheAuthModeSentToExportService",
@@ -1712,6 +1801,9 @@ __all__ = (
     "FindingRepresentsASinglePreflightValidationFinding",
     "FindingRepresentsASinglePreflightValidationFindingEvidence",
     "FindingRepresentsASinglePreflightValidationFindingLabelsUsed",
+    "FunnelAssetEntry",
+    "FunnelByAsset",
+    "FunnelByAssetByStage",
     "GenericFiltersItem",
     "GetAllRecurringSilencesResponse400",
     "GetAllRecurringSilencesResponse500",
@@ -1798,6 +1890,8 @@ __all__ = (
     "InstallAssetsResponse",
     "InstallCatalogDashboardRequest",
     "InstallIntegrationResponse",
+    "IntegrationCountBucketCountsUnitsPerDataSourceMapping",
+    "IntegrationCountBucketCountsUnitsPerDataSourceMappingByIntegration",
     "IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput",
     "Integrations",
     "InviteeDetails",
@@ -1811,6 +1905,7 @@ __all__ = (
     "KeepConfig",
     "KeyItem",
     "KeyMapping",
+    "KeyMissingBreakdownGroupsUnitsWithMissingKeys",
     "KeysResponse",
     "KeysResponseItem",
     "KnownPipelines",
@@ -1882,10 +1977,12 @@ __all__ = (
     "LogRecordTags",
     "LogResponse",
     "LogsContextRequestParams",
+    "LogsDatasets",
     "LogsErrorVelocityPeak",
     "LogsErrorVelocityPeakResponse",
     "LogsFiltersRequestParams",
     "LogsInsightsRequestParams",
+    "LogsMissingBucket",
     "LogsPatternParamDistributionResponse",
     "LogsPatternsParamDistributionRequestParams",
     "LogsPatternsRequestParams",
@@ -1912,9 +2009,11 @@ __all__ = (
     "MemberWithRoleResponse",
     "MetadataDefinesModelForMetadata",
     "MetadataDefinesModelForMetadataLabels",
+    "MetricKeyGapAggregatesMissingLabelKeysForOneMetricAcrossUnits",
     "MetricKeysRequestV2",
     "MetricKeysResponseV2",
     "MetricLabels",
+    "MetricListBucketCountsUnitsAndListsTheMetricsResponsible",
     "MetricMapping",
     "MetricsAggregatorConfig",
     "MetricsAggregatorDefaultConfig",
@@ -1931,6 +2030,7 @@ __all__ = (
     "MetricsQueryResponse500",
     "MetricsValuesRequest",
     "MetricsValuesResponse",
+    "MetricValueGapAggregatesMissingLabelValuesForOneMetric",
     "MetricValuesRequestV2",
     "MetricValuesResponseV2",
     "MetricVelocity",
@@ -1941,6 +2041,8 @@ __all__ = (
     "MigrationDataSourceItemStatus",
     "MigrationDataSourceItemSupportType",
     "MigrationDetectedIntegration",
+    "MissingDataSetBucketCoversConvertedUnitsWhoseUnderlyingDatasetIsAbsent",
+    "MissingMetricsBreakdownSplitsMissingMetricsIntoMutuallyExclusiveBuckets",
     "Monitor",
     "MonitorDetailsResponse",
     "MonitorListItem",
@@ -1954,6 +2056,9 @@ __all__ = (
     "MonitorVariableCompute",
     "MSTeamsData",
     "MSTeamsDataResponse",
+    "NoDataBreakdownDrillsIntoUnitsThatDidNotComeBackFullyWorking",
+    "NoDataNeededBucketCountsUnitsThatNeedNoQueryToRender",
+    "NoDataNeededBucketCountsUnitsThatNeedNoQueryToRenderByType",
     "NotificationRouteListItemResponse",
     "NotificationRouteListResponse",
     "NotificationRouteResponse",
@@ -1961,6 +2066,8 @@ __all__ = (
     "NotificationSettingsDefinesTheNotificationSettingsForTheMonitorMethod",
     "NotificationSettingsRequest",
     "NotificationSettingsResponse",
+    "NotSupportedBucketCoversUnsupportedTypesBucketedByType",
+    "NotSupportedBucketCoversUnsupportedTypesBucketedByTypeByType",
     "ObjectInfoResponse",
     "ObjectInfoResponseData",
     "ObjectYamlResponse",
@@ -1982,6 +2089,7 @@ __all__ = (
     "PatternParamDistributionValue",
     "PolicyDefinesAnAccessControlPolicy",
     "PolicyWithEntityCountIncludesThePolicyDetailsAlongWithTheCountOfEntitiesItsAppliedTo",
+    "PositiveNoDataBucket",
     "PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun",
     "PreflightRequestDefinesTheRequestBodyForRunningPreflightValidation",
     "Processor",
@@ -2103,6 +2211,10 @@ __all__ = (
     "StreamResponseBaseProvidesTheCommonDoneAndErrorFieldsForAllStreamingResponses",
     "SubjectHoldsBothDatadogAndGCNamesForExplainability",
     "SuggestionProposesAnAlternativeForAMissingResource",
+    "SuggestionReasonIsOneScoringSignalThatContributedToASuggestion",
+    "SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully",
+    "SupportedNotConvertedBucketCoversSupportedTypesThatFailedConversion",
+    "SupportedNotConvertedBucketCoversSupportedTypesThatFailedConversionByError",
     "SyntheticMonitorConfigRepresentsOptionalMonitorConfigurationOverridesForASyntheticTest",
     "SyntheticMonitorEvalIntervalRepresentsTheEvaluationIntervalForASyntheticMonitor",
     "SyntheticsCheckInputDefinesModelForSyntheticsCheckInput",
@@ -2113,6 +2225,7 @@ __all__ = (
     "SyntheticTestListResponse",
     "SyntheticTestMonitor",
     "SyntheticTestUpdateResponse",
+    "TaggedMetricNamesAMetricPlusEveryClassificationThatAppliesToIt",
     "TagsPayloadExistingTagNames",
     "TagsRequestBodyOptionalPrefixAndLimit",
     "TcpRequestDefinesModelForTcpRequest",
@@ -2183,8 +2296,8 @@ __all__ = (
     "UnfurlTraceRequest",
     "UnfurlTraceSummary",
     "UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutput",
-    "UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAffectedAssetsByType",
-    "UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAffectedAssetsByTypeAdditionalProperty",
+    "UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAssetsByFindingType",
+    "UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAssetsByFindingTypeAdditionalProperty",
     "UnionDefinesAUnionOperationBetweenTwoPipelinesUNIONALL",
     "UnsupportedAssetTypeBreakdownGroupsUnsupportedFindingsForASingleAssetType",
     "UnsupportedBreakdownIsTheLevel4SummaryWhyAreThingsUnsupported",
@@ -2282,6 +2395,7 @@ __all__ = (
     "V2UpdateSilenceResponse404",
     "V2UpdateSilenceResponse500",
     "ValueItem",
+    "ValueMissingBucketListsUnitsWhoseFilterValuesAreAbsentInGroundcover",
     "ValuesDistributionRequest",
     "ValuesDistributionResult",
     "ValuesResponse",

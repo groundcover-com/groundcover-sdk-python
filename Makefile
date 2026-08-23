@@ -7,13 +7,13 @@ generate:
 	cd .. && ./scripts/swagger/generate.sh --python-only
 
 lint:
-	uv run ruff check src/ tests/
-	uv run ruff format --check src/ tests/
-	uv run mypy src/groundcover/
+	uv run ruff check src/ tests/ tools/
+	uv run ruff format --check src/ tests/ tools/
+	uv run mypy src/groundcover/ tools/
 
 format:
-	uv run ruff format src/ tests/
-	uv run ruff check --fix src/ tests/
+	uv run ruff format src/ tests/ tools/
+	uv run ruff check --fix src/ tests/ tools/
 
 test: test-unit
 

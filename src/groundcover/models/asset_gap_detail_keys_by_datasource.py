@@ -1,26 +1,25 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar(
-    "T", bound="UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAffectedAssetsByTypeAdditionalProperty"
-)
+T = TypeVar("T", bound="AssetGapDetailKeysByDatasource")
 
 
 @_attrs_define
-class UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAffectedAssetsByTypeAdditionalProperty:
+class AssetGapDetailKeysByDatasource:
     """ """
 
-    additional_properties: dict[str, int] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, list[str]] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
 
         field_dict: dict[str, Any] = {}
-        field_dict.update(self.additional_properties)
+        for prop_name, prop in self.additional_properties.items():
+            field_dict[prop_name] = prop
 
         return field_dict
 
@@ -34,19 +33,25 @@ class UnifiedSummaryIsTheSingleHierarchicalSummaryIncludedInJSONOutputAffectedAs
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        unified_summary_is_the_single_hierarchical_summary_included_in_json_output_affected_assets_by_type_additional_property = cls()
+        asset_gap_detail_keys_by_datasource = cls()
 
-        unified_summary_is_the_single_hierarchical_summary_included_in_json_output_affected_assets_by_type_additional_property.additional_properties = d
-        return unified_summary_is_the_single_hierarchical_summary_included_in_json_output_affected_assets_by_type_additional_property
+        additional_properties = {}
+        for prop_name, prop_dict in d.items():
+            additional_property = cast(list[str], prop_dict)
+
+            additional_properties[prop_name] = additional_property
+
+        asset_gap_detail_keys_by_datasource.additional_properties = additional_properties
+        return asset_gap_detail_keys_by_datasource
 
     @property
     def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
-    def __getitem__(self, key: str) -> int:
+    def __getitem__(self, key: str) -> list[str]:
         return self.additional_properties[key]
 
-    def __setitem__(self, key: str, value: int) -> None:
+    def __setitem__(self, key: str, value: list[str]) -> None:
         self.additional_properties[key] = value
 
     def __delitem__(self, key: str) -> None:

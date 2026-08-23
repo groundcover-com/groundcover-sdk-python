@@ -8,72 +8,46 @@ from attrs import field as _attrs_field
 
 from .._generated_types import UNSET, Unset
 
-T = TypeVar("T", bound="WetResultHoldsTheOutcomeOfExecutingASingleWetQuery")
+T = TypeVar("T", bound="ExecutedQueryIsTheEvidenceForAUnitsWetOutcomeTheQueryThatRan")
 
 
 @_attrs_define
-class WetResultHoldsTheOutcomeOfExecutingASingleWetQuery:
-    """
+class ExecutedQueryIsTheEvidenceForAUnitsWetOutcomeTheQueryThatRan:
+    """the window it ran over, and what came back.
+
     Attributes:
-        asset_id (str | Unset):
-        asset_name (str | Unset):
-        asset_type (str | Unset):
         datasource (str | Unset):
         error (str | Unset):
-        has_free_text (bool | Unset): HasFreeText mirrors WetQuery.HasFreeText.
-        latency (int | Unset): Duration wraps time.Duration. It is used to parse the custom duration format
-            from YAML.
-            This type should not propagate beyond the scope of input/output processing.
-        metric (str | Unset): Metric mirrors WetQuery.Metric.
+        language (str | Unset):
+        metric (str | Unset): Metric names the query's underlying metric, for datasource == "metrics"
+            only. Without it a metrics query that returned no data cannot be traced
+            back to which metric was empty without parsing the query text.
         original_dd (str | Unset):
         query (str | Unset):
         query_id (str | Unset):
-        query_type (str | Unset):
         resolved_query (str | Unset):
         status (str | Unset):
-        widget_id (str | Unset):
-        widget_title (str | Unset):
-        window (str | Unset): Window is the span actually queried:
-            "5m"          progressive first pass
-            "30m"         dashboard long pass
-            "7d"          monitor long pass (or whatever --wet-monitor-lookback sets)
-            "instant"     instant query answered at a single point in time
-            "instant→7d"  instant query was empty, so it was re-run as a range
+        window (str | Unset):
     """
 
-    asset_id: str | Unset = UNSET
-    asset_name: str | Unset = UNSET
-    asset_type: str | Unset = UNSET
     datasource: str | Unset = UNSET
     error: str | Unset = UNSET
-    has_free_text: bool | Unset = UNSET
-    latency: int | Unset = UNSET
+    language: str | Unset = UNSET
     metric: str | Unset = UNSET
     original_dd: str | Unset = UNSET
     query: str | Unset = UNSET
     query_id: str | Unset = UNSET
-    query_type: str | Unset = UNSET
     resolved_query: str | Unset = UNSET
     status: str | Unset = UNSET
-    widget_id: str | Unset = UNSET
-    widget_title: str | Unset = UNSET
     window: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        asset_id = self.asset_id
-
-        asset_name = self.asset_name
-
-        asset_type = self.asset_type
-
         datasource = self.datasource
 
         error = self.error
 
-        has_free_text = self.has_free_text
-
-        latency = self.latency
+        language = self.language
 
         metric = self.metric
 
@@ -83,35 +57,21 @@ class WetResultHoldsTheOutcomeOfExecutingASingleWetQuery:
 
         query_id = self.query_id
 
-        query_type = self.query_type
-
         resolved_query = self.resolved_query
 
         status = self.status
-
-        widget_id = self.widget_id
-
-        widget_title = self.widget_title
 
         window = self.window
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
-        if asset_id is not UNSET:
-            field_dict["asset_id"] = asset_id
-        if asset_name is not UNSET:
-            field_dict["asset_name"] = asset_name
-        if asset_type is not UNSET:
-            field_dict["asset_type"] = asset_type
         if datasource is not UNSET:
             field_dict["datasource"] = datasource
         if error is not UNSET:
             field_dict["error"] = error
-        if has_free_text is not UNSET:
-            field_dict["has_free_text"] = has_free_text
-        if latency is not UNSET:
-            field_dict["latency"] = latency
+        if language is not UNSET:
+            field_dict["language"] = language
         if metric is not UNSET:
             field_dict["metric"] = metric
         if original_dd is not UNSET:
@@ -120,16 +80,10 @@ class WetResultHoldsTheOutcomeOfExecutingASingleWetQuery:
             field_dict["query"] = query
         if query_id is not UNSET:
             field_dict["query_id"] = query_id
-        if query_type is not UNSET:
-            field_dict["query_type"] = query_type
         if resolved_query is not UNSET:
             field_dict["resolved_query"] = resolved_query
         if status is not UNSET:
             field_dict["status"] = status
-        if widget_id is not UNSET:
-            field_dict["widget_id"] = widget_id
-        if widget_title is not UNSET:
-            field_dict["widget_title"] = widget_title
         if window is not UNSET:
             field_dict["window"] = window
 
@@ -145,19 +99,11 @@ class WetResultHoldsTheOutcomeOfExecutingASingleWetQuery:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        asset_id = d.pop("asset_id", UNSET)
-
-        asset_name = d.pop("asset_name", UNSET)
-
-        asset_type = d.pop("asset_type", UNSET)
-
         datasource = d.pop("datasource", UNSET)
 
         error = d.pop("error", UNSET)
 
-        has_free_text = d.pop("has_free_text", UNSET)
-
-        latency = d.pop("latency", UNSET)
+        language = d.pop("language", UNSET)
 
         metric = d.pop("metric", UNSET)
 
@@ -167,40 +113,27 @@ class WetResultHoldsTheOutcomeOfExecutingASingleWetQuery:
 
         query_id = d.pop("query_id", UNSET)
 
-        query_type = d.pop("query_type", UNSET)
-
         resolved_query = d.pop("resolved_query", UNSET)
 
         status = d.pop("status", UNSET)
 
-        widget_id = d.pop("widget_id", UNSET)
-
-        widget_title = d.pop("widget_title", UNSET)
-
         window = d.pop("window", UNSET)
 
-        wet_result_holds_the_outcome_of_executing_a_single_wet_query = cls(
-            asset_id=asset_id,
-            asset_name=asset_name,
-            asset_type=asset_type,
+        executed_query_is_the_evidence_for_a_units_wet_outcome_the_query_that_ran = cls(
             datasource=datasource,
             error=error,
-            has_free_text=has_free_text,
-            latency=latency,
+            language=language,
             metric=metric,
             original_dd=original_dd,
             query=query,
             query_id=query_id,
-            query_type=query_type,
             resolved_query=resolved_query,
             status=status,
-            widget_id=widget_id,
-            widget_title=widget_title,
             window=window,
         )
 
-        wet_result_holds_the_outcome_of_executing_a_single_wet_query.additional_properties = d
-        return wet_result_holds_the_outcome_of_executing_a_single_wet_query
+        executed_query_is_the_evidence_for_a_units_wet_outcome_the_query_that_ran.additional_properties = d
+        return executed_query_is_the_evidence_for_a_units_wet_outcome_the_query_that_ran
 
     @property
     def additional_keys(self) -> list[str]:

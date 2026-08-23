@@ -53,6 +53,10 @@ known-first-party = ["groundcover"]
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
 testpaths = ["tests"]
+# The e2e janitor (tools/gc_e2e_janitor) is deliberately not part of the shipped
+# package -- it must not import groundcover, whose generated modules are
+# gitignored -- so it needs to be importable without being installed.
+pythonpath = ["tools"]
 
 [tool.mypy]
 python_version = "3.9"
