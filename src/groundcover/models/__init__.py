@@ -1022,6 +1022,12 @@ from .span_event import SpanEvent
 from .span_event_attributes import SpanEventAttributes
 from .span_link import SpanLink
 from .span_link_attributes import SpanLinkAttributes
+from .span_record import SpanRecord
+from .span_record_attributes import SpanRecordAttributes
+from .span_record_query_parameters import SpanRecordQueryParameters
+from .span_record_request_headers import SpanRecordRequestHeaders
+from .span_record_response_headers import SpanRecordResponseHeaders
+from .span_record_tags import SpanRecordTags
 from .sql_pipeline_defines_a_pipeline_for_search_queries import SqlPipelineDefinesAPipelineForSearchQueries
 from .ssl_request_defines_model_for_ssl_request import SslRequestDefinesModelForSslRequest
 from .stats_request import StatsRequest
@@ -1137,6 +1143,8 @@ from .traces_response import TracesResponse
 from .traces_search_over_time_stream_response import TracesSearchOverTimeStreamResponse
 from .traces_search_request import TracesSearchRequest
 from .traces_search_time_series_request import TracesSearchTimeSeriesRequest
+from .traces_simulation_request import TracesSimulationRequest
+from .traces_simulation_response import TracesSimulationResponse
 from .tracing_defines_model_for_tracing import TracingDefinesModelForTracing
 from .transform_represents_a_column_transform_that_registers_in_the_alias_registry_transforms_dont_create_subqueries_they_register_handlers_that_resolve_aliases_to_sql_expressions import (
     TransformRepresentsAColumnTransformThatRegistersInTheAliasRegistryTransformsDontCreateSubqueriesTheyRegisterHandlersThatResolveAliasesToSQLExpressions,
@@ -2080,6 +2088,12 @@ __all__ = (
     "SpanEventAttributes",
     "SpanLink",
     "SpanLinkAttributes",
+    "SpanRecord",
+    "SpanRecordAttributes",
+    "SpanRecordQueryParameters",
+    "SpanRecordRequestHeaders",
+    "SpanRecordResponseHeaders",
+    "SpanRecordTags",
     "SqlPipelineDefinesAPipelineForSearchQueries",
     "SslRequestDefinesModelForSslRequest",
     "StatsRequest",
@@ -2155,6 +2169,8 @@ __all__ = (
     "TracesSearchOverTimeStreamResponse",
     "TracesSearchRequest",
     "TracesSearchTimeSeriesRequest",
+    "TracesSimulationRequest",
+    "TracesSimulationResponse",
     "TracingDefinesModelForTracing",
     "TransformRepresentsAColumnTransformThatRegistersInTheAliasRegistryTransformsDontCreateSubqueriesTheyRegisterHandlersThatResolveAliasesToSQLExpressions",
     "TransformRepresentsAColumnTransformThatRegistersInTheAliasRegistryTransformsDontCreateSubqueriesTheyRegisterHandlersThatResolveAliasesToSQLExpressionsType",
