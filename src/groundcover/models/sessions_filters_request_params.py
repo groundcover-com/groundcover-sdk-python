@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.sessions_filters_request_params_category import SessionsFiltersRequestParamsCategory
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -27,6 +28,9 @@ T = TypeVar("T", bound="SessionsFiltersRequestParams")
 class SessionsFiltersRequestParams:
     """
     Attributes:
+        category (SessionsFiltersRequestParamsCategory | Unset): Category selects the platform to query: 'rum' for web
+            RUM, 'mobile-rum' for
+            React Native. Defaults to 'rum' when omitted.
         conditions (list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset):
         end (datetime.datetime | Unset):
         required (list[ColumnDefinesASearchableColumnAndItsProperties] | Unset):
@@ -34,6 +38,7 @@ class SessionsFiltersRequestParams:
         start (datetime.datetime | Unset):
     """
 
+    category: SessionsFiltersRequestParamsCategory | Unset = UNSET
     conditions: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
     end: datetime.datetime | Unset = UNSET
     required: list[ColumnDefinesASearchableColumnAndItsProperties] | Unset = UNSET
@@ -42,6 +47,10 @@ class SessionsFiltersRequestParams:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        category: str | Unset = UNSET
+        if not isinstance(self.category, Unset):
+            category = self.category.value
+
         conditions: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.conditions, Unset):
             conditions = []
@@ -74,6 +83,8 @@ class SessionsFiltersRequestParams:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if category is not UNSET:
+            field_dict["category"] = category
         if conditions is not UNSET:
             field_dict["conditions"] = conditions
         if end is not UNSET:
@@ -97,6 +108,13 @@ class SessionsFiltersRequestParams:
         )
 
         d = dict(src_dict)
+        _category = d.pop("category", UNSET)
+        category: SessionsFiltersRequestParamsCategory | Unset
+        if isinstance(_category, Unset) or _category is None:
+            category = UNSET
+        else:
+            category = SessionsFiltersRequestParamsCategory(_category)
+
         _conditions = d.pop("conditions", UNSET)
         conditions: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
         if _conditions is not UNSET:
@@ -141,6 +159,7 @@ class SessionsFiltersRequestParams:
             start = parse_datetime(_start)
 
         sessions_filters_request_params = cls(
+            category=category,
             conditions=conditions,
             end=end,
             required=required,

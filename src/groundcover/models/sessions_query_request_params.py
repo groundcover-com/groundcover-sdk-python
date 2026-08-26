@@ -9,6 +9,8 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.sessions_query_request_params_category import SessionsQueryRequestParamsCategory
+from ..models.sessions_query_request_params_sort_by import SessionsQueryRequestParamsSortBy
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,27 +26,38 @@ T = TypeVar("T", bound="SessionsQueryRequestParams")
 class SessionsQueryRequestParams:
     """
     Attributes:
+        category (SessionsQueryRequestParamsCategory | Unset): Category selects the platform to query: 'rum' for web
+            RUM, 'mobile-rum' for
+            React Native. Defaults to 'rum' when omitted.
         conditions (list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset):
         end (datetime.datetime | Unset):
         limit (int | Unset):
         skip (int | Unset):
-        sort_by (str | Unset):
+        sort_by (SessionsQueryRequestParamsSortBy | Unset): Interpolated raw into ORDER BY, so this list is the only
+            guard - and it is
+            version-independent while the template is version-selected, so every value
+            needs an alias in all three variants. Keep the enum below in lockstep.
         sort_order (str | Unset):
         sources (list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset):
         start (datetime.datetime | Unset):
     """
 
+    category: SessionsQueryRequestParamsCategory | Unset = UNSET
     conditions: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
     end: datetime.datetime | Unset = UNSET
     limit: int | Unset = UNSET
     skip: int | Unset = UNSET
-    sort_by: str | Unset = UNSET
+    sort_by: SessionsQueryRequestParamsSortBy | Unset = UNSET
     sort_order: str | Unset = UNSET
     sources: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
     start: datetime.datetime | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        category: str | Unset = UNSET
+        if not isinstance(self.category, Unset):
+            category = self.category.value
+
         conditions: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.conditions, Unset):
             conditions = []
@@ -60,7 +73,9 @@ class SessionsQueryRequestParams:
 
         skip = self.skip
 
-        sort_by = self.sort_by
+        sort_by: str | Unset = UNSET
+        if not isinstance(self.sort_by, Unset):
+            sort_by = self.sort_by.value
 
         sort_order = self.sort_order
 
@@ -78,6 +93,8 @@ class SessionsQueryRequestParams:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if category is not UNSET:
+            field_dict["category"] = category
         if conditions is not UNSET:
             field_dict["conditions"] = conditions
         if end is not UNSET:
@@ -104,6 +121,13 @@ class SessionsQueryRequestParams:
         )
 
         d = dict(src_dict)
+        _category = d.pop("category", UNSET)
+        category: SessionsQueryRequestParamsCategory | Unset
+        if isinstance(_category, Unset) or _category is None:
+            category = UNSET
+        else:
+            category = SessionsQueryRequestParamsCategory(_category)
+
         _conditions = d.pop("conditions", UNSET)
         conditions: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
         if _conditions is not UNSET:
@@ -126,7 +150,12 @@ class SessionsQueryRequestParams:
 
         skip = d.pop("skip", UNSET)
 
-        sort_by = d.pop("sortBy", UNSET)
+        _sort_by = d.pop("sortBy", UNSET)
+        sort_by: SessionsQueryRequestParamsSortBy | Unset
+        if isinstance(_sort_by, Unset) or _sort_by is None:
+            sort_by = UNSET
+        else:
+            sort_by = SessionsQueryRequestParamsSortBy(_sort_by)
 
         sort_order = d.pop("sortOrder", UNSET)
 
@@ -147,6 +176,7 @@ class SessionsQueryRequestParams:
             start = parse_datetime(_start)
 
         sessions_query_request_params = cls(
+            category=category,
             conditions=conditions,
             end=end,
             limit=limit,

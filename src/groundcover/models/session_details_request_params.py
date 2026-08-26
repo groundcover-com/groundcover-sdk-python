@@ -9,6 +9,7 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.session_details_request_params_category import SessionDetailsRequestParamsCategory
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,6 +25,9 @@ T = TypeVar("T", bound="SessionDetailsRequestParams")
 class SessionDetailsRequestParams:
     """
     Attributes:
+        category (SessionDetailsRequestParamsCategory | Unset): Category selects the platform to query: 'rum' for web
+            RUM, 'mobile-rum' for
+            React Native. Defaults to 'rum' when omitted.
         conditions (list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset):
         end (datetime.datetime | Unset):
         session_id (str | Unset):
@@ -31,6 +35,7 @@ class SessionDetailsRequestParams:
         start (datetime.datetime | Unset):
     """
 
+    category: SessionDetailsRequestParamsCategory | Unset = UNSET
     conditions: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
     end: datetime.datetime | Unset = UNSET
     session_id: str | Unset = UNSET
@@ -39,6 +44,10 @@ class SessionDetailsRequestParams:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        category: str | Unset = UNSET
+        if not isinstance(self.category, Unset):
+            category = self.category.value
+
         conditions: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.conditions, Unset):
             conditions = []
@@ -66,6 +75,8 @@ class SessionDetailsRequestParams:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if category is not UNSET:
+            field_dict["category"] = category
         if conditions is not UNSET:
             field_dict["conditions"] = conditions
         if end is not UNSET:
@@ -86,6 +97,13 @@ class SessionDetailsRequestParams:
         )
 
         d = dict(src_dict)
+        _category = d.pop("category", UNSET)
+        category: SessionDetailsRequestParamsCategory | Unset
+        if isinstance(_category, Unset) or _category is None:
+            category = UNSET
+        else:
+            category = SessionDetailsRequestParamsCategory(_category)
+
         _conditions = d.pop("conditions", UNSET)
         conditions: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
         if _conditions is not UNSET:
@@ -123,6 +141,7 @@ class SessionDetailsRequestParams:
             start = parse_datetime(_start)
 
         session_details_request_params = cls(
+            category=category,
             conditions=conditions,
             end=end,
             session_id=session_id,

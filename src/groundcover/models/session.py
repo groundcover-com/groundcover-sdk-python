@@ -18,12 +18,19 @@ T = TypeVar("T", bound="Session")
 class Session:
     """
     Attributes:
+        app_version (str | Unset): AppVersion is the mobile application version. Empty for web sessions, which
+            report ReleaseID instead.
         browser (str | Unset):
         country (str | Unset):
+        device_brand (str | Unset):
+        device_model (str | Unset):
         duration_milli (int | Unset):
         end_time (datetime.datetime | Unset):
         has_session_replay (int | Unset):
         is_mobile (str | Unset):
+        os_name (str | Unset): Mobile RUM. Empty for web sessions, which report browser.* instead. The client
+            platform is not returned: it is a filter dimension only.
+        os_version (str | Unset):
         page_count (int | Unset):
         release_id (str | Unset):
         service_name (str | Unset):
@@ -35,12 +42,17 @@ class Session:
         user_organization (str | Unset):
     """
 
+    app_version: str | Unset = UNSET
     browser: str | Unset = UNSET
     country: str | Unset = UNSET
+    device_brand: str | Unset = UNSET
+    device_model: str | Unset = UNSET
     duration_milli: int | Unset = UNSET
     end_time: datetime.datetime | Unset = UNSET
     has_session_replay: int | Unset = UNSET
     is_mobile: str | Unset = UNSET
+    os_name: str | Unset = UNSET
+    os_version: str | Unset = UNSET
     page_count: int | Unset = UNSET
     release_id: str | Unset = UNSET
     service_name: str | Unset = UNSET
@@ -53,9 +65,15 @@ class Session:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        app_version = self.app_version
+
         browser = self.browser
 
         country = self.country
+
+        device_brand = self.device_brand
+
+        device_model = self.device_model
 
         duration_milli = self.duration_milli
 
@@ -66,6 +84,10 @@ class Session:
         has_session_replay = self.has_session_replay
 
         is_mobile = self.is_mobile
+
+        os_name = self.os_name
+
+        os_version = self.os_version
 
         page_count = self.page_count
 
@@ -90,10 +112,16 @@ class Session:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if app_version is not UNSET:
+            field_dict["appVersion"] = app_version
         if browser is not UNSET:
             field_dict["browser"] = browser
         if country is not UNSET:
             field_dict["country"] = country
+        if device_brand is not UNSET:
+            field_dict["deviceBrand"] = device_brand
+        if device_model is not UNSET:
+            field_dict["deviceModel"] = device_model
         if duration_milli is not UNSET:
             field_dict["durationMilli"] = duration_milli
         if end_time is not UNSET:
@@ -102,6 +130,10 @@ class Session:
             field_dict["hasSessionReplay"] = has_session_replay
         if is_mobile is not UNSET:
             field_dict["isMobile"] = is_mobile
+        if os_name is not UNSET:
+            field_dict["osName"] = os_name
+        if os_version is not UNSET:
+            field_dict["osVersion"] = os_version
         if page_count is not UNSET:
             field_dict["pageCount"] = page_count
         if release_id is not UNSET:
@@ -133,9 +165,15 @@ class Session:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
+        app_version = d.pop("appVersion", UNSET)
+
         browser = d.pop("browser", UNSET)
 
         country = d.pop("country", UNSET)
+
+        device_brand = d.pop("deviceBrand", UNSET)
+
+        device_model = d.pop("deviceModel", UNSET)
 
         duration_milli = d.pop("durationMilli", UNSET)
 
@@ -149,6 +187,10 @@ class Session:
         has_session_replay = d.pop("hasSessionReplay", UNSET)
 
         is_mobile = d.pop("isMobile", UNSET)
+
+        os_name = d.pop("osName", UNSET)
+
+        os_version = d.pop("osVersion", UNSET)
 
         page_count = d.pop("pageCount", UNSET)
 
@@ -174,12 +216,17 @@ class Session:
         user_organization = d.pop("userOrganization", UNSET)
 
         session = cls(
+            app_version=app_version,
             browser=browser,
             country=country,
+            device_brand=device_brand,
+            device_model=device_model,
             duration_milli=duration_milli,
             end_time=end_time,
             has_session_replay=has_session_replay,
             is_mobile=is_mobile,
+            os_name=os_name,
+            os_version=os_version,
             page_count=page_count,
             release_id=release_id,
             service_name=service_name,

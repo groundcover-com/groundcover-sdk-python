@@ -1030,6 +1030,7 @@ from .service_account_policy_ref import ServiceAccountPolicyRef
 from .service_accounts_with_policy import ServiceAccountsWithPolicy
 from .session import Session
 from .session_details_request_params import SessionDetailsRequestParams
+from .session_details_request_params_category import SessionDetailsRequestParamsCategory
 from .session_details_response import SessionDetailsResponse
 from .session_metrics import SessionMetrics
 from .session_replay_request_params_holds_the_query_parameters_for_fetching_session_replay_events import (
@@ -1048,10 +1049,14 @@ from .session_replay_velocity_response_wraps_the_velocity_series_returned_to_the
     SessionReplayVelocityResponseWrapsTheVelocitySeriesReturnedToTheClient,
 )
 from .sessions_filters_request_params import SessionsFiltersRequestParams
+from .sessions_filters_request_params_category import SessionsFiltersRequestParamsCategory
 from .sessions_filters_response import SessionsFiltersResponse
 from .sessions_query_request_params import SessionsQueryRequestParams
+from .sessions_query_request_params_category import SessionsQueryRequestParamsCategory
+from .sessions_query_request_params_sort_by import SessionsQueryRequestParamsSortBy
 from .sessions_query_response import SessionsQueryResponse
 from .sessions_summary_request_params import SessionsSummaryRequestParams
+from .sessions_summary_request_params_category import SessionsSummaryRequestParamsCategory
 from .sessions_summary_response import SessionsSummaryResponse
 from .silence import Silence
 from .silence_matcher import SilenceMatcher
@@ -2163,6 +2168,7 @@ __all__ = (
     "ServiceAccountsWithPolicy",
     "Session",
     "SessionDetailsRequestParams",
+    "SessionDetailsRequestParamsCategory",
     "SessionDetailsResponse",
     "SessionMetrics",
     "SessionReplayRequestParamsHoldsTheQueryParametersForFetchingSessionReplayEvents",
@@ -2171,10 +2177,14 @@ __all__ = (
     "SessionReplayVelocityRequestParamsHoldsTheQueryParametersForFetchingSessionReplayEventVelocity",
     "SessionReplayVelocityResponseWrapsTheVelocitySeriesReturnedToTheClient",
     "SessionsFiltersRequestParams",
+    "SessionsFiltersRequestParamsCategory",
     "SessionsFiltersResponse",
     "SessionsQueryRequestParams",
+    "SessionsQueryRequestParamsCategory",
+    "SessionsQueryRequestParamsSortBy",
     "SessionsQueryResponse",
     "SessionsSummaryRequestParams",
+    "SessionsSummaryRequestParamsCategory",
     "SessionsSummaryResponse",
     "Silence",
     "SilenceMatcher",
