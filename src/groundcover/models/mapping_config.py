@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     from ..models.key_mapping import KeyMapping
     from ..models.mapping_config_metric_name_char_replace import MappingConfigMetricNameCharReplace
     from ..models.metric_mapping import MetricMapping
+    from ..models.value_mapping import ValueMapping
 
 
 T = TypeVar("T", bound="MappingConfig")
@@ -25,12 +26,14 @@ class MappingConfig:
         key_mappings (list[KeyMapping] | Unset):
         metric_mappings (list[MetricMapping] | Unset):
         metric_name_char_replace (MappingConfigMetricNameCharReplace | Unset):
+        value_mappings (list[ValueMapping] | Unset):
     """
 
     default_rate_window: str | Unset = UNSET
     key_mappings: list[KeyMapping] | Unset = UNSET
     metric_mappings: list[MetricMapping] | Unset = UNSET
     metric_name_char_replace: MappingConfigMetricNameCharReplace | Unset = UNSET
+    value_mappings: list[ValueMapping] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -54,6 +57,13 @@ class MappingConfig:
         if not isinstance(self.metric_name_char_replace, Unset):
             metric_name_char_replace = self.metric_name_char_replace.to_dict()
 
+        value_mappings: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.value_mappings, Unset):
+            value_mappings = []
+            for value_mappings_item_data in self.value_mappings:
+                value_mappings_item = value_mappings_item_data.to_dict()
+                value_mappings.append(value_mappings_item)
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -65,6 +75,8 @@ class MappingConfig:
             field_dict["metric_mappings"] = metric_mappings
         if metric_name_char_replace is not UNSET:
             field_dict["metric_name_char_replace"] = metric_name_char_replace
+        if value_mappings is not UNSET:
+            field_dict["value_mappings"] = value_mappings
 
         return field_dict
 
@@ -73,6 +85,7 @@ class MappingConfig:
         from ..models.key_mapping import KeyMapping
         from ..models.mapping_config_metric_name_char_replace import MappingConfigMetricNameCharReplace
         from ..models.metric_mapping import MetricMapping
+        from ..models.value_mapping import ValueMapping
 
         d = dict(src_dict)
         default_rate_window = d.pop("default_rate_window", UNSET)
@@ -102,11 +115,21 @@ class MappingConfig:
         else:
             metric_name_char_replace = MappingConfigMetricNameCharReplace.from_dict(_metric_name_char_replace)
 
+        _value_mappings = d.pop("value_mappings", UNSET)
+        value_mappings: list[ValueMapping] | Unset = UNSET
+        if _value_mappings is not UNSET:
+            value_mappings = []
+            for value_mappings_item_data in _value_mappings:
+                value_mappings_item = ValueMapping.from_dict(value_mappings_item_data)
+
+                value_mappings.append(value_mappings_item)
+
         mapping_config = cls(
             default_rate_window=default_rate_window,
             key_mappings=key_mappings,
             metric_mappings=metric_mappings,
             metric_name_char_replace=metric_name_char_replace,
+            value_mappings=value_mappings,
         )
 
         mapping_config.additional_properties = d

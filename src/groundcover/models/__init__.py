@@ -1365,6 +1365,7 @@ from .v2_update_silence_response_400 import V2UpdateSilenceResponse400
 from .v2_update_silence_response_404 import V2UpdateSilenceResponse404
 from .v2_update_silence_response_500 import V2UpdateSilenceResponse500
 from .value_item import ValueItem
+from .value_mapping import ValueMapping
 from .value_missing_bucket_lists_units_whose_filter_values_are_absent_in_groundcover import (
     ValueMissingBucketListsUnitsWhoseFilterValuesAreAbsentInGroundcover,
 )
@@ -2405,6 +2406,7 @@ __all__ = (
     "V2UpdateSilenceResponse404",
     "V2UpdateSilenceResponse500",
     "ValueItem",
+    "ValueMapping",
     "ValueMissingBucketListsUnitsWhoseFilterValuesAreAbsentInGroundcover",
     "ValuesDistributionRequest",
     "ValuesDistributionResult",
