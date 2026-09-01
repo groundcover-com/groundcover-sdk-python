@@ -5,6 +5,7 @@ from enum import Enum
 
 class SearchDiscoveryRequestType(str, Enum):
     APM = "apm"
+    DASHBOARDS = "dashboards"
     ENTITIES = "entities"
     EVENTS = "events"
     ISSUES = "issues"
