@@ -20,8 +20,8 @@ T = TypeVar("T", bound="OrgConnectorUpdateRequestWrapsMutableOrgConnectorFields"
 @_attrs_define
 class OrgConnectorUpdateRequestWrapsMutableOrgConnectorFields:
     """For Slack, `name` may be set at the top level and `data` may include
-    `client_secret` and/or `app_token`. For MCP, `data` may include
-    `admin_token`. Omitted `data` is treated as an empty object.
+    `client_secret` and/or `app_token`. For MCP, `data` carries OAuth client
+    fields only. Omitted `data` is treated as an empty object.
 
         Attributes:
             data (OrgConnectorUpdateRequestWrapsMutableOrgConnectorFieldsData | Unset): Provider-specific connector data.

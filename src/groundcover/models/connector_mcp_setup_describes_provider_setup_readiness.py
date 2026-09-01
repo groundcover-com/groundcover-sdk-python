@@ -9,7 +9,6 @@ from attrs import field as _attrs_field
 from ..models.connector_mcp_setup_describes_provider_setup_readiness_state import (
     ConnectorMCPSetupDescribesProviderSetupReadinessState,
 )
-from .._generated_types import UNSET, Unset
 
 T = TypeVar("T", bound="ConnectorMCPSetupDescribesProviderSetupReadiness")
 
@@ -18,22 +17,22 @@ T = TypeVar("T", bound="ConnectorMCPSetupDescribesProviderSetupReadiness")
 class ConnectorMCPSetupDescribesProviderSetupReadiness:
     """
     Attributes:
-        state (ConnectorMCPSetupDescribesProviderSetupReadinessState | Unset): Provider setup state.
+        state (ConnectorMCPSetupDescribesProviderSetupReadinessState): Provider setup state.
     """
 
-    state: ConnectorMCPSetupDescribesProviderSetupReadinessState | Unset = UNSET
+    state: ConnectorMCPSetupDescribesProviderSetupReadinessState
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        state: str | Unset = UNSET
-        if not isinstance(self.state, Unset):
-            state = self.state.value
+        state = self.state.value
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update({})
-        if state is not UNSET:
-            field_dict["state"] = state
+        field_dict.update(
+            {
+                "state": state,
+            }
+        )
 
         return field_dict
 
@@ -47,12 +46,7 @@ class ConnectorMCPSetupDescribesProviderSetupReadiness:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        _state = d.pop("state", UNSET)
-        state: ConnectorMCPSetupDescribesProviderSetupReadinessState | Unset
-        if isinstance(_state, Unset) or _state is None:
-            state = UNSET
-        else:
-            state = ConnectorMCPSetupDescribesProviderSetupReadinessState(_state)
+        state = ConnectorMCPSetupDescribesProviderSetupReadinessState(d.pop("state"))
 
         connector_mcp_setup_describes_provider_setup_readiness = cls(
             state=state,

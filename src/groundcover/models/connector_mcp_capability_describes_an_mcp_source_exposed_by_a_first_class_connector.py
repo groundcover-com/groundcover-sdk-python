@@ -6,6 +6,12 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.connector_mcp_capability_describes_an_mcp_source_exposed_by_a_first_class_connector_auth_state import (
+    ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorAuthState,
+)
+from ..models.connector_mcp_capability_describes_an_mcp_source_exposed_by_a_first_class_connector_scope_status import (
+    ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorScopeStatus,
+)
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
@@ -24,11 +30,13 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
         display_name (str): Display name shown for the MCP source.
         server_id (str): Stable identifier for the connector-provided MCP server.
         source_kind (str): Ownership kind for the MCP source.
-        auth_state (str | Unset):
+        auth_state (ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorAuthState | Unset): Whether
+            MCP requests can be authenticated. Omitted when not applicable.
         icon (str | Unset):
         org_discovery_path (str | Unset):
-        scope_status (str | Unset): Whether the connected credential holds all grantable user scopes ("full")
-            or a re-consent could grant more ("partial"). Empty when not applicable.
+        scope_status (ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorScopeStatus | Unset):
+            Whether the connected credential holds all grantable user scopes ("full")
+            or a re-consent could grant more ("partial"). Omitted when not applicable.
         setup (ConnectorMCPSetupDescribesProviderSetupReadiness | Unset):
         setup_guidance (str | Unset):
         user_proxy_path (str | Unset):
@@ -37,10 +45,10 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
     display_name: str
     server_id: str
     source_kind: str
-    auth_state: str | Unset = UNSET
+    auth_state: ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorAuthState | Unset = UNSET
     icon: str | Unset = UNSET
     org_discovery_path: str | Unset = UNSET
-    scope_status: str | Unset = UNSET
+    scope_status: ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorScopeStatus | Unset = UNSET
     setup: ConnectorMCPSetupDescribesProviderSetupReadiness | Unset = UNSET
     setup_guidance: str | Unset = UNSET
     user_proxy_path: str | Unset = UNSET
@@ -53,13 +61,17 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
 
         source_kind = self.source_kind
 
-        auth_state = self.auth_state
+        auth_state: str | Unset = UNSET
+        if not isinstance(self.auth_state, Unset):
+            auth_state = self.auth_state.value
 
         icon = self.icon
 
         org_discovery_path = self.org_discovery_path
 
-        scope_status = self.scope_status
+        scope_status: str | Unset = UNSET
+        if not isinstance(self.scope_status, Unset):
+            scope_status = self.scope_status.value
 
         setup: dict[str, Any] | Unset = UNSET
         if not isinstance(self.setup, Unset):
@@ -108,13 +120,25 @@ class ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector:
 
         source_kind = d.pop("sourceKind")
 
-        auth_state = d.pop("authState", UNSET)
+        _auth_state = d.pop("authState", UNSET)
+        auth_state: ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorAuthState | Unset
+        if isinstance(_auth_state, Unset) or _auth_state is None:
+            auth_state = UNSET
+        else:
+            auth_state = ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorAuthState(_auth_state)
 
         icon = d.pop("icon", UNSET)
 
         org_discovery_path = d.pop("orgDiscoveryPath", UNSET)
 
-        scope_status = d.pop("scopeStatus", UNSET)
+        _scope_status = d.pop("scopeStatus", UNSET)
+        scope_status: ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorScopeStatus | Unset
+        if isinstance(_scope_status, Unset) or _scope_status is None:
+            scope_status = UNSET
+        else:
+            scope_status = ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorScopeStatus(
+                _scope_status
+            )
 
         _setup = d.pop("setup", UNSET)
         setup: ConnectorMCPSetupDescribesProviderSetupReadiness | Unset

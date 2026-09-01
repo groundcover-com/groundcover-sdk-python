@@ -221,6 +221,12 @@ from .connector_manifest_response_contains_a_provider_app_manifest_and_creation_
 from .connector_mcp_capability_describes_an_mcp_source_exposed_by_a_first_class_connector import (
     ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector,
 )
+from .connector_mcp_capability_describes_an_mcp_source_exposed_by_a_first_class_connector_auth_state import (
+    ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorAuthState,
+)
+from .connector_mcp_capability_describes_an_mcp_source_exposed_by_a_first_class_connector_scope_status import (
+    ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorScopeStatus,
+)
 from .connector_mcp_setup_describes_provider_setup_readiness import ConnectorMCPSetupDescribesProviderSetupReadiness
 from .connector_mcp_setup_describes_provider_setup_readiness_state import (
     ConnectorMCPSetupDescribesProviderSetupReadinessState,
@@ -1583,6 +1589,8 @@ __all__ = (
     "ConnectorListResponseIsTheListResponseKeyedByProviderName",
     "ConnectorManifestResponseContainsAProviderAppManifestAndCreationURL",
     "ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnector",
+    "ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorAuthState",
+    "ConnectorMCPCapabilityDescribesAnMCPSourceExposedByAFirstClassConnectorScopeStatus",
     "ConnectorMCPSetupDescribesProviderSetupReadiness",
     "ConnectorMCPSetupDescribesProviderSetupReadinessState",
     "ConnectorOAuthStartResponseContainsTheProviderAuthorizationURL",
