@@ -33,6 +33,8 @@ class UnfurlTraceSummary:
                 (which would just restate the trace duration).
             span_count (int | Unset):
             span_name (str | Unset):
+            status_code (str | Unset): StatusCode is the root span's protocol return code ("200", "500", a gRPC
+                code, …), empty for a protocol that has none.
             trace_id (str | Unset):
     """
 
@@ -44,6 +46,7 @@ class UnfurlTraceSummary:
     slowest_span: UnfurlSlowestSpan | Unset = UNSET
     span_count: int | Unset = UNSET
     span_name: str | Unset = UNSET
+    status_code: str | Unset = UNSET
     trace_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -66,6 +69,8 @@ class UnfurlTraceSummary:
 
         span_name = self.span_name
 
+        status_code = self.status_code
+
         trace_id = self.trace_id
 
         field_dict: dict[str, Any] = {}
@@ -87,6 +92,8 @@ class UnfurlTraceSummary:
             field_dict["spanCount"] = span_count
         if span_name is not UNSET:
             field_dict["spanName"] = span_name
+        if status_code is not UNSET:
+            field_dict["statusCode"] = status_code
         if trace_id is not UNSET:
             field_dict["traceId"] = trace_id
 
@@ -118,6 +125,8 @@ class UnfurlTraceSummary:
 
         span_name = d.pop("spanName", UNSET)
 
+        status_code = d.pop("statusCode", UNSET)
+
         trace_id = d.pop("traceId", UNSET)
 
         unfurl_trace_summary = cls(
@@ -129,6 +138,7 @@ class UnfurlTraceSummary:
             slowest_span=slowest_span,
             span_count=span_count,
             span_name=span_name,
+            status_code=status_code,
             trace_id=trace_id,
         )
 
