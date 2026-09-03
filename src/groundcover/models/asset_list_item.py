@@ -39,6 +39,10 @@ class AssetListItem:
         missing_data_sources (list[str] | Unset): Names of data sources referenced by this asset that are not yet
             migrated.
             Populated for monitors and dashboards only. Matches DataSourceItem.DatasourceName values.
+        missing_metrics (list[str] | None | Unset): Metric names used by this data source that are not currently live in
+            groundcover.
+            Populated for synthesized metrics items returned with dataSourceId. Null means
+            coverage has not been computed because the migration predates this field.
         missing_reqs (AssetListItemMissingReqs | Unset): Missing requirements for full conversion.
         name (str | Unset): The name of the asset.
         raw_payload (AssetListItemRawPayload | Unset): The verbatim provider object payload.
@@ -58,6 +62,7 @@ class AssetListItem:
     install_state: str | Unset = UNSET
     metadata: AssetMetadata | Unset = UNSET
     missing_data_sources: list[str] | Unset = UNSET
+    missing_metrics: list[str] | None | Unset = UNSET
     missing_reqs: AssetListItemMissingReqs | Unset = UNSET
     name: str | Unset = UNSET
     raw_payload: AssetListItemRawPayload | Unset = UNSET
@@ -96,6 +101,15 @@ class AssetListItem:
         missing_data_sources: list[str] | Unset = UNSET
         if not isinstance(self.missing_data_sources, Unset):
             missing_data_sources = self.missing_data_sources
+
+        missing_metrics: list[str] | None | Unset
+        if isinstance(self.missing_metrics, Unset):
+            missing_metrics = UNSET
+        elif isinstance(self.missing_metrics, list):
+            missing_metrics = self.missing_metrics
+
+        else:
+            missing_metrics = self.missing_metrics
 
         missing_reqs: dict[str, Any] | Unset = UNSET
         if not isinstance(self.missing_reqs, Unset):
@@ -138,6 +152,8 @@ class AssetListItem:
             field_dict["metadata"] = metadata
         if missing_data_sources is not UNSET:
             field_dict["missing_data_sources"] = missing_data_sources
+        if missing_metrics is not UNSET:
+            field_dict["missing_metrics"] = missing_metrics
         if missing_reqs is not UNSET:
             field_dict["missing_reqs"] = missing_reqs
         if name is not UNSET:
@@ -202,6 +218,23 @@ class AssetListItem:
 
         missing_data_sources = cast(list[str], d.pop("missing_data_sources", UNSET))
 
+        def _parse_missing_metrics(data: object) -> list[str] | None | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            try:
+                if not isinstance(data, list):
+                    raise TypeError()
+                missing_metrics_type_0 = cast(list[str], data)
+
+                return missing_metrics_type_0
+            except (TypeError, ValueError, AttributeError, KeyError):
+                pass
+            return cast(list[str] | None | Unset, data)
+
+        missing_metrics = _parse_missing_metrics(d.pop("missing_metrics", UNSET))
+
         _missing_reqs = d.pop("missing_reqs", UNSET)
         missing_reqs: AssetListItemMissingReqs | Unset
         if isinstance(_missing_reqs, Unset) or _missing_reqs is None:
@@ -240,6 +273,7 @@ class AssetListItem:
             install_state=install_state,
             metadata=metadata,
             missing_data_sources=missing_data_sources,
+            missing_metrics=missing_metrics,
             missing_reqs=missing_reqs,
             name=name,
             raw_payload=raw_payload,
