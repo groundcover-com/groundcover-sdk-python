@@ -29,8 +29,8 @@ class FiltersRequestBody:
             selected value's siblings stay listed and multi-select works (parity with
             monitors instances/filters).
         required (list[ColumnDefinesASearchableColumnAndItsProperties] | Unset): Optional list of facet keys (owner,
-            tags, source) that must appear in the
-            response even when the filtered set produces no values for them — each such
+            tags, source, favorites) that must
+            appear in the response even when the filtered set produces no values for them — each such
             key comes back as an empty list instead of being omitted from the map. This
             only guarantees presence: every facet is computed regardless of what is listed
             here. Keys outside the supported facet set are rejected with a 400 rather than
