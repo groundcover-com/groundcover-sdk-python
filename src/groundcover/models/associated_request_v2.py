@@ -30,6 +30,7 @@ class AssociatedRequestV2:
         limit (int): Limit is the maximum number of results to return
         start (datetime.datetime): Start time for the search
         filter_associated (list[AssociatedFilter] | Unset): Filter associated is a list of filters
+        filter_value (str | Unset): Filter value to narrow the returned values (substring match), same as /values
         metric_names (list[str] | Unset): MetricNames optionally narrows the metrics branch to specific metrics
         sources (list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset): Sources is a list of sources
             to filter the values by
@@ -40,6 +41,7 @@ class AssociatedRequestV2:
     limit: int
     start: datetime.datetime
     filter_associated: list[AssociatedFilter] | Unset = UNSET
+    filter_value: str | Unset = UNSET
     metric_names: list[str] | Unset = UNSET
     sources: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -59,6 +61,8 @@ class AssociatedRequestV2:
             for filter_associated_item_data in self.filter_associated:
                 filter_associated_item = filter_associated_item_data.to_dict()
                 filter_associated.append(filter_associated_item)
+
+        filter_value = self.filter_value
 
         metric_names: list[str] | Unset = UNSET
         if not isinstance(self.metric_names, Unset):
@@ -83,6 +87,8 @@ class AssociatedRequestV2:
         )
         if filter_associated is not UNSET:
             field_dict["filterAssociated"] = filter_associated
+        if filter_value is not UNSET:
+            field_dict["filterValue"] = filter_value
         if metric_names is not UNSET:
             field_dict["metricNames"] = metric_names
         if sources is not UNSET:
@@ -115,6 +121,8 @@ class AssociatedRequestV2:
 
                 filter_associated.append(filter_associated_item)
 
+        filter_value = d.pop("filterValue", UNSET)
+
         metric_names = cast(list[str], d.pop("metricNames", UNSET))
 
         _sources = d.pop("sources", UNSET)
@@ -132,6 +140,7 @@ class AssociatedRequestV2:
             limit=limit,
             start=start,
             filter_associated=filter_associated,
+            filter_value=filter_value,
             metric_names=metric_names,
             sources=sources,
         )
