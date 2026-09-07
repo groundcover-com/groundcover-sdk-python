@@ -802,6 +802,9 @@ from .logs_velocity_request_params import LogsVelocityRequestParams
 from .logs_velocity_response import LogsVelocityResponse
 from .mapping_config import MappingConfig
 from .mapping_config_metric_name_char_replace import MappingConfigMetricNameCharReplace
+from .mapping_evidence_records_why_an_automatically_discovered_mapping_was_safe_to_persist import (
+    MappingEvidenceRecordsWhyAnAutomaticallyDiscoveredMappingWasSafeToPersist,
+)
 from .mapping_response import MappingResponse
 from .mapping_response_provider import MappingResponseProvider
 from .matcher_models_the_matching_of_a_label import MatcherModelsTheMatchingOfALabel
@@ -2011,6 +2014,7 @@ __all__ = (
     "LogsVelocityResponse",
     "MappingConfig",
     "MappingConfigMetricNameCharReplace",
+    "MappingEvidenceRecordsWhyAnAutomaticallyDiscoveredMappingWasSafeToPersist",
     "MappingResponse",
     "MappingResponseProvider",
     "MatcherModelsTheMatchingOfALabel",
