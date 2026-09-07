@@ -24,17 +24,21 @@ T = TypeVar("T", bound="DistributedTraceSummaryRequest")
 class DistributedTraceSummaryRequest:
     """
     Attributes:
+        source_type (str | Unset):
         sources (list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset):
         time (datetime.datetime | Unset):
         trace_id (str | Unset):
     """
 
+    source_type: str | Unset = UNSET
     sources: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
     time: datetime.datetime | Unset = UNSET
     trace_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        source_type = self.source_type
+
         sources: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.sources, Unset):
             sources = []
@@ -51,6 +55,8 @@ class DistributedTraceSummaryRequest:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if source_type is not UNSET:
+            field_dict["sourceType"] = source_type
         if sources is not UNSET:
             field_dict["sources"] = sources
         if time is not UNSET:
@@ -67,6 +73,8 @@ class DistributedTraceSummaryRequest:
         )
 
         d = dict(src_dict)
+        source_type = d.pop("sourceType", UNSET)
+
         _sources = d.pop("sources", UNSET)
         sources: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
         if _sources is not UNSET:
@@ -86,6 +94,7 @@ class DistributedTraceSummaryRequest:
         trace_id = d.pop("traceId", UNSET)
 
         distributed_trace_summary_request = cls(
+            source_type=source_type,
             sources=sources,
             time=time,
             trace_id=trace_id,
