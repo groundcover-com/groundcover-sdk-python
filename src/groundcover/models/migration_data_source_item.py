@@ -21,7 +21,8 @@ class MigrationDataSourceItem:
             (AWS / GCP / Azure) this is prefixed with the cloud label and a
             space, e.g. "AWS 123456789012", "GCP sa@my-prod.iam.gserviceaccount.com",
             "Azure prod-azure-tenant". For non-cloud integrations it is the raw
-            source-provider integration name (e.g. "redis", "kubelet").
+            source-provider integration name (e.g. "redis", "kubelet"); ordinary
+            unmapped customer metrics are grouped under "Custom Metrics".
         id (str): The stable unique identifier for this data source.
         impacted_dashboards_count (int): Number of dashboards impacted by this data source.
         impacted_metrics_count (int): Number of metrics impacted by this data source.
@@ -29,8 +30,8 @@ class MigrationDataSourceItem:
         referenced_resources (list[str]): Cloud or external resources referenced by this data source.
         status (MigrationDataSourceItemStatus): The current migration status for this data source.
         support_type (MigrationDataSourceItemSupportType): Whether this data source is supported by migration.
-        integration_type (None | str | Unset): The matching groundcover integration type, or null when unsupported or
-            unmapped.
+        integration_type (None | str | Unset): The matching groundcover integration type. Ordinary unmapped customer
+            metrics use "custom_metrics"; null is reserved for unsupported vendor telemetry.
     """
 
     datasource_name: str
