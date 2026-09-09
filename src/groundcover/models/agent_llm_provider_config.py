@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -18,6 +18,11 @@ class AgentLLMProviderConfig:
 
         Attributes:
             base_url (str | Unset): Provider-compatible endpoint base URL, if configured.
+            default_provider (None | str | Unset): Static provider configured by LLM_PROVIDER. Null when dummy_provider
+                marks
+                a deployment without a managed default. This is response-only metadata and
+                is not part of AgentLLMProviderConfigRequest.
+                Nullable: true
             is_secret_ref_set (bool | Unset): Whether an API key secret ref is configured.
             provider (str | Unset): The configured provider ("" when unset).
             updated_at (str | Unset): When the config was last updated (ISO-8601), if set.
@@ -26,6 +31,7 @@ class AgentLLMProviderConfig:
     """
 
     base_url: str | Unset = UNSET
+    default_provider: None | str | Unset = UNSET
     is_secret_ref_set: bool | Unset = UNSET
     provider: str | Unset = UNSET
     updated_at: str | Unset = UNSET
@@ -35,6 +41,12 @@ class AgentLLMProviderConfig:
 
     def to_dict(self) -> dict[str, Any]:
         base_url = self.base_url
+
+        default_provider: None | str | Unset
+        if isinstance(self.default_provider, Unset):
+            default_provider = UNSET
+        else:
+            default_provider = self.default_provider
 
         is_secret_ref_set = self.is_secret_ref_set
 
@@ -51,6 +63,8 @@ class AgentLLMProviderConfig:
         field_dict.update({})
         if base_url is not UNSET:
             field_dict["baseUrl"] = base_url
+        if default_provider is not UNSET:
+            field_dict["defaultProvider"] = default_provider
         if is_secret_ref_set is not UNSET:
             field_dict["isSecretRefSet"] = is_secret_ref_set
         if provider is not UNSET:
@@ -76,6 +90,15 @@ class AgentLLMProviderConfig:
         d = dict(src_dict)
         base_url = d.pop("baseUrl", UNSET)
 
+        def _parse_default_provider(data: object) -> None | str | Unset:
+            if data is None:
+                return data
+            if isinstance(data, Unset):
+                return data
+            return cast(None | str | Unset, data)
+
+        default_provider = _parse_default_provider(d.pop("defaultProvider", UNSET))
+
         is_secret_ref_set = d.pop("isSecretRefSet", UNSET)
 
         provider = d.pop("provider", UNSET)
@@ -88,6 +111,7 @@ class AgentLLMProviderConfig:
 
         agent_llm_provider_config = cls(
             base_url=base_url,
+            default_provider=default_provider,
             is_secret_ref_set=is_secret_ref_set,
             provider=provider,
             updated_at=updated_at,
