@@ -28,6 +28,8 @@ class MemberView:
         origin_id (str | Unset):
         origin_type (str | Unset):
         owner (str | Unset):
+        pin_order (int | Unset): PinOrder is the member's pin weight, higher sorts first; nil when not
+            pinned. The client owns the numbering, so ties and gaps are possible.
         preset (str | Unset):
         revision_number (int | Unset):
         status (str | Unset):
@@ -50,6 +52,7 @@ class MemberView:
     origin_id: str | Unset = UNSET
     origin_type: str | Unset = UNSET
     owner: str | Unset = UNSET
+    pin_order: int | Unset = UNSET
     preset: str | Unset = UNSET
     revision_number: int | Unset = UNSET
     status: str | Unset = UNSET
@@ -86,6 +89,8 @@ class MemberView:
         origin_type = self.origin_type
 
         owner = self.owner
+
+        pin_order = self.pin_order
 
         preset = self.preset
 
@@ -134,6 +139,8 @@ class MemberView:
             field_dict["originType"] = origin_type
         if owner is not UNSET:
             field_dict["owner"] = owner
+        if pin_order is not UNSET:
+            field_dict["pinOrder"] = pin_order
         if preset is not UNSET:
             field_dict["preset"] = preset
         if revision_number is not UNSET:
@@ -197,6 +204,8 @@ class MemberView:
 
         owner = d.pop("owner", UNSET)
 
+        pin_order = d.pop("pinOrder", UNSET)
+
         preset = d.pop("preset", UNSET)
 
         revision_number = d.pop("revisionNumber", UNSET)
@@ -233,6 +242,7 @@ class MemberView:
             origin_id=origin_id,
             origin_type=origin_type,
             owner=owner,
+            pin_order=pin_order,
             preset=preset,
             revision_number=revision_number,
             status=status,

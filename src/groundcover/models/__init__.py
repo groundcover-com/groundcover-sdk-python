@@ -909,6 +909,7 @@ from .ops_genie_data import OpsGenieData
 from .ops_genie_data_response import OpsGenieDataResponse
 from .ops_genie_data_response_severity_mapping import OpsGenieDataResponseSeverityMapping
 from .ops_genie_data_severity_mapping import OpsGenieDataSeverityMapping
+from .order import Order
 from .org_connector_update_request_wraps_mutable_org_connector_fields import (
     OrgConnectorUpdateRequestWrapsMutableOrgConnectorFields,
 )
@@ -927,6 +928,8 @@ from .pager_duty_data_severity_mapping import PagerDutyDataSeverityMapping
 from .pattern_data import PatternData
 from .pattern_data_additional_columns import PatternDataAdditionalColumns
 from .pattern_param_distribution_value import PatternParamDistributionValue
+from .pin import Pin
+from .pinned_resource import PinnedResource
 from .policy_defines_an_access_control_policy import PolicyDefinesAnAccessControlPolicy
 from .policy_with_entity_count_includes_the_policy_details_along_with_the_count_of_entities_its_applied_to import (
     PolicyWithEntityCountIncludesThePolicyDetailsAlongWithTheCountOfEntitiesItsAppliedTo,
@@ -2093,6 +2096,7 @@ __all__ = (
     "OpsGenieDataResponse",
     "OpsGenieDataResponseSeverityMapping",
     "OpsGenieDataSeverityMapping",
+    "Order",
     "OrgConnectorUpdateRequestWrapsMutableOrgConnectorFields",
     "OrgConnectorUpdateRequestWrapsMutableOrgConnectorFieldsData",
     "OttlFromLogsResponse",
@@ -2105,6 +2109,8 @@ __all__ = (
     "PatternData",
     "PatternDataAdditionalColumns",
     "PatternParamDistributionValue",
+    "Pin",
+    "PinnedResource",
     "PolicyDefinesAnAccessControlPolicy",
     "PolicyWithEntityCountIncludesThePolicyDetailsAlongWithTheCountOfEntitiesItsAppliedTo",
     "PositiveNoDataBucket",

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -22,10 +22,13 @@ class OpsGenieDataResponse:
         region (str | Unset): The OpsGenie region (us or eu) Example: us.
         severity_mapping (OpsGenieDataResponseSeverityMapping | Unset): Custom severity mapping (if configured) Example:
             {'critical': 'P1', 'error': 'P2'}.
+        tags (list[str] | Unset): Tags added to every alert sent through this destination. Supports up to 20
+            non-empty tags of at most 50 Unicode characters. Example: ['Critical', 'OverwriteQuietHours', 'env:prod'].
     """
 
     region: str | Unset = UNSET
     severity_mapping: OpsGenieDataResponseSeverityMapping | Unset = UNSET
+    tags: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -35,6 +38,10 @@ class OpsGenieDataResponse:
         if not isinstance(self.severity_mapping, Unset):
             severity_mapping = self.severity_mapping.to_dict()
 
+        tags: list[str] | Unset = UNSET
+        if not isinstance(self.tags, Unset):
+            tags = self.tags
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -42,6 +49,8 @@ class OpsGenieDataResponse:
             field_dict["region"] = region
         if severity_mapping is not UNSET:
             field_dict["severity_mapping"] = severity_mapping
+        if tags is not UNSET:
+            field_dict["tags"] = tags
 
         return field_dict
 
@@ -59,9 +68,12 @@ class OpsGenieDataResponse:
         else:
             severity_mapping = OpsGenieDataResponseSeverityMapping.from_dict(_severity_mapping)
 
+        tags = cast(list[str], d.pop("tags", UNSET))
+
         ops_genie_data_response = cls(
             region=region,
             severity_mapping=severity_mapping,
+            tags=tags,
         )
 
         ops_genie_data_response.additional_properties = d
