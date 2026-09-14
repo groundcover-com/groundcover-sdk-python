@@ -35,6 +35,10 @@ class LogsRequestParams:
         query (str | Unset):
         selectors (list[Selector] | Unset):
         skip (int | Unset):
+        sort_by (str | Unset): SortBy is the column/attribute key to order by. Empty means order by
+            timestamp (the historical behavior). Any root column or attribute is
+            allowed; string columns are sorted best-effort numerically with a
+            lexicographic fallback (see search.BuildOrderByColumn).
         sort_order (str | Unset):
         sources (list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset):
         truncate_line (bool | Unset):
@@ -49,6 +53,7 @@ class LogsRequestParams:
     query: str | Unset = UNSET
     selectors: list[Selector] | Unset = UNSET
     skip: int | Unset = UNSET
+    sort_by: str | Unset = UNSET
     sort_order: str | Unset = UNSET
     sources: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
     truncate_line: bool | Unset = UNSET
@@ -85,6 +90,8 @@ class LogsRequestParams:
 
         skip = self.skip
 
+        sort_by = self.sort_by
+
         sort_order = self.sort_order
 
         sources: list[dict[str, Any]] | Unset = UNSET
@@ -118,6 +125,8 @@ class LogsRequestParams:
             field_dict["selectors"] = selectors
         if skip is not UNSET:
             field_dict["skip"] = skip
+        if sort_by is not UNSET:
+            field_dict["sortBy"] = sort_by
         if sort_order is not UNSET:
             field_dict["sortOrder"] = sort_order
         if sources is not UNSET:
@@ -175,6 +184,8 @@ class LogsRequestParams:
 
         skip = d.pop("skip", UNSET)
 
+        sort_by = d.pop("sortBy", UNSET)
+
         sort_order = d.pop("sortOrder", UNSET)
 
         _sources = d.pop("sources", UNSET)
@@ -198,6 +209,7 @@ class LogsRequestParams:
             query=query,
             selectors=selectors,
             skip=skip,
+            sort_by=sort_by,
             sort_order=sort_order,
             sources=sources,
             truncate_line=truncate_line,
