@@ -1323,20 +1323,18 @@ def companion_client(rows: Sequence[Mapping[str, Any]], *, synthetics: Any = ())
 
 
 def test_only_synthetic_owned_monitors_are_candidates() -> None:
-    """A title alone must not qualify a monitor for deletion through this route.
+    """originType is the only selector this kind has, so it carries all the weight.
 
-    The `[synthetic] - ...` name pattern is the primary selector, and it already
-    keeps an ordinary `e2e-test-monitor-<uuid>` out. What include_only_when adds is
-    the case the name cannot judge: a monitor CARRYING that title while not being a
-    companion at all. Its originId then means something else, or nothing, and
-    handing it to the synthetics delete route addresses an unrelated resource.
+    A monitor that is not a companion has an originId meaning something else, or
+    nothing, and handing that to the synthetics delete route addresses an
+    unrelated resource -- including, for a plain monitor, no resource at all.
 
-    Sabotage: drop include_only_when. The impostor becomes a candidate."""
+    Sabotage: drop include_only_when. Both impostors become candidates."""
     rows = [
         companion_row("s1"),
-        # Right title, not a companion -- originId points at another kind's id.
+        # Companion-shaped title, not a companion -- originId points at another kind's id.
         companion_row("someone-elses-config-id", originType="Monitor"),
-        # Belongs to the `monitor` kind; excluded by the name pattern, not by type.
+        # Belongs to the `monitor` kind.
         {
             "uuid": "plain",
             "originType": None,
@@ -1349,7 +1347,7 @@ def test_only_synthetic_owned_monitors_are_candidates() -> None:
     report = run_kind(client, COMPANION).kinds[COMPANION]
 
     assert [c["id"] for c in report.candidates] == ["s1"]
-    assert report.excluded == 1, "the impostor is reported as excluded, not silently dropped"
+    assert report.excluded == 2, "an impostor is reported as excluded, not silently dropped"
     assert [c.path for c in client.deletes] == [SYNTH_LIST + "/s1"]
 
 
@@ -1453,14 +1451,6 @@ def test_a_failed_monitor_delete_is_a_failure_not_a_reclaim() -> None:
     assert report.failures[0]["http_status"] == 500
 
 
-def test_human_named_synthetic_companions_are_never_matched() -> None:
-    """The 111 non-e2e companions on backend-dev are somebody's real synthetics."""
-    rows = [companion_row("h%d" % i, name=n) for i, n in enumerate(["asdf", "clickhouse", "TEST", "test-synth-1234"])]
-    report = run_kind(companion_client(rows), COMPANION, apply=False).kinds[COMPANION]
-
-    assert report.matched == 0 and report.candidates == []
-
-
 # ------------------------------------------------------- the lastActive freshness veto
 
 
@@ -1524,3 +1514,43 @@ def test_the_step_summary_cannot_be_corrupted_by_the_backend_or_identity() -> No
     assert not any(ln.startswith("- injected") for ln in starts), "a newline became a list item"
     # The record keeps the bytes exactly as they were.
     assert report_mod.to_dict(result)["backend_id"] == "backend-dev`\n## Injected heading"
+
+
+def test_an_orphaned_companion_is_swept_whatever_its_title() -> None:
+    """This kind's deletability is structural, so the title must not gate it.
+
+    109 orphaned companions survived four weeks on backend-dev because a name
+    pattern demanded an `e2e` prefix and the literal token `synthetic`, while the
+    real titles carry neither (BE-3240). The human-named ones are orphaned too,
+    and what protects a companion someone still uses is the synthetics listing,
+    not its title.
+
+    Sabotage: restore extra_name_patterns on the kind. Every row here goes back to
+    being invisible."""
+    rows = [
+        companion_row("s1", name="test-synth-ssl-loop-6917433793159180318"),
+        companion_row("s2", name="clickhouse"),
+        companion_row("s3", name="TEST"),
+        companion_row("s4", name="asdf"),
+    ]
+    client = companion_client(rows)
+    report = run_kind(client, COMPANION).kinds[COMPANION]
+
+    assert sorted(c["id"] for c in report.candidates) == ["s1", "s2", "s3", "s4"]
+    assert sorted(c.path for c in client.deletes) == [SYNTH_LIST + "/" + i for i in ("s1", "s2", "s3", "s4")]
+
+
+def test_a_test_shaped_name_is_reported_as_a_lookalike() -> None:
+    """The near-miss channel only works if it recognises the shapes that miss.
+
+    `test-synth-...` matched no strict pattern AND no lookalike, so the kinds that
+    still gate on names reported clean instead of reporting a near-miss.
+
+    Sabotage: narrow LOOKALIKE_RE back to `e2e[-_ ]?test`."""
+    spec = registry.KINDS["dashboard"]
+    rows = [{"uuid": "x", "name": "test-synth-ssl-loop-6917433793159180318", "createdTimestamp": iso(**OLD)}]
+    client = FakeClient().serve_rows(spec, rows)
+    result = run_kind(client, "dashboard")
+
+    assert result.kinds["dashboard"].lookalikes == ["test-synth-ssl-loop-6917433793159180318"]
+    assert client.deletes == []

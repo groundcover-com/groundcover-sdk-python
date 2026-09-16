@@ -435,7 +435,7 @@ def test_kind_is_internally_consistent(kind: str) -> None:
     assert route.path.startswith("/api/")
     assert not (route.page_size and route.hard_cap), "page_size and hard_cap are mutually exclusive"
     assert spec.name_fields
-    assert spec.name_patterns, "{}: no way to recognise its names".format(kind)
+    assert bool(spec.name_patterns) == spec.name_gated, "{}: patterns and the name gate disagree".format(kind)
     assert (spec.age_source == registry.AGE_FROM_TIMESTAMP) == bool(spec.timestamp_fields)
     assert spec.age_source in (registry.AGE_FROM_TIMESTAMP, registry.AGE_UNGATED)
 
@@ -444,6 +444,19 @@ def test_kind_is_internally_consistent(kind: str) -> None:
     allowed = {"id", "name"} | set(spec.extra_delete_fields)
     template = (delete.path_template or "") + "".join((delete.body_template or {}).values())
     assert set(re.findall(r"{(\w+)}", template)) <= allowed
+
+
+def test_name_ungated_kinds_are_the_ones_we_decided_on() -> None:
+    """Deleting without consulting the name is the exception, not a default.
+
+    It is sound only where orphaned-ness is structural. Pinned so a second kind
+    cannot join by someone clearing name_tokens to silence a pattern failure.
+    """
+    ungated = sorted(k for k, s in registry.KINDS.items() if not s.name_gated)
+    assert ungated == ["synthetic-companion-monitor"]
+    assert not registry.KINDS["synthetic-companion-monitor"].name_patterns, (
+        "a name-ungated kind must not keep a pattern nobody consults"
+    )
 
 
 def test_ungated_kinds_are_the_ones_we_decided_on() -> None:
@@ -606,6 +619,22 @@ def test_a_dependency_that_cannot_report_truncation_is_rejected() -> None:
             registry._validate()
     finally:
         registry.KINDS["synthetic"] = original
+
+
+def test_dropping_the_name_gate_requires_the_structural_ones() -> None:
+    """The name is what every other kind leans on, so a kind that does without it
+    must prove debris some other way -- its type, a dead owner, and age."""
+    spec = registry.KINDS["synthetic-companion-monitor"]
+    for broken, match in (
+        (dataclasses.replace(spec, include_only_when=()), "include_only_when"),
+        (dataclasses.replace(spec, requires_absent_from=None), "requires_absent_from"),
+        (
+            dataclasses.replace(spec, age_source=registry.AGE_UNGATED, timestamp_fields=()),
+            "needs an age gate",
+        ),
+    ):
+        with pytest.raises(registry.RegistryError, match=match):
+            _validate_with(broken)
 
 
 def test_a_success_code_cannot_be_declared_unverified() -> None:

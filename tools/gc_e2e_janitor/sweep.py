@@ -348,7 +348,7 @@ def classify(
             logger.warning("%s: a row carries none of %s, skipping it", spec.kind, list(spec.name_fields))
             continue
 
-        if not matches_kind(spec, name):
+        if spec.name_gated and not matches_kind(spec, name):
             if registry.LOOKALIKE_RE.search(name):
                 # Debris-shaped but unrecognised. Never deleted, only counted, so a renamed
                 # prefix shows up as a growing number instead of a silently shrinking sweep.

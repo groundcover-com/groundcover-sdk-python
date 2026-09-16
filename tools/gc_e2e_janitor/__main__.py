@@ -317,7 +317,8 @@ def _run(args: argparse.Namespace) -> int:
     if apply and gated and not identity:
         logger.warning(
             "GC_E2E_IDENTITY is not set, so the creator gate is DISABLED for %s. Deletion for "
-            "those kinds rests on the anchored name pattern and the age cutoff alone. Set it to "
+            "those kinds rests on the age cutoff plus whatever else gates them -- an anchored "
+            "name pattern, or for synthetic-companion-monitor its structure alone. Set it to "
             "the e2e service account's NAME -- the backend records that as the creator under "
             "API-key auth, not an email.",
             gated,

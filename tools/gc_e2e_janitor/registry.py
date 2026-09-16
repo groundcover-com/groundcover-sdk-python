@@ -98,6 +98,12 @@ class Kind:
     # Name shapes no generated pattern can reach -- different case, spaces, or
     # no e2e token at all.
     extra_name_patterns: Tuple[Pattern[str], ...] = ()
+    # False deletes on structure alone. Only sound where the structural gates
+    # already prove the row is debris -- everywhere else the name is the sole
+    # thing separating a suite's resource from a human's identical one, since a
+    # real dashboard and a test dashboard differ in nothing else. _validate()
+    # enforces what a kind must carry to earn this.
+    name_gated: bool = True
     # Fields copied verbatim into the delete route's templates.
     extra_delete_fields: Tuple[str, ...] = ()
 
@@ -124,7 +130,12 @@ SUITE_NAME_RE = re.compile("^" + _SUITE_PREFIX)
 # Loose, and never used to delete: a name matching this but no strict pattern is
 # counted and logged. That count is how the two TypeScript prefixes above were
 # found, while every strict pattern reported clean.
-LOOKALIKE_RE = re.compile(r"e2e[-_ ]?test", re.IGNORECASE)
+#
+# Deliberately looser than the prefixes: it previously required an adjacent
+# e2e+test pair, so `test-synth-ssl-loop-<unixnano>` was neither swept nor even
+# reported as a near-miss (BE-3240). A bare token is noisier, which is the point
+# -- this channel exists to notice shapes nobody anticipated.
+LOOKALIKE_RE = re.compile(r"e2e|test|synth", re.IGNORECASE)
 
 _UUID = r"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
 
@@ -351,10 +362,19 @@ KINDS: Dict[str, Kind] = {
         rank=60,
         include_only_when=(("originType", ("SyntheticTest",)),),
         exclude_when=(("isProvisioned", (True,)),),
-        # No generated pattern: the title is "[synthetic] - <name>", so the e2e
-        # token sits inside rather than at the front.
+        # No name gate at all, unlike every other kind. A companion whose synthetic
+        # is gone is unreachable by design (403 above) and can never fire
+        # meaningfully -- it scans `traces` for a synthetics.id that will never
+        # reappear -- so orphaned-ness here is a structural fact and the name adds
+        # no safety. It was, however, the one gate that could go stale in silence:
+        # a pattern demanding an `e2e` prefix and the token `synthetic` missed
+        # every real title ("[synthetic] - test-synth-ssl-loop-<unixnano>") and
+        # kept 109 of these evaluating every 60s for four weeks (BE-3240).
+        # Encoding a replacement string only relocates that failure -- and a
+        # creator gate would be worse, since main-service-account-2 owns 122
+        # legitimate monitors.
+        name_gated=False,
         name_tokens=(),
-        extra_name_patterns=(re.compile(r"^\[synthetic\] - " + _suite_regex("synthetic", allow_infix=True) + r"$"),),
         requires_absent_from="synthetic",
     ),
     "data-integration": Kind(
@@ -449,6 +469,21 @@ def _validate() -> None:
 
         if not spec.name_fields:
             raise RegistryError("{}: needs at least one name field".format(kind))
+        if spec.name_gated:
+            if not spec.name_patterns:
+                raise RegistryError("{}: no way to recognise its names".format(kind))
+        else:
+            if spec.name_patterns:
+                raise RegistryError("{}: is not name-gated, so a name pattern here is never consulted".format(kind))
+            # What replaces the name: the row must be provably debris without it.
+            if not spec.include_only_when or spec.requires_absent_from is None:
+                raise RegistryError(
+                    "{}: deleting without a name gate needs include_only_when to pin the row's type "
+                    "and requires_absent_from to prove its owner is gone -- otherwise nothing "
+                    "distinguishes it from a resource someone is using".format(kind)
+                )
+            if spec.age_source != AGE_FROM_TIMESTAMP:
+                raise RegistryError("{}: deleting without a name gate needs an age gate".format(kind))
         has_timestamps = bool(spec.timestamp_fields)
         if (spec.age_source == AGE_FROM_TIMESTAMP) != has_timestamps:
             raise RegistryError(
