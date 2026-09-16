@@ -935,8 +935,8 @@ from .policy_with_entity_count_includes_the_policy_details_along_with_the_count_
     PolicyWithEntityCountIncludesThePolicyDetailsAlongWithTheCountOfEntitiesItsAppliedTo,
 )
 from .positive_no_data_bucket import PositiveNoDataBucket
-from .preflight_report_is_the_top_level_structured_output_of_a_preflight_validation_run import (
-    PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun,
+from .preflight_report_response_is_the_preflight_report_plus_backend_only_counters import (
+    PreflightReportResponseIsThePreflightReportPlusBackendOnlyCounters,
 )
 from .preflight_request_defines_the_request_body_for_running_preflight_validation import (
     PreflightRequestDefinesTheRequestBodyForRunningPreflightValidation,
@@ -2114,7 +2114,7 @@ __all__ = (
     "PolicyDefinesAnAccessControlPolicy",
     "PolicyWithEntityCountIncludesThePolicyDetailsAlongWithTheCountOfEntitiesItsAppliedTo",
     "PositiveNoDataBucket",
-    "PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun",
+    "PreflightReportResponseIsThePreflightReportPlusBackendOnlyCounters",
     "PreflightRequestDefinesTheRequestBodyForRunningPreflightValidation",
     "Processor",
     "PromqlFunctionRepresentsAFunctionCallInAPromQLQuery",

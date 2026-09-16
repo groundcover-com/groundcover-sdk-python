@@ -30,13 +30,15 @@ if TYPE_CHECKING:
     )
 
 
-T = TypeVar("T", bound="PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun")
+T = TypeVar("T", bound="PreflightReportResponseIsThePreflightReportPlusBackendOnlyCounters")
 
 
 @_attrs_define
-class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
+class PreflightReportResponseIsThePreflightReportPlusBackendOnlyCounters:
     """
     Attributes:
+        assets_reextracted (int | Unset): AssetsReextracted counts assets converted before converted_queries was stored;
+            a non-zero value means the tenant needs a reconvert.
         coverage_plan (CoveragePlanProvidesAPrioritizedPathToImproveQuerySuccessRate | Unset):
         funnel_by_asset (FunnelByAsset | Unset): FunnelByAsset is the per-asset view of the funnel: every monitor and
             every
@@ -52,6 +54,7 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
         wet_results (WetReportHoldsTheCompleteWetModeResultsForInclusionInPreflightReport | Unset):
     """
 
+    assets_reextracted: int | Unset = UNSET
     coverage_plan: CoveragePlanProvidesAPrioritizedPathToImproveQuerySuccessRate | Unset = UNSET
     funnel_by_asset: FunnelByAsset | Unset = UNSET
     generated_at: datetime.datetime | Unset = UNSET
@@ -62,6 +65,8 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        assets_reextracted = self.assets_reextracted
+
         coverage_plan: dict[str, Any] | Unset = UNSET
         if not isinstance(self.coverage_plan, Unset):
             coverage_plan = self.coverage_plan.to_dict()
@@ -99,6 +104,8 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if assets_reextracted is not UNSET:
+            field_dict["assets_reextracted"] = assets_reextracted
         if coverage_plan is not UNSET:
             field_dict["coverage_plan"] = coverage_plan
         if funnel_by_asset is not UNSET:
@@ -136,6 +143,8 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
         )
 
         d = dict(src_dict)
+        assets_reextracted = d.pop("assets_reextracted", UNSET)
+
         _coverage_plan = d.pop("coverage_plan", UNSET)
         coverage_plan: CoveragePlanProvidesAPrioritizedPathToImproveQuerySuccessRate | Unset
         if isinstance(_coverage_plan, Unset) or _coverage_plan is None:
@@ -191,7 +200,8 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
         else:
             wet_results = WetReportHoldsTheCompleteWetModeResultsForInclusionInPreflightReport.from_dict(_wet_results)
 
-        preflight_report_is_the_top_level_structured_output_of_a_preflight_validation_run = cls(
+        preflight_report_response_is_the_preflight_report_plus_backend_only_counters = cls(
+            assets_reextracted=assets_reextracted,
             coverage_plan=coverage_plan,
             funnel_by_asset=funnel_by_asset,
             generated_at=generated_at,
@@ -201,8 +211,8 @@ class PreflightReportIsTheTopLevelStructuredOutputOfAPreflightValidationRun:
             wet_results=wet_results,
         )
 
-        preflight_report_is_the_top_level_structured_output_of_a_preflight_validation_run.additional_properties = d
-        return preflight_report_is_the_top_level_structured_output_of_a_preflight_validation_run
+        preflight_report_response_is_the_preflight_report_plus_backend_only_counters.additional_properties = d
+        return preflight_report_response_is_the_preflight_report_plus_backend_only_counters
 
     @property
     def additional_keys(self) -> list[str]:
