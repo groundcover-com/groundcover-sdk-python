@@ -39,6 +39,10 @@ class FindingRepresentsASinglePreflightValidationFinding:
         integration (str | Unset):
         issue_type (str | Unset):
         label_key (str | Unset):
+        label_key_dd (str | Unset): LabelKeyDD is the Datadog-side name of LabelKey, set only when a mapping
+            rule renamed it. Callers that match a finding against manifest filters —
+            which carry Datadog names — need both, because a rename makes the two
+            namespaces diverge and a GC-only comparison silently stops matching.
         label_value (str | Unset):
         label_values (list[str] | Unset):
         labels_used (FindingRepresentsASinglePreflightValidationFindingLabelsUsed | Unset):
@@ -60,6 +64,7 @@ class FindingRepresentsASinglePreflightValidationFinding:
     integration: str | Unset = UNSET
     issue_type: str | Unset = UNSET
     label_key: str | Unset = UNSET
+    label_key_dd: str | Unset = UNSET
     label_value: str | Unset = UNSET
     label_values: list[str] | Unset = UNSET
     labels_used: FindingRepresentsASinglePreflightValidationFindingLabelsUsed | Unset = UNSET
@@ -92,6 +97,8 @@ class FindingRepresentsASinglePreflightValidationFinding:
         issue_type = self.issue_type
 
         label_key = self.label_key
+
+        label_key_dd = self.label_key_dd
 
         label_value = self.label_value
 
@@ -147,6 +154,8 @@ class FindingRepresentsASinglePreflightValidationFinding:
             field_dict["issue_type"] = issue_type
         if label_key is not UNSET:
             field_dict["label_key"] = label_key
+        if label_key_dd is not UNSET:
+            field_dict["label_key_dd"] = label_key_dd
         if label_value is not UNSET:
             field_dict["label_value"] = label_value
         if label_values is not UNSET:
@@ -209,6 +218,8 @@ class FindingRepresentsASinglePreflightValidationFinding:
 
         label_key = d.pop("label_key", UNSET)
 
+        label_key_dd = d.pop("label_key_dd", UNSET)
+
         label_value = d.pop("label_value", UNSET)
 
         label_values = cast(list[str], d.pop("label_values", UNSET))
@@ -256,6 +267,7 @@ class FindingRepresentsASinglePreflightValidationFinding:
             integration=integration,
             issue_type=issue_type,
             label_key=label_key,
+            label_key_dd=label_key_dd,
             label_value=label_value,
             label_values=label_values,
             labels_used=labels_used,
