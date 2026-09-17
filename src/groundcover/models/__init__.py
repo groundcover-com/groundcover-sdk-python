@@ -117,10 +117,14 @@ from .aws_cur_search_time_series_request import AwsCurSearchTimeSeriesRequest
 from .backend_settings import BackendSettings
 from .backend_settings_gcp_pubsub_topic import BackendSettingsGcpPubsubTopic
 from .base_query_is_the_base_struct_for_different_query_types import BaseQueryIsTheBaseStructForDifferentQueryTypes
+from .batch_dashboards_error import BatchDashboardsError
+from .batch_dashboards_request import BatchDashboardsRequest
+from .batch_dashboards_response import BatchDashboardsResponse
 from .batch_get_monitors_error import BatchGetMonitorsError
 from .batch_get_monitors_request import BatchGetMonitorsRequest
 from .batch_get_monitors_response import BatchGetMonitorsResponse
 from .batch_get_monitors_response_monitors import BatchGetMonitorsResponseMonitors
+from .batch_update_dashboard_tags_request import BatchUpdateDashboardTagsRequest
 from .catalog import Catalog
 from .catalog_install_request_is_the_optional_body_for_a_catalog_install import (
     CatalogInstallRequestIsTheOptionalBodyForACatalogInstall,
@@ -1542,10 +1546,14 @@ __all__ = (
     "BackendSettings",
     "BackendSettingsGcpPubsubTopic",
     "BaseQueryIsTheBaseStructForDifferentQueryTypes",
+    "BatchDashboardsError",
+    "BatchDashboardsRequest",
+    "BatchDashboardsResponse",
     "BatchGetMonitorsError",
     "BatchGetMonitorsRequest",
     "BatchGetMonitorsResponse",
     "BatchGetMonitorsResponseMonitors",
+    "BatchUpdateDashboardTagsRequest",
     "Catalog",
     "CatalogInstallRequestIsTheOptionalBodyForACatalogInstall",
     "CatalogModelHoldsMetadataIfTheMonitorOriginatedFromACatalog",
