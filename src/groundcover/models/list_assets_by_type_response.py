@@ -20,10 +20,13 @@ class ListAssetsByTypeResponse:
     """
     Attributes:
         items (list[AssetListItem] | Unset): List of assets.
+        supports_view_rank_sort (bool | Unset): True when this router supports view-rank sorting for dashboards. Older
+            routers omit it.
         total (int | Unset): Total number of assets.
     """
 
     items: list[AssetListItem] | Unset = UNSET
+    supports_view_rank_sort: bool | Unset = UNSET
     total: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -35,6 +38,8 @@ class ListAssetsByTypeResponse:
                 items_item = items_item_data.to_dict()
                 items.append(items_item)
 
+        supports_view_rank_sort = self.supports_view_rank_sort
+
         total = self.total
 
         field_dict: dict[str, Any] = {}
@@ -42,6 +47,8 @@ class ListAssetsByTypeResponse:
         field_dict.update({})
         if items is not UNSET:
             field_dict["items"] = items
+        if supports_view_rank_sort is not UNSET:
+            field_dict["supports_view_rank_sort"] = supports_view_rank_sort
         if total is not UNSET:
             field_dict["total"] = total
 
@@ -61,10 +68,13 @@ class ListAssetsByTypeResponse:
 
                 items.append(items_item)
 
+        supports_view_rank_sort = d.pop("supports_view_rank_sort", UNSET)
+
         total = d.pop("total", UNSET)
 
         list_assets_by_type_response = cls(
             items=items,
+            supports_view_rank_sort=supports_view_rank_sort,
             total=total,
         )
 

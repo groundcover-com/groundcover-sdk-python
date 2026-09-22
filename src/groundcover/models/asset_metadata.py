@@ -26,6 +26,9 @@ class AssetMetadata:
         status (str | Unset): Monitor-specific: the overall state of the monitor.
         tags (list[str] | Unset): Tags associated with the asset.
         type_ (str | Unset): Monitor-specific: the beautified type of the monitor.
+        view_count (int | Unset): Dashboard-specific: Datadog-recorded views at fetch time.
+        view_rank (int | Unset): Dashboard-specific: new fetches use 1 (least viewed) through 5 (most viewed), based on
+            log-scaled view counts.
     """
 
     creator_email: str | Unset = UNSET
@@ -35,6 +38,8 @@ class AssetMetadata:
     status: str | Unset = UNSET
     tags: list[str] | Unset = UNSET
     type_: str | Unset = UNSET
+    view_count: int | Unset = UNSET
+    view_rank: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -56,6 +61,10 @@ class AssetMetadata:
 
         type_ = self.type_
 
+        view_count = self.view_count
+
+        view_rank = self.view_rank
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -73,6 +82,10 @@ class AssetMetadata:
             field_dict["tags"] = tags
         if type_ is not UNSET:
             field_dict["type"] = type_
+        if view_count is not UNSET:
+            field_dict["viewCount"] = view_count
+        if view_rank is not UNSET:
+            field_dict["viewRank"] = view_rank
 
         return field_dict
 
@@ -105,6 +118,10 @@ class AssetMetadata:
 
         type_ = d.pop("type", UNSET)
 
+        view_count = d.pop("viewCount", UNSET)
+
+        view_rank = d.pop("viewRank", UNSET)
+
         asset_metadata = cls(
             creator_email=creator_email,
             creator_name=creator_name,
@@ -113,6 +130,8 @@ class AssetMetadata:
             status=status,
             tags=tags,
             type_=type_,
+            view_count=view_count,
+            view_rank=view_rank,
         )
 
         asset_metadata.additional_properties = d
