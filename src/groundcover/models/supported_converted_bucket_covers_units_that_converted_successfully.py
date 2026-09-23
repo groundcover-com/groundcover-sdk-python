@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     from ..models.data_set_available_bucket_is_converted_units_whose_underlying_dataset_exists_in_gc import (
         DataSetAvailableBucketIsConvertedUnitsWhoseUnderlyingDatasetExistsInGC,
     )
+    from ..models.dd_metric_inactive_bucket import DDMetricInactiveBucket
     from ..models.missing_data_set_bucket_covers_converted_units_whose_underlying_dataset_is_absent import (
         MissingDataSetBucketCoversConvertedUnitsWhoseUnderlyingDatasetIsAbsent,
     )
@@ -28,12 +29,20 @@ class SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully:
     """
     Attributes:
         data_set_available (DataSetAvailableBucketIsConvertedUnitsWhoseUnderlyingDatasetExistsInGC | Unset):
+        dd_metric_inactive (DDMetricInactiveBucket | Unset): DDMetricInactiveBucket counts units whose only unmet metric
+            dependency is
+            confirmed inactive/missing in Datadog itself, tagging every metric involved
+            (a unit can mix a confirmed-inactive metric with a self-observability one;
+            see unitMissingMetricsAreDDInactiveOnly). Datadog itself never had data for
+            these metrics, so groundcover correctly has none either — a genuine,
+            successful migration outcome, not a gap to fix.
         missing_underlying_data_set (MissingDataSetBucketCoversConvertedUnitsWhoseUnderlyingDatasetIsAbsent | Unset):
         no_data_needed (NoDataNeededBucketCountsUnitsThatNeedNoQueryToRender | Unset):
         total (int | Unset):
     """
 
     data_set_available: DataSetAvailableBucketIsConvertedUnitsWhoseUnderlyingDatasetExistsInGC | Unset = UNSET
+    dd_metric_inactive: DDMetricInactiveBucket | Unset = UNSET
     missing_underlying_data_set: MissingDataSetBucketCoversConvertedUnitsWhoseUnderlyingDatasetIsAbsent | Unset = UNSET
     no_data_needed: NoDataNeededBucketCountsUnitsThatNeedNoQueryToRender | Unset = UNSET
     total: int | Unset = UNSET
@@ -43,6 +52,10 @@ class SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully:
         data_set_available: dict[str, Any] | Unset = UNSET
         if not isinstance(self.data_set_available, Unset):
             data_set_available = self.data_set_available.to_dict()
+
+        dd_metric_inactive: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.dd_metric_inactive, Unset):
+            dd_metric_inactive = self.dd_metric_inactive.to_dict()
 
         missing_underlying_data_set: dict[str, Any] | Unset = UNSET
         if not isinstance(self.missing_underlying_data_set, Unset):
@@ -59,6 +72,8 @@ class SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully:
         field_dict.update({})
         if data_set_available is not UNSET:
             field_dict["data_set_available"] = data_set_available
+        if dd_metric_inactive is not UNSET:
+            field_dict["dd_metric_inactive"] = dd_metric_inactive
         if missing_underlying_data_set is not UNSET:
             field_dict["missing_underlying_data_set"] = missing_underlying_data_set
         if no_data_needed is not UNSET:
@@ -73,6 +88,7 @@ class SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully:
         from ..models.data_set_available_bucket_is_converted_units_whose_underlying_dataset_exists_in_gc import (
             DataSetAvailableBucketIsConvertedUnitsWhoseUnderlyingDatasetExistsInGC,
         )
+        from ..models.dd_metric_inactive_bucket import DDMetricInactiveBucket
         from ..models.missing_data_set_bucket_covers_converted_units_whose_underlying_dataset_is_absent import (
             MissingDataSetBucketCoversConvertedUnitsWhoseUnderlyingDatasetIsAbsent,
         )
@@ -89,6 +105,13 @@ class SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully:
             data_set_available = DataSetAvailableBucketIsConvertedUnitsWhoseUnderlyingDatasetExistsInGC.from_dict(
                 _data_set_available
             )
+
+        _dd_metric_inactive = d.pop("dd_metric_inactive", UNSET)
+        dd_metric_inactive: DDMetricInactiveBucket | Unset
+        if isinstance(_dd_metric_inactive, Unset) or _dd_metric_inactive is None:
+            dd_metric_inactive = UNSET
+        else:
+            dd_metric_inactive = DDMetricInactiveBucket.from_dict(_dd_metric_inactive)
 
         _missing_underlying_data_set = d.pop("missing_underlying_data_set", UNSET)
         missing_underlying_data_set: MissingDataSetBucketCoversConvertedUnitsWhoseUnderlyingDatasetIsAbsent | Unset
@@ -112,6 +135,7 @@ class SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully:
 
         supported_converted_bucket_covers_units_that_converted_successfully = cls(
             data_set_available=data_set_available,
+            dd_metric_inactive=dd_metric_inactive,
             missing_underlying_data_set=missing_underlying_data_set,
             no_data_needed=no_data_needed,
             total=total,

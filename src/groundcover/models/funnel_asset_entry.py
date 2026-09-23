@@ -24,11 +24,15 @@ class FunnelAssetEntry:
 
         Attributes:
             asset_id (str | Unset):
+            asset_kind (str | Unset): AssetKind names the unsupported widget/monitor type when the unit never
+                reached conversion, e.g. "heatmap" or "slo".
             asset_name (str | Unset):
             asset_type (str | Unset):
             metrics (list[str] | Unset):
             missing_keys (list[str] | Unset):
             missing_values (list[str] | Unset):
+            primary_dataset (str | Unset): PrimaryDataset is the one missing dataset the unit is counted under, when
+                the terminal stage is a missing-dataset gap.
             queries (list[ExecutedQueryIsTheEvidenceForAUnitsWetOutcomeTheQueryThatRan] | Unset):
             reason (str | Unset):
             stage (str | Unset):
@@ -37,11 +41,13 @@ class FunnelAssetEntry:
     """
 
     asset_id: str | Unset = UNSET
+    asset_kind: str | Unset = UNSET
     asset_name: str | Unset = UNSET
     asset_type: str | Unset = UNSET
     metrics: list[str] | Unset = UNSET
     missing_keys: list[str] | Unset = UNSET
     missing_values: list[str] | Unset = UNSET
+    primary_dataset: str | Unset = UNSET
     queries: list[ExecutedQueryIsTheEvidenceForAUnitsWetOutcomeTheQueryThatRan] | Unset = UNSET
     reason: str | Unset = UNSET
     stage: str | Unset = UNSET
@@ -51,6 +57,8 @@ class FunnelAssetEntry:
 
     def to_dict(self) -> dict[str, Any]:
         asset_id = self.asset_id
+
+        asset_kind = self.asset_kind
 
         asset_name = self.asset_name
 
@@ -67,6 +75,8 @@ class FunnelAssetEntry:
         missing_values: list[str] | Unset = UNSET
         if not isinstance(self.missing_values, Unset):
             missing_values = self.missing_values
+
+        primary_dataset = self.primary_dataset
 
         queries: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.queries, Unset):
@@ -88,6 +98,8 @@ class FunnelAssetEntry:
         field_dict.update({})
         if asset_id is not UNSET:
             field_dict["asset_id"] = asset_id
+        if asset_kind is not UNSET:
+            field_dict["asset_kind"] = asset_kind
         if asset_name is not UNSET:
             field_dict["asset_name"] = asset_name
         if asset_type is not UNSET:
@@ -98,6 +110,8 @@ class FunnelAssetEntry:
             field_dict["missing_keys"] = missing_keys
         if missing_values is not UNSET:
             field_dict["missing_values"] = missing_values
+        if primary_dataset is not UNSET:
+            field_dict["primary_dataset"] = primary_dataset
         if queries is not UNSET:
             field_dict["queries"] = queries
         if reason is not UNSET:
@@ -120,6 +134,8 @@ class FunnelAssetEntry:
         d = dict(src_dict)
         asset_id = d.pop("asset_id", UNSET)
 
+        asset_kind = d.pop("asset_kind", UNSET)
+
         asset_name = d.pop("asset_name", UNSET)
 
         asset_type = d.pop("asset_type", UNSET)
@@ -129,6 +145,8 @@ class FunnelAssetEntry:
         missing_keys = cast(list[str], d.pop("missing_keys", UNSET))
 
         missing_values = cast(list[str], d.pop("missing_values", UNSET))
+
+        primary_dataset = d.pop("primary_dataset", UNSET)
 
         _queries = d.pop("queries", UNSET)
         queries: list[ExecutedQueryIsTheEvidenceForAUnitsWetOutcomeTheQueryThatRan] | Unset = UNSET
@@ -149,11 +167,13 @@ class FunnelAssetEntry:
 
         funnel_asset_entry = cls(
             asset_id=asset_id,
+            asset_kind=asset_kind,
             asset_name=asset_name,
             asset_type=asset_type,
             metrics=metrics,
             missing_keys=missing_keys,
             missing_values=missing_values,
+            primary_dataset=primary_dataset,
             queries=queries,
             reason=reason,
             stage=stage,

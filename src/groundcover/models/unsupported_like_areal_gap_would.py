@@ -14,25 +14,25 @@ if TYPE_CHECKING:
     )
 
 
-T = TypeVar("T", bound="ExcludedBucket")
+T = TypeVar("T", bound="UnsupportedLikeArealGapWould")
 
 
 @_attrs_define
-class ExcludedBucket:
-    """ExcludedBucket counts units held out of the funnel because their only unmet
-    dependency is Datadog's own telemetry: a self-observability metric, or one
-    already inactive in Datadog. Migration quality has no bearing on either —
-    they were never going to return data — so they are reported separately
-    rather than weighing on supported/unsupported like a real gap would.
+class UnsupportedLikeArealGapWould:
+    """A unit confirmed inactive in Datadog (IssueDDInactiveOrMissing) no longer
+    lands here — see StageDDMetricInactive and DDMetricInactiveBucket, its own
+    green success bucket under SupportedConverted. The former InactiveInDatadog
+    field here was removed rather than kept as an always-zero counter: nothing
+    outside this package ever read it (the funnelviz decoder only reads Total,
+    and the CLI summary printer never printed Excluded at all), so there was no
+    reader to preserve compatibility for.
 
         Attributes:
             datadog_self_observability (MetricListBucketCountsUnitsAndListsTheMetricsResponsible | Unset):
-            inactive_in_datadog (MetricListBucketCountsUnitsAndListsTheMetricsResponsible | Unset):
             total (int | Unset):
     """
 
     datadog_self_observability: MetricListBucketCountsUnitsAndListsTheMetricsResponsible | Unset = UNSET
-    inactive_in_datadog: MetricListBucketCountsUnitsAndListsTheMetricsResponsible | Unset = UNSET
     total: int | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -41,10 +41,6 @@ class ExcludedBucket:
         if not isinstance(self.datadog_self_observability, Unset):
             datadog_self_observability = self.datadog_self_observability.to_dict()
 
-        inactive_in_datadog: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.inactive_in_datadog, Unset):
-            inactive_in_datadog = self.inactive_in_datadog.to_dict()
-
         total = self.total
 
         field_dict: dict[str, Any] = {}
@@ -52,8 +48,6 @@ class ExcludedBucket:
         field_dict.update({})
         if datadog_self_observability is not UNSET:
             field_dict["datadog_self_observability"] = datadog_self_observability
-        if inactive_in_datadog is not UNSET:
-            field_dict["inactive_in_datadog"] = inactive_in_datadog
         if total is not UNSET:
             field_dict["total"] = total
 
@@ -75,25 +69,15 @@ class ExcludedBucket:
                 _datadog_self_observability
             )
 
-        _inactive_in_datadog = d.pop("inactive_in_datadog", UNSET)
-        inactive_in_datadog: MetricListBucketCountsUnitsAndListsTheMetricsResponsible | Unset
-        if isinstance(_inactive_in_datadog, Unset) or _inactive_in_datadog is None:
-            inactive_in_datadog = UNSET
-        else:
-            inactive_in_datadog = MetricListBucketCountsUnitsAndListsTheMetricsResponsible.from_dict(
-                _inactive_in_datadog
-            )
-
         total = d.pop("total", UNSET)
 
-        excluded_bucket = cls(
+        unsupported_like_areal_gap_would = cls(
             datadog_self_observability=datadog_self_observability,
-            inactive_in_datadog=inactive_in_datadog,
             total=total,
         )
 
-        excluded_bucket.additional_properties = d
-        return excluded_bucket
+        unsupported_like_areal_gap_would.additional_properties = d
+        return unsupported_like_areal_gap_would
 
     @property
     def additional_keys(self) -> list[str]:

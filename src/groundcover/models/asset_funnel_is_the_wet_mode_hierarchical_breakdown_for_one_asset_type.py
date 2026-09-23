@@ -9,7 +9,6 @@ from attrs import field as _attrs_field
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.excluded_bucket import ExcludedBucket
     from ..models.not_supported_bucket_covers_unsupported_types_bucketed_by_type import (
         NotSupportedBucketCoversUnsupportedTypesBucketedByType,
     )
@@ -19,6 +18,7 @@ if TYPE_CHECKING:
     from ..models.supported_not_converted_bucket_covers_supported_types_that_failed_conversion import (
         SupportedNotConvertedBucketCoversSupportedTypesThatFailedConversion,
     )
+    from ..models.unsupported_like_areal_gap_would import UnsupportedLikeArealGapWould
 
 
 T = TypeVar("T", bound="AssetFunnelIsTheWetModeHierarchicalBreakdownForOneAssetType")
@@ -30,11 +30,14 @@ class AssetFunnelIsTheWetModeHierarchicalBreakdownForOneAssetType:
     counted per widget.
 
         Attributes:
-            excluded (ExcludedBucket | Unset): ExcludedBucket counts units held out of the funnel because their only unmet
-                dependency is Datadog's own telemetry: a self-observability metric, or one
-                already inactive in Datadog. Migration quality has no bearing on either —
-                they were never going to return data — so they are reported separately
-                rather than weighing on supported/unsupported like a real gap would.
+            excluded (UnsupportedLikeArealGapWould | Unset): A unit confirmed inactive in Datadog (IssueDDInactiveOrMissing)
+                no longer
+                lands here — see StageDDMetricInactive and DDMetricInactiveBucket, its own
+                green success bucket under SupportedConverted. The former InactiveInDatadog
+                field here was removed rather than kept as an always-zero counter: nothing
+                outside this package ever read it (the funnelviz decoder only reads Total,
+                and the CLI summary printer never printed Excluded at all), so there was no
+                reader to preserve compatibility for.
             not_supported (NotSupportedBucketCoversUnsupportedTypesBucketedByType | Unset):
             supported_converted (SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully | Unset):
             supported_not_converted (SupportedNotConvertedBucketCoversSupportedTypesThatFailedConversion | Unset):
@@ -42,7 +45,7 @@ class AssetFunnelIsTheWetModeHierarchicalBreakdownForOneAssetType:
             unit (str | Unset):
     """
 
-    excluded: ExcludedBucket | Unset = UNSET
+    excluded: UnsupportedLikeArealGapWould | Unset = UNSET
     not_supported: NotSupportedBucketCoversUnsupportedTypesBucketedByType | Unset = UNSET
     supported_converted: SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully | Unset = UNSET
     supported_not_converted: SupportedNotConvertedBucketCoversSupportedTypesThatFailedConversion | Unset = UNSET
@@ -91,7 +94,6 @@ class AssetFunnelIsTheWetModeHierarchicalBreakdownForOneAssetType:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.excluded_bucket import ExcludedBucket
         from ..models.not_supported_bucket_covers_unsupported_types_bucketed_by_type import (
             NotSupportedBucketCoversUnsupportedTypesBucketedByType,
         )
@@ -101,14 +103,15 @@ class AssetFunnelIsTheWetModeHierarchicalBreakdownForOneAssetType:
         from ..models.supported_not_converted_bucket_covers_supported_types_that_failed_conversion import (
             SupportedNotConvertedBucketCoversSupportedTypesThatFailedConversion,
         )
+        from ..models.unsupported_like_areal_gap_would import UnsupportedLikeArealGapWould
 
         d = dict(src_dict)
         _excluded = d.pop("excluded", UNSET)
-        excluded: ExcludedBucket | Unset
+        excluded: UnsupportedLikeArealGapWould | Unset
         if isinstance(_excluded, Unset) or _excluded is None:
             excluded = UNSET
         else:
-            excluded = ExcludedBucket.from_dict(_excluded)
+            excluded = UnsupportedLikeArealGapWould.from_dict(_excluded)
 
         _not_supported = d.pop("not_supported", UNSET)
         not_supported: NotSupportedBucketCoversUnsupportedTypesBucketedByType | Unset
