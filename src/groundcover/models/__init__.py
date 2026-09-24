@@ -560,6 +560,9 @@ from .finding_represents_a_single_preflight_validation_finding_evidence import (
 from .finding_represents_a_single_preflight_validation_finding_labels_used import (
     FindingRepresentsASinglePreflightValidationFindingLabelsUsed,
 )
+from .flame_node_contains_inclusive_and_self_weight_in_the_selected_sample_unit import (
+    FlameNodeContainsInclusiveAndSelfWeightInTheSelectedSampleUnit,
+)
 from .funnel_asset_entry import FunnelAssetEntry
 from .funnel_by_asset import FunnelByAsset
 from .funnel_by_asset_by_stage import FunnelByAssetByStage
@@ -626,6 +629,11 @@ from .get_policy_audit_trail_response_500 import GetPolicyAuditTrailResponse500
 from .get_policy_response_400 import GetPolicyResponse400
 from .get_policy_response_404 import GetPolicyResponse404
 from .get_policy_response_500 import GetPolicyResponse500
+from .get_profiling_flamegraph_response_400 import GetProfilingFlamegraphResponse400
+from .get_profiling_flamegraph_response_404 import GetProfilingFlamegraphResponse404
+from .get_profiling_flamegraph_response_422 import GetProfilingFlamegraphResponse422
+from .get_profiling_flamegraph_response_500 import GetProfilingFlamegraphResponse500
+from .get_profiling_flamegraph_response_504 import GetProfilingFlamegraphResponse504
 from .get_recurring_silence_response_400 import GetRecurringSilenceResponse400
 from .get_recurring_silence_response_404 import GetRecurringSilenceResponse404
 from .get_recurring_silence_response_500 import GetRecurringSilenceResponse500
@@ -946,6 +954,8 @@ from .preflight_request_defines_the_request_body_for_running_preflight_validatio
     PreflightRequestDefinesTheRequestBodyForRunningPreflightValidation,
 )
 from .processor import Processor
+from .profiling_flamegraph_response import ProfilingFlamegraphResponse
+from .profiling_period import ProfilingPeriod
 from .promql_function_represents_a_function_call_in_a_prom_ql_query import (
     PromqlFunctionRepresentsAFunctionCallInAPromQLQuery,
 )
@@ -1112,6 +1122,9 @@ from .span_record_response_headers import SpanRecordResponseHeaders
 from .span_record_tags import SpanRecordTags
 from .sql_pipeline_defines_a_pipeline_for_search_queries import SqlPipelineDefinesAPipelineForSearchQueries
 from .ssl_request_defines_model_for_ssl_request import SslRequestDefinesModelForSslRequest
+from .stack_counts_counts_aggregated_stacks_not_samples_or_rendered_tree_nodes import (
+    StackCountsCountsAggregatedStacksNotSamplesOrRenderedTreeNodes,
+)
 from .stats_request import StatsRequest
 from .stats_response import StatsResponse
 from .storage_management_policy_request import StorageManagementPolicyRequest
@@ -1830,6 +1843,7 @@ __all__ = (
     "FindingRepresentsASinglePreflightValidationFinding",
     "FindingRepresentsASinglePreflightValidationFindingEvidence",
     "FindingRepresentsASinglePreflightValidationFindingLabelsUsed",
+    "FlameNodeContainsInclusiveAndSelfWeightInTheSelectedSampleUnit",
     "FunnelAssetEntry",
     "FunnelByAsset",
     "FunnelByAssetByStage",
@@ -1884,6 +1898,11 @@ __all__ = (
     "GetPolicyResponse400",
     "GetPolicyResponse404",
     "GetPolicyResponse500",
+    "GetProfilingFlamegraphResponse400",
+    "GetProfilingFlamegraphResponse404",
+    "GetProfilingFlamegraphResponse422",
+    "GetProfilingFlamegraphResponse500",
+    "GetProfilingFlamegraphResponse504",
     "GetRecurringSilenceResponse400",
     "GetRecurringSilenceResponse404",
     "GetRecurringSilenceResponse500",
@@ -2126,6 +2145,8 @@ __all__ = (
     "PreflightReportResponseIsThePreflightReportPlusBackendOnlyCounters",
     "PreflightRequestDefinesTheRequestBodyForRunningPreflightValidation",
     "Processor",
+    "ProfilingFlamegraphResponse",
+    "ProfilingPeriod",
     "PromqlFunctionRepresentsAFunctionCallInAPromQLQuery",
     "PromqlPipelineRepresentsASegmentOfAPromQLQueryWhichCanBeAMetricWithConditionsAFunctionOrATemplate",
     "Provider",
@@ -2242,6 +2263,7 @@ __all__ = (
     "SpanRecordTags",
     "SqlPipelineDefinesAPipelineForSearchQueries",
     "SslRequestDefinesModelForSslRequest",
+    "StackCountsCountsAggregatedStacksNotSamplesOrRenderedTreeNodes",
     "StatsRequest",
     "StatsResponse",
     "StorageManagementPolicyRequest",
