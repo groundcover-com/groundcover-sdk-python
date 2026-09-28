@@ -7,6 +7,7 @@ class SearchValuesRequestType(str, Enum):
     APM = "apm"
     AWS_CUR = "aws_cur"
     DASHBOARDS = "dashboards"
+    DBM_MEASUREMENTS_STATEMENT = "dbm_measurements_statement"
     ENTITIES = "entities"
     EVENTS = "events"
     INGESTION_MEASUREMENTS = "ingestion_measurements"
