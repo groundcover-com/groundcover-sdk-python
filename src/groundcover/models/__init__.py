@@ -124,6 +124,8 @@ from .batch_get_monitors_error import BatchGetMonitorsError
 from .batch_get_monitors_request import BatchGetMonitorsRequest
 from .batch_get_monitors_response import BatchGetMonitorsResponse
 from .batch_get_monitors_response_monitors import BatchGetMonitorsResponseMonitors
+from .batch_read_monitors_v2_response import BatchReadMonitorsV2Response
+from .batch_read_monitors_v2_response_monitors import BatchReadMonitorsV2ResponseMonitors
 from .batch_update_dashboard_tags_request import BatchUpdateDashboardTagsRequest
 from .catalog import Catalog
 from .catalog_install_request_is_the_optional_body_for_a_catalog_install import (
@@ -136,6 +138,7 @@ from .catalog_template_list_item_is_a_thin_per_tenant_view_of_a_catalog_template
     CatalogTemplateListItemIsAThinPerTenantViewOfACatalogTemplate,
 )
 from .catalog_template_response import CatalogTemplateResponse
+from .channel_identifies_a_slack_channel import ChannelIdentifiesASlackChannel
 from .checkout_session_request import CheckoutSessionRequest
 from .checkout_session_response import CheckoutSessionResponse
 from .claude_create_session_request import ClaudeCreateSessionRequest
@@ -468,6 +471,9 @@ from .delete_silence_response_500 import DeleteSilenceResponse500
 from .delete_synthetic_test_response import DeleteSyntheticTestResponse
 from .delete_traces_pipeline_config_response_200 import DeleteTracesPipelineConfigResponse200
 from .description import Description
+from .destinations_is_direct_delivery_status_filters_omitted_all import (
+    DestinationsIsDirectDeliveryStatusFiltersOmittedAll,
+)
 from .detection import Detection
 from .detection_signal import DetectionSignal
 from .discovery_response import DiscoveryResponse
@@ -525,7 +531,11 @@ from .export_auth_body_represents_the_auth_mode_sent_to_export_service import (
 from .export_auth_body_represents_the_auth_mode_sent_to_export_service_type import (
     ExportAuthBodyRepresentsTheAuthModeSentToExportServiceType,
 )
+from .export_body import ExportBody
+from .export_body_format import ExportBodyFormat
 from .export_capture_body_represents_export_capture_options import ExportCaptureBodyRepresentsExportCaptureOptions
+from .export_monitors_v2_response_400 import ExportMonitorsV2Response400
+from .export_monitors_v2_response_500 import ExportMonitorsV2Response500
 from .export_request_body_represents_the_request_body_proxied_to_export_service import (
     ExportRequestBodyRepresentsTheRequestBodyProxiedToExportService,
 )
@@ -681,6 +691,9 @@ from .integration_count_holds_an_integration_name_and_its_count_for_sorted_outpu
 from .integrations import Integrations
 from .invite_request import InviteRequest
 from .invitee_details import InviteeDetails
+from .issue_display_controls_how_the_resulting_issue_is_rendered import (
+    IssueDisplayControlsHowTheResultingIssueIsRendered,
+)
 from .issues_search_over_time_response import IssuesSearchOverTimeResponse
 from .issues_search_request import IssuesSearchRequest
 from .issues_search_time_series_request import IssuesSearchTimeSeriesRequest
@@ -875,12 +888,24 @@ from .missing_data_set_bucket_covers_converted_units_whose_underlying_dataset_is
 from .missing_metrics_breakdown_splits_missing_metrics_into_mutually_exclusive_buckets import (
     MissingMetricsBreakdownSplitsMissingMetricsIntoMutuallyExclusiveBuckets,
 )
+from .model_wraps_the_single_query_and_the_thresholds_list_capped_at_one_item import (
+    ModelWrapsTheSingleQueryAndTheThresholdsListCappedAtOneItem,
+)
 from .monitor import Monitor
 from .monitor_details_response import MonitorDetailsResponse
 from .monitor_list_item import MonitorListItem
 from .monitor_list_request import MonitorListRequest
 from .monitor_list_response import MonitorListResponse
 from .monitor_options import MonitorOptions
+from .monitor_spec_is_the_v2_monitor_document_value_required_outright_pointer_optional_nil_means_the_author_omitted_it_and_that_intent_is_preserved_in_the_stored_document_defaults_are_applied_on_read_neverbaked_in_at_write import (
+    MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWrite,
+)
+from .monitor_spec_is_the_v2_monitor_document_value_required_outright_pointer_optional_nil_means_the_author_omitted_it_and_that_intent_is_preserved_in_the_stored_document_defaults_are_applied_on_read_neverbaked_in_at_write_annotations import (
+    MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWriteAnnotations,
+)
+from .monitor_spec_is_the_v2_monitor_document_value_required_outright_pointer_optional_nil_means_the_author_omitted_it_and_that_intent_is_preserved_in_the_stored_document_defaults_are_applied_on_read_neverbaked_in_at_write_labels import (
+    MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWriteLabels,
+)
 from .monitor_state import MonitorState
 from .monitor_state_groups import MonitorStateGroups
 from .monitor_thresholds import MonitorThresholds
@@ -897,6 +922,7 @@ from .no_data_needed_bucket_counts_units_that_need_no_query_to_render import (
 from .no_data_needed_bucket_counts_units_that_need_no_query_to_render_by_type import (
     NoDataNeededBucketCountsUnitsThatNeedNoQueryToRenderByType,
 )
+from .no_notifications_is_the_suppress_everything_mode_marker import NoNotificationsIsTheSuppressEverythingModeMarker
 from .not_supported_bucket_covers_unsupported_types_bucketed_by_type import (
     NotSupportedBucketCoversUnsupportedTypesBucketedByType,
 )
@@ -906,6 +932,9 @@ from .not_supported_bucket_covers_unsupported_types_bucketed_by_type_by_type imp
 from .notification_route_list_item_response import NotificationRouteListItemResponse
 from .notification_route_list_response import NotificationRouteListResponse
 from .notification_route_response import NotificationRouteResponse
+from .notification_routes_is_the_route_based_delivery_mode_marker import (
+    NotificationRoutesIsTheRouteBasedDeliveryModeMarker,
+)
 from .notification_settings_defines_the_notification_settings_for_the_monitor import (
     NotificationSettingsDefinesTheNotificationSettingsForTheMonitor,
 )
@@ -913,6 +942,9 @@ from .notification_settings_defines_the_notification_settings_for_the_monitor_me
     NotificationSettingsDefinesTheNotificationSettingsForTheMonitorMethod,
 )
 from .notification_settings_request import NotificationSettingsRequest
+from .notification_settings_requires_exactly_one_mode_block_there_is_no_default import (
+    NotificationSettingsRequiresExactlyOneModeBlockThereIsNoDefault,
+)
 from .notification_settings_response import NotificationSettingsResponse
 from .object_info_response import ObjectInfoResponse
 from .object_info_response_data import ObjectInfoResponseData
@@ -971,6 +1003,9 @@ from .queries_summary_holds_query_level_statistics_for_the_unified_summary impor
 )
 from .queries_summary_holds_query_level_statistics_for_the_unified_summary_by_datasource import (
     QueriesSummaryHoldsQueryLevelStatisticsForTheUnifiedSummaryByDatasource,
+)
+from .query_is_the_whole_expression_in_the_language_monitor_spec_type_implies import (
+    QueryIsTheWholeExpressionInTheLanguageMonitorSpecTypeImplies,
 )
 from .query_request import QueryRequest
 from .query_request_query_type import QueryRequestQueryType
@@ -1105,6 +1140,9 @@ from .slack_chat_post_message_response_is_the_proxied_slack_chat_post_message_re
 from .slack_chat_post_message_response_is_the_proxied_slack_chat_post_message_response_message import (
     SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponseMessage,
 )
+from .slack_delivery_options_requires_a_non_empty_channels_when_present import (
+    SlackDeliveryOptionsRequiresANonEmptyChannelsWhenPresent,
+)
 from .slack_webhook_data import SlackWebhookData
 from .slack_webhook_data_response import SlackWebhookDataResponse
 from .source_map_upload_response_is_the_json_success_body_returned_by_the_upload_handler import (
@@ -1225,6 +1263,9 @@ from .threshold_defines_a_condition_to_evaluate_against_a_reduced_value_operator
     ThresholdDefinesAConditionToEvaluateAgainstAReducedValueOperator,
 )
 from .threshold_definitions import ThresholdDefinitions
+from .threshold_spec_is_one_condition_block_firing_is_its_only_arm_today import (
+    ThresholdSpecIsOneConditionBlockFiringIsItsOnlyArmToday,
+)
 from .time_range import TimeRange
 from .toleration import Toleration
 from .total_stats import TotalStats
@@ -1376,12 +1417,18 @@ from .v2_create_silence_response_500 import V2CreateSilenceResponse500
 from .v2_delete_silence_response_400 import V2DeleteSilenceResponse400
 from .v2_delete_silence_response_404 import V2DeleteSilenceResponse404
 from .v2_delete_silence_response_500 import V2DeleteSilenceResponse500
+from .v2_destination_app import V2DestinationApp
+from .v2_evaluation_interval import V2EvaluationInterval
+from .v2_firing_threshold import V2FiringThreshold
 from .v2_get_all_silences_response_400 import V2GetAllSilencesResponse400
 from .v2_get_all_silences_response_500 import V2GetAllSilencesResponse500
 from .v2_get_all_silences_type import V2GetAllSilencesType
 from .v2_get_silence_response_400 import V2GetSilenceResponse400
 from .v2_get_silence_response_404 import V2GetSilenceResponse404
 from .v2_get_silence_response_500 import V2GetSilenceResponse500
+from .v2_linear_delivery_options import V2LinearDeliveryOptions
+from .v2_monitor_entity import V2MonitorEntity
+from .v2_recovery_threshold import V2RecoveryThreshold
 from .v2_silence_response import V2SilenceResponse
 from .v2_silence_response_recurrence_type import V2SilenceResponseRecurrenceType
 from .v2_silence_response_timeframes import V2SilenceResponseTimeframes
@@ -1567,12 +1614,15 @@ __all__ = (
     "BatchGetMonitorsRequest",
     "BatchGetMonitorsResponse",
     "BatchGetMonitorsResponseMonitors",
+    "BatchReadMonitorsV2Response",
+    "BatchReadMonitorsV2ResponseMonitors",
     "BatchUpdateDashboardTagsRequest",
     "Catalog",
     "CatalogInstallRequestIsTheOptionalBodyForACatalogInstall",
     "CatalogModelHoldsMetadataIfTheMonitorOriginatedFromACatalog",
     "CatalogTemplateListItemIsAThinPerTenantViewOfACatalogTemplate",
     "CatalogTemplateResponse",
+    "ChannelIdentifiesASlackChannel",
     "CheckoutSessionRequest",
     "CheckoutSessionResponse",
     "ClaudeCreateSessionRequest",
@@ -1785,6 +1835,7 @@ __all__ = (
     "DeleteSyntheticTestResponse",
     "DeleteTracesPipelineConfigResponse200",
     "Description",
+    "DestinationsIsDirectDeliveryStatusFiltersOmittedAll",
     "Detection",
     "DetectionSignal",
     "DiscoveryResponse",
@@ -1822,7 +1873,11 @@ __all__ = (
     "ExecutionPolicyDefinesModelForExecutionPolicyRetries",
     "ExportAuthBodyRepresentsTheAuthModeSentToExportService",
     "ExportAuthBodyRepresentsTheAuthModeSentToExportServiceType",
+    "ExportBody",
+    "ExportBodyFormat",
     "ExportCaptureBodyRepresentsExportCaptureOptions",
+    "ExportMonitorsV2Response400",
+    "ExportMonitorsV2Response500",
     "ExportRequestBodyRepresentsTheRequestBodyProxiedToExportService",
     "ExportRequestBodyRepresentsTheRequestBodyProxiedToExportServiceFormat",
     "ExportServiceDrainingResponseBody",
@@ -1944,6 +1999,7 @@ __all__ = (
     "Integrations",
     "InviteeDetails",
     "InviteRequest",
+    "IssueDisplayControlsHowTheResultingIssueIsRendered",
     "IssuesSearchOverTimeResponse",
     "IssuesSearchRequest",
     "IssuesSearchTimeSeriesRequest",
@@ -2092,12 +2148,16 @@ __all__ = (
     "MigrationDetectedIntegration",
     "MissingDataSetBucketCoversConvertedUnitsWhoseUnderlyingDatasetIsAbsent",
     "MissingMetricsBreakdownSplitsMissingMetricsIntoMutuallyExclusiveBuckets",
+    "ModelWrapsTheSingleQueryAndTheThresholdsListCappedAtOneItem",
     "Monitor",
     "MonitorDetailsResponse",
     "MonitorListItem",
     "MonitorListRequest",
     "MonitorListResponse",
     "MonitorOptions",
+    "MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWrite",
+    "MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWriteAnnotations",
+    "MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWriteLabels",
     "MonitorState",
     "MonitorStateGroups",
     "MonitorThresholds",
@@ -2108,12 +2168,15 @@ __all__ = (
     "NoDataBreakdownDrillsIntoUnitsThatDidNotComeBackFullyWorking",
     "NoDataNeededBucketCountsUnitsThatNeedNoQueryToRender",
     "NoDataNeededBucketCountsUnitsThatNeedNoQueryToRenderByType",
+    "NoNotificationsIsTheSuppressEverythingModeMarker",
     "NotificationRouteListItemResponse",
     "NotificationRouteListResponse",
     "NotificationRouteResponse",
+    "NotificationRoutesIsTheRouteBasedDeliveryModeMarker",
     "NotificationSettingsDefinesTheNotificationSettingsForTheMonitor",
     "NotificationSettingsDefinesTheNotificationSettingsForTheMonitorMethod",
     "NotificationSettingsRequest",
+    "NotificationSettingsRequiresExactlyOneModeBlockThereIsNoDefault",
     "NotificationSettingsResponse",
     "NotSupportedBucketCoversUnsupportedTypesBucketedByType",
     "NotSupportedBucketCoversUnsupportedTypesBucketedByTypeByType",
@@ -2153,6 +2216,7 @@ __all__ = (
     "ProviderStateResponseIsReturnedAfterChangingDeploymentGlobalProviderAvailability",
     "QueriesSummaryHoldsQueryLevelStatisticsForTheUnifiedSummary",
     "QueriesSummaryHoldsQueryLevelStatisticsForTheUnifiedSummaryByDatasource",
+    "QueryIsTheWholeExpressionInTheLanguageMonitorSpecTypeImplies",
     "QueryRequest",
     "QueryRequestQueryType",
     "RawConfig",
@@ -2248,6 +2312,7 @@ __all__ = (
     "SlackChatPostMessageRequestBlocks",
     "SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponse",
     "SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponseMessage",
+    "SlackDeliveryOptionsRequiresANonEmptyChannelsWhenPresent",
     "SlackWebhookData",
     "SlackWebhookDataResponse",
     "SourceMapUploadResponseIsTheJSONSuccessBodyReturnedByTheUploadHandler",
@@ -2314,6 +2379,7 @@ __all__ = (
     "ThresholdDefinesAConditionToEvaluateAgainstAReducedValue",
     "ThresholdDefinesAConditionToEvaluateAgainstAReducedValueOperator",
     "ThresholdDefinitions",
+    "ThresholdSpecIsOneConditionBlockFiringIsItsOnlyArmToday",
     "TimeRange",
     "Toleration",
     "TotalStats",
@@ -2437,12 +2503,18 @@ __all__ = (
     "V2DeleteSilenceResponse400",
     "V2DeleteSilenceResponse404",
     "V2DeleteSilenceResponse500",
+    "V2DestinationApp",
+    "V2EvaluationInterval",
+    "V2FiringThreshold",
     "V2GetAllSilencesResponse400",
     "V2GetAllSilencesResponse500",
     "V2GetAllSilencesType",
     "V2GetSilenceResponse400",
     "V2GetSilenceResponse404",
     "V2GetSilenceResponse500",
+    "V2LinearDeliveryOptions",
+    "V2MonitorEntity",
+    "V2RecoveryThreshold",
     "V2SilenceResponse",
     "V2SilenceResponseRecurrenceType",
     "V2SilenceResponseTimeframes",
