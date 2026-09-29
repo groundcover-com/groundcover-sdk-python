@@ -9,6 +9,7 @@ class GetEventsOverTimeRequestDefinesTheRequestStructureForFetchingEventsOverTim
     FIRSTSEEN = "firstSeen"
     INSTANCE = "instance"
     LASTSEEN = "lastSeen"
+    MESSAGE = "message"
     NAMESPACE = "namespace"
     OBJECT_KIND = "object_kind"
     REASON = "reason"
