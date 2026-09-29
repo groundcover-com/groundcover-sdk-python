@@ -14,6 +14,7 @@ class SearchValuesRequestType(str, Enum):
     ISSUES = "issues"
     LOGS = "logs"
     MONITORS = "monitors"
+    PROFILING_SAMPLES = "profiling_samples"
     TRACES = "traces"
 
     def __str__(self) -> str:

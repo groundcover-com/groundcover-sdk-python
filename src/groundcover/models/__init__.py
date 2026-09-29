@@ -431,6 +431,10 @@ from .data_set_available_bucket_is_converted_units_whose_underlying_dataset_exis
 from .datasource_key_gap_aggregates_missing_field_keys_for_one_search_datasource import (
     DatasourceKeyGapAggregatesMissingFieldKeysForOneSearchDatasource,
 )
+from .dbm_measurements_search_request_queries_raw_statement_measurement_intervals import (
+    DBMMeasurementsSearchRequestQueriesRawStatementMeasurementIntervals,
+)
+from .dbm_measurements_search_time_series_request import DBMMeasurementsSearchTimeSeriesRequest
 from .dd_metric_inactive_bucket import DDMetricInactiveBucket
 from .delete_api_key_response_400 import DeleteApiKeyResponse400
 from .delete_api_key_response_404 import DeleteApiKeyResponse404
@@ -1795,6 +1799,8 @@ __all__ = (
     "DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions",
     "DataSetAvailableBucketIsConvertedUnitsWhoseUnderlyingDatasetExistsInGC",
     "DatasourceKeyGapAggregatesMissingFieldKeysForOneSearchDatasource",
+    "DBMMeasurementsSearchRequestQueriesRawStatementMeasurementIntervals",
+    "DBMMeasurementsSearchTimeSeriesRequest",
     "DDMetricInactiveBucket",
     "DeleteApiKeyResponse400",
     "DeleteApiKeyResponse404",
