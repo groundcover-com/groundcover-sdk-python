@@ -20,6 +20,7 @@ class InstallAssetsResponse:
     """
     Attributes:
         already_installed_count (int | Unset): The number of assets that were already installed.
+        excluded_count (int | Unset): The number of assets that were not installed because they are excluded.
         failed_count (int | Unset): The number of assets that failed to install.
         installed_count (int | Unset): The number of assets successfully installed.
         not_convertible_count (int | Unset): The number of assets that were not convertible.
@@ -28,6 +29,7 @@ class InstallAssetsResponse:
     """
 
     already_installed_count: int | Unset = UNSET
+    excluded_count: int | Unset = UNSET
     failed_count: int | Unset = UNSET
     installed_count: int | Unset = UNSET
     not_convertible_count: int | Unset = UNSET
@@ -37,6 +39,8 @@ class InstallAssetsResponse:
 
     def to_dict(self) -> dict[str, Any]:
         already_installed_count = self.already_installed_count
+
+        excluded_count = self.excluded_count
 
         failed_count = self.failed_count
 
@@ -58,6 +62,8 @@ class InstallAssetsResponse:
         field_dict.update({})
         if already_installed_count is not UNSET:
             field_dict["alreadyInstalledCount"] = already_installed_count
+        if excluded_count is not UNSET:
+            field_dict["excludedCount"] = excluded_count
         if failed_count is not UNSET:
             field_dict["failedCount"] = failed_count
         if installed_count is not UNSET:
@@ -78,6 +84,8 @@ class InstallAssetsResponse:
         d = dict(src_dict)
         already_installed_count = d.pop("alreadyInstalledCount", UNSET)
 
+        excluded_count = d.pop("excludedCount", UNSET)
+
         failed_count = d.pop("failedCount", UNSET)
 
         installed_count = d.pop("installedCount", UNSET)
@@ -97,6 +105,7 @@ class InstallAssetsResponse:
 
         install_assets_response = cls(
             already_installed_count=already_installed_count,
+            excluded_count=excluded_count,
             failed_count=failed_count,
             installed_count=installed_count,
             not_convertible_count=not_convertible_count,

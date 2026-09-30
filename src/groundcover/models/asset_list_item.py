@@ -33,6 +33,9 @@ class AssetListItem:
         converted_payload (str | Unset): The converted groundcover resource payload.
         discovered_at (datetime.datetime | Unset): The timestamp when this asset was discovered.
             Format: date-time
+        excluded_at (datetime.datetime | Unset): When the asset was excluded. Absent when not excluded.
+        excluded_by (str | Unset): Email of the user who excluded this asset from the migration. Absent when not
+            excluded.
         gc_resource_id (str | Unset): The groundcover resource ID if installed.
         install_state (str | Unset): The installation state of the asset.
         metadata (AssetMetadata | Unset):
@@ -58,6 +61,8 @@ class AssetListItem:
     converted_format: str | Unset = UNSET
     converted_payload: str | Unset = UNSET
     discovered_at: datetime.datetime | Unset = UNSET
+    excluded_at: datetime.datetime | Unset = UNSET
+    excluded_by: str | Unset = UNSET
     gc_resource_id: str | Unset = UNSET
     install_state: str | Unset = UNSET
     metadata: AssetMetadata | Unset = UNSET
@@ -89,6 +94,12 @@ class AssetListItem:
         discovered_at: str | Unset = UNSET
         if not isinstance(self.discovered_at, Unset):
             discovered_at = self.discovered_at.isoformat()
+
+        excluded_at: str | Unset = UNSET
+        if not isinstance(self.excluded_at, Unset):
+            excluded_at = self.excluded_at.isoformat()
+
+        excluded_by = self.excluded_by
 
         gc_resource_id = self.gc_resource_id
 
@@ -144,6 +155,10 @@ class AssetListItem:
             field_dict["converted_payload"] = converted_payload
         if discovered_at is not UNSET:
             field_dict["discovered_at"] = discovered_at
+        if excluded_at is not UNSET:
+            field_dict["excluded_at"] = excluded_at
+        if excluded_by is not UNSET:
+            field_dict["excluded_by"] = excluded_by
         if gc_resource_id is not UNSET:
             field_dict["gc_resource_id"] = gc_resource_id
         if install_state is not UNSET:
@@ -204,6 +219,15 @@ class AssetListItem:
             discovered_at = UNSET
         else:
             discovered_at = parse_datetime(_discovered_at)
+
+        _excluded_at = d.pop("excluded_at", UNSET)
+        excluded_at: datetime.datetime | Unset
+        if isinstance(_excluded_at, Unset) or _excluded_at is None:
+            excluded_at = UNSET
+        else:
+            excluded_at = parse_datetime(_excluded_at)
+
+        excluded_by = d.pop("excluded_by", UNSET)
 
         gc_resource_id = d.pop("gc_resource_id", UNSET)
 
@@ -269,6 +293,8 @@ class AssetListItem:
             converted_format=converted_format,
             converted_payload=converted_payload,
             discovered_at=discovered_at,
+            excluded_at=excluded_at,
+            excluded_by=excluded_by,
             gc_resource_id=gc_resource_id,
             install_state=install_state,
             metadata=metadata,

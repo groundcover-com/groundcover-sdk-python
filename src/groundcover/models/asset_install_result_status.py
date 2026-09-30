@@ -5,6 +5,7 @@ from enum import Enum
 
 class AssetInstallResultStatus(str, Enum):
     ALREADY_INSTALLED = "already_installed"
+    EXCLUDED = "excluded"
     FAILED = "failed"
     INSTALLED = "installed"
     NOT_CONVERTIBLE = "not_convertible"

@@ -86,6 +86,7 @@ from .archive_dashboard_response_404 import ArchiveDashboardResponse404
 from .archive_dashboard_response_409 import ArchiveDashboardResponse409
 from .archive_dashboard_response_500 import ArchiveDashboardResponse500
 from .assertion_defines_model_for_assertion import AssertionDefinesModelForAssertion
+from .asset_exclusion import AssetExclusion
 from .asset_fetch_result import AssetFetchResult
 from .asset_funnel_is_the_wet_mode_hierarchical_breakdown_for_one_asset_type import (
     AssetFunnelIsTheWetModeHierarchicalBreakdownForOneAssetType,
@@ -1584,6 +1585,7 @@ __all__ = (
     "ArchiveDashboardResponse409",
     "ArchiveDashboardResponse500",
     "AssertionDefinesModelForAssertion",
+    "AssetExclusion",
     "AssetFetchResult",
     "AssetFunnelIsTheWetModeHierarchicalBreakdownForOneAssetType",
     "AssetGapDetail",
