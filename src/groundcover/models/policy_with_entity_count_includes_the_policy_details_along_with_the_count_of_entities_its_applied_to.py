@@ -36,7 +36,7 @@ class PolicyWithEntityCountIncludesThePolicyDetailsAlongWithTheCountOfEntitiesIt
         read_only (bool | Unset): Indicates if the policy is read-only (system managed).
         revision_number (int | Unset): Revision number for optimistic locking.
         role (RoleMapDefinesTheMappingOfRolesToPermissions | Unset): It is used within a Policy.
-        sensitive_access (bool | Unset):
+        sensitive_access (bool | Unset): Whether this policy grants access to sensitive (access-controlled) attributes.
         tenant_uuid (str | Unset): Tenant associated with the policy.
         updated_by (str | Unset): Email of the user who last updated the policy.
         updated_timestamp (datetime.datetime | Unset): Timestamp when the policy was last updated.
