@@ -36,6 +36,7 @@ class PolicyDefinesAnAccessControlPolicy:
         read_only (bool | Unset): Indicates if the policy is read-only (system managed).
         revision_number (int | Unset): Revision number for optimistic locking.
         role (RoleMapDefinesTheMappingOfRolesToPermissions | Unset): It is used within a Policy.
+        sensitive_access (bool | Unset):
         tenant_uuid (str | Unset): Tenant associated with the policy.
         updated_by (str | Unset): Email of the user who last updated the policy.
         updated_timestamp (datetime.datetime | Unset): Timestamp when the policy was last updated.
@@ -51,6 +52,7 @@ class PolicyDefinesAnAccessControlPolicy:
     read_only: bool | Unset = UNSET
     revision_number: int | Unset = UNSET
     role: RoleMapDefinesTheMappingOfRolesToPermissions | Unset = UNSET
+    sensitive_access: bool | Unset = UNSET
     tenant_uuid: str | Unset = UNSET
     updated_by: str | Unset = UNSET
     updated_timestamp: datetime.datetime | Unset = UNSET
@@ -81,6 +83,8 @@ class PolicyDefinesAnAccessControlPolicy:
         role: dict[str, Any] | Unset = UNSET
         if not isinstance(self.role, Unset):
             role = self.role.to_dict()
+
+        sensitive_access = self.sensitive_access
 
         tenant_uuid = self.tenant_uuid
 
@@ -115,6 +119,8 @@ class PolicyDefinesAnAccessControlPolicy:
             field_dict["revisionNumber"] = revision_number
         if role is not UNSET:
             field_dict["role"] = role
+        if sensitive_access is not UNSET:
+            field_dict["sensitiveAccess"] = sensitive_access
         if tenant_uuid is not UNSET:
             field_dict["tenantUuid"] = tenant_uuid
         if updated_by is not UNSET:
@@ -169,6 +175,8 @@ class PolicyDefinesAnAccessControlPolicy:
         else:
             role = RoleMapDefinesTheMappingOfRolesToPermissions.from_dict(_role)
 
+        sensitive_access = d.pop("sensitiveAccess", UNSET)
+
         tenant_uuid = d.pop("tenantUuid", UNSET)
 
         updated_by = d.pop("updatedBy", UNSET)
@@ -192,6 +200,7 @@ class PolicyDefinesAnAccessControlPolicy:
             read_only=read_only,
             revision_number=revision_number,
             role=role,
+            sensitive_access=sensitive_access,
             tenant_uuid=tenant_uuid,
             updated_by=updated_by,
             updated_timestamp=updated_timestamp,

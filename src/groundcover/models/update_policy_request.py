@@ -31,6 +31,7 @@ class UpdatePolicyRequest:
         data_scope (DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions | Unset):
         description (str | Unset): Optional new description for the policy.
         role (RoleMapDefinesTheMappingOfRolesToPermissions | Unset): It is used within a Policy.
+        sensitive_access (bool | Unset): Whether this policy grants access to sensitive (access-controlled) attributes.
     """
 
     name: str
@@ -39,6 +40,7 @@ class UpdatePolicyRequest:
     data_scope: DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions | Unset = UNSET
     description: str | Unset = UNSET
     role: RoleMapDefinesTheMappingOfRolesToPermissions | Unset = UNSET
+    sensitive_access: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -58,6 +60,8 @@ class UpdatePolicyRequest:
         if not isinstance(self.role, Unset):
             role = self.role.to_dict()
 
+        sensitive_access = self.sensitive_access
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -75,6 +79,8 @@ class UpdatePolicyRequest:
             field_dict["description"] = description
         if role is not UNSET:
             field_dict["role"] = role
+        if sensitive_access is not UNSET:
+            field_dict["sensitiveAccess"] = sensitive_access
 
         return field_dict
 
@@ -110,6 +116,8 @@ class UpdatePolicyRequest:
         else:
             role = RoleMapDefinesTheMappingOfRolesToPermissions.from_dict(_role)
 
+        sensitive_access = d.pop("sensitiveAccess", UNSET)
+
         update_policy_request = cls(
             name=name,
             claim_role=claim_role,
@@ -117,6 +125,7 @@ class UpdatePolicyRequest:
             data_scope=data_scope,
             description=description,
             role=role,
+            sensitive_access=sensitive_access,
         )
 
         update_policy_request.additional_properties = d
