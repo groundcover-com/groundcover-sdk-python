@@ -44,6 +44,8 @@ class FindingRepresentsASinglePreflightValidationFinding:
             which carry Datadog names — need both, because a rename makes the two
             namespaces diverge and a GC-only comparison silently stops matching.
         label_value (str | Unset):
+        label_value_dd (str | Unset): LabelValueDD is the Datadog-side LabelValue, set only when a value
+            mapping rule rewrote it. Rules are keyed on the Datadog value.
         label_values (list[str] | Unset):
         labels_used (FindingRepresentsASinglePreflightValidationFindingLabelsUsed | Unset):
         message (str | Unset):
@@ -66,6 +68,7 @@ class FindingRepresentsASinglePreflightValidationFinding:
     label_key: str | Unset = UNSET
     label_key_dd: str | Unset = UNSET
     label_value: str | Unset = UNSET
+    label_value_dd: str | Unset = UNSET
     label_values: list[str] | Unset = UNSET
     labels_used: FindingRepresentsASinglePreflightValidationFindingLabelsUsed | Unset = UNSET
     message: str | Unset = UNSET
@@ -101,6 +104,8 @@ class FindingRepresentsASinglePreflightValidationFinding:
         label_key_dd = self.label_key_dd
 
         label_value = self.label_value
+
+        label_value_dd = self.label_value_dd
 
         label_values: list[str] | Unset = UNSET
         if not isinstance(self.label_values, Unset):
@@ -158,6 +163,8 @@ class FindingRepresentsASinglePreflightValidationFinding:
             field_dict["label_key_dd"] = label_key_dd
         if label_value is not UNSET:
             field_dict["label_value"] = label_value
+        if label_value_dd is not UNSET:
+            field_dict["label_value_dd"] = label_value_dd
         if label_values is not UNSET:
             field_dict["label_values"] = label_values
         if labels_used is not UNSET:
@@ -222,6 +229,8 @@ class FindingRepresentsASinglePreflightValidationFinding:
 
         label_value = d.pop("label_value", UNSET)
 
+        label_value_dd = d.pop("label_value_dd", UNSET)
+
         label_values = cast(list[str], d.pop("label_values", UNSET))
 
         _labels_used = d.pop("labels_used", UNSET)
@@ -269,6 +278,7 @@ class FindingRepresentsASinglePreflightValidationFinding:
             label_key=label_key,
             label_key_dd=label_key_dd,
             label_value=label_value,
+            label_value_dd=label_value_dd,
             label_values=label_values,
             labels_used=labels_used,
             message=message,
