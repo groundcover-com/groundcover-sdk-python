@@ -88,6 +88,22 @@ from .archive_dashboard_response_500 import ArchiveDashboardResponse500
 from .assertion_defines_model_for_assertion import AssertionDefinesModelForAssertion
 from .asset_exclusion import AssetExclusion
 from .asset_fetch_result import AssetFetchResult
+from .asset_finding_is_one_finding_or_warning_of_an_evaluated_asset import (
+    AssetFindingIsOneFindingOrWarningOfAnEvaluatedAsset,
+)
+from .asset_finding_suggestion_is_the_top_suggested_fix_carried_on_a_finding import (
+    AssetFindingSuggestionIsTheTopSuggestedFixCarriedOnAFinding,
+)
+from .asset_finding_suggestion_is_the_top_suggested_fix_carried_on_a_finding_kind import (
+    AssetFindingSuggestionIsTheTopSuggestedFixCarriedOnAFindingKind,
+)
+from .asset_findings_groups_are_the_findings_that_count_toward_needs_review_by_type import (
+    AssetFindingsGroupsAreTheFindingsThatCountTowardNeedsReviewByType,
+)
+from .asset_findings_response_is_an_assets_evaluation_findings import AssetFindingsResponseIsAnAssetsEvaluationFindings
+from .asset_findings_warnings_are_shown_to_the_user_but_never_count_toward_needs_review import (
+    AssetFindingsWarningsAreShownToTheUserButNeverCountTowardNeedsReview,
+)
 from .asset_funnel_is_the_wet_mode_hierarchical_breakdown_for_one_asset_type import (
     AssetFunnelIsTheWetModeHierarchicalBreakdownForOneAssetType,
 )
@@ -505,6 +521,14 @@ from .error_response_is_the_canonical_error_body_returned_by_http_handlers impor
 from .error_response_is_the_canonical_error_body_returned_by_http_handlers_code import (
     ErrorResponseIsTheCanonicalErrorBodyReturnedByHTTPHandlersCode,
 )
+from .evaluate_assets_request_defines_the_request_body_for_asset_readiness_evaluation import (
+    EvaluateAssetsRequestDefinesTheRequestBodyForAssetReadinessEvaluation,
+)
+from .evaluate_assets_response_is_the_full_response_of_the_evaluate_assets_endpoint import (
+    EvaluateAssetsResponseIsTheFullResponseOfTheEvaluateAssetsEndpoint,
+)
+from .evaluate_assets_summary_is_the_responses_top_level_rollup import EvaluateAssetsSummaryIsTheResponsesTopLevelRollup
+from .evaluated_asset_is_one_assets_evaluation_outcome import EvaluatedAssetIsOneAssetsEvaluationOutcome
 from .evaluation_interval_defines_the_evaluation_frequency_and_pending_duration import (
     EvaluationIntervalDefinesTheEvaluationFrequencyAndPendingDuration,
 )
@@ -1220,6 +1244,7 @@ from .tcp_request_defines_model_for_tcp_request import TcpRequestDefinesModelFor
 from .template_widget import TemplateWidget
 from .template_widget_kind import TemplateWidgetKind
 from .tenant_ai_settings_response import TenantAISettingsResponse
+from .tenant_connector_settings_response import TenantConnectorSettingsResponse
 from .tenant_info import TenantInfo
 from .tenant_response import TenantResponse
 from .test_connected_app_request import TestConnectedAppRequest
@@ -1405,6 +1430,7 @@ from .update_silence_response_500 import UpdateSilenceResponse500
 from .update_tenant_ai_settings_request import UpdateTenantAISettingsRequest
 from .update_tenant_ai_settings_response_400 import UpdateTenantAISettingsResponse400
 from .update_tenant_ai_settings_response_500 import UpdateTenantAISettingsResponse500
+from .update_tenant_connector_settings_request import UpdateTenantConnectorSettingsRequest
 from .update_user_credential_request_is_the_request_body_for_updating_a_user_level_credential import (
     UpdateUserCredentialRequestIsTheRequestBodyForUpdatingAUserLevelCredential,
 )
@@ -1491,6 +1517,9 @@ from .wet_report_holds_the_complete_wet_mode_results_for_inclusion_in_preflight_
 )
 from .wet_result_holds_the_outcome_of_executing_a_single_wet_query import (
     WetResultHoldsTheOutcomeOfExecutingASingleWetQuery,
+)
+from .wet_summary_counts_summarizes_the_wet_mode_execution_pass_if_any import (
+    WetSummaryCountsSummarizesTheWetModeExecutionPassIfAny,
 )
 from .wet_validation_summary_holds_wet_mode_validation_results_for_the_unified_summary import (
     WetValidationSummaryHoldsWetModeValidationResultsForTheUnifiedSummary,
@@ -1587,6 +1616,12 @@ __all__ = (
     "AssertionDefinesModelForAssertion",
     "AssetExclusion",
     "AssetFetchResult",
+    "AssetFindingIsOneFindingOrWarningOfAnEvaluatedAsset",
+    "AssetFindingsGroupsAreTheFindingsThatCountTowardNeedsReviewByType",
+    "AssetFindingsResponseIsAnAssetsEvaluationFindings",
+    "AssetFindingSuggestionIsTheTopSuggestedFixCarriedOnAFinding",
+    "AssetFindingSuggestionIsTheTopSuggestedFixCarriedOnAFindingKind",
+    "AssetFindingsWarningsAreShownToTheUserButNeverCountTowardNeedsReview",
     "AssetFunnelIsTheWetModeHierarchicalBreakdownForOneAssetType",
     "AssetGapDetail",
     "AssetGapDetailKeysByDatasource",
@@ -1864,6 +1899,10 @@ __all__ = (
     "EntitiesSearchRequest",
     "ErrorResponseIsTheCanonicalErrorBodyReturnedByHTTPHandlers",
     "ErrorResponseIsTheCanonicalErrorBodyReturnedByHTTPHandlersCode",
+    "EvaluateAssetsRequestDefinesTheRequestBodyForAssetReadinessEvaluation",
+    "EvaluateAssetsResponseIsTheFullResponseOfTheEvaluateAssetsEndpoint",
+    "EvaluateAssetsSummaryIsTheResponsesTopLevelRollup",
+    "EvaluatedAssetIsOneAssetsEvaluationOutcome",
     "EvaluationIntervalDefinesTheEvaluationFrequencyAndPendingDuration",
     "EventDetails",
     "EventDetailsEventAttributes",
@@ -2365,6 +2404,7 @@ __all__ = (
     "TemplateWidget",
     "TemplateWidgetKind",
     "TenantAISettingsResponse",
+    "TenantConnectorSettingsResponse",
     "TenantInfo",
     "TenantResponse",
     "TestConnectedAppRequest",
@@ -2498,6 +2538,7 @@ __all__ = (
     "UpdateTenantAISettingsRequest",
     "UpdateTenantAISettingsResponse400",
     "UpdateTenantAISettingsResponse500",
+    "UpdateTenantConnectorSettingsRequest",
     "UpdateUserCredentialRequestIsTheRequestBodyForUpdatingAUserLevelCredential",
     "UpdateUserCredentialRequestIsTheRequestBodyForUpdatingAUserLevelCredentialData",
     "UpdateViewRequest",
@@ -2563,6 +2604,7 @@ __all__ = (
     "WetBreakdownEntryHoldsWetModeStatsForASingleDimensionAssetTypeOrDatasource",
     "WetReportHoldsTheCompleteWetModeResultsForInclusionInPreflightReport",
     "WetResultHoldsTheOutcomeOfExecutingASingleWetQuery",
+    "WetSummaryCountsSummarizesTheWetModeExecutionPassIfAny",
     "WetValidationSummaryHoldsWetModeValidationResultsForTheUnifiedSummary",
     "WetValidationSummaryHoldsWetModeValidationResultsForTheUnifiedSummaryByDatasource",
     "WetValidationSummaryHoldsWetModeValidationResultsForTheUnifiedSummaryByType",
