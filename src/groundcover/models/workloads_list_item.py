@@ -38,6 +38,7 @@ class WorkloadsListItem:
         ready (bool | Unset):
         resource_version (str | Unset):
         rps (float | Unset):
+        running_pods_count (int | Unset):
         uid (str | Unset):
         workload (str | Unset):
     """
@@ -61,6 +62,7 @@ class WorkloadsListItem:
     ready: bool | Unset = UNSET
     resource_version: str | Unset = UNSET
     rps: float | Unset = UNSET
+    running_pods_count: int | Unset = UNSET
     uid: str | Unset = UNSET
     workload: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -105,6 +107,8 @@ class WorkloadsListItem:
         resource_version = self.resource_version
 
         rps = self.rps
+
+        running_pods_count = self.running_pods_count
 
         uid = self.uid
 
@@ -151,6 +155,8 @@ class WorkloadsListItem:
             field_dict["resourceVersion"] = resource_version
         if rps is not UNSET:
             field_dict["rps"] = rps
+        if running_pods_count is not UNSET:
+            field_dict["runningPodsCount"] = running_pods_count
         if uid is not UNSET:
             field_dict["uid"] = uid
         if workload is not UNSET:
@@ -206,6 +212,8 @@ class WorkloadsListItem:
 
         rps = d.pop("rps", UNSET)
 
+        running_pods_count = d.pop("runningPodsCount", UNSET)
+
         uid = d.pop("uid", UNSET)
 
         workload = d.pop("workload", UNSET)
@@ -230,6 +238,7 @@ class WorkloadsListItem:
             ready=ready,
             resource_version=resource_version,
             rps=rps,
+            running_pods_count=running_pods_count,
             uid=uid,
             workload=workload,
         )
