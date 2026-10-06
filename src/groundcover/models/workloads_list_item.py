@@ -31,6 +31,7 @@ class WorkloadsListItem:
         memory_limit (float | Unset):
         memory_usage (float | Unset):
         namespace (str | Unset):
+        owner_kind (str | Unset):
         p50 (float | Unset):
         p95 (float | Unset):
         p99 (float | Unset):
@@ -55,6 +56,7 @@ class WorkloadsListItem:
     memory_limit: float | Unset = UNSET
     memory_usage: float | Unset = UNSET
     namespace: str | Unset = UNSET
+    owner_kind: str | Unset = UNSET
     p50: float | Unset = UNSET
     p95: float | Unset = UNSET
     p99: float | Unset = UNSET
@@ -93,6 +95,8 @@ class WorkloadsListItem:
         memory_usage = self.memory_usage
 
         namespace = self.namespace
+
+        owner_kind = self.owner_kind
 
         p50 = self.p50
 
@@ -141,6 +145,8 @@ class WorkloadsListItem:
             field_dict["memoryUsage"] = memory_usage
         if namespace is not UNSET:
             field_dict["namespace"] = namespace
+        if owner_kind is not UNSET:
+            field_dict["ownerKind"] = owner_kind
         if p50 is not UNSET:
             field_dict["p50"] = p50
         if p95 is not UNSET:
@@ -198,6 +204,8 @@ class WorkloadsListItem:
 
         namespace = d.pop("namespace", UNSET)
 
+        owner_kind = d.pop("ownerKind", UNSET)
+
         p50 = d.pop("p50", UNSET)
 
         p95 = d.pop("p95", UNSET)
@@ -231,6 +239,7 @@ class WorkloadsListItem:
             memory_limit=memory_limit,
             memory_usage=memory_usage,
             namespace=namespace,
+            owner_kind=owner_kind,
             p50=p50,
             p95=p95,
             p99=p99,
