@@ -7,6 +7,8 @@ from .add_label_config_add_label import AddLabelConfigAddLabel
 from .advanced_data_scope_defines_fine_grained_data_scoping_rules import (
     AdvancedDataScopeDefinesFineGrainedDataScopingRules,
 )
+from .agent_chat_model import AgentChatModel
+from .agent_chat_models import AgentChatModels
 from .agent_create_skill_response_200 import AgentCreateSkillResponse200
 from .agent_create_skill_response_400 import AgentCreateSkillResponse400
 from .agent_create_skill_response_401 import AgentCreateSkillResponse401
@@ -42,6 +44,9 @@ from .agent_list_skills_response_502 import AgentListSkillsResponse502
 from .agent_list_skills_response_503 import AgentListSkillsResponse503
 from .agent_llm_provider_config import AgentLLMProviderConfig
 from .agent_llm_provider_config_request import AgentLLMProviderConfigRequest
+from .agent_llm_provider_entry import AgentLLMProviderEntry
+from .agent_llm_provider_entry_request import AgentLLMProviderEntryRequest
+from .agent_model_capabilities import AgentModelCapabilities
 from .agent_skill_request_is_forwarded_to_agent_service_for_skill_creation_and_updates import (
     AgentSkillRequestIsForwardedToAgentServiceForSkillCreationAndUpdates,
 )
@@ -940,6 +945,7 @@ from .monitor_state_groups import MonitorStateGroups
 from .monitor_thresholds import MonitorThresholds
 from .monitor_variable import MonitorVariable
 from .monitor_variable_compute import MonitorVariableCompute
+from .monitors_search_request import MonitorsSearchRequest
 from .ms_teams_data import MSTeamsData
 from .ms_teams_data_response import MSTeamsDataResponse
 from .no_data_breakdown_drills_into_units_that_did_not_come_back_fully_working import (
@@ -1549,6 +1555,8 @@ __all__ = (
     "AddLabelConfig",
     "AddLabelConfigAddLabel",
     "AdvancedDataScopeDefinesFineGrainedDataScopingRules",
+    "AgentChatModel",
+    "AgentChatModels",
     "AgentCreateSkillResponse200",
     "AgentCreateSkillResponse400",
     "AgentCreateSkillResponse401",
@@ -1584,6 +1592,9 @@ __all__ = (
     "AgentListSkillsResponse503",
     "AgentLLMProviderConfig",
     "AgentLLMProviderConfigRequest",
+    "AgentLLMProviderEntry",
+    "AgentLLMProviderEntryRequest",
+    "AgentModelCapabilities",
     "AgentSkillRequestIsForwardedToAgentServiceForSkillCreationAndUpdates",
     "AgentSkillSummaryIsTheCompactSkillRepresentationReturnedByListAPIs",
     "AgentToolDefaultRequestIsForwardedToAgentServiceForResourceDefaultUpserts",
@@ -2205,6 +2216,7 @@ __all__ = (
     "MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWrite",
     "MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWriteAnnotations",
     "MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWriteLabels",
+    "MonitorsSearchRequest",
     "MonitorState",
     "MonitorStateGroups",
     "MonitorThresholds",

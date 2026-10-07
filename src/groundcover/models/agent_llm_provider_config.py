@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import TYPE_CHECKING, Any, TypeVar, cast
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from .._generated_types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.agent_llm_provider_entry import AgentLLMProviderEntry
+
 
 T = TypeVar("T", bound="AgentLLMProviderConfig")
 
@@ -24,7 +28,10 @@ class AgentLLMProviderConfig:
                 is not part of AgentLLMProviderConfigRequest.
                 Nullable: true
             is_secret_ref_set (bool | Unset): Whether an API key secret ref is configured.
+            model_id (str | Unset):
+            primary_provider_id (str | Unset):
             provider (str | Unset): The configured provider ("" when unset).
+            providers (list[AgentLLMProviderEntry] | Unset):
             updated_at (str | Unset): When the config was last updated (ISO-8601), if set.
             updated_by (str | Unset): Identifier of whoever last updated the config, if known.
             version (int | Unset): Monotonic version, bumped on every write.
@@ -33,7 +40,10 @@ class AgentLLMProviderConfig:
     base_url: str | Unset = UNSET
     default_provider: None | str | Unset = UNSET
     is_secret_ref_set: bool | Unset = UNSET
+    model_id: str | Unset = UNSET
+    primary_provider_id: str | Unset = UNSET
     provider: str | Unset = UNSET
+    providers: list[AgentLLMProviderEntry] | Unset = UNSET
     updated_at: str | Unset = UNSET
     updated_by: str | Unset = UNSET
     version: int | Unset = UNSET
@@ -50,7 +60,18 @@ class AgentLLMProviderConfig:
 
         is_secret_ref_set = self.is_secret_ref_set
 
+        model_id = self.model_id
+
+        primary_provider_id = self.primary_provider_id
+
         provider = self.provider
+
+        providers: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.providers, Unset):
+            providers = []
+            for providers_item_data in self.providers:
+                providers_item = providers_item_data.to_dict()
+                providers.append(providers_item)
 
         updated_at = self.updated_at
 
@@ -67,8 +88,14 @@ class AgentLLMProviderConfig:
             field_dict["defaultProvider"] = default_provider
         if is_secret_ref_set is not UNSET:
             field_dict["isSecretRefSet"] = is_secret_ref_set
+        if model_id is not UNSET:
+            field_dict["modelId"] = model_id
+        if primary_provider_id is not UNSET:
+            field_dict["primaryProviderId"] = primary_provider_id
         if provider is not UNSET:
             field_dict["provider"] = provider
+        if providers is not UNSET:
+            field_dict["providers"] = providers
         if updated_at is not UNSET:
             field_dict["updatedAt"] = updated_at
         if updated_by is not UNSET:
@@ -80,13 +107,8 @@ class AgentLLMProviderConfig:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        if isinstance(src_dict, str):
-            if not src_dict.strip():
-                src_dict = {}
-            else:
-                import json
+        from ..models.agent_llm_provider_entry import AgentLLMProviderEntry
 
-                src_dict = json.loads(src_dict)
         d = dict(src_dict)
         base_url = d.pop("baseUrl", UNSET)
 
@@ -101,7 +123,20 @@ class AgentLLMProviderConfig:
 
         is_secret_ref_set = d.pop("isSecretRefSet", UNSET)
 
+        model_id = d.pop("modelId", UNSET)
+
+        primary_provider_id = d.pop("primaryProviderId", UNSET)
+
         provider = d.pop("provider", UNSET)
+
+        _providers = d.pop("providers", UNSET)
+        providers: list[AgentLLMProviderEntry] | Unset = UNSET
+        if _providers is not UNSET:
+            providers = []
+            for providers_item_data in _providers:
+                providers_item = AgentLLMProviderEntry.from_dict(providers_item_data)
+
+                providers.append(providers_item)
 
         updated_at = d.pop("updatedAt", UNSET)
 
@@ -113,7 +148,10 @@ class AgentLLMProviderConfig:
             base_url=base_url,
             default_provider=default_provider,
             is_secret_ref_set=is_secret_ref_set,
+            model_id=model_id,
+            primary_provider_id=primary_provider_id,
             provider=provider,
+            providers=providers,
             updated_at=updated_at,
             updated_by=updated_by,
             version=version,
