@@ -959,6 +959,8 @@ from .monitor_state_groups import MonitorStateGroups
 from .monitor_thresholds import MonitorThresholds
 from .monitor_variable import MonitorVariable
 from .monitor_variable_compute import MonitorVariableCompute
+from .monitors_catalog_item import MonitorsCatalogItem
+from .monitors_catalog_item_by_pack import MonitorsCatalogItemByPack
 from .monitors_search_request import MonitorsSearchRequest
 from .ms_teams_data import MSTeamsData
 from .ms_teams_data_response import MSTeamsDataResponse
@@ -2236,6 +2238,8 @@ __all__ = (
     "MonitorListRequest",
     "MonitorListResponse",
     "MonitorOptions",
+    "MonitorsCatalogItem",
+    "MonitorsCatalogItemByPack",
     "MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWrite",
     "MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWriteAnnotations",
     "MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWriteLabels",
