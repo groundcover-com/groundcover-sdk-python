@@ -1,12 +1,16 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from .._generated_types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.asset_summary_response_item_readiness import AssetSummaryResponseItemReadiness
+
 
 T = TypeVar("T", bound="AssetSummaryResponseItem")
 
@@ -18,6 +22,8 @@ class AssetSummaryResponseItem:
         asset_type (str | Unset): The type of asset (e.g., "monitors").
         installed_total (int | Unset): Total number of installed assets.
         pending_total (int | Unset): Total number of assets pending conversion.
+        readiness (AssetSummaryResponseItemReadiness | Unset): Asset counts per readiness bucket, split by exclusion.
+            Every bucket is present.
         source_total (int | Unset): Total number of unique assets from the source.
         supported_total (int | Unset): Total number of supported assets (full or partial support).
         unsupported_total (int | Unset): Total number of unsupported assets.
@@ -26,6 +32,7 @@ class AssetSummaryResponseItem:
     asset_type: str | Unset = UNSET
     installed_total: int | Unset = UNSET
     pending_total: int | Unset = UNSET
+    readiness: AssetSummaryResponseItemReadiness | Unset = UNSET
     source_total: int | Unset = UNSET
     supported_total: int | Unset = UNSET
     unsupported_total: int | Unset = UNSET
@@ -37,6 +44,10 @@ class AssetSummaryResponseItem:
         installed_total = self.installed_total
 
         pending_total = self.pending_total
+
+        readiness: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.readiness, Unset):
+            readiness = self.readiness.to_dict()
 
         source_total = self.source_total
 
@@ -53,6 +64,8 @@ class AssetSummaryResponseItem:
             field_dict["installed_total"] = installed_total
         if pending_total is not UNSET:
             field_dict["pending_total"] = pending_total
+        if readiness is not UNSET:
+            field_dict["readiness"] = readiness
         if source_total is not UNSET:
             field_dict["source_total"] = source_total
         if supported_total is not UNSET:
@@ -64,19 +77,21 @@ class AssetSummaryResponseItem:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        if isinstance(src_dict, str):
-            if not src_dict.strip():
-                src_dict = {}
-            else:
-                import json
+        from ..models.asset_summary_response_item_readiness import AssetSummaryResponseItemReadiness
 
-                src_dict = json.loads(src_dict)
         d = dict(src_dict)
         asset_type = d.pop("asset_type", UNSET)
 
         installed_total = d.pop("installed_total", UNSET)
 
         pending_total = d.pop("pending_total", UNSET)
+
+        _readiness = d.pop("readiness", UNSET)
+        readiness: AssetSummaryResponseItemReadiness | Unset
+        if isinstance(_readiness, Unset) or _readiness is None:
+            readiness = UNSET
+        else:
+            readiness = AssetSummaryResponseItemReadiness.from_dict(_readiness)
 
         source_total = d.pop("source_total", UNSET)
 
@@ -88,6 +103,7 @@ class AssetSummaryResponseItem:
             asset_type=asset_type,
             installed_total=installed_total,
             pending_total=pending_total,
+            readiness=readiness,
             source_total=source_total,
             supported_total=supported_total,
             unsupported_total=unsupported_total,

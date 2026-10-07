@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import datetime
+
+from .._datetime_compat import parse_datetime
 from collections.abc import Mapping
 from typing import Any, TypeVar, cast
 
@@ -30,6 +33,10 @@ class MigrationDataSourceItem:
         referenced_resources (list[str]): Cloud or external resources referenced by this data source.
         status (MigrationDataSourceItemStatus): The current migration status for this data source.
         support_type (MigrationDataSourceItemSupportType): Whether this data source is supported by migration.
+        connected_at (datetime.datetime | Unset): When the user connected this data source from the migrations UI.
+            Absent
+            until then. A connected source with status todo is waiting for data.
+            Format: date-time
         integration_type (None | str | Unset): The matching groundcover integration type. Ordinary unmapped customer
             metrics use "custom_metrics"; null is reserved for unsupported vendor telemetry.
     """
@@ -42,6 +49,7 @@ class MigrationDataSourceItem:
     referenced_resources: list[str]
     status: MigrationDataSourceItemStatus
     support_type: MigrationDataSourceItemSupportType
+    connected_at: datetime.datetime | Unset = UNSET
     integration_type: None | str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -61,6 +69,10 @@ class MigrationDataSourceItem:
         status = self.status.value
 
         support_type = self.support_type.value
+
+        connected_at: str | Unset = UNSET
+        if not isinstance(self.connected_at, Unset):
+            connected_at = self.connected_at.isoformat()
 
         integration_type: None | str | Unset
         if isinstance(self.integration_type, Unset):
@@ -82,6 +94,8 @@ class MigrationDataSourceItem:
                 "supportType": support_type,
             }
         )
+        if connected_at is not UNSET:
+            field_dict["connectedAt"] = connected_at
         if integration_type is not UNSET:
             field_dict["integrationType"] = integration_type
 
@@ -113,6 +127,13 @@ class MigrationDataSourceItem:
 
         support_type = MigrationDataSourceItemSupportType(d.pop("supportType"))
 
+        _connected_at = d.pop("connectedAt", UNSET)
+        connected_at: datetime.datetime | Unset
+        if isinstance(_connected_at, Unset) or _connected_at is None:
+            connected_at = UNSET
+        else:
+            connected_at = parse_datetime(_connected_at)
+
         def _parse_integration_type(data: object) -> None | str | Unset:
             if data is None:
                 return data
@@ -131,6 +152,7 @@ class MigrationDataSourceItem:
             referenced_resources=referenced_resources,
             status=status,
             support_type=support_type,
+            connected_at=connected_at,
             integration_type=integration_type,
         )
 
