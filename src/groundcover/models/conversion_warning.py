@@ -28,6 +28,7 @@ class ConversionWarning:
             severity (str | Unset):
             suggestions (list[str] | Unset):
             type_ (str | Unset): ConversionWarningType represents the type of conversion warning
+            unsupported (str | Unset):
     """
 
     context: ConversionWarningContext | Unset = UNSET
@@ -37,6 +38,7 @@ class ConversionWarning:
     severity: str | Unset = UNSET
     suggestions: list[str] | Unset = UNSET
     type_: str | Unset = UNSET
+    unsupported: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -58,6 +60,8 @@ class ConversionWarning:
 
         type_ = self.type_
 
+        unsupported = self.unsupported
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
@@ -75,6 +79,8 @@ class ConversionWarning:
             field_dict["suggestions"] = suggestions
         if type_ is not UNSET:
             field_dict["type"] = type_
+        if unsupported is not UNSET:
+            field_dict["unsupported"] = unsupported
 
         return field_dict
 
@@ -102,6 +108,8 @@ class ConversionWarning:
 
         type_ = d.pop("type", UNSET)
 
+        unsupported = d.pop("unsupported", UNSET)
+
         conversion_warning = cls(
             context=context,
             details=details,
@@ -110,6 +118,7 @@ class ConversionWarning:
             severity=severity,
             suggestions=suggestions,
             type_=type_,
+            unsupported=unsupported,
         )
 
         conversion_warning.additional_properties = d
