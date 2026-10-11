@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -23,7 +23,6 @@ class ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters:
     Attributes:
         additional_filter (str | Unset):
         auto_complete (bool | Unset):
-        filter_keys (list[str] | Unset):
         filters (list[FilterRepresentsAnOperationAndValueForACondition] | Unset):
         is_nullable (bool | Unset):
         key (str | Unset):
@@ -33,7 +32,6 @@ class ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters:
 
     additional_filter: str | Unset = UNSET
     auto_complete: bool | Unset = UNSET
-    filter_keys: list[str] | Unset = UNSET
     filters: list[FilterRepresentsAnOperationAndValueForACondition] | Unset = UNSET
     is_nullable: bool | Unset = UNSET
     key: str | Unset = UNSET
@@ -45,10 +43,6 @@ class ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters:
         additional_filter = self.additional_filter
 
         auto_complete = self.auto_complete
-
-        filter_keys: list[str] | Unset = UNSET
-        if not isinstance(self.filter_keys, Unset):
-            filter_keys = self.filter_keys
 
         filters: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.filters, Unset):
@@ -72,8 +66,6 @@ class ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters:
             field_dict["additionalFilter"] = additional_filter
         if auto_complete is not UNSET:
             field_dict["autoComplete"] = auto_complete
-        if filter_keys is not UNSET:
-            field_dict["filterKeys"] = filter_keys
         if filters is not UNSET:
             field_dict["filters"] = filters
         if is_nullable is not UNSET:
@@ -98,8 +90,6 @@ class ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters:
 
         auto_complete = d.pop("autoComplete", UNSET)
 
-        filter_keys = cast(list[str], d.pop("filterKeys", UNSET))
-
         _filters = d.pop("filters", UNSET)
         filters: list[FilterRepresentsAnOperationAndValueForACondition] | Unset = UNSET
         if _filters is not UNSET:
@@ -120,7 +110,6 @@ class ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters:
         condition_specifies_a_search_condition_based_on_a_column_and_filters = cls(
             additional_filter=additional_filter,
             auto_complete=auto_complete,
-            filter_keys=filter_keys,
             filters=filters,
             is_nullable=is_nullable,
             key=key,

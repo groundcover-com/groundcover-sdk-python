@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar, cast
+from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -17,7 +17,6 @@ class ColumnDefinesASearchableColumnAndItsProperties:
     Attributes:
         additional_filter (str | Unset):
         auto_complete (bool | Unset):
-        filter_keys (list[str] | Unset):
         is_nullable (bool | Unset):
         key (str | Unset):
         origin (str | Unset):
@@ -26,7 +25,6 @@ class ColumnDefinesASearchableColumnAndItsProperties:
 
     additional_filter: str | Unset = UNSET
     auto_complete: bool | Unset = UNSET
-    filter_keys: list[str] | Unset = UNSET
     is_nullable: bool | Unset = UNSET
     key: str | Unset = UNSET
     origin: str | Unset = UNSET
@@ -37,10 +35,6 @@ class ColumnDefinesASearchableColumnAndItsProperties:
         additional_filter = self.additional_filter
 
         auto_complete = self.auto_complete
-
-        filter_keys: list[str] | Unset = UNSET
-        if not isinstance(self.filter_keys, Unset):
-            filter_keys = self.filter_keys
 
         is_nullable = self.is_nullable
 
@@ -57,8 +51,6 @@ class ColumnDefinesASearchableColumnAndItsProperties:
             field_dict["additionalFilter"] = additional_filter
         if auto_complete is not UNSET:
             field_dict["autoComplete"] = auto_complete
-        if filter_keys is not UNSET:
-            field_dict["filterKeys"] = filter_keys
         if is_nullable is not UNSET:
             field_dict["isNullable"] = is_nullable
         if key is not UNSET:
@@ -84,8 +76,6 @@ class ColumnDefinesASearchableColumnAndItsProperties:
 
         auto_complete = d.pop("autoComplete", UNSET)
 
-        filter_keys = cast(list[str], d.pop("filterKeys", UNSET))
-
         is_nullable = d.pop("isNullable", UNSET)
 
         key = d.pop("key", UNSET)
@@ -97,7 +87,6 @@ class ColumnDefinesASearchableColumnAndItsProperties:
         column_defines_a_searchable_column_and_its_properties = cls(
             additional_filter=additional_filter,
             auto_complete=auto_complete,
-            filter_keys=filter_keys,
             is_nullable=is_nullable,
             key=key,
             origin=origin,

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import TYPE_CHECKING, Any, TypeVar, cast
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -25,7 +25,6 @@ class Selector:
         alias (str | Unset):
         auto_complete (bool | Unset):
         condition_filter (Group | Unset):
-        filter_keys (list[str] | Unset):
         is_nullable (bool | Unset):
         key (str | Unset):
         origin (str | Unset):
@@ -38,7 +37,6 @@ class Selector:
     alias: str | Unset = UNSET
     auto_complete: bool | Unset = UNSET
     condition_filter: Group | Unset = UNSET
-    filter_keys: list[str] | Unset = UNSET
     is_nullable: bool | Unset = UNSET
     key: str | Unset = UNSET
     origin: str | Unset = UNSET
@@ -57,10 +55,6 @@ class Selector:
         condition_filter: dict[str, Any] | Unset = UNSET
         if not isinstance(self.condition_filter, Unset):
             condition_filter = self.condition_filter.to_dict()
-
-        filter_keys: list[str] | Unset = UNSET
-        if not isinstance(self.filter_keys, Unset):
-            filter_keys = self.filter_keys
 
         is_nullable = self.is_nullable
 
@@ -92,8 +86,6 @@ class Selector:
             field_dict["autoComplete"] = auto_complete
         if condition_filter is not UNSET:
             field_dict["conditionFilter"] = condition_filter
-        if filter_keys is not UNSET:
-            field_dict["filterKeys"] = filter_keys
         if is_nullable is not UNSET:
             field_dict["isNullable"] = is_nullable
         if key is not UNSET:
@@ -129,8 +121,6 @@ class Selector:
         else:
             condition_filter = Group.from_dict(_condition_filter)
 
-        filter_keys = cast(list[str], d.pop("filterKeys", UNSET))
-
         is_nullable = d.pop("isNullable", UNSET)
 
         key = d.pop("key", UNSET)
@@ -160,7 +150,6 @@ class Selector:
             alias=alias,
             auto_complete=auto_complete,
             condition_filter=condition_filter,
-            filter_keys=filter_keys,
             is_nullable=is_nullable,
             key=key,
             origin=origin,
