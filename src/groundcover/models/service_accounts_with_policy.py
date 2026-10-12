@@ -22,6 +22,9 @@ T = TypeVar("T", bound="ServiceAccountsWithPolicy")
 class ServiceAccountsWithPolicy:
     """
     Attributes:
+        created_by (str | Unset): Email of the user who created the service account.
+        creation_date (datetime.datetime | Unset): Timestamp when the service account was created.
+            Format: date-time
         deleted (bool | Unset): Indicates if the service account has been marked for deletion.
         email (str | Unset): The email address of the service account.
         last_active (datetime.datetime | Unset): Timestamp of the last activity detected for this service account.
@@ -30,6 +33,8 @@ class ServiceAccountsWithPolicy:
         service_account_id (str | Unset): The UUID of the service account.
     """
 
+    created_by: str | Unset = UNSET
+    creation_date: datetime.datetime | Unset = UNSET
     deleted: bool | Unset = UNSET
     email: str | Unset = UNSET
     last_active: datetime.datetime | Unset = UNSET
@@ -39,6 +44,12 @@ class ServiceAccountsWithPolicy:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        created_by = self.created_by
+
+        creation_date: str | Unset = UNSET
+        if not isinstance(self.creation_date, Unset):
+            creation_date = self.creation_date.isoformat()
+
         deleted = self.deleted
 
         email = self.email
@@ -61,6 +72,10 @@ class ServiceAccountsWithPolicy:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if created_by is not UNSET:
+            field_dict["createdBy"] = created_by
+        if creation_date is not UNSET:
+            field_dict["creationDate"] = creation_date
         if deleted is not UNSET:
             field_dict["deleted"] = deleted
         if email is not UNSET:
@@ -81,6 +96,15 @@ class ServiceAccountsWithPolicy:
         from ..models.service_account_policy_ref import ServiceAccountPolicyRef
 
         d = dict(src_dict)
+        created_by = d.pop("createdBy", UNSET)
+
+        _creation_date = d.pop("creationDate", UNSET)
+        creation_date: datetime.datetime | Unset
+        if isinstance(_creation_date, Unset) or _creation_date is None:
+            creation_date = UNSET
+        else:
+            creation_date = parse_datetime(_creation_date)
+
         deleted = d.pop("deleted", UNSET)
 
         email = d.pop("email", UNSET)
@@ -106,6 +130,8 @@ class ServiceAccountsWithPolicy:
         service_account_id = d.pop("serviceAccountId", UNSET)
 
         service_accounts_with_policy = cls(
+            created_by=created_by,
+            creation_date=creation_date,
             deleted=deleted,
             email=email,
             last_active=last_active,
