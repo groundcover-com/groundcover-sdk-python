@@ -321,6 +321,7 @@ from .create_ingestion_key_request_type import CreateIngestionKeyRequestType
 from .create_ingestion_key_response_400 import CreateIngestionKeyResponse400
 from .create_ingestion_key_response_409 import CreateIngestionKeyResponse409
 from .create_ingestion_key_response_500 import CreateIngestionKeyResponse500
+from .create_investigation_request import CreateInvestigationRequest
 from .create_mappings_request import CreateMappingsRequest
 from .create_mappings_request_data_type import CreateMappingsRequestDataType
 from .create_migration_request import CreateMigrationRequest
@@ -655,6 +656,7 @@ from .get_events_over_time_response_500 import GetEventsOverTimeResponse500
 from .get_events_over_time_response_defines_the_structure_for_the_events_over_time_api_response import (
     GetEventsOverTimeResponseDefinesTheStructureForTheEventsOverTimeAPIResponse,
 )
+from .get_investigation_response import GetInvestigationResponse
 from .get_keys_response_400 import GetKeysResponse400
 from .get_keys_response_500 import GetKeysResponse500
 from .get_logs_pipeline_config_response_204 import GetLogsPipelineConfigResponse204
@@ -727,6 +729,8 @@ from .integration_count_holds_an_integration_name_and_its_count_for_sorted_outpu
     IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput,
 )
 from .integrations import Integrations
+from .investigation_author import InvestigationAuthor
+from .investigation_author_type import InvestigationAuthorType
 from .investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question import (
     InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion,
 )
@@ -736,6 +740,10 @@ from .investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_an
 from .investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question_status import (
     InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus,
 )
+from .investigation_scope_entry import InvestigationScopeEntry
+from .investigation_source import InvestigationSource
+from .investigation_source_ref import InvestigationSourceRef
+from .investigation_time_range import InvestigationTimeRange
 from .invite_request import InviteRequest
 from .invitee_details import InviteeDetails
 from .issue_display_controls_how_the_resulting_issue_is_rendered import (
@@ -1786,6 +1794,7 @@ __all__ = (
     "CreateIngestionKeyResponse400",
     "CreateIngestionKeyResponse409",
     "CreateIngestionKeyResponse500",
+    "CreateInvestigationRequest",
     "CreateMappingsRequest",
     "CreateMappingsRequestDataType",
     "CreateMigrationRequest",
@@ -2010,6 +2019,7 @@ __all__ = (
     "GetEventsOverTimeResponse400",
     "GetEventsOverTimeResponse500",
     "GetEventsOverTimeResponseDefinesTheStructureForTheEventsOverTimeAPIResponse",
+    "GetInvestigationResponse",
     "GetKeysResponse400",
     "GetKeysResponse500",
     "GetLogsPipelineConfigResponse204",
@@ -2076,9 +2086,15 @@ __all__ = (
     "IntegrationCountBucketCountsUnitsPerDataSourceMappingByIntegration",
     "IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput",
     "Integrations",
+    "InvestigationAuthor",
+    "InvestigationAuthorType",
     "InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion",
     "InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionKind",
     "InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus",
+    "InvestigationScopeEntry",
+    "InvestigationSource",
+    "InvestigationSourceRef",
+    "InvestigationTimeRange",
     "InviteeDetails",
     "InviteRequest",
     "IssueDisplayControlsHowTheResultingIssueIsRendered",

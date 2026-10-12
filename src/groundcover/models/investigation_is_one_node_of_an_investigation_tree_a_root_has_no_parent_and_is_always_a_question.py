@@ -4,7 +4,7 @@ import datetime
 
 from .._datetime_compat import parse_datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 from uuid import UUID
 
 from attrs import define as _attrs_define
@@ -18,6 +18,13 @@ from ..models.investigation_is_one_node_of_an_investigation_tree_a_root_has_no_p
 )
 from .._generated_types import UNSET, Unset
 
+if TYPE_CHECKING:
+    from ..models.investigation_author import InvestigationAuthor
+    from ..models.investigation_scope_entry import InvestigationScopeEntry
+    from ..models.investigation_source import InvestigationSource
+    from ..models.investigation_time_range import InvestigationTimeRange
+
+
 T = TypeVar("T", bound="InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion")
 
 
@@ -26,25 +33,39 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
     """
     Attributes:
         created_at (datetime.datetime):
+        created_by (InvestigationAuthor):
         id (UUID):
         kind (InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionKind):
         root_id (UUID): Root of the tree; equals id for roots.
         statement (str): The question, or the claim to test.
         status (InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus):
+        closed_at (datetime.datetime | Unset):
+        outcome (str | Unset):
         parent_id (UUID | Unset): Parent node; omitted for roots.
+        scope (list[InvestigationScopeEntry] | Unset):
+        source (InvestigationSource | Unset):
+        time_range (InvestigationTimeRange | Unset):
     """
 
     created_at: datetime.datetime
+    created_by: InvestigationAuthor
     id: UUID
     kind: InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionKind
     root_id: UUID
     statement: str
     status: InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus
+    closed_at: datetime.datetime | Unset = UNSET
+    outcome: str | Unset = UNSET
     parent_id: UUID | Unset = UNSET
+    scope: list[InvestigationScopeEntry] | Unset = UNSET
+    source: InvestigationSource | Unset = UNSET
+    time_range: InvestigationTimeRange | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         created_at = self.created_at.isoformat()
+
+        created_by = self.created_by.to_dict()
 
         id = str(self.id)
 
@@ -56,15 +77,37 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
 
         status = self.status.value
 
+        closed_at: str | Unset = UNSET
+        if not isinstance(self.closed_at, Unset):
+            closed_at = self.closed_at.isoformat()
+
+        outcome = self.outcome
+
         parent_id: str | Unset = UNSET
         if not isinstance(self.parent_id, Unset):
             parent_id = str(self.parent_id)
+
+        scope: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.scope, Unset):
+            scope = []
+            for scope_item_data in self.scope:
+                scope_item = scope_item_data.to_dict()
+                scope.append(scope_item)
+
+        source: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.source, Unset):
+            source = self.source.to_dict()
+
+        time_range: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.time_range, Unset):
+            time_range = self.time_range.to_dict()
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
                 "createdAt": created_at,
+                "createdBy": created_by,
                 "id": id,
                 "kind": kind,
                 "rootId": root_id,
@@ -72,22 +115,32 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
                 "status": status,
             }
         )
+        if closed_at is not UNSET:
+            field_dict["closedAt"] = closed_at
+        if outcome is not UNSET:
+            field_dict["outcome"] = outcome
         if parent_id is not UNSET:
             field_dict["parentId"] = parent_id
+        if scope is not UNSET:
+            field_dict["scope"] = scope
+        if source is not UNSET:
+            field_dict["source"] = source
+        if time_range is not UNSET:
+            field_dict["timeRange"] = time_range
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        if isinstance(src_dict, str):
-            if not src_dict.strip():
-                src_dict = {}
-            else:
-                import json
+        from ..models.investigation_author import InvestigationAuthor
+        from ..models.investigation_scope_entry import InvestigationScopeEntry
+        from ..models.investigation_source import InvestigationSource
+        from ..models.investigation_time_range import InvestigationTimeRange
 
-                src_dict = json.loads(src_dict)
         d = dict(src_dict)
         created_at = parse_datetime(d.pop("createdAt"))
+
+        created_by = InvestigationAuthor.from_dict(d.pop("createdBy"))
 
         id = UUID(d.pop("id"))
 
@@ -99,6 +152,15 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
 
         status = InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus(d.pop("status"))
 
+        _closed_at = d.pop("closedAt", UNSET)
+        closed_at: datetime.datetime | Unset
+        if isinstance(_closed_at, Unset) or _closed_at is None:
+            closed_at = UNSET
+        else:
+            closed_at = parse_datetime(_closed_at)
+
+        outcome = d.pop("outcome", UNSET)
+
         _parent_id = d.pop("parentId", UNSET)
         parent_id: UUID | Unset
         if isinstance(_parent_id, Unset) or _parent_id is None:
@@ -106,14 +168,43 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         else:
             parent_id = UUID(_parent_id)
 
+        _scope = d.pop("scope", UNSET)
+        scope: list[InvestigationScopeEntry] | Unset = UNSET
+        if _scope is not UNSET:
+            scope = []
+            for scope_item_data in _scope:
+                scope_item = InvestigationScopeEntry.from_dict(scope_item_data)
+
+                scope.append(scope_item)
+
+        _source = d.pop("source", UNSET)
+        source: InvestigationSource | Unset
+        if isinstance(_source, Unset) or _source is None:
+            source = UNSET
+        else:
+            source = InvestigationSource.from_dict(_source)
+
+        _time_range = d.pop("timeRange", UNSET)
+        time_range: InvestigationTimeRange | Unset
+        if isinstance(_time_range, Unset) or _time_range is None:
+            time_range = UNSET
+        else:
+            time_range = InvestigationTimeRange.from_dict(_time_range)
+
         investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question = cls(
             created_at=created_at,
+            created_by=created_by,
             id=id,
             kind=kind,
             root_id=root_id,
             statement=statement,
             status=status,
+            closed_at=closed_at,
+            outcome=outcome,
             parent_id=parent_id,
+            scope=scope,
+            source=source,
+            time_range=time_range,
         )
 
         investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question.additional_properties = d
