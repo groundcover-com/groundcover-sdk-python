@@ -953,6 +953,9 @@ from .monitor_list_item import MonitorListItem
 from .monitor_list_request import MonitorListRequest
 from .monitor_list_response import MonitorListResponse
 from .monitor_options import MonitorOptions
+from .monitor_revisions_response_is_a_page_of_revisions_newest_first import (
+    MonitorRevisionsResponseIsAPageOfRevisionsNewestFirst,
+)
 from .monitor_spec_is_the_v2_monitor_document_value_required_outright_pointer_optional_nil_means_the_author_omitted_it_and_that_intent_is_preserved_in_the_stored_document_defaults_are_applied_on_read_neverbaked_in_at_write import (
     MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWrite,
 )
@@ -1094,6 +1097,7 @@ from .request_check_request_configuration_only_one_field_should_be_set_based_on_
 from .restore_dashboard_response_400 import RestoreDashboardResponse400
 from .restore_dashboard_response_404 import RestoreDashboardResponse404
 from .restore_dashboard_response_500 import RestoreDashboardResponse500
+from .revision_entry import RevisionEntry
 from .role_map_defines_the_mapping_of_roles_to_permissions import RoleMapDefinesTheMappingOfRolesToPermissions
 from .rollup import Rollup
 from .root_span_details import RootSpanDetails
@@ -2254,6 +2258,7 @@ __all__ = (
     "MonitorListRequest",
     "MonitorListResponse",
     "MonitorOptions",
+    "MonitorRevisionsResponseIsAPageOfRevisionsNewestFirst",
     "MonitorsCatalogItem",
     "MonitorsCatalogItemByPack",
     "MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMeansTheAuthorOmittedItAndThatIntentIsPRESERVEDInTheStoredDocumentDefaultsAreAppliedOnReadNeverbakedInAtWrite",
@@ -2339,6 +2344,7 @@ __all__ = (
     "RestoreDashboardResponse400",
     "RestoreDashboardResponse404",
     "RestoreDashboardResponse500",
+    "RevisionEntry",
     "RoleMapDefinesTheMappingOfRolesToPermissions",
     "Rollup",
     "RootlyData",
