@@ -7,6 +7,7 @@ from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 if TYPE_CHECKING:
+    from ..models.investigation_finding import InvestigationFinding
     from ..models.investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question import (
         InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion,
     )
@@ -20,10 +21,13 @@ class GetInvestigationResponse:
     """
     Attributes:
         children (list[InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion]):
+        findings (list[InvestigationFinding]): Findings belonging to this node, included for all callers; an empty
+            collection is [].
         investigation (InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion):
     """
 
     children: list[InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion]
+    findings: list[InvestigationFinding]
     investigation: InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -33,6 +37,11 @@ class GetInvestigationResponse:
             children_item = children_item_data.to_dict()
             children.append(children_item)
 
+        findings = []
+        for findings_item_data in self.findings:
+            findings_item = findings_item_data.to_dict()
+            findings.append(findings_item)
+
         investigation = self.investigation.to_dict()
 
         field_dict: dict[str, Any] = {}
@@ -40,6 +49,7 @@ class GetInvestigationResponse:
         field_dict.update(
             {
                 "children": children,
+                "findings": findings,
                 "investigation": investigation,
             }
         )
@@ -48,6 +58,7 @@ class GetInvestigationResponse:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.investigation_finding import InvestigationFinding
         from ..models.investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question import (
             InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion,
         )
@@ -62,12 +73,20 @@ class GetInvestigationResponse:
 
             children.append(children_item)
 
+        findings = []
+        _findings = d.pop("findings")
+        for findings_item_data in _findings:
+            findings_item = InvestigationFinding.from_dict(findings_item_data)
+
+            findings.append(findings_item)
+
         investigation = InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion.from_dict(
             d.pop("investigation")
         )
 
         get_investigation_response = cls(
             children=children,
+            findings=findings,
             investigation=investigation,
         )
 
