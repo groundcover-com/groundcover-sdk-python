@@ -12,6 +12,9 @@ from attrs import field as _attrs_field
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.assessment_is_one_participants_current_conclusion_on_a_node import (
+        AssessmentIsOneParticipantsCurrentConclusionOnANode,
+    )
     from ..models.investigation_finding import InvestigationFinding
     from ..models.investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question import (
         InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion,
@@ -25,6 +28,8 @@ T = TypeVar("T", bound="GetInvestigationResponse")
 class GetInvestigationResponse:
     """
     Attributes:
+        assessments (list[AssessmentIsOneParticipantsCurrentConclusionOnANode]): Each participant's assessment on this
+            node, its evidence embedding the cited findings; an empty collection is [].
         children (list[InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion]):
         events_after (int): Tree events after afterTimestamp, or all events when it is omitted.
         findings (list[InvestigationFinding]): Findings belonging to this node, included for all callers; an empty
@@ -33,6 +38,7 @@ class GetInvestigationResponse:
         next_after_timestamp (datetime.datetime | Unset): Timestamp of the latest tree event in this snapshot.
     """
 
+    assessments: list[AssessmentIsOneParticipantsCurrentConclusionOnANode]
     children: list[InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion]
     events_after: int
     findings: list[InvestigationFinding]
@@ -41,6 +47,11 @@ class GetInvestigationResponse:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        assessments = []
+        for assessments_item_data in self.assessments:
+            assessments_item = assessments_item_data.to_dict()
+            assessments.append(assessments_item)
+
         children = []
         for children_item_data in self.children:
             children_item = children_item_data.to_dict()
@@ -63,6 +74,7 @@ class GetInvestigationResponse:
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
+                "assessments": assessments,
                 "children": children,
                 "eventsAfter": events_after,
                 "findings": findings,
@@ -76,12 +88,22 @@ class GetInvestigationResponse:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.assessment_is_one_participants_current_conclusion_on_a_node import (
+            AssessmentIsOneParticipantsCurrentConclusionOnANode,
+        )
         from ..models.investigation_finding import InvestigationFinding
         from ..models.investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question import (
             InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion,
         )
 
         d = dict(src_dict)
+        assessments = []
+        _assessments = d.pop("assessments")
+        for assessments_item_data in _assessments:
+            assessments_item = AssessmentIsOneParticipantsCurrentConclusionOnANode.from_dict(assessments_item_data)
+
+            assessments.append(assessments_item)
+
         children = []
         _children = d.pop("children")
         for children_item_data in _children:
@@ -112,6 +134,7 @@ class GetInvestigationResponse:
             next_after_timestamp = parse_datetime(_next_after_timestamp)
 
         get_investigation_response = cls(
+            assessments=assessments,
             children=children,
             events_after=events_after,
             findings=findings,

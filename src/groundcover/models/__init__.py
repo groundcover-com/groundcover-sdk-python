@@ -91,6 +91,12 @@ from .archive_dashboard_response_404 import ArchiveDashboardResponse404
 from .archive_dashboard_response_409 import ArchiveDashboardResponse409
 from .archive_dashboard_response_500 import ArchiveDashboardResponse500
 from .assertion_defines_model_for_assertion import AssertionDefinesModelForAssertion
+from .assessment_is_one_participants_current_conclusion_on_a_node import (
+    AssessmentIsOneParticipantsCurrentConclusionOnANode,
+)
+from .assessment_is_one_participants_current_conclusion_on_a_node_verdict import (
+    AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict,
+)
 from .asset_data_source import AssetDataSource
 from .asset_data_source_status import AssetDataSourceStatus
 from .asset_exclusion import AssetExclusion
@@ -576,6 +582,8 @@ from .events_search_request import EventsSearchRequest
 from .events_search_response_400 import EventsSearchResponse400
 from .events_search_response_500 import EventsSearchResponse500
 from .events_search_time_series_request import EventsSearchTimeSeriesRequest
+from .evidence_request import EvidenceRequest
+from .evidence_request_relation import EvidenceRequestRelation
 from .executed_query_is_the_evidence_for_a_units_wet_outcome_the_query_that_ran import (
     ExecutedQueryIsTheEvidenceForAUnitsWetOutcomeTheQueryThatRan,
 )
@@ -752,8 +760,16 @@ from .integration_count_holds_an_integration_name_and_its_count_for_sorted_outpu
     IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput,
 )
 from .integrations import Integrations
+from .invalid_citation_is_one_entry_of_the_error_details_when_cited_findings_cant_be_used import (
+    InvalidCitationIsOneEntryOfTheErrorDetailsWhenCitedFindingsCantBeUsed,
+)
+from .invalid_citation_is_one_entry_of_the_error_details_when_cited_findings_cant_be_used_code import (
+    InvalidCitationIsOneEntryOfTheErrorDetailsWhenCitedFindingsCantBeUsedCode,
+)
 from .investigation_author import InvestigationAuthor
 from .investigation_author_type import InvestigationAuthorType
+from .investigation_evidence import InvestigationEvidence
+from .investigation_evidence_relation import InvestigationEvidenceRelation
 from .investigation_finding import InvestigationFinding
 from .investigation_finding_query_language import InvestigationFindingQueryLanguage
 from .investigation_finding_signal import InvestigationFindingSignal
@@ -1213,6 +1229,9 @@ from .sessions_query_response import SessionsQueryResponse
 from .sessions_summary_request_params import SessionsSummaryRequestParams
 from .sessions_summary_request_params_category import SessionsSummaryRequestParamsCategory
 from .sessions_summary_response import SessionsSummaryResponse
+from .set_assessment_request_replaces_the_callers_assessment_on_the_node import (
+    SetAssessmentRequestReplacesTheCallersAssessmentOnTheNode,
+)
 from .silence import Silence
 from .silence_matcher import SilenceMatcher
 from .simulation_request import SimulationRequest
@@ -1684,6 +1703,8 @@ __all__ = (
     "ArchiveDashboardResponse409",
     "ArchiveDashboardResponse500",
     "AssertionDefinesModelForAssertion",
+    "AssessmentIsOneParticipantsCurrentConclusionOnANode",
+    "AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict",
     "AssetDataSource",
     "AssetDataSourceStatus",
     "AssetExclusion",
@@ -1997,6 +2018,8 @@ __all__ = (
     "EventsSearchResponse400",
     "EventsSearchResponse500",
     "EventsSearchTimeSeriesRequest",
+    "EvidenceRequest",
+    "EvidenceRequestRelation",
     "ExecutedQueryIsTheEvidenceForAUnitsWetOutcomeTheQueryThatRan",
     "ExecutionPolicyDefinesModelForExecutionPolicy",
     "ExecutionPolicyDefinesModelForExecutionPolicyRetries",
@@ -2129,8 +2152,12 @@ __all__ = (
     "IntegrationCountBucketCountsUnitsPerDataSourceMappingByIntegration",
     "IntegrationCountHoldsAnIntegrationNameAndItsCountForSortedOutput",
     "Integrations",
+    "InvalidCitationIsOneEntryOfTheErrorDetailsWhenCitedFindingsCantBeUsed",
+    "InvalidCitationIsOneEntryOfTheErrorDetailsWhenCitedFindingsCantBeUsedCode",
     "InvestigationAuthor",
     "InvestigationAuthorType",
+    "InvestigationEvidence",
+    "InvestigationEvidenceRelation",
     "InvestigationFinding",
     "InvestigationFindingQueryLanguage",
     "InvestigationFindingSignal",
@@ -2452,6 +2479,7 @@ __all__ = (
     "SessionsSummaryRequestParams",
     "SessionsSummaryRequestParamsCategory",
     "SessionsSummaryResponse",
+    "SetAssessmentRequestReplacesTheCallersAssessmentOnTheNode",
     "Silence",
     "SilenceMatcher",
     "SimulationRequest",
