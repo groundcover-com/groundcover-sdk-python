@@ -10,8 +10,10 @@ from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.investigation_scope_entry import InvestigationScopeEntry
-    from ..models.investigation_source import InvestigationSource
     from ..models.investigation_time_range import InvestigationTimeRange
+    from ..models.source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time import (
+        SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime,
+    )
 
 
 T = TypeVar("T", bound="CreateInvestigationRequest")
@@ -23,13 +25,13 @@ class CreateInvestigationRequest:
     Attributes:
         statement (str):
         scope (list[InvestigationScopeEntry] | Unset):
-        source (InvestigationSource | Unset):
+        source (SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime | Unset):
         time_range (InvestigationTimeRange | Unset):
     """
 
     statement: str
     scope: list[InvestigationScopeEntry] | Unset = UNSET
-    source: InvestigationSource | Unset = UNSET
+    source: SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime | Unset = UNSET
     time_range: InvestigationTimeRange | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -70,8 +72,10 @@ class CreateInvestigationRequest:
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.investigation_scope_entry import InvestigationScopeEntry
-        from ..models.investigation_source import InvestigationSource
         from ..models.investigation_time_range import InvestigationTimeRange
+        from ..models.source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time import (
+            SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime,
+        )
 
         d = dict(src_dict)
         statement = d.pop("statement")
@@ -86,11 +90,11 @@ class CreateInvestigationRequest:
                 scope.append(scope_item)
 
         _source = d.pop("source", UNSET)
-        source: InvestigationSource | Unset
+        source: SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime | Unset
         if isinstance(_source, Unset) or _source is None:
             source = UNSET
         else:
-            source = InvestigationSource.from_dict(_source)
+            source = SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime.from_dict(_source)
 
         _time_range = d.pop("timeRange", UNSET)
         time_range: InvestigationTimeRange | Unset

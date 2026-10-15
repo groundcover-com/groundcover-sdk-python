@@ -776,6 +776,15 @@ from .investigation_author import InvestigationAuthor
 from .investigation_author_type import InvestigationAuthorType
 from .investigation_evidence import InvestigationEvidence
 from .investigation_evidence_relation import InvestigationEvidenceRelation
+from .investigation_exists_details_is_the_details_of_a409investigationexists_the_root_to_join import (
+    InvestigationExistsDetailsIsTheDetailsOfA409INVESTIGATIONEXISTSTheRootToJoin,
+)
+from .investigation_exists_error_is_the_409_body_of_create_investigation_the_issue_already_has_an_open_root_to_join import (
+    InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssueAlreadyHasAnOpenRootToJoin,
+)
+from .investigation_exists_error_is_the_409_body_of_create_investigation_the_issue_already_has_an_open_root_to_join_code import (
+    InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssueAlreadyHasAnOpenRootToJoinCode,
+)
 from .investigation_finding import InvestigationFinding
 from .investigation_finding_query_language import InvestigationFindingQueryLanguage
 from .investigation_finding_signal import InvestigationFindingSignal
@@ -789,7 +798,6 @@ from .investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_an
     InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus,
 )
 from .investigation_scope_entry import InvestigationScopeEntry
-from .investigation_source import InvestigationSource
 from .investigation_source_ref import InvestigationSourceRef
 from .investigation_time_range import InvestigationTimeRange
 from .invite_request import InviteRequest
@@ -1280,6 +1288,12 @@ from .slack_delivery_options_requires_a_non_empty_channels_when_present import (
 )
 from .slack_webhook_data import SlackWebhookData
 from .slack_webhook_data_response import SlackWebhookDataResponse
+from .source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time import (
+    SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime,
+)
+from .source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time_type import (
+    SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType,
+)
 from .source_map_upload_response_is_the_json_success_body_returned_by_the_upload_handler import (
     SourceMapUploadResponseIsTheJSONSuccessBodyReturnedByTheUploadHandler,
 )
@@ -2182,6 +2196,9 @@ __all__ = (
     "InvestigationAuthorType",
     "InvestigationEvidence",
     "InvestigationEvidenceRelation",
+    "InvestigationExistsDetailsIsTheDetailsOfA409INVESTIGATIONEXISTSTheRootToJoin",
+    "InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssueAlreadyHasAnOpenRootToJoin",
+    "InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssueAlreadyHasAnOpenRootToJoinCode",
     "InvestigationFinding",
     "InvestigationFindingQueryLanguage",
     "InvestigationFindingSignal",
@@ -2189,7 +2206,6 @@ __all__ = (
     "InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionKind",
     "InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus",
     "InvestigationScopeEntry",
-    "InvestigationSource",
     "InvestigationSourceRef",
     "InvestigationTimeRange",
     "InviteeDetails",
@@ -2526,6 +2542,8 @@ __all__ = (
     "SlackDeliveryOptionsRequiresANonEmptyChannelsWhenPresent",
     "SlackWebhookData",
     "SlackWebhookDataResponse",
+    "SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime",
+    "SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType",
     "SourceMapUploadResponseIsTheJSONSuccessBodyReturnedByTheUploadHandler",
     "SpanEvent",
     "SpanEventAttributes",

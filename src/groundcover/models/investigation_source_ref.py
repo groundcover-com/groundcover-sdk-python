@@ -11,14 +11,24 @@ T = TypeVar("T", bound="InvestigationSourceRef")
 
 @_attrs_define
 class InvestigationSourceRef:
-    """JSON object whose serialized representation is at most 8192 bytes."""
+    """
+    Attributes:
+        issue_fingerprint (str): The monitor issue's fingerprint.
+    """
 
+    issue_fingerprint: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        issue_fingerprint = self.issue_fingerprint
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update(
+            {
+                "issueFingerprint": issue_fingerprint,
+            }
+        )
 
         return field_dict
 
@@ -32,7 +42,11 @@ class InvestigationSourceRef:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        investigation_source_ref = cls()
+        issue_fingerprint = d.pop("issueFingerprint")
+
+        investigation_source_ref = cls(
+            issue_fingerprint=issue_fingerprint,
+        )
 
         investigation_source_ref.additional_properties = d
         return investigation_source_ref

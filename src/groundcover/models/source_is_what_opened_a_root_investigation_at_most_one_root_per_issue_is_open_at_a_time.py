@@ -6,43 +6,42 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from .._generated_types import UNSET, Unset
+from ..models.source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time_type import (
+    SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType,
+)
 
 if TYPE_CHECKING:
     from ..models.investigation_source_ref import InvestigationSourceRef
 
 
-T = TypeVar("T", bound="InvestigationSource")
+T = TypeVar("T", bound="SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime")
 
 
 @_attrs_define
-class InvestigationSource:
+class SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime:
     """
     Attributes:
-        type_ (str):
-        ref (InvestigationSourceRef | Unset): JSON object whose serialized representation is at most 8192 bytes.
+        ref (InvestigationSourceRef):
+        type_ (SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType):
     """
 
-    type_: str
-    ref: InvestigationSourceRef | Unset = UNSET
+    ref: InvestigationSourceRef
+    type_: SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        type_ = self.type_
+        ref = self.ref.to_dict()
 
-        ref: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.ref, Unset):
-            ref = self.ref.to_dict()
+        type_ = self.type_.value
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
+                "ref": ref,
                 "type": type_,
             }
         )
-        if ref is not UNSET:
-            field_dict["ref"] = ref
 
         return field_dict
 
@@ -51,22 +50,17 @@ class InvestigationSource:
         from ..models.investigation_source_ref import InvestigationSourceRef
 
         d = dict(src_dict)
-        type_ = d.pop("type")
+        ref = InvestigationSourceRef.from_dict(d.pop("ref"))
 
-        _ref = d.pop("ref", UNSET)
-        ref: InvestigationSourceRef | Unset
-        if isinstance(_ref, Unset) or _ref is None:
-            ref = UNSET
-        else:
-            ref = InvestigationSourceRef.from_dict(_ref)
+        type_ = SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType(d.pop("type"))
 
-        investigation_source = cls(
-            type_=type_,
+        source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time = cls(
             ref=ref,
+            type_=type_,
         )
 
-        investigation_source.additional_properties = d
-        return investigation_source
+        source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time.additional_properties = d
+        return source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time
 
     @property
     def additional_keys(self) -> list[str]:
