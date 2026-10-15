@@ -553,6 +553,16 @@ from .evaluation_interval_defines_the_evaluation_frequency_and_pending_duration 
 )
 from .event_details import EventDetails
 from .event_details_event_attributes import EventDetailsEventAttributes
+from .event_is_an_attributable_change_in_an_investigation_tree import EventIsAnAttributableChangeInAnInvestigationTree
+from .event_is_an_attributable_change_in_an_investigation_tree_entity_type import (
+    EventIsAnAttributableChangeInAnInvestigationTreeEntityType,
+)
+from .event_is_an_attributable_change_in_an_investigation_tree_payload import (
+    EventIsAnAttributableChangeInAnInvestigationTreePayload,
+)
+from .event_is_an_attributable_change_in_an_investigation_tree_type import (
+    EventIsAnAttributableChangeInAnInvestigationTreeType,
+)
 from .event_request import EventRequest
 from .event_request_params import EventRequestParams
 from .events_over_time_response_defines_the_structure_for_a_single_event_in_the_events_over_time_api_response import (
@@ -667,6 +677,9 @@ from .get_events_over_time_response_defines_the_structure_for_the_events_over_ti
     GetEventsOverTimeResponseDefinesTheStructureForTheEventsOverTimeAPIResponse,
 )
 from .get_investigation_response import GetInvestigationResponse
+from .get_investigation_tree_response_is_one_consistent_snapshot_of_the_complete_tree import (
+    GetInvestigationTreeResponseIsOneConsistentSnapshotOfTheCompleteTree,
+)
 from .get_keys_response_400 import GetKeysResponse400
 from .get_keys_response_500 import GetKeysResponse500
 from .get_logs_pipeline_config_response_204 import GetLogsPipelineConfigResponse204
@@ -850,6 +863,9 @@ from .list_connected_apps_response_500 import ListConnectedAppsResponse500
 from .list_ingestion_keys_request import ListIngestionKeysRequest
 from .list_ingestion_keys_response_400 import ListIngestionKeysResponse400
 from .list_ingestion_keys_response_500 import ListIngestionKeysResponse500
+from .list_investigation_events_response_is_a_page_ordered_by_event_timestamp import (
+    ListInvestigationEventsResponseIsAPageOrderedByEventTimestamp,
+)
 from .list_investigations_response import ListInvestigationsResponse
 from .list_migration_cloud_integrations_response import ListMigrationCloudIntegrationsResponse
 from .list_migration_data_sources_response import ListMigrationDataSourcesResponse
@@ -1968,6 +1984,10 @@ __all__ = (
     "EvaluationIntervalDefinesTheEvaluationFrequencyAndPendingDuration",
     "EventDetails",
     "EventDetailsEventAttributes",
+    "EventIsAnAttributableChangeInAnInvestigationTree",
+    "EventIsAnAttributableChangeInAnInvestigationTreeEntityType",
+    "EventIsAnAttributableChangeInAnInvestigationTreePayload",
+    "EventIsAnAttributableChangeInAnInvestigationTreeType",
     "EventRequest",
     "EventRequestParams",
     "EventsOverTimeResponseDefinesTheStructureForASingleEventInTheEventsOverTimeAPIResponse",
@@ -2042,6 +2062,7 @@ __all__ = (
     "GetEventsOverTimeResponse500",
     "GetEventsOverTimeResponseDefinesTheStructureForTheEventsOverTimeAPIResponse",
     "GetInvestigationResponse",
+    "GetInvestigationTreeResponseIsOneConsistentSnapshotOfTheCompleteTree",
     "GetKeysResponse400",
     "GetKeysResponse500",
     "GetLogsPipelineConfigResponse204",
@@ -2179,6 +2200,7 @@ __all__ = (
     "ListIngestionKeysRequest",
     "ListIngestionKeysResponse400",
     "ListIngestionKeysResponse500",
+    "ListInvestigationEventsResponseIsAPageOrderedByEventTimestamp",
     "ListInvestigationsResponse",
     "ListMigrationCloudIntegrationsResponse",
     "ListMigrationDataSourcesResponse",
