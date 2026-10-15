@@ -15,6 +15,7 @@ T = TypeVar("T", bound="TenantInfo")
 class TenantInfo:
     """
     Attributes:
+        grafana_enabled (bool | Unset):
         grafana_org_id (str | Unset):
         is_public (bool | Unset):
         org_name (str | Unset):
@@ -22,6 +23,7 @@ class TenantInfo:
         uuid (str | Unset):
     """
 
+    grafana_enabled: bool | Unset = UNSET
     grafana_org_id: str | Unset = UNSET
     is_public: bool | Unset = UNSET
     org_name: str | Unset = UNSET
@@ -30,6 +32,8 @@ class TenantInfo:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        grafana_enabled = self.grafana_enabled
+
         grafana_org_id = self.grafana_org_id
 
         is_public = self.is_public
@@ -43,6 +47,8 @@ class TenantInfo:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if grafana_enabled is not UNSET:
+            field_dict["GrafanaEnabled"] = grafana_enabled
         if grafana_org_id is not UNSET:
             field_dict["GrafanaOrgID"] = grafana_org_id
         if is_public is not UNSET:
@@ -66,6 +72,8 @@ class TenantInfo:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
+        grafana_enabled = d.pop("GrafanaEnabled", UNSET)
+
         grafana_org_id = d.pop("GrafanaOrgID", UNSET)
 
         is_public = d.pop("IsPublic", UNSET)
@@ -77,6 +85,7 @@ class TenantInfo:
         uuid = d.pop("UUID", UNSET)
 
         tenant_info = cls(
+            grafana_enabled=grafana_enabled,
             grafana_org_id=grafana_org_id,
             is_public=is_public,
             org_name=org_name,

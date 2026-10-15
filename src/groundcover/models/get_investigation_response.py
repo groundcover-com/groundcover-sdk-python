@@ -19,6 +19,9 @@ if TYPE_CHECKING:
     from ..models.investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question import (
         InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion,
     )
+    from ..models.proposal_is_an_immutable_request_for_a_decision_on_one_investigation_node import (
+        ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode,
+    )
 
 
 T = TypeVar("T", bound="GetInvestigationResponse")
@@ -35,6 +38,8 @@ class GetInvestigationResponse:
         findings (list[InvestigationFinding]): Findings belonging to this node, included for all callers; an empty
             collection is [].
         investigation (InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion):
+        proposals (list[ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode]): Pending and decided proposals
+            on this node; an empty collection is [].
         next_after_timestamp (datetime.datetime | Unset): Timestamp of the latest tree event in this snapshot.
     """
 
@@ -43,6 +48,7 @@ class GetInvestigationResponse:
     events_after: int
     findings: list[InvestigationFinding]
     investigation: InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion
+    proposals: list[ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode]
     next_after_timestamp: datetime.datetime | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -66,6 +72,11 @@ class GetInvestigationResponse:
 
         investigation = self.investigation.to_dict()
 
+        proposals = []
+        for proposals_item_data in self.proposals:
+            proposals_item = proposals_item_data.to_dict()
+            proposals.append(proposals_item)
+
         next_after_timestamp: str | Unset = UNSET
         if not isinstance(self.next_after_timestamp, Unset):
             next_after_timestamp = self.next_after_timestamp.isoformat()
@@ -79,6 +90,7 @@ class GetInvestigationResponse:
                 "eventsAfter": events_after,
                 "findings": findings,
                 "investigation": investigation,
+                "proposals": proposals,
             }
         )
         if next_after_timestamp is not UNSET:
@@ -94,6 +106,9 @@ class GetInvestigationResponse:
         from ..models.investigation_finding import InvestigationFinding
         from ..models.investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question import (
             InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion,
+        )
+        from ..models.proposal_is_an_immutable_request_for_a_decision_on_one_investigation_node import (
+            ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode,
         )
 
         d = dict(src_dict)
@@ -126,6 +141,15 @@ class GetInvestigationResponse:
             d.pop("investigation")
         )
 
+        proposals = []
+        _proposals = d.pop("proposals")
+        for proposals_item_data in _proposals:
+            proposals_item = ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode.from_dict(
+                proposals_item_data
+            )
+
+            proposals.append(proposals_item)
+
         _next_after_timestamp = d.pop("nextAfterTimestamp", UNSET)
         next_after_timestamp: datetime.datetime | Unset
         if isinstance(_next_after_timestamp, Unset) or _next_after_timestamp is None:
@@ -139,6 +163,7 @@ class GetInvestigationResponse:
             events_after=events_after,
             findings=findings,
             investigation=investigation,
+            proposals=proposals,
             next_after_timestamp=next_after_timestamp,
         )
 

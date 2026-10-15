@@ -360,6 +360,12 @@ from .create_notification_route_response_500 import CreateNotificationRouteRespo
 from .create_policy_request import CreatePolicyRequest
 from .create_policy_response_400 import CreatePolicyResponse400
 from .create_policy_response_500 import CreatePolicyResponse500
+from .create_proposal_request_submits_a_decision_for_later_approval_or_rejection import (
+    CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejection,
+)
+from .create_proposal_request_submits_a_decision_for_later_approval_or_rejection_type import (
+    CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejectionType,
+)
 from .create_recurring_silence_request import CreateRecurringSilenceRequest
 from .create_recurring_silence_request_recurrence_type import CreateRecurringSilenceRequestRecurrenceType
 from .create_recurring_silence_request_timeframes import CreateRecurringSilenceRequestTimeframes
@@ -1100,6 +1106,22 @@ from .promql_function_represents_a_function_call_in_a_prom_ql_query import (
 )
 from .promql_pipeline_represents_a_segment_of_a_prom_ql_query_which_can_be_a_metric_with_conditions_a_function_or_a_template import (
     PromqlPipelineRepresentsASegmentOfAPromQLQueryWhichCanBeAMetricWithConditionsAFunctionOrATemplate,
+)
+from .proposal_child_describes_a_node_to_create_if_the_proposal_is_approved import (
+    ProposalChildDescribesANodeToCreateIfTheProposalIsApproved,
+)
+from .proposal_child_describes_a_node_to_create_if_the_proposal_is_approved_kind import (
+    ProposalChildDescribesANodeToCreateIfTheProposalIsApprovedKind,
+)
+from .proposal_decision_records_who_decided_a_proposal_and_why import ProposalDecisionRecordsWhoDecidedAProposalAndWhy
+from .proposal_is_an_immutable_request_for_a_decision_on_one_investigation_node import (
+    ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode,
+)
+from .proposal_is_an_immutable_request_for_a_decision_on_one_investigation_node_status import (
+    ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeStatus,
+)
+from .proposal_is_an_immutable_request_for_a_decision_on_one_investigation_node_type import (
+    ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeType,
 )
 from .provider import Provider
 from .provider_state_response_is_returned_after_changing_deployment_global_provider_availability import (
@@ -1876,6 +1898,8 @@ __all__ = (
     "CreatePolicyRequest",
     "CreatePolicyResponse400",
     "CreatePolicyResponse500",
+    "CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejection",
+    "CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejectionType",
     "CreateRecurringSilenceRequest",
     "CreateRecurringSilenceRequestRecurrenceType",
     "CreateRecurringSilenceRequestTimeframes",
@@ -2389,6 +2413,12 @@ __all__ = (
     "ProfilingPeriod",
     "PromqlFunctionRepresentsAFunctionCallInAPromQLQuery",
     "PromqlPipelineRepresentsASegmentOfAPromQLQueryWhichCanBeAMetricWithConditionsAFunctionOrATemplate",
+    "ProposalChildDescribesANodeToCreateIfTheProposalIsApproved",
+    "ProposalChildDescribesANodeToCreateIfTheProposalIsApprovedKind",
+    "ProposalDecisionRecordsWhoDecidedAProposalAndWhy",
+    "ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode",
+    "ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeStatus",
+    "ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeType",
     "Provider",
     "ProviderStateResponseIsReturnedAfterChangingDeploymentGlobalProviderAvailability",
     "QueriesSummaryHoldsQueryLevelStatisticsForTheUnifiedSummary",
