@@ -91,12 +91,20 @@ from .archive_dashboard_response_404 import ArchiveDashboardResponse404
 from .archive_dashboard_response_409 import ArchiveDashboardResponse409
 from .archive_dashboard_response_500 import ArchiveDashboardResponse500
 from .assertion_defines_model_for_assertion import AssertionDefinesModelForAssertion
+from .assessment_feedback_is_provisional_feedback_from_a_rejected_proposal import (
+    AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal,
+)
+from .assessment_feedback_is_provisional_feedback_from_a_rejected_proposal_verdict import (
+    AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposalVerdict,
+)
 from .assessment_is_one_participants_current_conclusion_on_a_node import (
     AssessmentIsOneParticipantsCurrentConclusionOnANode,
 )
 from .assessment_is_one_participants_current_conclusion_on_a_node_verdict import (
     AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict,
 )
+from .assessment_verdict_request import AssessmentVerdictRequest
+from .assessment_verdict_request_verdict import AssessmentVerdictRequestVerdict
 from .asset_data_source import AssetDataSource
 from .asset_data_source_status import AssetDataSourceStatus
 from .asset_exclusion import AssetExclusion
@@ -484,6 +492,9 @@ from .dbm_measurements_search_request_queries_raw_statement_measurement_interval
 )
 from .dbm_measurements_search_time_series_request import DBMMeasurementsSearchTimeSeriesRequest
 from .dd_metric_inactive_bucket import DDMetricInactiveBucket
+from .decide_proposal_request_approves_or_rejects_a_pending_proposal import (
+    DecideProposalRequestApprovesOrRejectsAPendingProposal,
+)
 from .delete_api_key_response_400 import DeleteApiKeyResponse400
 from .delete_api_key_response_404 import DeleteApiKeyResponse404
 from .delete_api_key_response_500 import DeleteApiKeyResponse500
@@ -1739,8 +1750,12 @@ __all__ = (
     "ArchiveDashboardResponse409",
     "ArchiveDashboardResponse500",
     "AssertionDefinesModelForAssertion",
+    "AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal",
+    "AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposalVerdict",
     "AssessmentIsOneParticipantsCurrentConclusionOnANode",
     "AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict",
+    "AssessmentVerdictRequest",
+    "AssessmentVerdictRequestVerdict",
     "AssetDataSource",
     "AssetDataSourceStatus",
     "AssetExclusion",
@@ -1976,6 +1991,7 @@ __all__ = (
     "DBMMeasurementsSearchRequestQueriesRawStatementMeasurementIntervals",
     "DBMMeasurementsSearchTimeSeriesRequest",
     "DDMetricInactiveBucket",
+    "DecideProposalRequestApprovesOrRejectsAPendingProposal",
     "DeleteApiKeyResponse400",
     "DeleteApiKeyResponse404",
     "DeleteApiKeyResponse500",

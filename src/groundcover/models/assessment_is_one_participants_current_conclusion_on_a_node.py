@@ -16,6 +16,9 @@ from ..models.assessment_is_one_participants_current_conclusion_on_a_node_verdic
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.assessment_feedback_is_provisional_feedback_from_a_rejected_proposal import (
+        AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal,
+    )
     from ..models.investigation_author import InvestigationAuthor
     from ..models.investigation_evidence import InvestigationEvidence
 
@@ -39,6 +42,7 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
             open VerdictOpen
             correct VerdictCorrect
             incorrect VerdictIncorrect
+        feedback (AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal | Unset):
         verdict_reason (str | Unset):
     """
 
@@ -50,6 +54,7 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
     revision: int
     updated_at: datetime.datetime
     verdict: AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict
+    feedback: AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal | Unset = UNSET
     verdict_reason: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -73,6 +78,10 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
 
         verdict = self.verdict.value
 
+        feedback: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.feedback, Unset):
+            feedback = self.feedback.to_dict()
+
         verdict_reason = self.verdict_reason
 
         field_dict: dict[str, Any] = {}
@@ -89,6 +98,8 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
                 "verdict": verdict,
             }
         )
+        if feedback is not UNSET:
+            field_dict["feedback"] = feedback
         if verdict_reason is not UNSET:
             field_dict["verdictReason"] = verdict_reason
 
@@ -96,6 +107,9 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.assessment_feedback_is_provisional_feedback_from_a_rejected_proposal import (
+            AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal,
+        )
         from ..models.investigation_author import InvestigationAuthor
         from ..models.investigation_evidence import InvestigationEvidence
 
@@ -121,6 +135,13 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
 
         verdict = AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict(d.pop("verdict"))
 
+        _feedback = d.pop("feedback", UNSET)
+        feedback: AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal | Unset
+        if isinstance(_feedback, Unset) or _feedback is None:
+            feedback = UNSET
+        else:
+            feedback = AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal.from_dict(_feedback)
+
         verdict_reason = d.pop("verdictReason", UNSET)
 
         assessment_is_one_participants_current_conclusion_on_a_node = cls(
@@ -132,6 +153,7 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
             revision=revision,
             updated_at=updated_at,
             verdict=verdict,
+            feedback=feedback,
             verdict_reason=verdict_reason,
         )
 
