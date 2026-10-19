@@ -29,6 +29,9 @@ from .agent_delete_skill_response_404 import AgentDeleteSkillResponse404
 from .agent_delete_skill_response_500 import AgentDeleteSkillResponse500
 from .agent_delete_skill_response_502 import AgentDeleteSkillResponse502
 from .agent_delete_skill_response_503 import AgentDeleteSkillResponse503
+from .agent_discover_models_request import AgentDiscoverModelsRequest
+from .agent_discovered_model import AgentDiscoveredModel
+from .agent_discovered_models import AgentDiscoveredModels
 from .agent_get_skill_response_200 import AgentGetSkillResponse200
 from .agent_get_skill_response_400 import AgentGetSkillResponse400
 from .agent_get_skill_response_401 import AgentGetSkillResponse401
@@ -47,6 +50,7 @@ from .agent_llm_provider_config_request import AgentLLMProviderConfigRequest
 from .agent_llm_provider_entry import AgentLLMProviderEntry
 from .agent_llm_provider_entry_request import AgentLLMProviderEntryRequest
 from .agent_model_capabilities import AgentModelCapabilities
+from .agent_model_validation import AgentModelValidation
 from .agent_skill_request_is_forwarded_to_agent_service_for_skill_creation_and_updates import (
     AgentSkillRequestIsForwardedToAgentServiceForSkillCreationAndUpdates,
 )
@@ -79,6 +83,7 @@ from .agent_update_skill_response_422 import AgentUpdateSkillResponse422
 from .agent_update_skill_response_500 import AgentUpdateSkillResponse500
 from .agent_update_skill_response_502 import AgentUpdateSkillResponse502
 from .agent_update_skill_response_503 import AgentUpdateSkillResponse503
+from .agent_validate_model_request import AgentValidateModelRequest
 from .api_key_policy_ref import ApiKeyPolicyRef
 from .apm_measurements_search_request import ApmMeasurementsSearchRequest
 from .apm_measurements_search_time_series_request import ApmMeasurementsSearchTimeSeriesRequest
@@ -908,6 +913,7 @@ from .list_ingestion_keys_response_500 import ListIngestionKeysResponse500
 from .list_investigation_events_response_is_a_page_ordered_by_event_timestamp import (
     ListInvestigationEventsResponseIsAPageOrderedByEventTimestamp,
 )
+from .list_investigation_findings_response import ListInvestigationFindingsResponse
 from .list_investigations_response import ListInvestigationsResponse
 from .list_migration_cloud_integrations_response import ListMigrationCloudIntegrationsResponse
 from .list_migration_data_sources_response import ListMigrationDataSourcesResponse
@@ -1703,6 +1709,9 @@ __all__ = (
     "AgentDeleteSkillResponse500",
     "AgentDeleteSkillResponse502",
     "AgentDeleteSkillResponse503",
+    "AgentDiscoveredModel",
+    "AgentDiscoveredModels",
+    "AgentDiscoverModelsRequest",
     "AgentGetSkillResponse200",
     "AgentGetSkillResponse400",
     "AgentGetSkillResponse401",
@@ -1721,6 +1730,7 @@ __all__ = (
     "AgentLLMProviderEntry",
     "AgentLLMProviderEntryRequest",
     "AgentModelCapabilities",
+    "AgentModelValidation",
     "AgentSkillRequestIsForwardedToAgentServiceForSkillCreationAndUpdates",
     "AgentSkillSummaryIsTheCompactSkillRepresentationReturnedByListAPIs",
     "AgentToolDefaultRequestIsForwardedToAgentServiceForResourceDefaultUpserts",
@@ -1739,6 +1749,7 @@ __all__ = (
     "AgentUpdateSkillResponse500",
     "AgentUpdateSkillResponse502",
     "AgentUpdateSkillResponse503",
+    "AgentValidateModelRequest",
     "ApiKeyPolicyRef",
     "ApmMeasurementsSearchRequest",
     "ApmMeasurementsSearchTimeSeriesRequest",
@@ -2286,6 +2297,7 @@ __all__ = (
     "ListIngestionKeysResponse400",
     "ListIngestionKeysResponse500",
     "ListInvestigationEventsResponseIsAPageOrderedByEventTimestamp",
+    "ListInvestigationFindingsResponse",
     "ListInvestigationsResponse",
     "ListMigrationCloudIntegrationsResponse",
     "ListMigrationDataSourcesResponse",
