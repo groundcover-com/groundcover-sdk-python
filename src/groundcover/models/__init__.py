@@ -798,6 +798,7 @@ from .investigation_exists_error_is_the_409_body_of_create_investigation_the_iss
 )
 from .investigation_finding import InvestigationFinding
 from .investigation_finding_query_language import InvestigationFindingQueryLanguage
+from .investigation_finding_scope_details import InvestigationFindingScopeDetails
 from .investigation_finding_signal import InvestigationFindingSignal
 from .investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question import (
     InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion,
@@ -2217,6 +2218,7 @@ __all__ = (
     "InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssueAlreadyHasAnOpenRootToJoinCode",
     "InvestigationFinding",
     "InvestigationFindingQueryLanguage",
+    "InvestigationFindingScopeDetails",
     "InvestigationFindingSignal",
     "InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion",
     "InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionKind",
