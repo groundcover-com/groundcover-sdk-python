@@ -23,6 +23,9 @@ def _get_kwargs(
     end: datetime.datetime,
     query: str,
     limit: int | Unset = UNSET,
+    focus: str | Unset = UNSET,
+    frame_filter: str | Unset = UNSET,
+    invert: bool | Unset = UNSET,
 ) -> dict[str, Any]:
 
     params: dict[str, Any] = {}
@@ -36,6 +39,12 @@ def _get_kwargs(
     params["query"] = query
 
     params["limit"] = limit
+
+    params["focus"] = focus
+
+    params["frameFilter"] = frame_filter
+
+    params["invert"] = invert
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -120,6 +129,9 @@ def sync_detailed(
     end: datetime.datetime,
     query: str,
     limit: int | Unset = UNSET,
+    focus: str | Unset = UNSET,
+    frame_filter: str | Unset = UNSET,
+    invert: bool | Unset = UNSET,
 ) -> Response[
     GetProfilingFlamegraphResponse400
     | GetProfilingFlamegraphResponse404
@@ -135,6 +147,9 @@ def sync_detailed(
         end (datetime.datetime):
         query (str):
         limit (int | Unset):
+        focus (str | Unset):
+        frame_filter (str | Unset):
+        invert (bool | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -149,6 +164,9 @@ def sync_detailed(
         end=end,
         query=query,
         limit=limit,
+        focus=focus,
+        frame_filter=frame_filter,
+        invert=invert,
     )
 
     response = client.get_httpx_client().request(
@@ -165,6 +183,9 @@ def sync(
     end: datetime.datetime,
     query: str,
     limit: int | Unset = UNSET,
+    focus: str | Unset = UNSET,
+    frame_filter: str | Unset = UNSET,
+    invert: bool | Unset = UNSET,
 ) -> (
     GetProfilingFlamegraphResponse400
     | GetProfilingFlamegraphResponse404
@@ -181,6 +202,9 @@ def sync(
         end (datetime.datetime):
         query (str):
         limit (int | Unset):
+        focus (str | Unset):
+        frame_filter (str | Unset):
+        invert (bool | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -196,6 +220,9 @@ def sync(
         end=end,
         query=query,
         limit=limit,
+        focus=focus,
+        frame_filter=frame_filter,
+        invert=invert,
     ).parsed
 
 
@@ -206,6 +233,9 @@ async def asyncio_detailed(
     end: datetime.datetime,
     query: str,
     limit: int | Unset = UNSET,
+    focus: str | Unset = UNSET,
+    frame_filter: str | Unset = UNSET,
+    invert: bool | Unset = UNSET,
 ) -> Response[
     GetProfilingFlamegraphResponse400
     | GetProfilingFlamegraphResponse404
@@ -221,6 +251,9 @@ async def asyncio_detailed(
         end (datetime.datetime):
         query (str):
         limit (int | Unset):
+        focus (str | Unset):
+        frame_filter (str | Unset):
+        invert (bool | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -235,6 +268,9 @@ async def asyncio_detailed(
         end=end,
         query=query,
         limit=limit,
+        focus=focus,
+        frame_filter=frame_filter,
+        invert=invert,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -249,6 +285,9 @@ async def asyncio(
     end: datetime.datetime,
     query: str,
     limit: int | Unset = UNSET,
+    focus: str | Unset = UNSET,
+    frame_filter: str | Unset = UNSET,
+    invert: bool | Unset = UNSET,
 ) -> (
     GetProfilingFlamegraphResponse400
     | GetProfilingFlamegraphResponse404
@@ -265,6 +304,9 @@ async def asyncio(
         end (datetime.datetime):
         query (str):
         limit (int | Unset):
+        focus (str | Unset):
+        frame_filter (str | Unset):
+        invert (bool | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -281,5 +323,8 @@ async def asyncio(
             end=end,
             query=query,
             limit=limit,
+            focus=focus,
+            frame_filter=frame_filter,
+            invert=invert,
         )
     ).parsed

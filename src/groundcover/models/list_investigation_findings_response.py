@@ -1,10 +1,15 @@
 from __future__ import annotations
 
+import datetime
+
+from .._datetime_compat import parse_datetime
 from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
+
+from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.investigation_finding import InvestigationFinding
@@ -18,12 +23,15 @@ class ListInvestigationFindingsResponse:
     """
     Attributes:
         done (bool): Whether this page exhausts the findings currently stored; not investigation completion.
-        findings (list[InvestigationFinding]): Full findings across the root investigation, ordered by createdAt then
-            id, ascending.
+        findings (list[InvestigationFinding]): Full findings across the root investigation, ordered by createdAt,
+            ascending.
+        next_after_timestamp (datetime.datetime | Unset): Last returned finding's createdAt, to send as afterTimestamp;
+            an empty page retains afterTimestamp.
     """
 
     done: bool
     findings: list[InvestigationFinding]
+    next_after_timestamp: datetime.datetime | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -34,6 +42,10 @@ class ListInvestigationFindingsResponse:
             findings_item = findings_item_data.to_dict()
             findings.append(findings_item)
 
+        next_after_timestamp: str | Unset = UNSET
+        if not isinstance(self.next_after_timestamp, Unset):
+            next_after_timestamp = self.next_after_timestamp.isoformat()
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -42,6 +54,8 @@ class ListInvestigationFindingsResponse:
                 "findings": findings,
             }
         )
+        if next_after_timestamp is not UNSET:
+            field_dict["nextAfterTimestamp"] = next_after_timestamp
 
         return field_dict
 
@@ -59,9 +73,17 @@ class ListInvestigationFindingsResponse:
 
             findings.append(findings_item)
 
+        _next_after_timestamp = d.pop("nextAfterTimestamp", UNSET)
+        next_after_timestamp: datetime.datetime | Unset
+        if isinstance(_next_after_timestamp, Unset) or _next_after_timestamp is None:
+            next_after_timestamp = UNSET
+        else:
+            next_after_timestamp = parse_datetime(_next_after_timestamp)
+
         list_investigation_findings_response = cls(
             done=done,
             findings=findings,
+            next_after_timestamp=next_after_timestamp,
         )
 
         list_investigation_findings_response.additional_properties = d

@@ -10,6 +10,9 @@ from uuid import UUID
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from ..models.proposal_is_an_immutable_request_for_a_decision_on_one_investigation_node_review_state import (
+    ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeReviewState,
+)
 from ..models.proposal_is_an_immutable_request_for_a_decision_on_one_investigation_node_status import (
     ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeStatus,
 )
@@ -54,6 +57,13 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
         child (ProposalChildDescribesANodeToCreateIfTheProposalIsApproved | Unset):
         child_id (UUID | Unset):
         decision (ProposalDecisionRecordsWhoDecidedAProposalAndWhy | Unset):
+        review_state (ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeReviewState | Unset): Where a
+            pending proposal stands in moderation; set only by the tree-wide proposals list.
+            deferred: blockedBy is non-empty; reviewing: a review of its decision group is starting or running; queued:
+            neither.
+            queued ReviewStateQueued
+            reviewing ReviewStateReviewing
+            deferred ReviewStateDeferred
     """
 
     created_at: datetime.datetime
@@ -68,6 +78,7 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
     child: ProposalChildDescribesANodeToCreateIfTheProposalIsApproved | Unset = UNSET
     child_id: UUID | Unset = UNSET
     decision: ProposalDecisionRecordsWhoDecidedAProposalAndWhy | Unset = UNSET
+    review_state: ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeReviewState | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -109,6 +120,10 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
         if not isinstance(self.decision, Unset):
             decision = self.decision.to_dict()
 
+        review_state: str | Unset = UNSET
+        if not isinstance(self.review_state, Unset):
+            review_state = self.review_state.value
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -131,6 +146,8 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
             field_dict["childId"] = child_id
         if decision is not UNSET:
             field_dict["decision"] = decision
+        if review_state is not UNSET:
+            field_dict["reviewState"] = review_state
 
         return field_dict
 
@@ -197,6 +214,13 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
         else:
             decision = ProposalDecisionRecordsWhoDecidedAProposalAndWhy.from_dict(_decision)
 
+        _review_state = d.pop("reviewState", UNSET)
+        review_state: ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeReviewState | Unset
+        if isinstance(_review_state, Unset) or _review_state is None:
+            review_state = UNSET
+        else:
+            review_state = ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeReviewState(_review_state)
+
         proposal_is_an_immutable_request_for_a_decision_on_one_investigation_node = cls(
             created_at=created_at,
             created_by=created_by,
@@ -210,6 +234,7 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
             child=child,
             child_id=child_id,
             decision=decision,
+            review_state=review_state,
         )
 
         proposal_is_an_immutable_request_for_a_decision_on_one_investigation_node.additional_properties = d

@@ -25,13 +25,13 @@ T = TypeVar("T", bound="ProfilingFlamegraphResponse")
 class ProfilingFlamegraphResponse:
     """
     Attributes:
-        filtered_value (float | Unset):
+        filtered_value (float | Unset): Signed weight removed by focus and frame filtering.
         period (ProfilingPeriod | Unset):
         profile_type (str | Unset):
         root (FlameNodeContainsInclusiveAndSelfWeightInTheSelectedSampleUnit | Unset):
         sample_type (str | Unset):
         stacks (StackCountsCountsAggregatedStacksNotSamplesOrRenderedTreeNodes | Unset):
-        total (float | Unset):
+        total (float | Unset): Original authorized selection weight before focus or frame filtering.
         truncated (bool | Unset):
         unit (str | Unset):
     """

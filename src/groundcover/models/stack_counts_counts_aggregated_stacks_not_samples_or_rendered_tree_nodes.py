@@ -15,7 +15,8 @@ T = TypeVar("T", bound="StackCountsCountsAggregatedStacksNotSamplesOrRenderedTre
 class StackCountsCountsAggregatedStacksNotSamplesOrRenderedTreeNodes:
     """
     Attributes:
-        returned (int | Unset): Stacks included in the tree before depth, node, and small-branch compaction.
+        returned (int | Unset): Stacks selected for detailed paths before depth, node, and small-branch
+            compaction. Inverted function totals also include stacks beyond this count.
         total (int | Unset): Matching aggregated stacks before the top-stack limit or result truncation.
     """
 

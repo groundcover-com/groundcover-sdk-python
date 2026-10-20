@@ -914,6 +914,7 @@ from .list_investigation_events_response_is_a_page_ordered_by_event_timestamp im
     ListInvestigationEventsResponseIsAPageOrderedByEventTimestamp,
 )
 from .list_investigation_findings_response import ListInvestigationFindingsResponse
+from .list_investigation_proposals_response import ListInvestigationProposalsResponse
 from .list_investigations_response import ListInvestigationsResponse
 from .list_migration_cloud_integrations_response import ListMigrationCloudIntegrationsResponse
 from .list_migration_data_sources_response import ListMigrationDataSourcesResponse
@@ -1142,6 +1143,9 @@ from .proposal_child_describes_a_node_to_create_if_the_proposal_is_approved_kind
 from .proposal_decision_records_who_decided_a_proposal_and_why import ProposalDecisionRecordsWhoDecidedAProposalAndWhy
 from .proposal_is_an_immutable_request_for_a_decision_on_one_investigation_node import (
     ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode,
+)
+from .proposal_is_an_immutable_request_for_a_decision_on_one_investigation_node_review_state import (
+    ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeReviewState,
 )
 from .proposal_is_an_immutable_request_for_a_decision_on_one_investigation_node_status import (
     ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeStatus,
@@ -2298,6 +2302,7 @@ __all__ = (
     "ListIngestionKeysResponse500",
     "ListInvestigationEventsResponseIsAPageOrderedByEventTimestamp",
     "ListInvestigationFindingsResponse",
+    "ListInvestigationProposalsResponse",
     "ListInvestigationsResponse",
     "ListMigrationCloudIntegrationsResponse",
     "ListMigrationDataSourcesResponse",
@@ -2463,6 +2468,7 @@ __all__ = (
     "ProposalChildDescribesANodeToCreateIfTheProposalIsApprovedKind",
     "ProposalDecisionRecordsWhoDecidedAProposalAndWhy",
     "ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode",
+    "ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeReviewState",
     "ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeStatus",
     "ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeType",
     "Provider",
