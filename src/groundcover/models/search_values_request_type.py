@@ -5,6 +5,7 @@ from enum import Enum
 
 class SearchValuesRequestType(str, Enum):
     APM = "apm"
+    AUTONOMOUS_INFRA = "autonomous_infra"
     AWS_CUR = "aws_cur"
     DASHBOARDS = "dashboards"
     DBM_MEASUREMENTS_STATEMENT = "dbm_measurements_statement"

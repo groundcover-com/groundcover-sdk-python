@@ -157,6 +157,7 @@ from .assets_summary_holds_asset_counts_for_the_unified_summary_by_type import (
 from .assets_summary_response import AssetsSummaryResponse
 from .associated_filter import AssociatedFilter
 from .associated_request_v2 import AssociatedRequestV2
+from .auto_infra_search_request import AutoInfraSearchRequest
 from .auto_infra_workload_config import AutoInfraWorkloadConfig
 from .aws_cur_search_request import AwsCurSearchRequest
 from .aws_cur_search_time_series_request import AwsCurSearchTimeSeriesRequest
@@ -292,6 +293,15 @@ from .connector_o_auth_start_response_contains_the_provider_authorization_url im
 )
 from .connector_status_represents_a_single_providers_state_and_credentials import (
     ConnectorStatusRepresentsASingleProvidersStateAndCredentials,
+)
+from .connector_validation_error_details_lists_every_validation_violation import (
+    ConnectorValidationErrorDetailsListsEveryValidationViolation,
+)
+from .connector_validation_error_response_is_a_connector_400_validation_failures_list_every_violation_in_details import (
+    ConnectorValidationErrorResponseIsAConnector400ValidationFailuresListEveryViolationInDetails,
+)
+from .connector_validation_violation_is_one_rule_the_submitted_connector_data_violates import (
+    ConnectorValidationViolationIsOneRuleTheSubmittedConnectorDataViolates,
 )
 from .conversion_result_item import ConversionResultItem
 from .conversion_warning import ConversionWarning
@@ -1814,6 +1824,7 @@ __all__ = (
     "AssetSummaryResponseItemReadiness",
     "AssociatedFilter",
     "AssociatedRequestV2",
+    "AutoInfraSearchRequest",
     "AutoInfraWorkloadConfig",
     "AwsCurSearchRequest",
     "AwsCurSearchTimeSeriesRequest",
@@ -1887,6 +1898,9 @@ __all__ = (
     "ConnectorMCPSetupDescribesProviderSetupReadinessState",
     "ConnectorOAuthStartResponseContainsTheProviderAuthorizationURL",
     "ConnectorStatusRepresentsASingleProvidersStateAndCredentials",
+    "ConnectorValidationErrorDetailsListsEveryValidationViolation",
+    "ConnectorValidationErrorResponseIsAConnector400ValidationFailuresListEveryViolationInDetails",
+    "ConnectorValidationViolationIsOneRuleTheSubmittedConnectorDataViolates",
     "ConnMetadata",
     "ConversionResultItem",
     "ConversionWarning",
