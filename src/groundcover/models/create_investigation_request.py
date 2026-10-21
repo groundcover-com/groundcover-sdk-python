@@ -23,19 +23,21 @@ T = TypeVar("T", bound="CreateInvestigationRequest")
 class CreateInvestigationRequest:
     """
     Attributes:
+        source (SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime):
         statement (str):
         scope (list[InvestigationScopeEntry] | Unset):
-        source (SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime | Unset):
         time_range (InvestigationTimeRange | Unset):
     """
 
+    source: SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime
     statement: str
     scope: list[InvestigationScopeEntry] | Unset = UNSET
-    source: SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime | Unset = UNSET
     time_range: InvestigationTimeRange | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        source = self.source.to_dict()
+
         statement = self.statement
 
         scope: list[dict[str, Any]] | Unset = UNSET
@@ -45,10 +47,6 @@ class CreateInvestigationRequest:
                 scope_item = scope_item_data.to_dict()
                 scope.append(scope_item)
 
-        source: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.source, Unset):
-            source = self.source.to_dict()
-
         time_range: dict[str, Any] | Unset = UNSET
         if not isinstance(self.time_range, Unset):
             time_range = self.time_range.to_dict()
@@ -57,13 +55,12 @@ class CreateInvestigationRequest:
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
+                "source": source,
                 "statement": statement,
             }
         )
         if scope is not UNSET:
             field_dict["scope"] = scope
-        if source is not UNSET:
-            field_dict["source"] = source
         if time_range is not UNSET:
             field_dict["timeRange"] = time_range
 
@@ -78,6 +75,8 @@ class CreateInvestigationRequest:
         )
 
         d = dict(src_dict)
+        source = SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime.from_dict(d.pop("source"))
+
         statement = d.pop("statement")
 
         _scope = d.pop("scope", UNSET)
@@ -89,13 +88,6 @@ class CreateInvestigationRequest:
 
                 scope.append(scope_item)
 
-        _source = d.pop("source", UNSET)
-        source: SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime | Unset
-        if isinstance(_source, Unset) or _source is None:
-            source = UNSET
-        else:
-            source = SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime.from_dict(_source)
-
         _time_range = d.pop("timeRange", UNSET)
         time_range: InvestigationTimeRange | Unset
         if isinstance(_time_range, Unset) or _time_range is None:
@@ -104,9 +96,9 @@ class CreateInvestigationRequest:
             time_range = InvestigationTimeRange.from_dict(_time_range)
 
         create_investigation_request = cls(
+            source=source,
             statement=statement,
             scope=scope,
-            source=source,
             time_range=time_range,
         )
 
