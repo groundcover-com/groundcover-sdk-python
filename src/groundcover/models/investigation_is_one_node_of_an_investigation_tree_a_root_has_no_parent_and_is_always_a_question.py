@@ -40,7 +40,8 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         kind (InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionKind):
         root_id (UUID): Root of the tree; equals id for roots.
         statement (str): The question, or the claim to test.
-        status (InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus):
+        status (InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus): Questions use
+            open/answered/stopped; hypotheses use open/supported/refuted/stopped.
         closed_at (datetime.datetime | Unset):
         outcome (str | Unset):
         parent_id (UUID | Unset): Parent node; omitted for roots.

@@ -4,9 +4,9 @@ from enum import Enum
 
 
 class AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict(str, Enum):
-    CORRECT = "correct"
-    INCORRECT = "incorrect"
+    ACCEPTED = "accepted"
     OPEN = "open"
+    REJECTED = "rejected"
 
     def __str__(self) -> str:
         return str(self.value)

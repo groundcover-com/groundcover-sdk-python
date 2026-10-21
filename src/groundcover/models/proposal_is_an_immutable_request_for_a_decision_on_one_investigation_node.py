@@ -45,10 +45,7 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
         evidence (list[InvestigationEvidence]):
         id (UUID):
         investigation_id (UUID):
-        status (ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeStatus): pending ProposalPending
-            approved ProposalApproved
-            rejected ProposalRejected
-            superseded ProposalSuperseded
+        status (ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeStatus):
         type_ (ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeType): create_child ProposalCreateChild
             resolve ProposalResolve
             refute ProposalRefute

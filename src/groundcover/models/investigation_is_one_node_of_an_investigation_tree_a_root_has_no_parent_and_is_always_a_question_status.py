@@ -4,10 +4,11 @@ from enum import Enum
 
 
 class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus(str, Enum):
+    ANSWERED = "answered"
     OPEN = "open"
     REFUTED = "refuted"
-    RESOLVED = "resolved"
     STOPPED = "stopped"
+    SUPPORTED = "supported"
 
     def __str__(self) -> str:
         return str(self.value)

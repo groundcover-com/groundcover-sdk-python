@@ -18,9 +18,7 @@ class AssessmentVerdictRequest:
     Attributes:
         assessment_id (UUID):
         reason (str):
-        verdict (AssessmentVerdictRequestVerdict): open VerdictOpen
-            correct VerdictCorrect
-            incorrect VerdictIncorrect
+        verdict (AssessmentVerdictRequestVerdict):
     """
 
     assessment_id: UUID

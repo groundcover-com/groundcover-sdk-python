@@ -4,8 +4,8 @@ from enum import Enum
 
 
 class AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposalVerdict(str, Enum):
-    CORRECT = "correct"
-    INCORRECT = "incorrect"
+    ACCEPTED = "accepted"
+    REJECTED = "rejected"
 
     def __str__(self) -> str:
         return str(self.value)

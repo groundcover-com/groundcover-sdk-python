@@ -20,9 +20,7 @@ class AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal:
     Attributes:
         proposal_id (UUID):
         reason (str):
-        verdict (AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposalVerdict): open VerdictOpen
-            correct VerdictCorrect
-            incorrect VerdictIncorrect
+        verdict (AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposalVerdict):
     """
 
     proposal_id: UUID

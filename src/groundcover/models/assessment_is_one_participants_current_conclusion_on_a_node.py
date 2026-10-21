@@ -39,9 +39,6 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
         updated_at (datetime.datetime):
         verdict (AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict): Set when a conclusion on the node is
             approved; an update resets it to open.
-            open VerdictOpen
-            correct VerdictCorrect
-            incorrect VerdictIncorrect
         feedback (AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal | Unset):
         verdict_reason (str | Unset):
     """

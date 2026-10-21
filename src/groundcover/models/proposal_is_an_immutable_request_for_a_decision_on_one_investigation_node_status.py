@@ -4,7 +4,7 @@ from enum import Enum
 
 
 class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeStatus(str, Enum):
-    APPROVED = "approved"
+    ACCEPTED = "accepted"
     PENDING = "pending"
     REJECTED = "rejected"
     SUPERSEDED = "superseded"
