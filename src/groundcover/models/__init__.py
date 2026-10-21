@@ -1126,6 +1126,8 @@ from .preflight_request_defines_the_request_body_for_running_preflight_validatio
     PreflightRequestDefinesTheRequestBodyForRunningPreflightValidation,
 )
 from .processor import Processor
+from .profiling_diff_flame_node import ProfilingDiffFlameNode
+from .profiling_flamegraph_diff_response import ProfilingFlamegraphDiffResponse
 from .profiling_flamegraph_response import ProfilingFlamegraphResponse
 from .profiling_period import ProfilingPeriod
 from .promql_function_represents_a_function_call_in_a_prom_ql_query import (
@@ -2460,6 +2462,8 @@ __all__ = (
     "PreflightReportResponseIsThePreflightReportPlusBackendOnlyCounters",
     "PreflightRequestDefinesTheRequestBodyForRunningPreflightValidation",
     "Processor",
+    "ProfilingDiffFlameNode",
+    "ProfilingFlamegraphDiffResponse",
     "ProfilingFlamegraphResponse",
     "ProfilingPeriod",
     "PromqlFunctionRepresentsAFunctionCallInAPromQLQuery",
