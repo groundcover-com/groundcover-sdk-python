@@ -157,6 +157,7 @@ from .assets_summary_holds_asset_counts_for_the_unified_summary_by_type import (
 from .assets_summary_response import AssetsSummaryResponse
 from .associated_filter import AssociatedFilter
 from .associated_request_v2 import AssociatedRequestV2
+from .auto_infra_workload_config import AutoInfraWorkloadConfig
 from .aws_cur_search_request import AwsCurSearchRequest
 from .aws_cur_search_time_series_request import AwsCurSearchTimeSeriesRequest
 from .backend_settings import BackendSettings
@@ -183,6 +184,9 @@ from .catalog_template_list_item_is_a_thin_per_tenant_view_of_a_catalog_template
     CatalogTemplateListItemIsAThinPerTenantViewOfACatalogTemplate,
 )
 from .catalog_template_response import CatalogTemplateResponse
+from .changed_response_counts_the_rows_an_upsert_created_or_whose_enabled_changed_a_row_sent_unchanged_is_not_counted import (
+    ChangedResponseCountsTheRowsAnUpsertCreatedOrWhoseEnabledChangedARowSentUnchangedIsNotCounted,
+)
 from .channel_identifies_a_slack_channel import ChannelIdentifiesASlackChannel
 from .checkout_session_request import CheckoutSessionRequest
 from .checkout_session_response import CheckoutSessionResponse
@@ -1159,6 +1163,9 @@ from .provider import Provider
 from .provider_state_response_is_returned_after_changing_deployment_global_provider_availability import (
     ProviderStateResponseIsReturnedAfterChangingDeploymentGlobalProviderAvailability,
 )
+from .put_workloads_config_request_sets_auto_infra_on_a_batch_of_workloads import (
+    PutWorkloadsConfigRequestSetsAutoInfraOnABatchOfWorkloads,
+)
 from .queries_summary_holds_query_level_statistics_for_the_unified_summary import (
     QueriesSummaryHoldsQueryLevelStatisticsForTheUnifiedSummary,
 )
@@ -1807,6 +1814,7 @@ __all__ = (
     "AssetSummaryResponseItemReadiness",
     "AssociatedFilter",
     "AssociatedRequestV2",
+    "AutoInfraWorkloadConfig",
     "AwsCurSearchRequest",
     "AwsCurSearchTimeSeriesRequest",
     "BackendSettings",
@@ -1827,6 +1835,7 @@ __all__ = (
     "CatalogModelHoldsMetadataIfTheMonitorOriginatedFromACatalog",
     "CatalogTemplateListItemIsAThinPerTenantViewOfACatalogTemplate",
     "CatalogTemplateResponse",
+    "ChangedResponseCountsTheRowsAnUpsertCreatedOrWhoseEnabledChangedARowSentUnchangedIsNotCounted",
     "ChannelIdentifiesASlackChannel",
     "CheckoutSessionRequest",
     "CheckoutSessionResponse",
@@ -2477,6 +2486,7 @@ __all__ = (
     "ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeType",
     "Provider",
     "ProviderStateResponseIsReturnedAfterChangingDeploymentGlobalProviderAvailability",
+    "PutWorkloadsConfigRequestSetsAutoInfraOnABatchOfWorkloads",
     "QueriesSummaryHoldsQueryLevelStatisticsForTheUnifiedSummary",
     "QueriesSummaryHoldsQueryLevelStatisticsForTheUnifiedSummaryByDatasource",
     "QueryIsTheWholeExpressionInTheLanguageMonitorSpecTypeImplies",
