@@ -30,6 +30,7 @@ class NotificationSettingsRequiresExactlyOneModeBlockThereIsNoDefault:
     Attributes:
         destinations (DestinationsIsDirectDeliveryStatusFiltersOmittedAll | Unset):
         disable_renotification (bool | Unset):
+        hide_preview_graph (bool | Unset):
         no_notifications (NoNotificationsIsTheSuppressEverythingModeMarker | Unset):
         notification_routes (NotificationRoutesIsTheRouteBasedDeliveryModeMarker | Unset):
         renotification_interval (str | Unset):
@@ -37,6 +38,7 @@ class NotificationSettingsRequiresExactlyOneModeBlockThereIsNoDefault:
 
     destinations: DestinationsIsDirectDeliveryStatusFiltersOmittedAll | Unset = UNSET
     disable_renotification: bool | Unset = UNSET
+    hide_preview_graph: bool | Unset = UNSET
     no_notifications: NoNotificationsIsTheSuppressEverythingModeMarker | Unset = UNSET
     notification_routes: NotificationRoutesIsTheRouteBasedDeliveryModeMarker | Unset = UNSET
     renotification_interval: str | Unset = UNSET
@@ -48,6 +50,8 @@ class NotificationSettingsRequiresExactlyOneModeBlockThereIsNoDefault:
             destinations = self.destinations.to_dict()
 
         disable_renotification = self.disable_renotification
+
+        hide_preview_graph = self.hide_preview_graph
 
         no_notifications: dict[str, Any] | Unset = UNSET
         if not isinstance(self.no_notifications, Unset):
@@ -66,6 +70,8 @@ class NotificationSettingsRequiresExactlyOneModeBlockThereIsNoDefault:
             field_dict["destinations"] = destinations
         if disable_renotification is not UNSET:
             field_dict["disableRenotification"] = disable_renotification
+        if hide_preview_graph is not UNSET:
+            field_dict["hidePreviewGraph"] = hide_preview_graph
         if no_notifications is not UNSET:
             field_dict["noNotifications"] = no_notifications
         if notification_routes is not UNSET:
@@ -97,6 +103,8 @@ class NotificationSettingsRequiresExactlyOneModeBlockThereIsNoDefault:
 
         disable_renotification = d.pop("disableRenotification", UNSET)
 
+        hide_preview_graph = d.pop("hidePreviewGraph", UNSET)
+
         _no_notifications = d.pop("noNotifications", UNSET)
         no_notifications: NoNotificationsIsTheSuppressEverythingModeMarker | Unset
         if isinstance(_no_notifications, Unset) or _no_notifications is None:
@@ -116,6 +124,7 @@ class NotificationSettingsRequiresExactlyOneModeBlockThereIsNoDefault:
         notification_settings_requires_exactly_one_mode_block_there_is_no_default = cls(
             destinations=destinations,
             disable_renotification=disable_renotification,
+            hide_preview_graph=hide_preview_graph,
             no_notifications=no_notifications,
             notification_routes=notification_routes,
             renotification_interval=renotification_interval,
