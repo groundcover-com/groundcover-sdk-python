@@ -1227,6 +1227,8 @@ from .route_connected_app_response import RouteConnectedAppResponse
 from .route_connected_app_response_params import RouteConnectedAppResponseParams
 from .route_rule_request import RouteRuleRequest
 from .route_rule_response import RouteRuleResponse
+from .rum_search_request import RumSearchRequest
+from .rum_search_time_series_request import RumSearchTimeSeriesRequest
 from .sample_pair import SamplePair
 from .search_discovery_request import SearchDiscoveryRequest
 from .search_discovery_request_type import SearchDiscoveryRequestType
@@ -2538,6 +2540,8 @@ __all__ = (
     "RouteConnectedAppResponseParams",
     "RouteRuleRequest",
     "RouteRuleResponse",
+    "RumSearchRequest",
+    "RumSearchTimeSeriesRequest",
     "SamplePair",
     "SearchDiscoveryRequest",
     "SearchDiscoveryRequestType",
