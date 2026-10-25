@@ -11,6 +11,8 @@ class SearchDiscoveryRequestType(str, Enum):
     ISSUES = "issues"
     LOGS = "logs"
     MONITORS = "monitors"
+    RUM_EVENTS = "rum_events"
+    RUM_SESSIONS = "rum_sessions"
     TRACES = "traces"
 
     def __str__(self) -> str:
