@@ -22,8 +22,11 @@ if TYPE_CHECKING:
     from ..models.investigation_author import InvestigationAuthor
     from ..models.investigation_scope_entry import InvestigationScopeEntry
     from ..models.investigation_time_range import InvestigationTimeRange
-    from ..models.source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time import (
-        SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime,
+    from ..models.source_is_how_a_root_started_manual_on_the_public_create_route_or_what_a_backend_caller_opened_it_from import (
+        SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom,
+    )
+    from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
+        SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime,
     )
 
 
@@ -46,7 +49,8 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         outcome (str | Unset):
         parent_id (UUID | Unset): Parent node; omitted for roots.
         scope (list[InvestigationScopeEntry] | Unset):
-        source (SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime | Unset):
+        source (SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom | Unset):
+        subject (SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime | Unset):
         time_range (InvestigationTimeRange | Unset):
     """
 
@@ -61,7 +65,8 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
     outcome: str | Unset = UNSET
     parent_id: UUID | Unset = UNSET
     scope: list[InvestigationScopeEntry] | Unset = UNSET
-    source: SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime | Unset = UNSET
+    source: SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom | Unset = UNSET
+    subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime | Unset = UNSET
     time_range: InvestigationTimeRange | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -101,6 +106,10 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         if not isinstance(self.source, Unset):
             source = self.source.to_dict()
 
+        subject: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.subject, Unset):
+            subject = self.subject.to_dict()
+
         time_range: dict[str, Any] | Unset = UNSET
         if not isinstance(self.time_range, Unset):
             time_range = self.time_range.to_dict()
@@ -128,6 +137,8 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
             field_dict["scope"] = scope
         if source is not UNSET:
             field_dict["source"] = source
+        if subject is not UNSET:
+            field_dict["subject"] = subject
         if time_range is not UNSET:
             field_dict["timeRange"] = time_range
 
@@ -138,8 +149,11 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         from ..models.investigation_author import InvestigationAuthor
         from ..models.investigation_scope_entry import InvestigationScopeEntry
         from ..models.investigation_time_range import InvestigationTimeRange
-        from ..models.source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time import (
-            SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime,
+        from ..models.source_is_how_a_root_started_manual_on_the_public_create_route_or_what_a_backend_caller_opened_it_from import (
+            SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom,
+        )
+        from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
+            SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime,
         )
 
         d = dict(src_dict)
@@ -183,11 +197,20 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
                 scope.append(scope_item)
 
         _source = d.pop("source", UNSET)
-        source: SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime | Unset
+        source: SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom | Unset
         if isinstance(_source, Unset) or _source is None:
             source = UNSET
         else:
-            source = SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime.from_dict(_source)
+            source = SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom.from_dict(
+                _source
+            )
+
+        _subject = d.pop("subject", UNSET)
+        subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime | Unset
+        if isinstance(_subject, Unset) or _subject is None:
+            subject = UNSET
+        else:
+            subject = SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime.from_dict(_subject)
 
         _time_range = d.pop("timeRange", UNSET)
         time_range: InvestigationTimeRange | Unset
@@ -209,6 +232,7 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
             parent_id=parent_id,
             scope=scope,
             source=source,
+            subject=subject,
             time_range=time_range,
         )
 

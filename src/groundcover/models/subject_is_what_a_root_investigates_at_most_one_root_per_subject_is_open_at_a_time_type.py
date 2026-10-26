@@ -3,7 +3,7 @@ from __future__ import annotations
 from enum import Enum
 
 
-class SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType(str, Enum):
+class SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATimeType(str, Enum):
     ISSUE = "issue"
 
     def __str__(self) -> str:

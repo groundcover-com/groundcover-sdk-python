@@ -6,27 +6,27 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time_type import (
-    SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType,
+from ..models.backend_source_is_the_source_a_backend_caller_opens_a_root_from_type import (
+    BackendSourceIsTheSourceABackendCallerOpensARootFromType,
 )
 
 if TYPE_CHECKING:
     from ..models.investigation_source_ref import InvestigationSourceRef
 
 
-T = TypeVar("T", bound="SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime")
+T = TypeVar("T", bound="BackendSourceIsTheSourceABackendCallerOpensARootFrom")
 
 
 @_attrs_define
-class SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime:
+class BackendSourceIsTheSourceABackendCallerOpensARootFrom:
     """
     Attributes:
         ref (InvestigationSourceRef):
-        type_ (SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType):
+        type_ (BackendSourceIsTheSourceABackendCallerOpensARootFromType):
     """
 
     ref: InvestigationSourceRef
-    type_: SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType
+    type_: BackendSourceIsTheSourceABackendCallerOpensARootFromType
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -52,15 +52,15 @@ class SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime:
         d = dict(src_dict)
         ref = InvestigationSourceRef.from_dict(d.pop("ref"))
 
-        type_ = SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType(d.pop("type"))
+        type_ = BackendSourceIsTheSourceABackendCallerOpensARootFromType(d.pop("type"))
 
-        source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time = cls(
+        backend_source_is_the_source_a_backend_caller_opens_a_root_from = cls(
             ref=ref,
             type_=type_,
         )
 
-        source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time.additional_properties = d
-        return source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time
+        backend_source_is_the_source_a_backend_caller_opens_a_root_from.additional_properties = d
+        return backend_source_is_the_source_a_backend_caller_opens_a_root_from
 
     @property
     def additional_keys(self) -> list[str]:

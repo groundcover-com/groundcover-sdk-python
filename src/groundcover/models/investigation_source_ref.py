@@ -13,20 +13,20 @@ T = TypeVar("T", bound="InvestigationSourceRef")
 class InvestigationSourceRef:
     """
     Attributes:
-        issue_fingerprint (str): The monitor issue's fingerprint.
+        trigger_id (str): The automation trigger that opened the root.
     """
 
-    issue_fingerprint: str
+    trigger_id: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        issue_fingerprint = self.issue_fingerprint
+        trigger_id = self.trigger_id
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "issueFingerprint": issue_fingerprint,
+                "triggerId": trigger_id,
             }
         )
 
@@ -42,10 +42,10 @@ class InvestigationSourceRef:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        issue_fingerprint = d.pop("issueFingerprint")
+        trigger_id = d.pop("triggerId")
 
         investigation_source_ref = cls(
-            issue_fingerprint=issue_fingerprint,
+            trigger_id=trigger_id,
         )
 
         investigation_source_ref.additional_properties = d

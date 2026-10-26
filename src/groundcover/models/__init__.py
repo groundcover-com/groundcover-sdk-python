@@ -162,6 +162,12 @@ from .aws_cur_search_request import AwsCurSearchRequest
 from .aws_cur_search_time_series_request import AwsCurSearchTimeSeriesRequest
 from .backend_settings import BackendSettings
 from .backend_settings_gcp_pubsub_topic import BackendSettingsGcpPubsubTopic
+from .backend_source_is_the_source_a_backend_caller_opens_a_root_from import (
+    BackendSourceIsTheSourceABackendCallerOpensARootFrom,
+)
+from .backend_source_is_the_source_a_backend_caller_opens_a_root_from_type import (
+    BackendSourceIsTheSourceABackendCallerOpensARootFromType,
+)
 from .base_query_is_the_base_struct_for_different_query_types import BaseQueryIsTheBaseStructForDifferentQueryTypes
 from .batch_dashboards_error import BatchDashboardsError
 from .batch_dashboards_request import BatchDashboardsRequest
@@ -330,6 +336,9 @@ from .create_assets_request import CreateAssetsRequest
 from .create_assets_request_source_method import CreateAssetsRequestSourceMethod
 from .create_assets_request_source_provider import CreateAssetsRequestSourceProvider
 from .create_assets_response import CreateAssetsResponse
+from .create_backend_investigation_request_opens_a_root_for_a_backend_caller_acting_for_a_user_with_how_it_started import (
+    CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUserWithHowItStarted,
+)
 from .create_connected_app_request_is_the_request_body_for_creating_a_new_connected_app import (
     CreateConnectedAppRequestIsTheRequestBodyForCreatingANewConnectedApp,
 )
@@ -833,6 +842,7 @@ from .investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_an
 )
 from .investigation_scope_entry import InvestigationScopeEntry
 from .investigation_source_ref import InvestigationSourceRef
+from .investigation_subject_ref import InvestigationSubjectRef
 from .investigation_time_range import InvestigationTimeRange
 from .invite_request import InviteRequest
 from .invitee_details import InviteeDetails
@@ -1340,11 +1350,11 @@ from .slack_delivery_options_requires_a_non_empty_channels_when_present import (
 )
 from .slack_webhook_data import SlackWebhookData
 from .slack_webhook_data_response import SlackWebhookDataResponse
-from .source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time import (
-    SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime,
+from .source_is_how_a_root_started_manual_on_the_public_create_route_or_what_a_backend_caller_opened_it_from import (
+    SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom,
 )
-from .source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time_type import (
-    SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType,
+from .source_is_how_a_root_started_manual_on_the_public_create_route_or_what_a_backend_caller_opened_it_from_type import (
+    SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFromType,
 )
 from .source_map_upload_response_is_the_json_success_body_returned_by_the_upload_handler import (
     SourceMapUploadResponseIsTheJSONSuccessBodyReturnedByTheUploadHandler,
@@ -1375,6 +1385,12 @@ from .stream_response_base_provides_the_common_done_and_error_fields_for_all_str
 )
 from .subject_holds_both_datadog_and_gc_names_for_explainability import (
     SubjectHoldsBothDatadogAndGCNamesForExplainability,
+)
+from .subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
+    SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime,
+)
+from .subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time_type import (
+    SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATimeType,
 )
 from .suggestion_proposes_an_alternative_for_a_missing_resource import (
     SuggestionProposesAnAlternativeForAMissingResource,
@@ -1840,6 +1856,8 @@ __all__ = (
     "AwsCurSearchTimeSeriesRequest",
     "BackendSettings",
     "BackendSettingsGcpPubsubTopic",
+    "BackendSourceIsTheSourceABackendCallerOpensARootFrom",
+    "BackendSourceIsTheSourceABackendCallerOpensARootFromType",
     "BaseQueryIsTheBaseStructForDifferentQueryTypes",
     "BatchDashboardsError",
     "BatchDashboardsRequest",
@@ -1934,6 +1952,7 @@ __all__ = (
     "CreateAssetsRequestSourceMethod",
     "CreateAssetsRequestSourceProvider",
     "CreateAssetsResponse",
+    "CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUserWithHowItStarted",
     "CreateConnectedAppRequestIsTheRequestBodyForCreatingANewConnectedApp",
     "CreateConnectedAppRequestIsTheRequestBodyForCreatingANewConnectedAppData",
     "CreateConnectedAppRequestIsTheRequestBodyForCreatingANewConnectedAppType",
@@ -2281,6 +2300,7 @@ __all__ = (
     "InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus",
     "InvestigationScopeEntry",
     "InvestigationSourceRef",
+    "InvestigationSubjectRef",
     "InvestigationTimeRange",
     "InviteeDetails",
     "InviteRequest",
@@ -2626,8 +2646,8 @@ __all__ = (
     "SlackDeliveryOptionsRequiresANonEmptyChannelsWhenPresent",
     "SlackWebhookData",
     "SlackWebhookDataResponse",
-    "SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime",
-    "SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATimeType",
+    "SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom",
+    "SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFromType",
     "SourceMapUploadResponseIsTheJSONSuccessBodyReturnedByTheUploadHandler",
     "SpanEvent",
     "SpanEventAttributes",
@@ -2648,6 +2668,8 @@ __all__ = (
     "StorageManagementPolicyResponseIsTheAPIFacingPolicyRepresentation",
     "StreamResponseBaseProvidesTheCommonDoneAndErrorFieldsForAllStreamingResponses",
     "SubjectHoldsBothDatadogAndGCNamesForExplainability",
+    "SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime",
+    "SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATimeType",
     "SuggestionProposesAnAlternativeForAMissingResource",
     "SuggestionReasonIsOneScoringSignalThatContributedToASuggestion",
     "SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully",

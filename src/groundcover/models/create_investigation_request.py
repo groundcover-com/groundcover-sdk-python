@@ -11,8 +11,8 @@ from .._generated_types import UNSET, Unset
 if TYPE_CHECKING:
     from ..models.investigation_scope_entry import InvestigationScopeEntry
     from ..models.investigation_time_range import InvestigationTimeRange
-    from ..models.source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time import (
-        SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime,
+    from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
+        SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime,
     )
 
 
@@ -23,22 +23,22 @@ T = TypeVar("T", bound="CreateInvestigationRequest")
 class CreateInvestigationRequest:
     """
     Attributes:
-        source (SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime):
         statement (str):
+        subject (SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime):
         scope (list[InvestigationScopeEntry] | Unset):
         time_range (InvestigationTimeRange | Unset):
     """
 
-    source: SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime
     statement: str
+    subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime
     scope: list[InvestigationScopeEntry] | Unset = UNSET
     time_range: InvestigationTimeRange | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        source = self.source.to_dict()
-
         statement = self.statement
+
+        subject = self.subject.to_dict()
 
         scope: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.scope, Unset):
@@ -55,8 +55,8 @@ class CreateInvestigationRequest:
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "source": source,
                 "statement": statement,
+                "subject": subject,
             }
         )
         if scope is not UNSET:
@@ -70,14 +70,14 @@ class CreateInvestigationRequest:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.investigation_scope_entry import InvestigationScopeEntry
         from ..models.investigation_time_range import InvestigationTimeRange
-        from ..models.source_is_what_opened_a_root_investigation_at_most_one_root_per_issue_is_open_at_a_time import (
-            SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime,
+        from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
+            SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime,
         )
 
         d = dict(src_dict)
-        source = SourceIsWhatOpenedARootInvestigationAtMostOneRootPerIssueIsOpenAtATime.from_dict(d.pop("source"))
-
         statement = d.pop("statement")
+
+        subject = SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime.from_dict(d.pop("subject"))
 
         _scope = d.pop("scope", UNSET)
         scope: list[InvestigationScopeEntry] | Unset = UNSET
@@ -96,8 +96,8 @@ class CreateInvestigationRequest:
             time_range = InvestigationTimeRange.from_dict(_time_range)
 
         create_investigation_request = cls(
-            source=source,
             statement=statement,
+            subject=subject,
             scope=scope,
             time_range=time_range,
         )
