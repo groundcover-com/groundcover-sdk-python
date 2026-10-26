@@ -16,6 +16,7 @@ if TYPE_CHECKING:
     from ..models.investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question import (
         InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion,
     )
+    from ..models.missing_groundcover_integration_ref import MissingGroundcoverIntegrationRef
 
 
 T = TypeVar("T", bound="GetInvestigationTreeResponseIsOneConsistentSnapshotOfTheCompleteTree")
@@ -29,6 +30,8 @@ class GetInvestigationTreeResponseIsOneConsistentSnapshotOfTheCompleteTree:
         nodes (list[InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion]): Root first, then
             remaining nodes by createdAt and id.
         participants (list[InvestigationAuthor]):
+        missing_groundcover_integrations (list[MissingGroundcoverIntegrationRef] | Unset): Distinct integrations
+            reported by assessments anywhere in this tree, including rejected assessments.
         next_after_timestamp (datetime.datetime | Unset): Timestamp of the latest event in this snapshot; omitted when
             no event exists.
     """
@@ -36,6 +39,7 @@ class GetInvestigationTreeResponseIsOneConsistentSnapshotOfTheCompleteTree:
     events_after: int
     nodes: list[InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion]
     participants: list[InvestigationAuthor]
+    missing_groundcover_integrations: list[MissingGroundcoverIntegrationRef] | Unset = UNSET
     next_after_timestamp: datetime.datetime | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -52,6 +56,13 @@ class GetInvestigationTreeResponseIsOneConsistentSnapshotOfTheCompleteTree:
             participants_item = participants_item_data.to_dict()
             participants.append(participants_item)
 
+        missing_groundcover_integrations: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.missing_groundcover_integrations, Unset):
+            missing_groundcover_integrations = []
+            for missing_groundcover_integrations_item_data in self.missing_groundcover_integrations:
+                missing_groundcover_integrations_item = missing_groundcover_integrations_item_data.to_dict()
+                missing_groundcover_integrations.append(missing_groundcover_integrations_item)
+
         next_after_timestamp: str | Unset = UNSET
         if not isinstance(self.next_after_timestamp, Unset):
             next_after_timestamp = self.next_after_timestamp.isoformat()
@@ -65,6 +76,8 @@ class GetInvestigationTreeResponseIsOneConsistentSnapshotOfTheCompleteTree:
                 "participants": participants,
             }
         )
+        if missing_groundcover_integrations is not UNSET:
+            field_dict["missingGroundcoverIntegrations"] = missing_groundcover_integrations
         if next_after_timestamp is not UNSET:
             field_dict["nextAfterTimestamp"] = next_after_timestamp
 
@@ -76,6 +89,7 @@ class GetInvestigationTreeResponseIsOneConsistentSnapshotOfTheCompleteTree:
         from ..models.investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question import (
             InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion,
         )
+        from ..models.missing_groundcover_integration_ref import MissingGroundcoverIntegrationRef
 
         d = dict(src_dict)
         events_after = d.pop("eventsAfter")
@@ -96,6 +110,17 @@ class GetInvestigationTreeResponseIsOneConsistentSnapshotOfTheCompleteTree:
 
             participants.append(participants_item)
 
+        _missing_groundcover_integrations = d.pop("missingGroundcoverIntegrations", UNSET)
+        missing_groundcover_integrations: list[MissingGroundcoverIntegrationRef] | Unset = UNSET
+        if _missing_groundcover_integrations is not UNSET:
+            missing_groundcover_integrations = []
+            for missing_groundcover_integrations_item_data in _missing_groundcover_integrations:
+                missing_groundcover_integrations_item = MissingGroundcoverIntegrationRef.from_dict(
+                    missing_groundcover_integrations_item_data
+                )
+
+                missing_groundcover_integrations.append(missing_groundcover_integrations_item)
+
         _next_after_timestamp = d.pop("nextAfterTimestamp", UNSET)
         next_after_timestamp: datetime.datetime | Unset
         if isinstance(_next_after_timestamp, Unset) or _next_after_timestamp is None:
@@ -107,6 +132,7 @@ class GetInvestigationTreeResponseIsOneConsistentSnapshotOfTheCompleteTree:
             events_after=events_after,
             nodes=nodes,
             participants=participants,
+            missing_groundcover_integrations=missing_groundcover_integrations,
             next_after_timestamp=next_after_timestamp,
         )
 

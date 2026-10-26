@@ -1046,6 +1046,10 @@ from .migration_detected_integration import MigrationDetectedIntegration
 from .missing_data_set_bucket_covers_converted_units_whose_underlying_dataset_is_absent import (
     MissingDataSetBucketCoversConvertedUnitsWhoseUnderlyingDatasetIsAbsent,
 )
+from .missing_groundcover_integration import MissingGroundcoverIntegration
+from .missing_groundcover_integration_kind import MissingGroundcoverIntegrationKind
+from .missing_groundcover_integration_ref import MissingGroundcoverIntegrationRef
+from .missing_groundcover_integration_ref_kind import MissingGroundcoverIntegrationRefKind
 from .missing_metrics_breakdown_splits_missing_metrics_into_mutually_exclusive_buckets import (
     MissingMetricsBreakdownSplitsMissingMetricsIntoMutuallyExclusiveBuckets,
 )
@@ -2456,6 +2460,10 @@ __all__ = (
     "MigrationDataSourceItemSupportType",
     "MigrationDetectedIntegration",
     "MissingDataSetBucketCoversConvertedUnitsWhoseUnderlyingDatasetIsAbsent",
+    "MissingGroundcoverIntegration",
+    "MissingGroundcoverIntegrationKind",
+    "MissingGroundcoverIntegrationRef",
+    "MissingGroundcoverIntegrationRefKind",
     "MissingMetricsBreakdownSplitsMissingMetricsIntoMutuallyExclusiveBuckets",
     "ModelWrapsTheSingleQueryAndTheThresholdsListCappedAtOneItem",
     "Monitor",

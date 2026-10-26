@@ -18,6 +18,7 @@ from .._generated_types import UNSET, Unset
 if TYPE_CHECKING:
     from ..models.investigation_author import InvestigationAuthor
     from ..models.investigation_evidence import InvestigationEvidence
+    from ..models.missing_groundcover_integration import MissingGroundcoverIntegration
 
 
 T = TypeVar("T", bound="AssessmentIsOneParticipantsCurrentConclusionOnANode")
@@ -36,6 +37,8 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
         updated_at (datetime.datetime):
         verdict (AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict): Set from the approved conclusion's verdict
             on this revision; an update resets it to open.
+        missing_groundcover_integrations (list[MissingGroundcoverIntegration] | Unset): Groundcover integrations
+            recommended by this assessment.
         verdict_approved_by (InvestigationAuthor | Unset):
         verdict_proposal_id (UUID | Unset): The approved conclusion whose verdict set Verdict.
         verdict_reason (str | Unset):
@@ -51,6 +54,7 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
     revision: int
     updated_at: datetime.datetime
     verdict: AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict
+    missing_groundcover_integrations: list[MissingGroundcoverIntegration] | Unset = UNSET
     verdict_approved_by: InvestigationAuthor | Unset = UNSET
     verdict_proposal_id: UUID | Unset = UNSET
     verdict_reason: str | Unset = UNSET
@@ -77,6 +81,13 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
         updated_at = self.updated_at.isoformat()
 
         verdict = self.verdict.value
+
+        missing_groundcover_integrations: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.missing_groundcover_integrations, Unset):
+            missing_groundcover_integrations = []
+            for missing_groundcover_integrations_item_data in self.missing_groundcover_integrations:
+                missing_groundcover_integrations_item = missing_groundcover_integrations_item_data.to_dict()
+                missing_groundcover_integrations.append(missing_groundcover_integrations_item)
 
         verdict_approved_by: dict[str, Any] | Unset = UNSET
         if not isinstance(self.verdict_approved_by, Unset):
@@ -110,6 +121,8 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
                 "verdict": verdict,
             }
         )
+        if missing_groundcover_integrations is not UNSET:
+            field_dict["missingGroundcoverIntegrations"] = missing_groundcover_integrations
         if verdict_approved_by is not UNSET:
             field_dict["verdictApprovedBy"] = verdict_approved_by
         if verdict_proposal_id is not UNSET:
@@ -127,6 +140,7 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.investigation_author import InvestigationAuthor
         from ..models.investigation_evidence import InvestigationEvidence
+        from ..models.missing_groundcover_integration import MissingGroundcoverIntegration
 
         d = dict(src_dict)
         author = InvestigationAuthor.from_dict(d.pop("author"))
@@ -149,6 +163,17 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
         updated_at = parse_datetime(d.pop("updatedAt"))
 
         verdict = AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict(d.pop("verdict"))
+
+        _missing_groundcover_integrations = d.pop("missingGroundcoverIntegrations", UNSET)
+        missing_groundcover_integrations: list[MissingGroundcoverIntegration] | Unset = UNSET
+        if _missing_groundcover_integrations is not UNSET:
+            missing_groundcover_integrations = []
+            for missing_groundcover_integrations_item_data in _missing_groundcover_integrations:
+                missing_groundcover_integrations_item = MissingGroundcoverIntegration.from_dict(
+                    missing_groundcover_integrations_item_data
+                )
+
+                missing_groundcover_integrations.append(missing_groundcover_integrations_item)
 
         _verdict_approved_by = d.pop("verdictApprovedBy", UNSET)
         verdict_approved_by: InvestigationAuthor | Unset
@@ -189,6 +214,7 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
             revision=revision,
             updated_at=updated_at,
             verdict=verdict,
+            missing_groundcover_integrations=missing_groundcover_integrations,
             verdict_approved_by=verdict_approved_by,
             verdict_proposal_id=verdict_proposal_id,
             verdict_reason=verdict_reason,
