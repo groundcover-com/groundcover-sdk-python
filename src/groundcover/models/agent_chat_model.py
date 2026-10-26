@@ -6,6 +6,8 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from .._generated_types import UNSET, Unset
+
 if TYPE_CHECKING:
     from ..models.agent_model_capabilities import AgentModelCapabilities
 
@@ -23,6 +25,7 @@ class AgentChatModel:
         model_id (str):
         provider (str):
         provider_id (str):
+        region (str | Unset): Configured cloud endpoint/resource region; omitted when unknown.
     """
 
     capabilities: AgentModelCapabilities
@@ -31,6 +34,7 @@ class AgentChatModel:
     model_id: str
     provider: str
     provider_id: str
+    region: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -46,6 +50,8 @@ class AgentChatModel:
 
         provider_id = self.provider_id
 
+        region = self.region
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -58,6 +64,8 @@ class AgentChatModel:
                 "providerId": provider_id,
             }
         )
+        if region is not UNSET:
+            field_dict["region"] = region
 
         return field_dict
 
@@ -78,6 +86,8 @@ class AgentChatModel:
 
         provider_id = d.pop("providerId")
 
+        region = d.pop("region", UNSET)
+
         agent_chat_model = cls(
             capabilities=capabilities,
             display_name=display_name,
@@ -85,6 +95,7 @@ class AgentChatModel:
             model_id=model_id,
             provider=provider,
             provider_id=provider_id,
+            region=region,
         )
 
         agent_chat_model.additional_properties = d

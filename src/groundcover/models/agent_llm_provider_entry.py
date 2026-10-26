@@ -21,6 +21,7 @@ class AgentLLMProviderEntry:
         is_secret_ref_set (bool | Unset):
         model_id (str | Unset):
         provider (str | Unset):
+        region (str | Unset): Configured cloud endpoint/resource region; omitted when unknown.
         unpriced_models (list[str] | Unset): Enabled models for which the cost calculator has no model-specific pricing.
     """
 
@@ -30,6 +31,7 @@ class AgentLLMProviderEntry:
     is_secret_ref_set: bool | Unset = UNSET
     model_id: str | Unset = UNSET
     provider: str | Unset = UNSET
+    region: str | Unset = UNSET
     unpriced_models: list[str] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -47,6 +49,8 @@ class AgentLLMProviderEntry:
         model_id = self.model_id
 
         provider = self.provider
+
+        region = self.region
 
         unpriced_models: list[str] | Unset = UNSET
         if not isinstance(self.unpriced_models, Unset):
@@ -67,6 +71,8 @@ class AgentLLMProviderEntry:
             field_dict["modelId"] = model_id
         if provider is not UNSET:
             field_dict["provider"] = provider
+        if region is not UNSET:
+            field_dict["region"] = region
         if unpriced_models is not UNSET:
             field_dict["unpricedModels"] = unpriced_models
 
@@ -94,6 +100,8 @@ class AgentLLMProviderEntry:
 
         provider = d.pop("provider", UNSET)
 
+        region = d.pop("region", UNSET)
+
         unpriced_models = cast(list[str], d.pop("unpricedModels", UNSET))
 
         agent_llm_provider_entry = cls(
@@ -103,6 +111,7 @@ class AgentLLMProviderEntry:
             is_secret_ref_set=is_secret_ref_set,
             model_id=model_id,
             provider=provider,
+            region=region,
             unpriced_models=unpriced_models,
         )
 
