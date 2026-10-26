@@ -4,7 +4,6 @@ from enum import Enum
 
 
 class EventIsAnAttributableChangeInAnInvestigationTreeType(str, Enum):
-    ASSESSMENT_FEEDBACK = "assessment.feedback"
     ASSESSMENT_JUDGED = "assessment.judged"
     ASSESSMENT_UPDATED = "assessment.updated"
     FINDING_CREATED = "finding.created"

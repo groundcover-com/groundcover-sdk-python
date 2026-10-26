@@ -2,46 +2,33 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from typing import Any, TypeVar
-from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.assessment_verdict_request_verdict import AssessmentVerdictRequestVerdict
+from .._generated_types import UNSET, Unset
 
-T = TypeVar("T", bound="AssessmentVerdictRequest")
+T = TypeVar("T", bound="GetProfilingFlamegraphDiffResponse422")
 
 
 @_attrs_define
-class AssessmentVerdictRequest:
+class GetProfilingFlamegraphDiffResponse422:
     """
     Attributes:
-        assessment_id (UUID):
-        reason (str):
-        verdict (AssessmentVerdictRequestVerdict):
+        message (str | Unset):
     """
 
-    assessment_id: UUID
-    reason: str
-    verdict: AssessmentVerdictRequestVerdict
+    message: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        assessment_id = str(self.assessment_id)
-
-        reason = self.reason
-
-        verdict = self.verdict.value
+        message = self.message
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
-        field_dict.update(
-            {
-                "assessmentId": assessment_id,
-                "reason": reason,
-                "verdict": verdict,
-            }
-        )
+        field_dict.update({})
+        if message is not UNSET:
+            field_dict["message"] = message
 
         return field_dict
 
@@ -55,20 +42,14 @@ class AssessmentVerdictRequest:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        assessment_id = UUID(d.pop("assessmentId"))
+        message = d.pop("message", UNSET)
 
-        reason = d.pop("reason")
-
-        verdict = AssessmentVerdictRequestVerdict(d.pop("verdict"))
-
-        assessment_verdict_request = cls(
-            assessment_id=assessment_id,
-            reason=reason,
-            verdict=verdict,
+        get_profiling_flamegraph_diff_response_422 = cls(
+            message=message,
         )
 
-        assessment_verdict_request.additional_properties = d
-        return assessment_verdict_request
+        get_profiling_flamegraph_diff_response_422.additional_properties = d
+        return get_profiling_flamegraph_diff_response_422
 
     @property
     def additional_keys(self) -> list[str]:

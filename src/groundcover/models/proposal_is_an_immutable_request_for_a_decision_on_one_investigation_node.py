@@ -24,6 +24,9 @@ from .._generated_types import UNSET, Unset
 if TYPE_CHECKING:
     from ..models.investigation_author import InvestigationAuthor
     from ..models.investigation_evidence import InvestigationEvidence
+    from ..models.proposal_assessment_verdict_is_a_proposals_verdict_on_one_assessment_as_reads_return_it import (
+        ProposalAssessmentVerdictIsAProposalsVerdictOnOneAssessmentAsReadsReturnIt,
+    )
     from ..models.proposal_child_describes_a_node_to_create_if_the_proposal_is_approved import (
         ProposalChildDescribesANodeToCreateIfTheProposalIsApproved,
     )
@@ -50,6 +53,8 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
             resolve ProposalResolve
             refute ProposalRefute
             stop ProposalStop
+        assessment_verdicts (list[ProposalAssessmentVerdictIsAProposalsVerdictOnOneAssessmentAsReadsReturnIt] | Unset):
+            A resolve or refute's verdicts on the node's assessments, each at the revision it graded.
         blocked_by (list[UUID] | Unset): Open descendants blocking a pending resolve or refute, computed at read time.
         child (ProposalChildDescribesANodeToCreateIfTheProposalIsApproved | Unset):
         child_id (UUID | Unset):
@@ -71,6 +76,9 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
     investigation_id: UUID
     status: ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeStatus
     type_: ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeType
+    assessment_verdicts: list[ProposalAssessmentVerdictIsAProposalsVerdictOnOneAssessmentAsReadsReturnIt] | Unset = (
+        UNSET
+    )
     blocked_by: list[UUID] | Unset = UNSET
     child: ProposalChildDescribesANodeToCreateIfTheProposalIsApproved | Unset = UNSET
     child_id: UUID | Unset = UNSET
@@ -97,6 +105,13 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
         status = self.status.value
 
         type_ = self.type_.value
+
+        assessment_verdicts: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.assessment_verdicts, Unset):
+            assessment_verdicts = []
+            for assessment_verdicts_item_data in self.assessment_verdicts:
+                assessment_verdicts_item = assessment_verdicts_item_data.to_dict()
+                assessment_verdicts.append(assessment_verdicts_item)
 
         blocked_by: list[str] | Unset = UNSET
         if not isinstance(self.blocked_by, Unset):
@@ -135,6 +150,8 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
                 "type": type_,
             }
         )
+        if assessment_verdicts is not UNSET:
+            field_dict["assessmentVerdicts"] = assessment_verdicts
         if blocked_by is not UNSET:
             field_dict["blockedBy"] = blocked_by
         if child is not UNSET:
@@ -152,6 +169,9 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.investigation_author import InvestigationAuthor
         from ..models.investigation_evidence import InvestigationEvidence
+        from ..models.proposal_assessment_verdict_is_a_proposals_verdict_on_one_assessment_as_reads_return_it import (
+            ProposalAssessmentVerdictIsAProposalsVerdictOnOneAssessmentAsReadsReturnIt,
+        )
         from ..models.proposal_child_describes_a_node_to_create_if_the_proposal_is_approved import (
             ProposalChildDescribesANodeToCreateIfTheProposalIsApproved,
         )
@@ -180,6 +200,21 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
         status = ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeStatus(d.pop("status"))
 
         type_ = ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeType(d.pop("type"))
+
+        _assessment_verdicts = d.pop("assessmentVerdicts", UNSET)
+        assessment_verdicts: (
+            list[ProposalAssessmentVerdictIsAProposalsVerdictOnOneAssessmentAsReadsReturnIt] | Unset
+        ) = UNSET
+        if _assessment_verdicts is not UNSET:
+            assessment_verdicts = []
+            for assessment_verdicts_item_data in _assessment_verdicts:
+                assessment_verdicts_item = (
+                    ProposalAssessmentVerdictIsAProposalsVerdictOnOneAssessmentAsReadsReturnIt.from_dict(
+                        assessment_verdicts_item_data
+                    )
+                )
+
+                assessment_verdicts.append(assessment_verdicts_item)
 
         _blocked_by = d.pop("blockedBy", UNSET)
         blocked_by: list[UUID] | Unset = UNSET
@@ -227,6 +262,7 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
             investigation_id=investigation_id,
             status=status,
             type_=type_,
+            assessment_verdicts=assessment_verdicts,
             blocked_by=blocked_by,
             child=child,
             child_id=child_id,

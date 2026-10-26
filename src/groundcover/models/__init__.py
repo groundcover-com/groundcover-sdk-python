@@ -96,20 +96,19 @@ from .archive_dashboard_response_404 import ArchiveDashboardResponse404
 from .archive_dashboard_response_409 import ArchiveDashboardResponse409
 from .archive_dashboard_response_500 import ArchiveDashboardResponse500
 from .assertion_defines_model_for_assertion import AssertionDefinesModelForAssertion
-from .assessment_feedback_is_provisional_feedback_from_a_rejected_proposal import (
-    AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal,
-)
-from .assessment_feedback_is_provisional_feedback_from_a_rejected_proposal_verdict import (
-    AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposalVerdict,
-)
 from .assessment_is_one_participants_current_conclusion_on_a_node import (
     AssessmentIsOneParticipantsCurrentConclusionOnANode,
 )
 from .assessment_is_one_participants_current_conclusion_on_a_node_verdict import (
     AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict,
 )
-from .assessment_verdict_request import AssessmentVerdictRequest
-from .assessment_verdict_request_verdict import AssessmentVerdictRequestVerdict
+from .assessment_revision_names_an_assessment_at_one_revision import AssessmentRevisionNamesAnAssessmentAtOneRevision
+from .assessment_verdict_request_grades_one_open_assessment_on_the_node_at_the_revision_the_proposer_read import (
+    AssessmentVerdictRequestGradesOneOpenAssessmentOnTheNodeAtTheRevisionTheProposerRead,
+)
+from .assessment_verdict_request_grades_one_open_assessment_on_the_node_at_the_revision_the_proposer_read_verdict import (
+    AssessmentVerdictRequestGradesOneOpenAssessmentOnTheNodeAtTheRevisionTheProposerReadVerdict,
+)
 from .asset_data_source import AssetDataSource
 from .asset_data_source_status import AssetDataSourceStatus
 from .asset_exclusion import AssetExclusion
@@ -511,9 +510,7 @@ from .dbm_measurements_search_request_queries_raw_statement_measurement_interval
 )
 from .dbm_measurements_search_time_series_request import DBMMeasurementsSearchTimeSeriesRequest
 from .dd_metric_inactive_bucket import DDMetricInactiveBucket
-from .decide_proposal_request_approves_or_rejects_a_pending_proposal import (
-    DecideProposalRequestApprovesOrRejectsAPendingProposal,
-)
+from .decide_proposal_request import DecideProposalRequest
 from .delete_api_key_response_400 import DeleteApiKeyResponse400
 from .delete_api_key_response_404 import DeleteApiKeyResponse404
 from .delete_api_key_response_500 import DeleteApiKeyResponse500
@@ -746,6 +743,11 @@ from .get_policy_audit_trail_response_500 import GetPolicyAuditTrailResponse500
 from .get_policy_response_400 import GetPolicyResponse400
 from .get_policy_response_404 import GetPolicyResponse404
 from .get_policy_response_500 import GetPolicyResponse500
+from .get_profiling_flamegraph_diff_response_400 import GetProfilingFlamegraphDiffResponse400
+from .get_profiling_flamegraph_diff_response_404 import GetProfilingFlamegraphDiffResponse404
+from .get_profiling_flamegraph_diff_response_422 import GetProfilingFlamegraphDiffResponse422
+from .get_profiling_flamegraph_diff_response_500 import GetProfilingFlamegraphDiffResponse500
+from .get_profiling_flamegraph_diff_response_504 import GetProfilingFlamegraphDiffResponse504
 from .get_profiling_flamegraph_response_400 import GetProfilingFlamegraphResponse400
 from .get_profiling_flamegraph_response_404 import GetProfilingFlamegraphResponse404
 from .get_profiling_flamegraph_response_422 import GetProfilingFlamegraphResponse422
@@ -802,6 +804,7 @@ from .invalid_citation_is_one_entry_of_the_error_details_when_cited_findings_can
 from .invalid_citation_is_one_entry_of_the_error_details_when_cited_findings_cant_be_used_code import (
     InvalidCitationIsOneEntryOfTheErrorDetailsWhenCitedFindingsCantBeUsedCode,
 )
+from .investigation_assessment_verdicts_details import InvestigationAssessmentVerdictsDetails
 from .investigation_author import InvestigationAuthor
 from .investigation_author_type import InvestigationAuthorType
 from .investigation_evidence import InvestigationEvidence
@@ -1149,6 +1152,12 @@ from .promql_function_represents_a_function_call_in_a_prom_ql_query import (
 )
 from .promql_pipeline_represents_a_segment_of_a_prom_ql_query_which_can_be_a_metric_with_conditions_a_function_or_a_template import (
     PromqlPipelineRepresentsASegmentOfAPromQLQueryWhichCanBeAMetricWithConditionsAFunctionOrATemplate,
+)
+from .proposal_assessment_verdict_is_a_proposals_verdict_on_one_assessment_as_reads_return_it import (
+    ProposalAssessmentVerdictIsAProposalsVerdictOnOneAssessmentAsReadsReturnIt,
+)
+from .proposal_assessment_verdict_is_a_proposals_verdict_on_one_assessment_as_reads_return_it_verdict import (
+    ProposalAssessmentVerdictIsAProposalsVerdictOnOneAssessmentAsReadsReturnItVerdict,
 )
 from .proposal_child_describes_a_node_to_create_if_the_proposal_is_approved import (
     ProposalChildDescribesANodeToCreateIfTheProposalIsApproved,
@@ -1787,12 +1796,11 @@ __all__ = (
     "ArchiveDashboardResponse409",
     "ArchiveDashboardResponse500",
     "AssertionDefinesModelForAssertion",
-    "AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal",
-    "AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposalVerdict",
     "AssessmentIsOneParticipantsCurrentConclusionOnANode",
     "AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict",
-    "AssessmentVerdictRequest",
-    "AssessmentVerdictRequestVerdict",
+    "AssessmentRevisionNamesAnAssessmentAtOneRevision",
+    "AssessmentVerdictRequestGradesOneOpenAssessmentOnTheNodeAtTheRevisionTheProposerRead",
+    "AssessmentVerdictRequestGradesOneOpenAssessmentOnTheNodeAtTheRevisionTheProposerReadVerdict",
     "AssetDataSource",
     "AssetDataSourceStatus",
     "AssetExclusion",
@@ -2034,7 +2042,7 @@ __all__ = (
     "DBMMeasurementsSearchRequestQueriesRawStatementMeasurementIntervals",
     "DBMMeasurementsSearchTimeSeriesRequest",
     "DDMetricInactiveBucket",
-    "DecideProposalRequestApprovesOrRejectsAPendingProposal",
+    "DecideProposalRequest",
     "DeleteApiKeyResponse400",
     "DeleteApiKeyResponse404",
     "DeleteApiKeyResponse500",
@@ -2205,6 +2213,11 @@ __all__ = (
     "GetPolicyResponse400",
     "GetPolicyResponse404",
     "GetPolicyResponse500",
+    "GetProfilingFlamegraphDiffResponse400",
+    "GetProfilingFlamegraphDiffResponse404",
+    "GetProfilingFlamegraphDiffResponse422",
+    "GetProfilingFlamegraphDiffResponse500",
+    "GetProfilingFlamegraphDiffResponse504",
     "GetProfilingFlamegraphResponse400",
     "GetProfilingFlamegraphResponse404",
     "GetProfilingFlamegraphResponse422",
@@ -2251,6 +2264,7 @@ __all__ = (
     "Integrations",
     "InvalidCitationIsOneEntryOfTheErrorDetailsWhenCitedFindingsCantBeUsed",
     "InvalidCitationIsOneEntryOfTheErrorDetailsWhenCitedFindingsCantBeUsedCode",
+    "InvestigationAssessmentVerdictsDetails",
     "InvestigationAuthor",
     "InvestigationAuthorType",
     "InvestigationEvidence",
@@ -2493,6 +2507,8 @@ __all__ = (
     "ProfilingPeriod",
     "PromqlFunctionRepresentsAFunctionCallInAPromQLQuery",
     "PromqlPipelineRepresentsASegmentOfAPromQLQueryWhichCanBeAMetricWithConditionsAFunctionOrATemplate",
+    "ProposalAssessmentVerdictIsAProposalsVerdictOnOneAssessmentAsReadsReturnIt",
+    "ProposalAssessmentVerdictIsAProposalsVerdictOnOneAssessmentAsReadsReturnItVerdict",
     "ProposalChildDescribesANodeToCreateIfTheProposalIsApproved",
     "ProposalChildDescribesANodeToCreateIfTheProposalIsApprovedKind",
     "ProposalDecisionRecordsWhoDecidedAProposalAndWhy",

@@ -12,6 +12,9 @@ from ..models.create_proposal_request_submits_a_decision_for_later_approval_or_r
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
+    from ..models.assessment_verdict_request_grades_one_open_assessment_on_the_node_at_the_revision_the_proposer_read import (
+        AssessmentVerdictRequestGradesOneOpenAssessmentOnTheNodeAtTheRevisionTheProposerRead,
+    )
     from ..models.evidence_request import EvidenceRequest
     from ..models.proposal_child_describes_a_node_to_create_if_the_proposal_is_approved import (
         ProposalChildDescribesANodeToCreateIfTheProposalIsApproved,
@@ -30,6 +33,9 @@ class CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejection:
             resolve ProposalResolve
             refute ProposalRefute
             stop ProposalStop
+        assessment_verdicts (list[AssessmentVerdictRequestGradesOneOpenAssessmentOnTheNodeAtTheRevisionTheProposerRead]
+            | Unset): Required for resolve and refute: exactly one per open assessment on the node, at its current revision.
+            Not allowed for create_child and stop.
         child (ProposalChildDescribesANodeToCreateIfTheProposalIsApproved | Unset):
         evidence (list[EvidenceRequest] | Unset): Findings from the same tree; omitted means none. Each finding may
             appear once.
@@ -37,6 +43,9 @@ class CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejection:
 
     details: str
     type_: CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejectionType
+    assessment_verdicts: (
+        list[AssessmentVerdictRequestGradesOneOpenAssessmentOnTheNodeAtTheRevisionTheProposerRead] | Unset
+    ) = UNSET
     child: ProposalChildDescribesANodeToCreateIfTheProposalIsApproved | Unset = UNSET
     evidence: list[EvidenceRequest] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -45,6 +54,13 @@ class CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejection:
         details = self.details
 
         type_ = self.type_.value
+
+        assessment_verdicts: list[dict[str, Any]] | Unset = UNSET
+        if not isinstance(self.assessment_verdicts, Unset):
+            assessment_verdicts = []
+            for assessment_verdicts_item_data in self.assessment_verdicts:
+                assessment_verdicts_item = assessment_verdicts_item_data.to_dict()
+                assessment_verdicts.append(assessment_verdicts_item)
 
         child: dict[str, Any] | Unset = UNSET
         if not isinstance(self.child, Unset):
@@ -65,6 +81,8 @@ class CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejection:
                 "type": type_,
             }
         )
+        if assessment_verdicts is not UNSET:
+            field_dict["assessmentVerdicts"] = assessment_verdicts
         if child is not UNSET:
             field_dict["child"] = child
         if evidence is not UNSET:
@@ -74,6 +92,9 @@ class CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejection:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        from ..models.assessment_verdict_request_grades_one_open_assessment_on_the_node_at_the_revision_the_proposer_read import (
+            AssessmentVerdictRequestGradesOneOpenAssessmentOnTheNodeAtTheRevisionTheProposerRead,
+        )
         from ..models.evidence_request import EvidenceRequest
         from ..models.proposal_child_describes_a_node_to_create_if_the_proposal_is_approved import (
             ProposalChildDescribesANodeToCreateIfTheProposalIsApproved,
@@ -83,6 +104,21 @@ class CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejection:
         details = d.pop("details")
 
         type_ = CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejectionType(d.pop("type"))
+
+        _assessment_verdicts = d.pop("assessmentVerdicts", UNSET)
+        assessment_verdicts: (
+            list[AssessmentVerdictRequestGradesOneOpenAssessmentOnTheNodeAtTheRevisionTheProposerRead] | Unset
+        ) = UNSET
+        if _assessment_verdicts is not UNSET:
+            assessment_verdicts = []
+            for assessment_verdicts_item_data in _assessment_verdicts:
+                assessment_verdicts_item = (
+                    AssessmentVerdictRequestGradesOneOpenAssessmentOnTheNodeAtTheRevisionTheProposerRead.from_dict(
+                        assessment_verdicts_item_data
+                    )
+                )
+
+                assessment_verdicts.append(assessment_verdicts_item)
 
         _child = d.pop("child", UNSET)
         child: ProposalChildDescribesANodeToCreateIfTheProposalIsApproved | Unset
@@ -103,6 +139,7 @@ class CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejection:
         create_proposal_request_submits_a_decision_for_later_approval_or_rejection = cls(
             details=details,
             type_=type_,
+            assessment_verdicts=assessment_verdicts,
             child=child,
             evidence=evidence,
         )

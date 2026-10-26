@@ -7,41 +7,32 @@ from uuid import UUID
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.assessment_feedback_is_provisional_feedback_from_a_rejected_proposal_verdict import (
-    AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposalVerdict,
-)
-
-T = TypeVar("T", bound="AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal")
+T = TypeVar("T", bound="AssessmentRevisionNamesAnAssessmentAtOneRevision")
 
 
 @_attrs_define
-class AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal:
+class AssessmentRevisionNamesAnAssessmentAtOneRevision:
     """
     Attributes:
-        proposal_id (UUID):
-        reason (str):
-        verdict (AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposalVerdict):
+        assessment_id (UUID):
+        revision (int):
     """
 
-    proposal_id: UUID
-    reason: str
-    verdict: AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposalVerdict
+    assessment_id: UUID
+    revision: int
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        proposal_id = str(self.proposal_id)
+        assessment_id = str(self.assessment_id)
 
-        reason = self.reason
-
-        verdict = self.verdict.value
+        revision = self.revision
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "proposalId": proposal_id,
-                "reason": reason,
-                "verdict": verdict,
+                "assessmentId": assessment_id,
+                "revision": revision,
             }
         )
 
@@ -57,20 +48,17 @@ class AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        proposal_id = UUID(d.pop("proposalId"))
+        assessment_id = UUID(d.pop("assessmentId"))
 
-        reason = d.pop("reason")
+        revision = d.pop("revision")
 
-        verdict = AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposalVerdict(d.pop("verdict"))
-
-        assessment_feedback_is_provisional_feedback_from_a_rejected_proposal = cls(
-            proposal_id=proposal_id,
-            reason=reason,
-            verdict=verdict,
+        assessment_revision_names_an_assessment_at_one_revision = cls(
+            assessment_id=assessment_id,
+            revision=revision,
         )
 
-        assessment_feedback_is_provisional_feedback_from_a_rejected_proposal.additional_properties = d
-        return assessment_feedback_is_provisional_feedback_from_a_rejected_proposal
+        assessment_revision_names_an_assessment_at_one_revision.additional_properties = d
+        return assessment_revision_names_an_assessment_at_one_revision
 
     @property
     def additional_keys(self) -> list[str]:

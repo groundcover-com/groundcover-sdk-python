@@ -50,7 +50,7 @@ def _get_kwargs(
 
     _kwargs: dict[str, Any] = {
         "method": "get",
-        "url": "/api/profiling/flamegraph",
+        "url": "/api/profiling/v1/flamegraph",
         "params": params,
     }
 

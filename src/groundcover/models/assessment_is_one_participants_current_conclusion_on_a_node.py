@@ -16,9 +16,6 @@ from ..models.assessment_is_one_participants_current_conclusion_on_a_node_verdic
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.assessment_feedback_is_provisional_feedback_from_a_rejected_proposal import (
-        AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal,
-    )
     from ..models.investigation_author import InvestigationAuthor
     from ..models.investigation_evidence import InvestigationEvidence
 
@@ -37,9 +34,9 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
         investigation_id (UUID):
         revision (int): Starts at 1; every update adds one.
         updated_at (datetime.datetime):
-        verdict (AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict): Set when a conclusion on the node is
-            approved; an update resets it to open.
-        feedback (AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal | Unset):
+        verdict (AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict): Set from the approved conclusion's verdict
+            on this revision; an update resets it to open.
+        verdict_proposal_id (UUID | Unset): The approved conclusion whose verdict set Verdict.
         verdict_reason (str | Unset):
     """
 
@@ -51,7 +48,7 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
     revision: int
     updated_at: datetime.datetime
     verdict: AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict
-    feedback: AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal | Unset = UNSET
+    verdict_proposal_id: UUID | Unset = UNSET
     verdict_reason: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -75,9 +72,9 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
 
         verdict = self.verdict.value
 
-        feedback: dict[str, Any] | Unset = UNSET
-        if not isinstance(self.feedback, Unset):
-            feedback = self.feedback.to_dict()
+        verdict_proposal_id: str | Unset = UNSET
+        if not isinstance(self.verdict_proposal_id, Unset):
+            verdict_proposal_id = str(self.verdict_proposal_id)
 
         verdict_reason = self.verdict_reason
 
@@ -95,8 +92,8 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
                 "verdict": verdict,
             }
         )
-        if feedback is not UNSET:
-            field_dict["feedback"] = feedback
+        if verdict_proposal_id is not UNSET:
+            field_dict["verdictProposalId"] = verdict_proposal_id
         if verdict_reason is not UNSET:
             field_dict["verdictReason"] = verdict_reason
 
@@ -104,9 +101,6 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.assessment_feedback_is_provisional_feedback_from_a_rejected_proposal import (
-            AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal,
-        )
         from ..models.investigation_author import InvestigationAuthor
         from ..models.investigation_evidence import InvestigationEvidence
 
@@ -132,12 +126,12 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
 
         verdict = AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict(d.pop("verdict"))
 
-        _feedback = d.pop("feedback", UNSET)
-        feedback: AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal | Unset
-        if isinstance(_feedback, Unset) or _feedback is None:
-            feedback = UNSET
+        _verdict_proposal_id = d.pop("verdictProposalId", UNSET)
+        verdict_proposal_id: UUID | Unset
+        if isinstance(_verdict_proposal_id, Unset) or _verdict_proposal_id is None:
+            verdict_proposal_id = UNSET
         else:
-            feedback = AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposal.from_dict(_feedback)
+            verdict_proposal_id = UUID(_verdict_proposal_id)
 
         verdict_reason = d.pop("verdictReason", UNSET)
 
@@ -150,7 +144,7 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
             revision=revision,
             updated_at=updated_at,
             verdict=verdict,
-            feedback=feedback,
+            verdict_proposal_id=verdict_proposal_id,
             verdict_reason=verdict_reason,
         )
 

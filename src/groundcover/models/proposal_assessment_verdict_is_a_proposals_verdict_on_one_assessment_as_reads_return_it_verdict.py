@@ -3,7 +3,7 @@ from __future__ import annotations
 from enum import Enum
 
 
-class AssessmentFeedbackIsProvisionalFeedbackFromARejectedProposalVerdict(str, Enum):
+class ProposalAssessmentVerdictIsAProposalsVerdictOnOneAssessmentAsReadsReturnItVerdict(str, Enum):
     ACCEPTED = "accepted"
     REJECTED = "rejected"
 
