@@ -29,6 +29,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         source (BackendSourceIsTheSourceABackendCallerOpensARootFrom):
         statement (str):
         subject (SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime):
+        instructions (str | Unset): Sent to the root's investigator after the statement.
         scope (list[InvestigationScopeEntry] | Unset):
         time_range (InvestigationTimeRange | Unset):
     """
@@ -36,6 +37,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
     source: BackendSourceIsTheSourceABackendCallerOpensARootFrom
     statement: str
     subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime
+    instructions: str | Unset = UNSET
     scope: list[InvestigationScopeEntry] | Unset = UNSET
     time_range: InvestigationTimeRange | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -46,6 +48,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         statement = self.statement
 
         subject = self.subject.to_dict()
+
+        instructions = self.instructions
 
         scope: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.scope, Unset):
@@ -67,6 +71,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
                 "subject": subject,
             }
         )
+        if instructions is not UNSET:
+            field_dict["instructions"] = instructions
         if scope is not UNSET:
             field_dict["scope"] = scope
         if time_range is not UNSET:
@@ -92,6 +98,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
 
         subject = SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime.from_dict(d.pop("subject"))
 
+        instructions = d.pop("instructions", UNSET)
+
         _scope = d.pop("scope", UNSET)
         scope: list[InvestigationScopeEntry] | Unset = UNSET
         if _scope is not UNSET:
@@ -113,6 +121,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
                 source=source,
                 statement=statement,
                 subject=subject,
+                instructions=instructions,
                 scope=scope,
                 time_range=time_range,
             )

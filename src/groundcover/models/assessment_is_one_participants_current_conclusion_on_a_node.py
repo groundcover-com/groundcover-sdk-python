@@ -36,8 +36,11 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
         updated_at (datetime.datetime):
         verdict (AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict): Set from the approved conclusion's verdict
             on this revision; an update resets it to open.
+        verdict_approved_by (InvestigationAuthor | Unset):
         verdict_proposal_id (UUID | Unset): The approved conclusion whose verdict set Verdict.
         verdict_reason (str | Unset):
+        verdict_set_at (datetime.datetime | Unset): When that conclusion was approved.
+        verdict_set_by (InvestigationAuthor | Unset):
     """
 
     author: InvestigationAuthor
@@ -48,8 +51,11 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
     revision: int
     updated_at: datetime.datetime
     verdict: AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict
+    verdict_approved_by: InvestigationAuthor | Unset = UNSET
     verdict_proposal_id: UUID | Unset = UNSET
     verdict_reason: str | Unset = UNSET
+    verdict_set_at: datetime.datetime | Unset = UNSET
+    verdict_set_by: InvestigationAuthor | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -72,11 +78,23 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
 
         verdict = self.verdict.value
 
+        verdict_approved_by: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.verdict_approved_by, Unset):
+            verdict_approved_by = self.verdict_approved_by.to_dict()
+
         verdict_proposal_id: str | Unset = UNSET
         if not isinstance(self.verdict_proposal_id, Unset):
             verdict_proposal_id = str(self.verdict_proposal_id)
 
         verdict_reason = self.verdict_reason
+
+        verdict_set_at: str | Unset = UNSET
+        if not isinstance(self.verdict_set_at, Unset):
+            verdict_set_at = self.verdict_set_at.isoformat()
+
+        verdict_set_by: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.verdict_set_by, Unset):
+            verdict_set_by = self.verdict_set_by.to_dict()
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -92,10 +110,16 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
                 "verdict": verdict,
             }
         )
+        if verdict_approved_by is not UNSET:
+            field_dict["verdictApprovedBy"] = verdict_approved_by
         if verdict_proposal_id is not UNSET:
             field_dict["verdictProposalId"] = verdict_proposal_id
         if verdict_reason is not UNSET:
             field_dict["verdictReason"] = verdict_reason
+        if verdict_set_at is not UNSET:
+            field_dict["verdictSetAt"] = verdict_set_at
+        if verdict_set_by is not UNSET:
+            field_dict["verdictSetBy"] = verdict_set_by
 
         return field_dict
 
@@ -126,6 +150,13 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
 
         verdict = AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict(d.pop("verdict"))
 
+        _verdict_approved_by = d.pop("verdictApprovedBy", UNSET)
+        verdict_approved_by: InvestigationAuthor | Unset
+        if isinstance(_verdict_approved_by, Unset) or _verdict_approved_by is None:
+            verdict_approved_by = UNSET
+        else:
+            verdict_approved_by = InvestigationAuthor.from_dict(_verdict_approved_by)
+
         _verdict_proposal_id = d.pop("verdictProposalId", UNSET)
         verdict_proposal_id: UUID | Unset
         if isinstance(_verdict_proposal_id, Unset) or _verdict_proposal_id is None:
@@ -134,6 +165,20 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
             verdict_proposal_id = UUID(_verdict_proposal_id)
 
         verdict_reason = d.pop("verdictReason", UNSET)
+
+        _verdict_set_at = d.pop("verdictSetAt", UNSET)
+        verdict_set_at: datetime.datetime | Unset
+        if isinstance(_verdict_set_at, Unset) or _verdict_set_at is None:
+            verdict_set_at = UNSET
+        else:
+            verdict_set_at = parse_datetime(_verdict_set_at)
+
+        _verdict_set_by = d.pop("verdictSetBy", UNSET)
+        verdict_set_by: InvestigationAuthor | Unset
+        if isinstance(_verdict_set_by, Unset) or _verdict_set_by is None:
+            verdict_set_by = UNSET
+        else:
+            verdict_set_by = InvestigationAuthor.from_dict(_verdict_set_by)
 
         assessment_is_one_participants_current_conclusion_on_a_node = cls(
             author=author,
@@ -144,8 +189,11 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
             revision=revision,
             updated_at=updated_at,
             verdict=verdict,
+            verdict_approved_by=verdict_approved_by,
             verdict_proposal_id=verdict_proposal_id,
             verdict_reason=verdict_reason,
+            verdict_set_at=verdict_set_at,
+            verdict_set_by=verdict_set_by,
         )
 
         assessment_is_one_participants_current_conclusion_on_a_node.additional_properties = d

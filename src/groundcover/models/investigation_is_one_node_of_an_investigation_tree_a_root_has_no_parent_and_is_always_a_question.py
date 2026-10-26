@@ -45,8 +45,14 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         statement (str): The question, or the claim to test.
         status (InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus): Questions use
             open/answered/stopped; hypotheses use open/supported/refuted/stopped.
+        close_approved_by (InvestigationAuthor | Unset):
         closed_at (datetime.datetime | Unset):
+        closed_by (InvestigationAuthor | Unset):
+        instructions (str | Unset): What the backend caller that opened the root asked of its investigator, sent after
+            the statement; omitted when none.
         outcome (str | Unset):
+        outcome_proposal_id (UUID | Unset): The approved resolve, refute or stop that closed the node; for a node a stop
+            closed below it, that stop.
         parent_id (UUID | Unset): Parent node; omitted for roots.
         scope (list[InvestigationScopeEntry] | Unset):
         source (SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom | Unset):
@@ -61,8 +67,12 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
     root_id: UUID
     statement: str
     status: InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus
+    close_approved_by: InvestigationAuthor | Unset = UNSET
     closed_at: datetime.datetime | Unset = UNSET
+    closed_by: InvestigationAuthor | Unset = UNSET
+    instructions: str | Unset = UNSET
     outcome: str | Unset = UNSET
+    outcome_proposal_id: UUID | Unset = UNSET
     parent_id: UUID | Unset = UNSET
     scope: list[InvestigationScopeEntry] | Unset = UNSET
     source: SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom | Unset = UNSET
@@ -85,11 +95,25 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
 
         status = self.status.value
 
+        close_approved_by: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.close_approved_by, Unset):
+            close_approved_by = self.close_approved_by.to_dict()
+
         closed_at: str | Unset = UNSET
         if not isinstance(self.closed_at, Unset):
             closed_at = self.closed_at.isoformat()
 
+        closed_by: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.closed_by, Unset):
+            closed_by = self.closed_by.to_dict()
+
+        instructions = self.instructions
+
         outcome = self.outcome
+
+        outcome_proposal_id: str | Unset = UNSET
+        if not isinstance(self.outcome_proposal_id, Unset):
+            outcome_proposal_id = str(self.outcome_proposal_id)
 
         parent_id: str | Unset = UNSET
         if not isinstance(self.parent_id, Unset):
@@ -127,10 +151,18 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
                 "status": status,
             }
         )
+        if close_approved_by is not UNSET:
+            field_dict["closeApprovedBy"] = close_approved_by
         if closed_at is not UNSET:
             field_dict["closedAt"] = closed_at
+        if closed_by is not UNSET:
+            field_dict["closedBy"] = closed_by
+        if instructions is not UNSET:
+            field_dict["instructions"] = instructions
         if outcome is not UNSET:
             field_dict["outcome"] = outcome
+        if outcome_proposal_id is not UNSET:
+            field_dict["outcomeProposalId"] = outcome_proposal_id
         if parent_id is not UNSET:
             field_dict["parentId"] = parent_id
         if scope is not UNSET:
@@ -171,6 +203,13 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
 
         status = InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus(d.pop("status"))
 
+        _close_approved_by = d.pop("closeApprovedBy", UNSET)
+        close_approved_by: InvestigationAuthor | Unset
+        if isinstance(_close_approved_by, Unset) or _close_approved_by is None:
+            close_approved_by = UNSET
+        else:
+            close_approved_by = InvestigationAuthor.from_dict(_close_approved_by)
+
         _closed_at = d.pop("closedAt", UNSET)
         closed_at: datetime.datetime | Unset
         if isinstance(_closed_at, Unset) or _closed_at is None:
@@ -178,7 +217,23 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         else:
             closed_at = parse_datetime(_closed_at)
 
+        _closed_by = d.pop("closedBy", UNSET)
+        closed_by: InvestigationAuthor | Unset
+        if isinstance(_closed_by, Unset) or _closed_by is None:
+            closed_by = UNSET
+        else:
+            closed_by = InvestigationAuthor.from_dict(_closed_by)
+
+        instructions = d.pop("instructions", UNSET)
+
         outcome = d.pop("outcome", UNSET)
+
+        _outcome_proposal_id = d.pop("outcomeProposalId", UNSET)
+        outcome_proposal_id: UUID | Unset
+        if isinstance(_outcome_proposal_id, Unset) or _outcome_proposal_id is None:
+            outcome_proposal_id = UNSET
+        else:
+            outcome_proposal_id = UUID(_outcome_proposal_id)
 
         _parent_id = d.pop("parentId", UNSET)
         parent_id: UUID | Unset
@@ -227,8 +282,12 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
             root_id=root_id,
             statement=statement,
             status=status,
+            close_approved_by=close_approved_by,
             closed_at=closed_at,
+            closed_by=closed_by,
+            instructions=instructions,
             outcome=outcome,
+            outcome_proposal_id=outcome_proposal_id,
             parent_id=parent_id,
             scope=scope,
             source=source,
