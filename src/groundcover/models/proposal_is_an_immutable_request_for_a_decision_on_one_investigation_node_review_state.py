@@ -5,6 +5,7 @@ from enum import Enum
 
 class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeReviewState(str, Enum):
     DEFERRED = "deferred"
+    NEEDS_PERSON = "needs_person"
     QUEUED = "queued"
     REVIEWING = "reviewing"
 

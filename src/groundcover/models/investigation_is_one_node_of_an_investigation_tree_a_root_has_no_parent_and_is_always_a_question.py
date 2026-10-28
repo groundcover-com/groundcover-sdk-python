@@ -22,6 +22,9 @@ if TYPE_CHECKING:
     from ..models.investigation_author import InvestigationAuthor
     from ..models.investigation_scope_entry import InvestigationScopeEntry
     from ..models.investigation_time_range import InvestigationTimeRange
+    from ..models.investigator_run_is_the_start_of_a_roots_investigator_pending_until_agent_service_accepts_or_refuses_it import (
+        InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesIt,
+    )
     from ..models.source_is_how_a_root_started_manual_on_the_public_create_route_or_what_a_backend_caller_opened_it_from import (
         SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom,
     )
@@ -50,6 +53,7 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         closed_by (InvestigationAuthor | Unset):
         instructions (str | Unset): What the backend caller that opened the root asked of its investigator, sent after
             the statement; omitted when none.
+        investigator (InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesIt | Unset):
         outcome (str | Unset):
         outcome_proposal_id (UUID | Unset): The approved resolve, refute or stop that closed the node; for a node a stop
             closed below it, that stop.
@@ -71,6 +75,9 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
     closed_at: datetime.datetime | Unset = UNSET
     closed_by: InvestigationAuthor | Unset = UNSET
     instructions: str | Unset = UNSET
+    investigator: InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesIt | Unset = (
+        UNSET
+    )
     outcome: str | Unset = UNSET
     outcome_proposal_id: UUID | Unset = UNSET
     parent_id: UUID | Unset = UNSET
@@ -108,6 +115,10 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
             closed_by = self.closed_by.to_dict()
 
         instructions = self.instructions
+
+        investigator: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.investigator, Unset):
+            investigator = self.investigator.to_dict()
 
         outcome = self.outcome
 
@@ -159,6 +170,8 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
             field_dict["closedBy"] = closed_by
         if instructions is not UNSET:
             field_dict["instructions"] = instructions
+        if investigator is not UNSET:
+            field_dict["investigator"] = investigator
         if outcome is not UNSET:
             field_dict["outcome"] = outcome
         if outcome_proposal_id is not UNSET:
@@ -181,6 +194,9 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         from ..models.investigation_author import InvestigationAuthor
         from ..models.investigation_scope_entry import InvestigationScopeEntry
         from ..models.investigation_time_range import InvestigationTimeRange
+        from ..models.investigator_run_is_the_start_of_a_roots_investigator_pending_until_agent_service_accepts_or_refuses_it import (
+            InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesIt,
+        )
         from ..models.source_is_how_a_root_started_manual_on_the_public_create_route_or_what_a_backend_caller_opened_it_from import (
             SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom,
         )
@@ -225,6 +241,17 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
             closed_by = InvestigationAuthor.from_dict(_closed_by)
 
         instructions = d.pop("instructions", UNSET)
+
+        _investigator = d.pop("investigator", UNSET)
+        investigator: InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesIt | Unset
+        if isinstance(_investigator, Unset) or _investigator is None:
+            investigator = UNSET
+        else:
+            investigator = (
+                InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesIt.from_dict(
+                    _investigator
+                )
+            )
 
         outcome = d.pop("outcome", UNSET)
 
@@ -286,6 +313,7 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
             closed_at=closed_at,
             closed_by=closed_by,
             instructions=instructions,
+            investigator=investigator,
             outcome=outcome,
             outcome_proposal_id=outcome_proposal_id,
             parent_id=parent_id,

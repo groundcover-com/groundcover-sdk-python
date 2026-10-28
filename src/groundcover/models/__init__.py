@@ -849,6 +849,12 @@ from .investigation_scope_entry import InvestigationScopeEntry
 from .investigation_source_ref import InvestigationSourceRef
 from .investigation_subject_ref import InvestigationSubjectRef
 from .investigation_time_range import InvestigationTimeRange
+from .investigator_run_is_the_start_of_a_roots_investigator_pending_until_agent_service_accepts_or_refuses_it import (
+    InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesIt,
+)
+from .investigator_run_is_the_start_of_a_roots_investigator_pending_until_agent_service_accepts_or_refuses_it_status import (
+    InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesItStatus,
+)
 from .invite_request import InviteRequest
 from .invitee_details import InviteeDetails
 from .issue_display_controls_how_the_resulting_issue_is_rendered import (
@@ -1257,6 +1263,7 @@ from .route_rule_request import RouteRuleRequest
 from .route_rule_response import RouteRuleResponse
 from .rum_search_request import RumSearchRequest
 from .rum_search_time_series_request import RumSearchTimeSeriesRequest
+from .run_error_is_agent_services_answer_to_a_refused_run_start import RunErrorIsAgentServicesAnswerToARefusedRunStart
 from .sample_pair import SamplePair
 from .search_discovery_request import SearchDiscoveryRequest
 from .search_discovery_request_type import SearchDiscoveryRequestType
@@ -2316,6 +2323,8 @@ __all__ = (
     "InvestigationSourceRef",
     "InvestigationSubjectRef",
     "InvestigationTimeRange",
+    "InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesIt",
+    "InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesItStatus",
     "InviteeDetails",
     "InviteRequest",
     "IssueDisplayControlsHowTheResultingIssueIsRendered",
@@ -2596,6 +2605,7 @@ __all__ = (
     "RouteRuleResponse",
     "RumSearchRequest",
     "RumSearchTimeSeriesRequest",
+    "RunErrorIsAgentServicesAnswerToARefusedRunStart",
     "SamplePair",
     "SearchDiscoveryRequest",
     "SearchDiscoveryRequestType",

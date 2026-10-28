@@ -61,11 +61,12 @@ class ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNode:
         decision (ProposalDecisionRecordsWhoDecidedAProposalAndWhy | Unset):
         review_state (ProposalIsAnImmutableRequestForADecisionOnOneInvestigationNodeReviewState | Unset): Where a
             pending proposal stands in moderation; set only by the tree-wide proposals list.
-            deferred: blockedBy is non-empty; reviewing: a review of its decision group is starting or running; queued:
-            neither.
+            deferred: blockedBy is non-empty; reviewing: a review of its decision group is starting or running;
+            needs_person: its group's cycle used up its reviews, so a person decides; queued: none of these.
             queued ReviewStateQueued
             reviewing ReviewStateReviewing
             deferred ReviewStateDeferred
+            needs_person ReviewStateNeedsPerson
     """
 
     created_at: datetime.datetime

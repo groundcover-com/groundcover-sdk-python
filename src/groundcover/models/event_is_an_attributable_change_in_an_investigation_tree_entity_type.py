@@ -7,9 +7,10 @@ class EventIsAnAttributableChangeInAnInvestigationTreeEntityType(str, Enum):
     ASSESSMENT = "assessment"
     FINDING = "finding"
     INVESTIGATION = "investigation"
+    INVESTIGATOR = "investigator"
+    MODERATOR = "moderator"
     PARTICIPANT = "participant"
     PROPOSAL = "proposal"
-    REVIEW = "review"
 
     def __str__(self) -> str:
         return str(self.value)
