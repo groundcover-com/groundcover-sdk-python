@@ -21,12 +21,14 @@ class InvestigationAuthor:
         name (str):
         type_ (InvestigationAuthorType):
         agent_instance_id (str | Unset):
+        on_behalf_of (str | Unset): Email of the user this participant acts on behalf of; absent without delegation.
     """
 
     id: UUID
     name: str
     type_: InvestigationAuthorType
     agent_instance_id: str | Unset = UNSET
+    on_behalf_of: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -37,6 +39,8 @@ class InvestigationAuthor:
         type_ = self.type_.value
 
         agent_instance_id = self.agent_instance_id
+
+        on_behalf_of = self.on_behalf_of
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -49,6 +53,8 @@ class InvestigationAuthor:
         )
         if agent_instance_id is not UNSET:
             field_dict["agentInstanceId"] = agent_instance_id
+        if on_behalf_of is not UNSET:
+            field_dict["onBehalfOf"] = on_behalf_of
 
         return field_dict
 
@@ -70,11 +76,14 @@ class InvestigationAuthor:
 
         agent_instance_id = d.pop("agentInstanceId", UNSET)
 
+        on_behalf_of = d.pop("onBehalfOf", UNSET)
+
         investigation_author = cls(
             id=id,
             name=name,
             type_=type_,
             agent_instance_id=agent_instance_id,
+            on_behalf_of=on_behalf_of,
         )
 
         investigation_author.additional_properties = d
