@@ -29,7 +29,10 @@ class GetInvestigationTreeResponseIsOneConsistentSnapshotOfTheCompleteTree:
         events_after (int): Tree events after afterTimestamp, or all events when it is omitted.
         nodes (list[InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion]): Root first, then
             remaining nodes by createdAt and id.
-        participants (list[InvestigationAuthor]):
+        participants (list[InvestigationAuthor]): Contributors only, without system writers or the moderator; each
+            groundcover agent appears once, as its first run.
+            A node's or finding's createdBy can name a later run that isn't listed, so use inline authors, not participant
+            ids.
         missing_groundcover_integrations (list[MissingGroundcoverIntegrationRef] | Unset): Distinct integrations
             reported by assessments anywhere in this tree, including rejected assessments.
         next_after_timestamp (datetime.datetime | Unset): Timestamp of the latest event in this snapshot; omitted when
