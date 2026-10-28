@@ -20,6 +20,7 @@ class AgentLLMProviderEntry:
         id (str | Unset):
         is_secret_ref_set (bool | Unset):
         model_id (str | Unset):
+        pricing_model_ids (list[str] | Unset): Exact pricing lookup IDs for enabled models, in lookup order.
         provider (str | Unset):
         region (str | Unset): Configured cloud endpoint/resource region; omitted when unknown.
         unpriced_models (list[str] | Unset): Enabled models for which the cost calculator has no model-specific pricing.
@@ -30,6 +31,7 @@ class AgentLLMProviderEntry:
     id: str | Unset = UNSET
     is_secret_ref_set: bool | Unset = UNSET
     model_id: str | Unset = UNSET
+    pricing_model_ids: list[str] | Unset = UNSET
     provider: str | Unset = UNSET
     region: str | Unset = UNSET
     unpriced_models: list[str] | Unset = UNSET
@@ -47,6 +49,10 @@ class AgentLLMProviderEntry:
         is_secret_ref_set = self.is_secret_ref_set
 
         model_id = self.model_id
+
+        pricing_model_ids: list[str] | Unset = UNSET
+        if not isinstance(self.pricing_model_ids, Unset):
+            pricing_model_ids = self.pricing_model_ids
 
         provider = self.provider
 
@@ -69,6 +75,8 @@ class AgentLLMProviderEntry:
             field_dict["isSecretRefSet"] = is_secret_ref_set
         if model_id is not UNSET:
             field_dict["modelId"] = model_id
+        if pricing_model_ids is not UNSET:
+            field_dict["pricingModelIds"] = pricing_model_ids
         if provider is not UNSET:
             field_dict["provider"] = provider
         if region is not UNSET:
@@ -98,6 +106,8 @@ class AgentLLMProviderEntry:
 
         model_id = d.pop("modelId", UNSET)
 
+        pricing_model_ids = cast(list[str], d.pop("pricingModelIds", UNSET))
+
         provider = d.pop("provider", UNSET)
 
         region = d.pop("region", UNSET)
@@ -110,6 +120,7 @@ class AgentLLMProviderEntry:
             id=id,
             is_secret_ref_set=is_secret_ref_set,
             model_id=model_id,
+            pricing_model_ids=pricing_model_ids,
             provider=provider,
             region=region,
             unpriced_models=unpriced_models,
