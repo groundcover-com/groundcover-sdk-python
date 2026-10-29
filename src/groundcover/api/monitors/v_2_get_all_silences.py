@@ -21,6 +21,7 @@ def _get_kwargs(
     include_recurring: bool | Unset = UNSET,
     limit: int | Unset = UNSET,
     skip: int | Unset = UNSET,
+    ids: str | Unset = UNSET,
 ) -> dict[str, Any]:
 
     params: dict[str, Any] = {}
@@ -38,6 +39,8 @@ def _get_kwargs(
     params["limit"] = limit
 
     params["skip"] = skip
+
+    params["ids"] = ids
 
     params = {k: v for k, v in params.items() if v is not UNSET and v is not None}
 
@@ -93,6 +96,7 @@ def sync_detailed(
     include_recurring: bool | Unset = UNSET,
     limit: int | Unset = UNSET,
     skip: int | Unset = UNSET,
+    ids: str | Unset = UNSET,
 ) -> Response[V2GetAllSilencesResponse400 | V2GetAllSilencesResponse500 | V2SilencesListResponse]:
     """List All Silences (V2 Unified)
 
@@ -104,6 +108,7 @@ def sync_detailed(
         include_recurring (bool | Unset):
         limit (int | Unset):
         skip (int | Unset):
+        ids (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -119,6 +124,7 @@ def sync_detailed(
         include_recurring=include_recurring,
         limit=limit,
         skip=skip,
+        ids=ids,
     )
 
     response = client.get_httpx_client().request(
@@ -136,6 +142,7 @@ def sync(
     include_recurring: bool | Unset = UNSET,
     limit: int | Unset = UNSET,
     skip: int | Unset = UNSET,
+    ids: str | Unset = UNSET,
 ) -> V2GetAllSilencesResponse400 | V2GetAllSilencesResponse500 | V2SilencesListResponse | None:
     """List All Silences (V2 Unified)
 
@@ -147,6 +154,7 @@ def sync(
         include_recurring (bool | Unset):
         limit (int | Unset):
         skip (int | Unset):
+        ids (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -163,6 +171,7 @@ def sync(
         include_recurring=include_recurring,
         limit=limit,
         skip=skip,
+        ids=ids,
     ).parsed
 
 
@@ -174,6 +183,7 @@ async def asyncio_detailed(
     include_recurring: bool | Unset = UNSET,
     limit: int | Unset = UNSET,
     skip: int | Unset = UNSET,
+    ids: str | Unset = UNSET,
 ) -> Response[V2GetAllSilencesResponse400 | V2GetAllSilencesResponse500 | V2SilencesListResponse]:
     """List All Silences (V2 Unified)
 
@@ -185,6 +195,7 @@ async def asyncio_detailed(
         include_recurring (bool | Unset):
         limit (int | Unset):
         skip (int | Unset):
+        ids (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -200,6 +211,7 @@ async def asyncio_detailed(
         include_recurring=include_recurring,
         limit=limit,
         skip=skip,
+        ids=ids,
     )
 
     response = await client.get_async_httpx_client().request(**kwargs)
@@ -215,6 +227,7 @@ async def asyncio(
     include_recurring: bool | Unset = UNSET,
     limit: int | Unset = UNSET,
     skip: int | Unset = UNSET,
+    ids: str | Unset = UNSET,
 ) -> V2GetAllSilencesResponse400 | V2GetAllSilencesResponse500 | V2SilencesListResponse | None:
     """List All Silences (V2 Unified)
 
@@ -226,6 +239,7 @@ async def asyncio(
         include_recurring (bool | Unset):
         limit (int | Unset):
         skip (int | Unset):
+        ids (str | Unset):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -243,5 +257,6 @@ async def asyncio(
             include_recurring=include_recurring,
             limit=limit,
             skip=skip,
+            ids=ids,
         )
     ).parsed

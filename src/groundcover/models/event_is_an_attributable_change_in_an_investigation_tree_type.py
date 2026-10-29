@@ -11,6 +11,7 @@ class EventIsAnAttributableChangeInAnInvestigationTreeType(str, Enum):
     INVESTIGATION_CLOSED = "investigation.closed"
     INVESTIGATION_OPENED = "investigation.opened"
     INVESTIGATOR_RUN_REJECTED = "investigator.run_rejected"
+    INVESTIGATOR_RUN_REQUESTED = "investigator.run_requested"
     MODERATOR_RUN_LIMIT_REACHED = "moderator.run_limit_reached"
     MODERATOR_RUN_REJECTED = "moderator.run_rejected"
     PARTICIPANT_JOINED = "participant.joined"
