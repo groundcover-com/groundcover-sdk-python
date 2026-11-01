@@ -953,6 +953,7 @@ from .list_investigation_events_response_is_a_page_ordered_by_event_timestamp im
 )
 from .list_investigation_findings_response import ListInvestigationFindingsResponse
 from .list_investigation_proposals_response import ListInvestigationProposalsResponse
+from .list_investigation_triggers_response import ListInvestigationTriggersResponse
 from .list_investigations_response import ListInvestigationsResponse
 from .list_migration_cloud_integrations_response import ListMigrationCloudIntegrationsResponse
 from .list_migration_data_sources_response import ListMigrationDataSourcesResponse
@@ -1538,6 +1539,9 @@ from .transform_represents_a_column_transform_that_registers_in_the_alias_regist
     TransformRepresentsAColumnTransformThatRegistersInTheAliasRegistryTransformsDontCreateSubqueriesTheyRegisterHandlersThatResolveAliasesToSQLExpressionsType,
 )
 from .trigger import Trigger
+from .trigger_opens_a_root_investigation_when_a_monitor_issue_its_query_selects_starts_firing import (
+    TriggerOpensARootInvestigationWhenAMonitorIssueItsQuerySelectsStartsFiring,
+)
 from .udp_request_defines_model_for_udp_request import UdpRequestDefinesModelForUdpRequest
 from .unfurl_card import UnfurlCard
 from .unfurl_card_field import UnfurlCardField
@@ -1748,6 +1752,9 @@ from .workloads_list_response import WorkloadsListResponse
 from .workloads_list_response_400 import WorkloadsListResponse400
 from .workloads_list_response_500 import WorkloadsListResponse500
 from .write_ap_is import WriteAPIs
+from .write_trigger_request_is_a_triggers_full_content_on_create_and_update import (
+    WriteTriggerRequestIsATriggersFullContentOnCreateAndUpdate,
+)
 
 __all__ = (
     "Activation",
@@ -2388,6 +2395,7 @@ __all__ = (
     "ListInvestigationFindingsResponse",
     "ListInvestigationProposalsResponse",
     "ListInvestigationsResponse",
+    "ListInvestigationTriggersResponse",
     "ListMigrationCloudIntegrationsResponse",
     "ListMigrationDataSourcesResponse",
     "ListMigrationsResponse",
@@ -2778,6 +2786,7 @@ __all__ = (
     "TransformRepresentsAColumnTransformThatRegistersInTheAliasRegistryTransformsDontCreateSubqueriesTheyRegisterHandlersThatResolveAliasesToSQLExpressions",
     "TransformRepresentsAColumnTransformThatRegistersInTheAliasRegistryTransformsDontCreateSubqueriesTheyRegisterHandlersThatResolveAliasesToSQLExpressionsType",
     "Trigger",
+    "TriggerOpensARootInvestigationWhenAMonitorIssueItsQuerySelectsStartsFiring",
     "UdpRequestDefinesModelForUdpRequest",
     "UnfurlCard",
     "UnfurlCardField",
@@ -2936,4 +2945,5 @@ __all__ = (
     "WorkloadsListResponse400",
     "WorkloadsListResponse500",
     "WriteAPIs",
+    "WriteTriggerRequestIsATriggersFullContentOnCreateAndUpdate",
 )

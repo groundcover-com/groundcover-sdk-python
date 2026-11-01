@@ -30,6 +30,9 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         statement (str):
         subject (SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime):
         instructions (str | Unset): Sent to the root's investigator after the statement.
+        max_concurrent (int | Unset): At most this many of the trigger's roots may be open: at the cap, a root for a new
+            subject is refused
+            with 429 TRIGGER_AT_CAPACITY. Omitted: no limit.
         scope (list[InvestigationScopeEntry] | Unset):
         time_range (InvestigationTimeRange | Unset):
     """
@@ -38,6 +41,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
     statement: str
     subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime
     instructions: str | Unset = UNSET
+    max_concurrent: int | Unset = UNSET
     scope: list[InvestigationScopeEntry] | Unset = UNSET
     time_range: InvestigationTimeRange | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -50,6 +54,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         subject = self.subject.to_dict()
 
         instructions = self.instructions
+
+        max_concurrent = self.max_concurrent
 
         scope: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.scope, Unset):
@@ -73,6 +79,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         )
         if instructions is not UNSET:
             field_dict["instructions"] = instructions
+        if max_concurrent is not UNSET:
+            field_dict["maxConcurrent"] = max_concurrent
         if scope is not UNSET:
             field_dict["scope"] = scope
         if time_range is not UNSET:
@@ -100,6 +108,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
 
         instructions = d.pop("instructions", UNSET)
 
+        max_concurrent = d.pop("maxConcurrent", UNSET)
+
         _scope = d.pop("scope", UNSET)
         scope: list[InvestigationScopeEntry] | Unset = UNSET
         if _scope is not UNSET:
@@ -122,6 +132,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
                 statement=statement,
                 subject=subject,
                 instructions=instructions,
+                max_concurrent=max_concurrent,
                 scope=scope,
                 time_range=time_range,
             )
