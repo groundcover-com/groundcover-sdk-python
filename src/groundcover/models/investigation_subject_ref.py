@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import datetime
+
+from .._datetime_compat import parse_datetime
 from collections.abc import Mapping
 from typing import Any, TypeVar
 
@@ -14,19 +17,26 @@ class InvestigationSubjectRef:
     """
     Attributes:
         issue_fingerprint (str): The monitor issue's fingerprint.
+        issue_timestamp (datetime.datetime): When the issue changed state into the firing, or a later evaluation of that
+            firing. The investigator
+            takes the latest firing at or before it. Not in the future.
     """
 
     issue_fingerprint: str
+    issue_timestamp: datetime.datetime
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         issue_fingerprint = self.issue_fingerprint
+
+        issue_timestamp = self.issue_timestamp.isoformat()
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
                 "issueFingerprint": issue_fingerprint,
+                "issueTimestamp": issue_timestamp,
             }
         )
 
@@ -44,8 +54,11 @@ class InvestigationSubjectRef:
         d = dict(src_dict)
         issue_fingerprint = d.pop("issueFingerprint")
 
+        issue_timestamp = parse_datetime(d.pop("issueTimestamp"))
+
         investigation_subject_ref = cls(
             issue_fingerprint=issue_fingerprint,
+            issue_timestamp=issue_timestamp,
         )
 
         investigation_subject_ref.additional_properties = d
