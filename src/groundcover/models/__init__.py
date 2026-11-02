@@ -358,6 +358,12 @@ from .create_dashboard_response_400 import CreateDashboardResponse400
 from .create_dashboard_response_500 import CreateDashboardResponse500
 from .create_data_integration_config_request import CreateDataIntegrationConfigRequest
 from .create_data_integration_config_request_tags import CreateDataIntegrationConfigRequestTags
+from .create_decision_request_creates_and_approves_a_proposal_as_one_human_decision import (
+    CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecision,
+)
+from .create_decision_request_creates_and_approves_a_proposal_as_one_human_decision_type import (
+    CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecisionType,
+)
 from .create_finding_request_uses_signal_and_query_language_to_identify_the_mcp_tool_for_retrieving_evidence import (
     CreateFindingRequestUsesSignalAndQueryLanguageToIdentifyTheMCPToolForRetrievingEvidence,
 )
@@ -1989,6 +1995,8 @@ __all__ = (
     "CreateDashboardResponse500",
     "CreateDataIntegrationConfigRequest",
     "CreateDataIntegrationConfigRequestTags",
+    "CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecision",
+    "CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecisionType",
     "CreateFindingRequestUsesSignalAndQueryLanguageToIdentifyTheMCPToolForRetrievingEvidence",
     "CreateFindingRequestUsesSignalAndQueryLanguageToIdentifyTheMCPToolForRetrievingEvidenceQueryLanguage",
     "CreateFindingRequestUsesSignalAndQueryLanguageToIdentifyTheMCPToolForRetrievingEvidenceSignal",

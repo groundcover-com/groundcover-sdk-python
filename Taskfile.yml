@@ -1,0 +1,20 @@
+# yaml-language-server: $schema=https://taskfile.dev/schema.json
+version: "3"
+
+tasks:
+  # What the merge queue runs (.github/signoff/products.yml); needs Go, uv and npx.
+  test:
+    desc: Generate the Python SDK and run its unit tests on Python 3.9-3.13, writing JUnit
+    env:
+      # Relative to the repo root; the root Taskfile's default.
+      REPORTS_DIR: '{{.REPORTS_DIR | default "artifacts/reports"}}'
+    cmds:
+      - ./scripts/signoff-tests.sh
+
+  signoff:
+    desc: Run sdk-python:test, then push and post signoff/sdk-python
+    cmds:
+      - task: :signoff:run
+        vars:
+          PRODUCT: sdk-python
+          TEST_CMD: '{{.TASK_EXE}} sdk-python:test'
