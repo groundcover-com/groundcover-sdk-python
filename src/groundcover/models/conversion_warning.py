@@ -25,7 +25,8 @@ class ConversionWarning:
             details (str | Unset):
             message (str | Unset):
             original_data (Any | Unset):
-            severity (str | Unset):
+            severity (str | Unset): WarningSeverity grades how serious a conversion warning is. It is not a
+                monitor severity.
             suggestions (list[str] | Unset):
             type_ (str | Unset): ConversionWarningType represents the type of conversion warning
             unsupported (str | Unset):
