@@ -672,6 +672,8 @@ from .export_target_body_represents_a_dashboard_widget_or_issue_graph_export_tar
     ExportTargetBodyRepresentsADashboardWidgetOrIssueGraphExportTargetType,
 )
 from .export_time_range_body_represents_the_export_time_range import ExportTimeRangeBodyRepresentsTheExportTimeRange
+from .feature_permission_catalogue import FeaturePermissionCatalogue
+from .feature_permission_catalogue_additional_property_item import FeaturePermissionCatalogueAdditionalPropertyItem
 from .fetch_assets_request import FetchAssetsRequest
 from .fetch_assets_request_asset_types_item import FetchAssetsRequestAssetTypesItem
 from .fetch_assets_request_provider import FetchAssetsRequestProvider
@@ -1161,6 +1163,12 @@ from .pager_duty_data_severity_mapping import PagerDutyDataSeverityMapping
 from .pattern_data import PatternData
 from .pattern_data_additional_columns import PatternDataAdditionalColumns
 from .pattern_param_distribution_value import PatternParamDistributionValue
+from .permissions_contains_explicit_overrides_only_a_missing_feature_inherits_legacy_authorization import (
+    PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization,
+)
+from .permissions_contains_explicit_overrides_only_a_missing_feature_inherits_legacy_authorization_additional_property import (
+    PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty,
+)
 from .pin import Pin
 from .pinned_resource import PinnedResource
 from .policy_defines_an_access_control_policy import PolicyDefinesAnAccessControlPolicy
@@ -2197,6 +2205,8 @@ __all__ = (
     "ExportTargetBodyRepresentsADashboardWidgetOrIssueGraphExportTargetMode",
     "ExportTargetBodyRepresentsADashboardWidgetOrIssueGraphExportTargetType",
     "ExportTimeRangeBodyRepresentsTheExportTimeRange",
+    "FeaturePermissionCatalogue",
+    "FeaturePermissionCatalogueAdditionalPropertyItem",
     "FetchAssetsRequest",
     "FetchAssetsRequestAssetTypesItem",
     "FetchAssetsRequestProvider",
@@ -2556,6 +2566,8 @@ __all__ = (
     "PatternData",
     "PatternDataAdditionalColumns",
     "PatternParamDistributionValue",
+    "PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization",
+    "PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty",
     "Pin",
     "PinnedResource",
     "PolicyDefinesAnAccessControlPolicy",

@@ -15,6 +15,9 @@ if TYPE_CHECKING:
     from ..models.data_scope_contains_either_simple_or_advanced_scope_definitions import (
         DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions,
     )
+    from ..models.permissions_contains_explicit_overrides_only_a_missing_feature_inherits_legacy_authorization import (
+        PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization,
+    )
     from ..models.role_map_defines_the_mapping_of_roles_to_permissions import (
         RoleMapDefinesTheMappingOfRolesToPermissions,
     )
@@ -33,6 +36,8 @@ class PolicyDefinesAnAccessControlPolicy:
         created_timestamp (datetime.datetime | Unset): Timestamp when the policy was created.
         data_scope (DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions | Unset):
         description (str | Unset): Optional description of the policy.
+        feature_permissions (PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization |
+            Unset):
         read_only (bool | Unset): Indicates if the policy is read-only (system managed).
         revision_number (int | Unset): Revision number for optimistic locking.
         role (RoleMapDefinesTheMappingOfRolesToPermissions | Unset): It is used within a Policy.
@@ -49,6 +54,9 @@ class PolicyDefinesAnAccessControlPolicy:
     created_timestamp: datetime.datetime | Unset = UNSET
     data_scope: DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions | Unset = UNSET
     description: str | Unset = UNSET
+    feature_permissions: PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization | Unset = (
+        UNSET
+    )
     read_only: bool | Unset = UNSET
     revision_number: int | Unset = UNSET
     role: RoleMapDefinesTheMappingOfRolesToPermissions | Unset = UNSET
@@ -75,6 +83,10 @@ class PolicyDefinesAnAccessControlPolicy:
             data_scope = self.data_scope.to_dict()
 
         description = self.description
+
+        feature_permissions: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.feature_permissions, Unset):
+            feature_permissions = self.feature_permissions.to_dict()
 
         read_only = self.read_only
 
@@ -113,6 +125,8 @@ class PolicyDefinesAnAccessControlPolicy:
             field_dict["dataScope"] = data_scope
         if description is not UNSET:
             field_dict["description"] = description
+        if feature_permissions is not UNSET:
+            field_dict["featurePermissions"] = feature_permissions
         if read_only is not UNSET:
             field_dict["readOnly"] = read_only
         if revision_number is not UNSET:
@@ -136,6 +150,9 @@ class PolicyDefinesAnAccessControlPolicy:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.data_scope_contains_either_simple_or_advanced_scope_definitions import (
             DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions,
+        )
+        from ..models.permissions_contains_explicit_overrides_only_a_missing_feature_inherits_legacy_authorization import (
+            PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization,
         )
         from ..models.role_map_defines_the_mapping_of_roles_to_permissions import (
             RoleMapDefinesTheMappingOfRolesToPermissions,
@@ -163,6 +180,17 @@ class PolicyDefinesAnAccessControlPolicy:
             data_scope = DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions.from_dict(_data_scope)
 
         description = d.pop("description", UNSET)
+
+        _feature_permissions = d.pop("featurePermissions", UNSET)
+        feature_permissions: PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization | Unset
+        if isinstance(_feature_permissions, Unset) or _feature_permissions is None:
+            feature_permissions = UNSET
+        else:
+            feature_permissions = (
+                PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization.from_dict(
+                    _feature_permissions
+                )
+            )
 
         read_only = d.pop("readOnly", UNSET)
 
@@ -197,6 +225,7 @@ class PolicyDefinesAnAccessControlPolicy:
             created_timestamp=created_timestamp,
             data_scope=data_scope,
             description=description,
+            feature_permissions=feature_permissions,
             read_only=read_only,
             revision_number=revision_number,
             role=role,
