@@ -4,12 +4,16 @@ import datetime
 
 from .._datetime_compat import parse_datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from .._generated_types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.investigation_model_selection import InvestigationModelSelection
+
 
 T = TypeVar("T", bound="TriggerOpensARootInvestigationWhenAMonitorIssueItsQuerySelectsStartsFiring")
 
@@ -29,6 +33,9 @@ class TriggerOpensARootInvestigationWhenAMonitorIssueItsQuerySelectsStartsFiring
         query (str): The gcQL issue selector notification routes use.
         cooldown_interval (str | Unset): A still-firing issue is investigated again at most once per interval; empty:
             once per firing cycle.
+        model_selection (InvestigationModelSelection | Unset): ModelSelection is the model agent-service runs an
+            investigation's agents on. agent-service decides which
+            models and efforts are allowed, and refuses a run whose selection it doesn't allow.
     """
 
     created_at: datetime.datetime
@@ -41,6 +48,7 @@ class TriggerOpensARootInvestigationWhenAMonitorIssueItsQuerySelectsStartsFiring
     name: str
     query: str
     cooldown_interval: str | Unset = UNSET
+    model_selection: InvestigationModelSelection | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -64,6 +72,10 @@ class TriggerOpensARootInvestigationWhenAMonitorIssueItsQuerySelectsStartsFiring
 
         cooldown_interval = self.cooldown_interval
 
+        model_selection: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.model_selection, Unset):
+            model_selection = self.model_selection.to_dict()
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -81,18 +93,15 @@ class TriggerOpensARootInvestigationWhenAMonitorIssueItsQuerySelectsStartsFiring
         )
         if cooldown_interval is not UNSET:
             field_dict["cooldownInterval"] = cooldown_interval
+        if model_selection is not UNSET:
+            field_dict["modelSelection"] = model_selection
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        if isinstance(src_dict, str):
-            if not src_dict.strip():
-                src_dict = {}
-            else:
-                import json
+        from ..models.investigation_model_selection import InvestigationModelSelection
 
-                src_dict = json.loads(src_dict)
         d = dict(src_dict)
         created_at = parse_datetime(d.pop("createdAt"))
 
@@ -114,6 +123,13 @@ class TriggerOpensARootInvestigationWhenAMonitorIssueItsQuerySelectsStartsFiring
 
         cooldown_interval = d.pop("cooldownInterval", UNSET)
 
+        _model_selection = d.pop("modelSelection", UNSET)
+        model_selection: InvestigationModelSelection | Unset
+        if isinstance(_model_selection, Unset) or _model_selection is None:
+            model_selection = UNSET
+        else:
+            model_selection = InvestigationModelSelection.from_dict(_model_selection)
+
         trigger_opens_a_root_investigation_when_a_monitor_issue_its_query_selects_starts_firing = cls(
             created_at=created_at,
             created_by=created_by,
@@ -125,6 +141,7 @@ class TriggerOpensARootInvestigationWhenAMonitorIssueItsQuerySelectsStartsFiring
             name=name,
             query=query,
             cooldown_interval=cooldown_interval,
+            model_selection=model_selection,
         )
 
         trigger_opens_a_root_investigation_when_a_monitor_issue_its_query_selects_starts_firing.additional_properties = d

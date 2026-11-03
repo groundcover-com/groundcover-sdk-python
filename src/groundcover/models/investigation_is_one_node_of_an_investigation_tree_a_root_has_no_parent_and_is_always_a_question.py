@@ -20,6 +20,7 @@ from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
     from ..models.investigation_author import InvestigationAuthor
+    from ..models.investigation_model_selection import InvestigationModelSelection
     from ..models.investigation_scope_entry import InvestigationScopeEntry
     from ..models.investigation_time_range import InvestigationTimeRange
     from ..models.investigator_run_is_the_start_of_a_roots_investigator_pending_until_agent_service_accepts_or_refuses_it import (
@@ -54,6 +55,9 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         instructions (str | Unset): What the backend caller that opened the root asked of its investigator, sent after
             the statement; omitted when none.
         investigator (InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesIt | Unset):
+        model_selection (InvestigationModelSelection | Unset): ModelSelection is the model agent-service runs an
+            investigation's agents on. agent-service decides which
+            models and efforts are allowed, and refuses a run whose selection it doesn't allow.
         outcome (str | Unset):
         outcome_proposal_id (UUID | Unset): The approved resolve, refute or stop that closed the node; for a node a stop
             closed below it, that stop.
@@ -78,6 +82,7 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
     investigator: InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesIt | Unset = (
         UNSET
     )
+    model_selection: InvestigationModelSelection | Unset = UNSET
     outcome: str | Unset = UNSET
     outcome_proposal_id: UUID | Unset = UNSET
     parent_id: UUID | Unset = UNSET
@@ -119,6 +124,10 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         investigator: dict[str, Any] | Unset = UNSET
         if not isinstance(self.investigator, Unset):
             investigator = self.investigator.to_dict()
+
+        model_selection: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.model_selection, Unset):
+            model_selection = self.model_selection.to_dict()
 
         outcome = self.outcome
 
@@ -172,6 +181,8 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
             field_dict["instructions"] = instructions
         if investigator is not UNSET:
             field_dict["investigator"] = investigator
+        if model_selection is not UNSET:
+            field_dict["modelSelection"] = model_selection
         if outcome is not UNSET:
             field_dict["outcome"] = outcome
         if outcome_proposal_id is not UNSET:
@@ -192,6 +203,7 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.investigation_author import InvestigationAuthor
+        from ..models.investigation_model_selection import InvestigationModelSelection
         from ..models.investigation_scope_entry import InvestigationScopeEntry
         from ..models.investigation_time_range import InvestigationTimeRange
         from ..models.investigator_run_is_the_start_of_a_roots_investigator_pending_until_agent_service_accepts_or_refuses_it import (
@@ -252,6 +264,13 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
                     _investigator
                 )
             )
+
+        _model_selection = d.pop("modelSelection", UNSET)
+        model_selection: InvestigationModelSelection | Unset
+        if isinstance(_model_selection, Unset) or _model_selection is None:
+            model_selection = UNSET
+        else:
+            model_selection = InvestigationModelSelection.from_dict(_model_selection)
 
         outcome = d.pop("outcome", UNSET)
 
@@ -314,6 +333,7 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
             closed_by=closed_by,
             instructions=instructions,
             investigator=investigator,
+            model_selection=model_selection,
             outcome=outcome,
             outcome_proposal_id=outcome_proposal_id,
             parent_id=parent_id,

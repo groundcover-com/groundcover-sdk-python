@@ -1,0 +1,89 @@
+from __future__ import annotations
+
+from collections.abc import Mapping
+from typing import Any, TypeVar
+
+from attrs import define as _attrs_define
+from attrs import field as _attrs_field
+
+from .._generated_types import UNSET, Unset
+
+T = TypeVar("T", bound="InvestigationModelSelection")
+
+
+@_attrs_define
+class InvestigationModelSelection:
+    """ModelSelection is the model agent-service runs an investigation's agents on. agent-service decides which
+    models and efforts are allowed, and refuses a run whose selection it doesn't allow.
+
+        Attributes:
+            model_id (str): A modelId that provider lists.
+            provider_id (str): A providerId from GET /api/agent/llm-provider/models.
+            effort (str | Unset): One of the model's capabilities.effortLevels; omitted: the model's default effort.
+    """
+
+    model_id: str
+    provider_id: str
+    effort: str | Unset = UNSET
+    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+
+    def to_dict(self) -> dict[str, Any]:
+        model_id = self.model_id
+
+        provider_id = self.provider_id
+
+        effort = self.effort
+
+        field_dict: dict[str, Any] = {}
+        field_dict.update(self.additional_properties)
+        field_dict.update(
+            {
+                "modelId": model_id,
+                "providerId": provider_id,
+            }
+        )
+        if effort is not UNSET:
+            field_dict["effort"] = effort
+
+        return field_dict
+
+    @classmethod
+    def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
+        if isinstance(src_dict, str):
+            if not src_dict.strip():
+                src_dict = {}
+            else:
+                import json
+
+                src_dict = json.loads(src_dict)
+        d = dict(src_dict)
+        model_id = d.pop("modelId")
+
+        provider_id = d.pop("providerId")
+
+        effort = d.pop("effort", UNSET)
+
+        investigation_model_selection = cls(
+            model_id=model_id,
+            provider_id=provider_id,
+            effort=effort,
+        )
+
+        investigation_model_selection.additional_properties = d
+        return investigation_model_selection
+
+    @property
+    def additional_keys(self) -> list[str]:
+        return list(self.additional_properties.keys())
+
+    def __getitem__(self, key: str) -> Any:
+        return self.additional_properties[key]
+
+    def __setitem__(self, key: str, value: Any) -> None:
+        self.additional_properties[key] = value
+
+    def __delitem__(self, key: str) -> None:
+        del self.additional_properties[key]
+
+    def __contains__(self, key: str) -> bool:
+        return key in self.additional_properties

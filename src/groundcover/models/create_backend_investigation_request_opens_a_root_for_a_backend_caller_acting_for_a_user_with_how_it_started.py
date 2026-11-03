@@ -12,6 +12,7 @@ if TYPE_CHECKING:
     from ..models.backend_source_is_the_source_a_backend_caller_opens_a_root_from import (
         BackendSourceIsTheSourceABackendCallerOpensARootFrom,
     )
+    from ..models.investigation_model_selection import InvestigationModelSelection
     from ..models.investigation_scope_entry import InvestigationScopeEntry
     from ..models.investigation_time_range import InvestigationTimeRange
     from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
@@ -33,6 +34,9 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         max_concurrent (int | Unset): At most this many of the trigger's roots may be open: at the cap, a root for a new
             subject is refused
             with 429 TRIGGER_AT_CAPACITY. Omitted: no limit.
+        model_selection (InvestigationModelSelection | Unset): ModelSelection is the model agent-service runs an
+            investigation's agents on. agent-service decides which
+            models and efforts are allowed, and refuses a run whose selection it doesn't allow.
         scope (list[InvestigationScopeEntry] | Unset):
         time_range (InvestigationTimeRange | Unset):
     """
@@ -42,6 +46,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
     subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime
     instructions: str | Unset = UNSET
     max_concurrent: int | Unset = UNSET
+    model_selection: InvestigationModelSelection | Unset = UNSET
     scope: list[InvestigationScopeEntry] | Unset = UNSET
     time_range: InvestigationTimeRange | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -56,6 +61,10 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         instructions = self.instructions
 
         max_concurrent = self.max_concurrent
+
+        model_selection: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.model_selection, Unset):
+            model_selection = self.model_selection.to_dict()
 
         scope: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.scope, Unset):
@@ -81,6 +90,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
             field_dict["instructions"] = instructions
         if max_concurrent is not UNSET:
             field_dict["maxConcurrent"] = max_concurrent
+        if model_selection is not UNSET:
+            field_dict["modelSelection"] = model_selection
         if scope is not UNSET:
             field_dict["scope"] = scope
         if time_range is not UNSET:
@@ -93,6 +104,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         from ..models.backend_source_is_the_source_a_backend_caller_opens_a_root_from import (
             BackendSourceIsTheSourceABackendCallerOpensARootFrom,
         )
+        from ..models.investigation_model_selection import InvestigationModelSelection
         from ..models.investigation_scope_entry import InvestigationScopeEntry
         from ..models.investigation_time_range import InvestigationTimeRange
         from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
@@ -109,6 +121,13 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         instructions = d.pop("instructions", UNSET)
 
         max_concurrent = d.pop("maxConcurrent", UNSET)
+
+        _model_selection = d.pop("modelSelection", UNSET)
+        model_selection: InvestigationModelSelection | Unset
+        if isinstance(_model_selection, Unset) or _model_selection is None:
+            model_selection = UNSET
+        else:
+            model_selection = InvestigationModelSelection.from_dict(_model_selection)
 
         _scope = d.pop("scope", UNSET)
         scope: list[InvestigationScopeEntry] | Unset = UNSET
@@ -133,6 +152,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
                 subject=subject,
                 instructions=instructions,
                 max_concurrent=max_concurrent,
+                model_selection=model_selection,
                 scope=scope,
                 time_range=time_range,
             )

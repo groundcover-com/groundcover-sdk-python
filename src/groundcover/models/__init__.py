@@ -853,6 +853,7 @@ from .investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_an
 from .investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_and_is_always_a_question_status import (
     InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus,
 )
+from .investigation_model_selection import InvestigationModelSelection
 from .investigation_scope_entry import InvestigationScopeEntry
 from .investigation_source_ref import InvestigationSourceRef
 from .investigation_subject_ref import InvestigationSubjectRef
@@ -1465,6 +1466,7 @@ from .template_widget_kind import TemplateWidgetKind
 from .tenant_ai_settings_response import TenantAISettingsResponse
 from .tenant_connector_settings_response import TenantConnectorSettingsResponse
 from .tenant_info import TenantInfo
+from .tenant_investigations_settings_response import TenantInvestigationsSettingsResponse
 from .tenant_response import TenantResponse
 from .test_connected_app_request import TestConnectedAppRequest
 from .test_connected_app_request_data import TestConnectedAppRequestData
@@ -1653,6 +1655,7 @@ from .update_tenant_ai_settings_request import UpdateTenantAISettingsRequest
 from .update_tenant_ai_settings_response_400 import UpdateTenantAISettingsResponse400
 from .update_tenant_ai_settings_response_500 import UpdateTenantAISettingsResponse500
 from .update_tenant_connector_settings_request import UpdateTenantConnectorSettingsRequest
+from .update_tenant_investigations_settings_request import UpdateTenantInvestigationsSettingsRequest
 from .update_user_credential_request_is_the_request_body_for_updating_a_user_level_credential import (
     UpdateUserCredentialRequestIsTheRequestBodyForUpdatingAUserLevelCredential,
 )
@@ -2344,6 +2347,7 @@ __all__ = (
     "InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestion",
     "InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionKind",
     "InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus",
+    "InvestigationModelSelection",
     "InvestigationScopeEntry",
     "InvestigationSourceRef",
     "InvestigationSubjectRef",
@@ -2750,6 +2754,7 @@ __all__ = (
     "TenantAISettingsResponse",
     "TenantConnectorSettingsResponse",
     "TenantInfo",
+    "TenantInvestigationsSettingsResponse",
     "TenantResponse",
     "TestConnectedAppRequest",
     "TestConnectedAppRequestData",
@@ -2884,6 +2889,7 @@ __all__ = (
     "UpdateTenantAISettingsResponse400",
     "UpdateTenantAISettingsResponse500",
     "UpdateTenantConnectorSettingsRequest",
+    "UpdateTenantInvestigationsSettingsRequest",
     "UpdateUserCredentialRequestIsTheRequestBodyForUpdatingAUserLevelCredential",
     "UpdateUserCredentialRequestIsTheRequestBodyForUpdatingAUserLevelCredentialData",
     "UpdateViewRequest",
