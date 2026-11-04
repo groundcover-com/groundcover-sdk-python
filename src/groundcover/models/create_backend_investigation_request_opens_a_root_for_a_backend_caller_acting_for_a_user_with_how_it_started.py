@@ -9,9 +9,7 @@ from attrs import field as _attrs_field
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.backend_source_is_the_source_a_backend_caller_opens_a_root_from import (
-        BackendSourceIsTheSourceABackendCallerOpensARootFrom,
-    )
+    from ..models.investigation_backend_source import InvestigationBackendSource
     from ..models.investigation_model_selection import InvestigationModelSelection
     from ..models.investigation_scope_entry import InvestigationScopeEntry
     from ..models.investigation_time_range import InvestigationTimeRange
@@ -27,13 +25,15 @@ T = TypeVar("T", bound="CreateBackendInvestigationRequestOpensARootForABackendCa
 class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUserWithHowItStarted:
     """
     Attributes:
-        source (BackendSourceIsTheSourceABackendCallerOpensARootFrom):
+        source (InvestigationBackendSource): BackendSource is the source a backend caller opens a root from: an
+            automation trigger, or the Slack thread whose
+            Investigate button was clicked.
         statement (str):
         subject (SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime):
         instructions (str | Unset): Sent to the root's investigator after the statement.
         max_concurrent (int | Unset): At most this many of the trigger's roots may be open: at the cap, a root for a new
             subject is refused
-            with 429 TRIGGER_AT_CAPACITY. Omitted: no limit.
+            with 429 TRIGGER_AT_CAPACITY. Omitted: no limit. Only for an automation source.
         model_selection (InvestigationModelSelection | Unset): ModelSelection is the model agent-service runs an
             investigation's agents on. agent-service decides which
             models and efforts are allowed, and refuses a run whose selection it doesn't allow.
@@ -41,7 +41,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         time_range (InvestigationTimeRange | Unset):
     """
 
-    source: BackendSourceIsTheSourceABackendCallerOpensARootFrom
+    source: InvestigationBackendSource
     statement: str
     subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime
     instructions: str | Unset = UNSET
@@ -101,9 +101,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.backend_source_is_the_source_a_backend_caller_opens_a_root_from import (
-            BackendSourceIsTheSourceABackendCallerOpensARootFrom,
-        )
+        from ..models.investigation_backend_source import InvestigationBackendSource
         from ..models.investigation_model_selection import InvestigationModelSelection
         from ..models.investigation_scope_entry import InvestigationScopeEntry
         from ..models.investigation_time_range import InvestigationTimeRange
@@ -112,7 +110,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         )
 
         d = dict(src_dict)
-        source = BackendSourceIsTheSourceABackendCallerOpensARootFrom.from_dict(d.pop("source"))
+        source = InvestigationBackendSource.from_dict(d.pop("source"))
 
         statement = d.pop("statement")
 

@@ -2,31 +2,32 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from typing import Any, TypeVar
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="InvestigationSourceRef")
+T = TypeVar("T", bound="SyncTargetTakenDetailsIsTheDetailsOfA409SYNCTARGETTAKENTheRootThatFollowsTheThread")
 
 
 @_attrs_define
-class InvestigationSourceRef:
+class SyncTargetTakenDetailsIsTheDetailsOfA409SYNCTARGETTAKENTheRootThatFollowsTheThread:
     """
     Attributes:
-        trigger_id (str): The automation trigger that opened the root.
+        owner_investigation_id (UUID):
     """
 
-    trigger_id: str
+    owner_investigation_id: UUID
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        trigger_id = self.trigger_id
+        owner_investigation_id = str(self.owner_investigation_id)
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "triggerId": trigger_id,
+                "ownerInvestigationId": owner_investigation_id,
             }
         )
 
@@ -42,14 +43,14 @@ class InvestigationSourceRef:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        trigger_id = d.pop("triggerId")
+        owner_investigation_id = UUID(d.pop("ownerInvestigationId"))
 
-        investigation_source_ref = cls(
-            trigger_id=trigger_id,
+        sync_target_taken_details_is_the_details_of_a409synctargettaken_the_root_that_follows_the_thread = cls(
+            owner_investigation_id=owner_investigation_id,
         )
 
-        investigation_source_ref.additional_properties = d
-        return investigation_source_ref
+        sync_target_taken_details_is_the_details_of_a409synctargettaken_the_root_that_follows_the_thread.additional_properties = d
+        return sync_target_taken_details_is_the_details_of_a409synctargettaken_the_root_that_follows_the_thread
 
     @property
     def additional_keys(self) -> list[str]:

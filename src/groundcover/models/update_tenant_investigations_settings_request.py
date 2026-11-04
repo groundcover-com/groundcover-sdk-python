@@ -13,8 +13,8 @@ T = TypeVar("T", bound="UpdateTenantInvestigationsSettingsRequest")
 class UpdateTenantInvestigationsSettingsRequest:
     """
     Attributes:
-        investigations_enabled (bool): Whether the organization uses Investigations. While off, no investigation is
-            started, manually or automatically; existing investigations stay readable.
+        investigations_enabled (bool): Whether the organization uses Investigations. While off, the investigation and
+            trigger APIs and tools refuse changes; reads stay available and nothing stored is deleted.
     """
 
     investigations_enabled: bool

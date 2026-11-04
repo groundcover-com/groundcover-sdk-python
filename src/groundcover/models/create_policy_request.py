@@ -12,6 +12,9 @@ if TYPE_CHECKING:
     from ..models.data_scope_contains_either_simple_or_advanced_scope_definitions import (
         DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions,
     )
+    from ..models.permissions_contains_explicit_overrides_only_a_missing_feature_inherits_legacy_authorization import (
+        PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization,
+    )
     from ..models.role_map_defines_the_mapping_of_roles_to_permissions import (
         RoleMapDefinesTheMappingOfRolesToPermissions,
     )
@@ -28,6 +31,8 @@ class CreatePolicyRequest:
         claim_role (str | Unset): Optional claim role for the policy.
         data_scope (DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions | Unset):
         description (str | Unset): Optional description for the policy.
+        feature_permissions (PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization |
+            Unset):
         role (RoleMapDefinesTheMappingOfRolesToPermissions | Unset): It is used within a Policy.
         sensitive_access (bool | Unset): Whether this policy grants access to sensitive (access-controlled) attributes.
     """
@@ -36,6 +41,9 @@ class CreatePolicyRequest:
     claim_role: str | Unset = UNSET
     data_scope: DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions | Unset = UNSET
     description: str | Unset = UNSET
+    feature_permissions: PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization | Unset = (
+        UNSET
+    )
     role: RoleMapDefinesTheMappingOfRolesToPermissions | Unset = UNSET
     sensitive_access: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -50,6 +58,10 @@ class CreatePolicyRequest:
             data_scope = self.data_scope.to_dict()
 
         description = self.description
+
+        feature_permissions: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.feature_permissions, Unset):
+            feature_permissions = self.feature_permissions.to_dict()
 
         role: dict[str, Any] | Unset = UNSET
         if not isinstance(self.role, Unset):
@@ -70,6 +82,8 @@ class CreatePolicyRequest:
             field_dict["dataScope"] = data_scope
         if description is not UNSET:
             field_dict["description"] = description
+        if feature_permissions is not UNSET:
+            field_dict["featurePermissions"] = feature_permissions
         if role is not UNSET:
             field_dict["role"] = role
         if sensitive_access is not UNSET:
@@ -81,6 +95,9 @@ class CreatePolicyRequest:
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
         from ..models.data_scope_contains_either_simple_or_advanced_scope_definitions import (
             DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions,
+        )
+        from ..models.permissions_contains_explicit_overrides_only_a_missing_feature_inherits_legacy_authorization import (
+            PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization,
         )
         from ..models.role_map_defines_the_mapping_of_roles_to_permissions import (
             RoleMapDefinesTheMappingOfRolesToPermissions,
@@ -100,6 +117,17 @@ class CreatePolicyRequest:
 
         description = d.pop("description", UNSET)
 
+        _feature_permissions = d.pop("featurePermissions", UNSET)
+        feature_permissions: PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization | Unset
+        if isinstance(_feature_permissions, Unset) or _feature_permissions is None:
+            feature_permissions = UNSET
+        else:
+            feature_permissions = (
+                PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization.from_dict(
+                    _feature_permissions
+                )
+            )
+
         _role = d.pop("role", UNSET)
         role: RoleMapDefinesTheMappingOfRolesToPermissions | Unset
         if isinstance(_role, Unset) or _role is None:
@@ -114,6 +142,7 @@ class CreatePolicyRequest:
             claim_role=claim_role,
             data_scope=data_scope,
             description=description,
+            feature_permissions=feature_permissions,
             role=role,
             sensitive_access=sensitive_access,
         )

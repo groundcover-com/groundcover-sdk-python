@@ -12,7 +12,9 @@ from ..models.source_is_how_a_root_started_manual_on_the_public_create_route_or_
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.investigation_source_ref import InvestigationSourceRef
+    from ..models.source_ref_holds_the_fields_of_every_source_type_each_type_requires_its_own_and_refuses_the_others import (
+        SourceRefHoldsTheFieldsOfEverySourceTypeEachTypeRequiresItsOwnAndRefusesTheOthers,
+    )
 
 
 T = TypeVar("T", bound="SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom")
@@ -23,11 +25,11 @@ class SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpe
     """
     Attributes:
         type_ (SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFromType):
-        ref (InvestigationSourceRef | Unset):
+        ref (SourceRefHoldsTheFieldsOfEverySourceTypeEachTypeRequiresItsOwnAndRefusesTheOthers | Unset):
     """
 
     type_: SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFromType
-    ref: InvestigationSourceRef | Unset = UNSET
+    ref: SourceRefHoldsTheFieldsOfEverySourceTypeEachTypeRequiresItsOwnAndRefusesTheOthers | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -51,17 +53,19 @@ class SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpe
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.investigation_source_ref import InvestigationSourceRef
+        from ..models.source_ref_holds_the_fields_of_every_source_type_each_type_requires_its_own_and_refuses_the_others import (
+            SourceRefHoldsTheFieldsOfEverySourceTypeEachTypeRequiresItsOwnAndRefusesTheOthers,
+        )
 
         d = dict(src_dict)
         type_ = SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFromType(d.pop("type"))
 
         _ref = d.pop("ref", UNSET)
-        ref: InvestigationSourceRef | Unset
+        ref: SourceRefHoldsTheFieldsOfEverySourceTypeEachTypeRequiresItsOwnAndRefusesTheOthers | Unset
         if isinstance(_ref, Unset) or _ref is None:
             ref = UNSET
         else:
-            ref = InvestigationSourceRef.from_dict(_ref)
+            ref = SourceRefHoldsTheFieldsOfEverySourceTypeEachTypeRequiresItsOwnAndRefusesTheOthers.from_dict(_ref)
 
         source_is_how_a_root_started_manual_on_the_public_create_route_or_what_a_backend_caller_opened_it_from = cls(
             type_=type_,

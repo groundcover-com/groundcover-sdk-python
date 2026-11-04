@@ -11,6 +11,7 @@ class EventIsAnAttributableChangeInAnInvestigationTreeEntityType(str, Enum):
     MODERATOR = "moderator"
     PARTICIPANT = "participant"
     PROPOSAL = "proposal"
+    SYNC_TARGET = "sync_target"
 
     def __str__(self) -> str:
         return str(self.value)

@@ -28,33 +28,28 @@ T = TypeVar("T", bound="CreateDecisionRequestCreatesAndApprovesAProposalAsOneHum
 class CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecision:
     """
     Attributes:
-        details (str):
         type_ (CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecisionType): create_child ProposalCreateChild
             resolve ProposalResolve
             refute ProposalRefute
             stop ProposalStop
         assessment_verdicts (list[AssessmentVerdictRequestGradesOneOpenAssessmentOnTheNodeAtTheRevisionTheProposerRead]
-            | Unset): Required for resolve and refute: exactly one per open assessment on the node, at its current revision.
-            Not allowed for create_child and stop.
+            | Unset): Optional verdicts for resolve and refute, at each assessment's current revision.
+            Omitted open assessments remain unjudged. Not allowed for create_child and stop.
         child (ProposalChildDescribesANodeToCreateIfTheProposalIsApproved | Unset):
-        evidence (list[EvidenceRequest] | Unset): Findings from the same tree; omitted means none. Each finding may
-            appear once.
-        reason (str | Unset): Defaults to details when omitted or blank.
+        details (str | Unset): Defaults to "Decided by user." when omitted or blank.
+        evidence (list[EvidenceRequest] | Unset): Optional findings from the same tree. Each finding may appear once.
     """
 
-    details: str
     type_: CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecisionType
     assessment_verdicts: (
         list[AssessmentVerdictRequestGradesOneOpenAssessmentOnTheNodeAtTheRevisionTheProposerRead] | Unset
     ) = UNSET
     child: ProposalChildDescribesANodeToCreateIfTheProposalIsApproved | Unset = UNSET
+    details: str | Unset = UNSET
     evidence: list[EvidenceRequest] | Unset = UNSET
-    reason: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        details = self.details
-
         type_ = self.type_.value
 
         assessment_verdicts: list[dict[str, Any]] | Unset = UNSET
@@ -68,6 +63,8 @@ class CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecision:
         if not isinstance(self.child, Unset):
             child = self.child.to_dict()
 
+        details = self.details
+
         evidence: list[dict[str, Any]] | Unset = UNSET
         if not isinstance(self.evidence, Unset):
             evidence = []
@@ -75,13 +72,10 @@ class CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecision:
                 evidence_item = evidence_item_data.to_dict()
                 evidence.append(evidence_item)
 
-        reason = self.reason
-
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "details": details,
                 "type": type_,
             }
         )
@@ -89,10 +83,10 @@ class CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecision:
             field_dict["assessmentVerdicts"] = assessment_verdicts
         if child is not UNSET:
             field_dict["child"] = child
+        if details is not UNSET:
+            field_dict["details"] = details
         if evidence is not UNSET:
             field_dict["evidence"] = evidence
-        if reason is not UNSET:
-            field_dict["reason"] = reason
 
         return field_dict
 
@@ -107,8 +101,6 @@ class CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecision:
         )
 
         d = dict(src_dict)
-        details = d.pop("details")
-
         type_ = CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecisionType(d.pop("type"))
 
         _assessment_verdicts = d.pop("assessmentVerdicts", UNSET)
@@ -133,6 +125,8 @@ class CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecision:
         else:
             child = ProposalChildDescribesANodeToCreateIfTheProposalIsApproved.from_dict(_child)
 
+        details = d.pop("details", UNSET)
+
         _evidence = d.pop("evidence", UNSET)
         evidence: list[EvidenceRequest] | Unset = UNSET
         if _evidence is not UNSET:
@@ -142,15 +136,12 @@ class CreateDecisionRequestCreatesAndApprovesAProposalAsOneHumanDecision:
 
                 evidence.append(evidence_item)
 
-        reason = d.pop("reason", UNSET)
-
         create_decision_request_creates_and_approves_a_proposal_as_one_human_decision = cls(
-            details=details,
             type_=type_,
             assessment_verdicts=assessment_verdicts,
             child=child,
+            details=details,
             evidence=evidence,
-            reason=reason,
         )
 
         create_decision_request_creates_and_approves_a_proposal_as_one_human_decision.additional_properties = d

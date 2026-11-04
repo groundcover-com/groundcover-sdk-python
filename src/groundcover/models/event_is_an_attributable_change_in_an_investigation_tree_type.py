@@ -20,6 +20,7 @@ class EventIsAnAttributableChangeInAnInvestigationTreeType(str, Enum):
     PROPOSAL_DEFERRED = "proposal.deferred"
     PROPOSAL_REJECTED = "proposal.rejected"
     PROPOSAL_SUPERSEDED = "proposal.superseded"
+    SYNC_TARGET_ATTACHED = "sync_target.attached"
 
     def __str__(self) -> str:
         return str(self.value)

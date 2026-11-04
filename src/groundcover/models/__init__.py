@@ -157,18 +157,18 @@ from .assets_summary_holds_asset_counts_for_the_unified_summary_by_type import (
 from .assets_summary_response import AssetsSummaryResponse
 from .associated_filter import AssociatedFilter
 from .associated_request_v2 import AssociatedRequestV2
+from .attach_sync_target_request_attaches_a_slack_thread_to_a_root_so_the_roots_updates_are_posted_there import (
+    AttachSyncTargetRequestAttachesASlackThreadToARootSoTheRootsUpdatesArePostedThere,
+)
+from .attach_sync_target_request_attaches_a_slack_thread_to_a_root_so_the_roots_updates_are_posted_there_provider import (
+    AttachSyncTargetRequestAttachesASlackThreadToARootSoTheRootsUpdatesArePostedThereProvider,
+)
 from .auto_infra_search_request import AutoInfraSearchRequest
 from .auto_infra_workload_config import AutoInfraWorkloadConfig
 from .aws_cur_search_request import AwsCurSearchRequest
 from .aws_cur_search_time_series_request import AwsCurSearchTimeSeriesRequest
 from .backend_settings import BackendSettings
 from .backend_settings_gcp_pubsub_topic import BackendSettingsGcpPubsubTopic
-from .backend_source_is_the_source_a_backend_caller_opens_a_root_from import (
-    BackendSourceIsTheSourceABackendCallerOpensARootFrom,
-)
-from .backend_source_is_the_source_a_backend_caller_opens_a_root_from_type import (
-    BackendSourceIsTheSourceABackendCallerOpensARootFromType,
-)
 from .base_query_is_the_base_struct_for_different_query_types import BaseQueryIsTheBaseStructForDifferentQueryTypes
 from .batch_dashboards_error import BatchDashboardsError
 from .batch_dashboards_request import BatchDashboardsRequest
@@ -530,6 +530,8 @@ from .dbm_measurements_search_request_queries_raw_statement_measurement_interval
 from .dbm_measurements_search_time_series_request import DBMMeasurementsSearchTimeSeriesRequest
 from .dd_metric_inactive_bucket import DDMetricInactiveBucket
 from .decide_proposal_request import DecideProposalRequest
+from .definition import Definition
+from .definition_permissions_item import DefinitionPermissionsItem
 from .delete_api_key_response_400 import DeleteApiKeyResponse400
 from .delete_api_key_response_404 import DeleteApiKeyResponse404
 from .delete_api_key_response_500 import DeleteApiKeyResponse500
@@ -673,7 +675,6 @@ from .export_target_body_represents_a_dashboard_widget_or_issue_graph_export_tar
 )
 from .export_time_range_body_represents_the_export_time_range import ExportTimeRangeBodyRepresentsTheExportTimeRange
 from .feature_permission_catalogue import FeaturePermissionCatalogue
-from .feature_permission_catalogue_additional_property_item import FeaturePermissionCatalogueAdditionalPropertyItem
 from .fetch_assets_request import FetchAssetsRequest
 from .fetch_assets_request_asset_types_item import FetchAssetsRequestAssetTypesItem
 from .fetch_assets_request_provider import FetchAssetsRequestProvider
@@ -829,6 +830,8 @@ from .invalid_citation_is_one_entry_of_the_error_details_when_cited_findings_can
 from .investigation_assessment_verdicts_details import InvestigationAssessmentVerdictsDetails
 from .investigation_author import InvestigationAuthor
 from .investigation_author_type import InvestigationAuthorType
+from .investigation_backend_source import InvestigationBackendSource
+from .investigation_backend_source_type import InvestigationBackendSourceType
 from .investigation_evidence import InvestigationEvidence
 from .investigation_evidence_relation import InvestigationEvidenceRelation
 from .investigation_exists_details_is_the_details_of_a409investigationexists_the_root_to_join import (
@@ -855,7 +858,6 @@ from .investigation_is_one_node_of_an_investigation_tree_a_root_has_no_parent_an
 )
 from .investigation_model_selection import InvestigationModelSelection
 from .investigation_scope_entry import InvestigationScopeEntry
-from .investigation_source_ref import InvestigationSourceRef
 from .investigation_subject_ref import InvestigationSubjectRef
 from .investigation_time_range import InvestigationTimeRange
 from .investigator_run_is_the_start_of_a_roots_investigator_pending_until_agent_service_accepts_or_refuses_it import (
@@ -1265,6 +1267,12 @@ from .restore_dashboard_response_404 import RestoreDashboardResponse404
 from .restore_dashboard_response_500 import RestoreDashboardResponse500
 from .retract_finding_request import RetractFindingRequest
 from .revision_entry import RevisionEntry
+from .role_defaults_are_form_presets_backend_configuration_and_legacy_checks_still_determine_inherited_access import (
+    RoleDefaultsAreFormPresetsBackendConfigurationAndLegacyChecksStillDetermineInheritedAccess,
+)
+from .role_defaults_are_form_presets_backend_configuration_and_legacy_checks_still_determine_inherited_access_additional_property import (
+    RoleDefaultsAreFormPresetsBackendConfigurationAndLegacyChecksStillDetermineInheritedAccessAdditionalProperty,
+)
 from .role_map_defines_the_mapping_of_roles_to_permissions import RoleMapDefinesTheMappingOfRolesToPermissions
 from .rollup import Rollup
 from .root_span_details import RootSpanDetails
@@ -1380,6 +1388,9 @@ from .slack_chat_post_message_response_is_the_proxied_slack_chat_post_message_re
 from .slack_delivery_options_requires_a_non_empty_channels_when_present import (
     SlackDeliveryOptionsRequiresANonEmptyChannelsWhenPresent,
 )
+from .slack_destination_is_a_slack_thread_the_alert_messages_channel_and_ts import (
+    SlackDestinationIsASlackThreadTheAlertMessagesChannelAndTs,
+)
 from .slack_webhook_data import SlackWebhookData
 from .slack_webhook_data_response import SlackWebhookDataResponse
 from .source_is_how_a_root_started_manual_on_the_public_create_route_or_what_a_backend_caller_opened_it_from import (
@@ -1390,6 +1401,9 @@ from .source_is_how_a_root_started_manual_on_the_public_create_route_or_what_a_b
 )
 from .source_map_upload_response_is_the_json_success_body_returned_by_the_upload_handler import (
     SourceMapUploadResponseIsTheJSONSuccessBodyReturnedByTheUploadHandler,
+)
+from .source_ref_holds_the_fields_of_every_source_type_each_type_requires_its_own_and_refuses_the_others import (
+    SourceRefHoldsTheFieldsOfEverySourceTypeEachTypeRequiresItsOwnAndRefusesTheOthers,
 )
 from .span_event import SpanEvent
 from .span_event_attributes import SpanEventAttributes
@@ -1438,6 +1452,15 @@ from .supported_not_converted_bucket_covers_supported_types_that_failed_conversi
 )
 from .supported_not_converted_bucket_covers_supported_types_that_failed_conversion_by_error import (
     SupportedNotConvertedBucketCoversSupportedTypesThatFailedConversionByError,
+)
+from .sync_target_attachment_answers_an_attach_the_root_and_what_became_of_the_thread import (
+    SyncTargetAttachmentAnswersAnAttachTheRootAndWhatBecameOfTheThread,
+)
+from .sync_target_attachment_answers_an_attach_the_root_and_what_became_of_the_thread_outcome import (
+    SyncTargetAttachmentAnswersAnAttachTheRootAndWhatBecameOfTheThreadOutcome,
+)
+from .sync_target_taken_details_is_the_details_of_a409synctargettaken_the_root_that_follows_the_thread import (
+    SyncTargetTakenDetailsIsTheDetailsOfA409SYNCTARGETTAKENTheRootThatFollowsTheThread,
 )
 from .synthetic_monitor_config_represents_optional_monitor_configuration_overrides_for_a_synthetic_test import (
     SyntheticMonitorConfigRepresentsOptionalMonitorConfigurationOverridesForASyntheticTest,
@@ -1891,14 +1914,14 @@ __all__ = (
     "AssetSummaryResponseItemReadiness",
     "AssociatedFilter",
     "AssociatedRequestV2",
+    "AttachSyncTargetRequestAttachesASlackThreadToARootSoTheRootsUpdatesArePostedThere",
+    "AttachSyncTargetRequestAttachesASlackThreadToARootSoTheRootsUpdatesArePostedThereProvider",
     "AutoInfraSearchRequest",
     "AutoInfraWorkloadConfig",
     "AwsCurSearchRequest",
     "AwsCurSearchTimeSeriesRequest",
     "BackendSettings",
     "BackendSettingsGcpPubsubTopic",
-    "BackendSourceIsTheSourceABackendCallerOpensARootFrom",
-    "BackendSourceIsTheSourceABackendCallerOpensARootFromType",
     "BaseQueryIsTheBaseStructForDifferentQueryTypes",
     "BatchDashboardsError",
     "BatchDashboardsRequest",
@@ -2108,6 +2131,8 @@ __all__ = (
     "DBMMeasurementsSearchTimeSeriesRequest",
     "DDMetricInactiveBucket",
     "DecideProposalRequest",
+    "Definition",
+    "DefinitionPermissionsItem",
     "DeleteApiKeyResponse400",
     "DeleteApiKeyResponse404",
     "DeleteApiKeyResponse500",
@@ -2209,7 +2234,6 @@ __all__ = (
     "ExportTargetBodyRepresentsADashboardWidgetOrIssueGraphExportTargetType",
     "ExportTimeRangeBodyRepresentsTheExportTimeRange",
     "FeaturePermissionCatalogue",
-    "FeaturePermissionCatalogueAdditionalPropertyItem",
     "FetchAssetsRequest",
     "FetchAssetsRequestAssetTypesItem",
     "FetchAssetsRequestProvider",
@@ -2335,6 +2359,8 @@ __all__ = (
     "InvestigationAssessmentVerdictsDetails",
     "InvestigationAuthor",
     "InvestigationAuthorType",
+    "InvestigationBackendSource",
+    "InvestigationBackendSourceType",
     "InvestigationEvidence",
     "InvestigationEvidenceRelation",
     "InvestigationExistsDetailsIsTheDetailsOfA409INVESTIGATIONEXISTSTheRootToJoin",
@@ -2349,7 +2375,6 @@ __all__ = (
     "InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQuestionStatus",
     "InvestigationModelSelection",
     "InvestigationScopeEntry",
-    "InvestigationSourceRef",
     "InvestigationSubjectRef",
     "InvestigationTimeRange",
     "InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesIt",
@@ -2623,6 +2648,8 @@ __all__ = (
     "RestoreDashboardResponse500",
     "RetractFindingRequest",
     "RevisionEntry",
+    "RoleDefaultsAreFormPresetsBackendConfigurationAndLegacyChecksStillDetermineInheritedAccess",
+    "RoleDefaultsAreFormPresetsBackendConfigurationAndLegacyChecksStillDetermineInheritedAccessAdditionalProperty",
     "RoleMapDefinesTheMappingOfRolesToPermissions",
     "Rollup",
     "RootlyData",
@@ -2704,11 +2731,13 @@ __all__ = (
     "SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponse",
     "SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponseMessage",
     "SlackDeliveryOptionsRequiresANonEmptyChannelsWhenPresent",
+    "SlackDestinationIsASlackThreadTheAlertMessagesChannelAndTs",
     "SlackWebhookData",
     "SlackWebhookDataResponse",
     "SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom",
     "SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFromType",
     "SourceMapUploadResponseIsTheJSONSuccessBodyReturnedByTheUploadHandler",
+    "SourceRefHoldsTheFieldsOfEverySourceTypeEachTypeRequiresItsOwnAndRefusesTheOthers",
     "SpanEvent",
     "SpanEventAttributes",
     "SpanLink",
@@ -2735,6 +2764,9 @@ __all__ = (
     "SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully",
     "SupportedNotConvertedBucketCoversSupportedTypesThatFailedConversion",
     "SupportedNotConvertedBucketCoversSupportedTypesThatFailedConversionByError",
+    "SyncTargetAttachmentAnswersAnAttachTheRootAndWhatBecameOfTheThread",
+    "SyncTargetAttachmentAnswersAnAttachTheRootAndWhatBecameOfTheThreadOutcome",
+    "SyncTargetTakenDetailsIsTheDetailsOfA409SYNCTARGETTAKENTheRootThatFollowsTheThread",
     "SyntheticMonitorConfigRepresentsOptionalMonitorConfigurationOverridesForASyntheticTest",
     "SyntheticMonitorEvalIntervalRepresentsTheEvaluationIntervalForASyntheticMonitor",
     "SyntheticsCheckInputDefinesModelForSyntheticsCheckInput",

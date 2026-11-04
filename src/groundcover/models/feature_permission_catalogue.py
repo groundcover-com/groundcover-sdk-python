@@ -1,14 +1,14 @@
 from __future__ import annotations
 
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.feature_permission_catalogue_additional_property_item import (
-    FeaturePermissionCatalogueAdditionalPropertyItem,
-)
+if TYPE_CHECKING:
+    from ..models.definition import Definition
+
 
 T = TypeVar("T", bound="FeaturePermissionCatalogue")
 
@@ -17,43 +17,26 @@ T = TypeVar("T", bound="FeaturePermissionCatalogue")
 class FeaturePermissionCatalogue:
     """ """
 
-    additional_properties: dict[str, list[FeaturePermissionCatalogueAdditionalPropertyItem]] = _attrs_field(
-        init=False, factory=dict
-    )
+    additional_properties: dict[str, Definition] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
 
         field_dict: dict[str, Any] = {}
         for prop_name, prop in self.additional_properties.items():
-            field_dict[prop_name] = []
-            for additional_property_item_data in prop:
-                additional_property_item = additional_property_item_data.value
-                field_dict[prop_name].append(additional_property_item)
+            field_dict[prop_name] = prop.to_dict()
 
         return field_dict
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        if isinstance(src_dict, str):
-            if not src_dict.strip():
-                src_dict = {}
-            else:
-                import json
+        from ..models.definition import Definition
 
-                src_dict = json.loads(src_dict)
         d = dict(src_dict)
         feature_permission_catalogue = cls()
 
         additional_properties = {}
         for prop_name, prop_dict in d.items():
-            additional_property = []
-            _additional_property = prop_dict
-            for additional_property_item_data in _additional_property:
-                additional_property_item = FeaturePermissionCatalogueAdditionalPropertyItem(
-                    additional_property_item_data
-                )
-
-                additional_property.append(additional_property_item)
+            additional_property = Definition.from_dict(prop_dict)
 
             additional_properties[prop_name] = additional_property
 
@@ -64,10 +47,10 @@ class FeaturePermissionCatalogue:
     def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
-    def __getitem__(self, key: str) -> list[FeaturePermissionCatalogueAdditionalPropertyItem]:
+    def __getitem__(self, key: str) -> Definition:
         return self.additional_properties[key]
 
-    def __setitem__(self, key: str, value: list[FeaturePermissionCatalogueAdditionalPropertyItem]) -> None:
+    def __setitem__(self, key: str, value: Definition) -> None:
         self.additional_properties[key] = value
 
     def __delitem__(self, key: str) -> None:
