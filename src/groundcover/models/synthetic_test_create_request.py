@@ -31,6 +31,7 @@ class SyntheticTestCreateRequest:
             Providing a monitor block when createMonitor=false (or when no monitor exists and createMonitor is nil) returns
             400.
         enabled (bool | Unset):
+        excluded_clusters (list[str] | Unset):
         exporters (list[str] | Unset): Deprecated: Exporters field is no longer used but kept for backward compatibility
             to prevent parsing errors from clients that still send it.
         interval (str | Unset):
@@ -44,6 +45,7 @@ class SyntheticTestCreateRequest:
     check_config: WorkerRequestDefinesModelForWorkerRequest | Unset = UNSET
     create_monitor: bool | Unset = UNSET
     enabled: bool | Unset = UNSET
+    excluded_clusters: list[str] | Unset = UNSET
     exporters: list[str] | Unset = UNSET
     interval: str | Unset = UNSET
     label_settings: LabelSettings | Unset = UNSET
@@ -60,6 +62,10 @@ class SyntheticTestCreateRequest:
         create_monitor = self.create_monitor
 
         enabled = self.enabled
+
+        excluded_clusters: list[str] | Unset = UNSET
+        if not isinstance(self.excluded_clusters, Unset):
+            excluded_clusters = self.excluded_clusters
 
         exporters: list[str] | Unset = UNSET
         if not isinstance(self.exporters, Unset):
@@ -88,6 +94,8 @@ class SyntheticTestCreateRequest:
             field_dict["createMonitor"] = create_monitor
         if enabled is not UNSET:
             field_dict["enabled"] = enabled
+        if excluded_clusters is not UNSET:
+            field_dict["excludedClusters"] = excluded_clusters
         if exporters is not UNSET:
             field_dict["exporters"] = exporters
         if interval is not UNSET:
@@ -123,6 +131,8 @@ class SyntheticTestCreateRequest:
 
         enabled = d.pop("enabled", UNSET)
 
+        excluded_clusters = cast(list[str], d.pop("excludedClusters", UNSET))
+
         exporters = cast(list[str], d.pop("exporters", UNSET))
 
         interval = d.pop("interval", UNSET)
@@ -151,6 +161,7 @@ class SyntheticTestCreateRequest:
             check_config=check_config,
             create_monitor=create_monitor,
             enabled=enabled,
+            excluded_clusters=excluded_clusters,
             exporters=exporters,
             interval=interval,
             label_settings=label_settings,
