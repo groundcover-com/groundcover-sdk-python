@@ -6,22 +6,19 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization_additional_property import (
-    PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty,
+from ..models.permissions_contains_explicit_overrides_only_a_missing_feature_uses_role_authorization_additional_property import (
+    PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorizationAdditionalProperty,
 )
 
-T = TypeVar(
-    "T", bound="PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization"
-)
+T = TypeVar("T", bound="PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorization")
 
 
 @_attrs_define
-class PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization:
+class PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorization:
     """ """
 
     additional_properties: dict[
-        str,
-        PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty,
+        str, PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorizationAdditionalProperty
     ] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -42,18 +39,22 @@ class PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInher
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization = cls()
+        permissions_contains_explicit_overrides_only_a_missing_feature_uses_role_authorization = cls()
 
         additional_properties = {}
         for prop_name, prop_dict in d.items():
-            additional_property = PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty(
-                prop_dict
+            additional_property = (
+                PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorizationAdditionalProperty(
+                    prop_dict
+                )
             )
 
             additional_properties[prop_name] = additional_property
 
-        permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization.additional_properties = additional_properties
-        return permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization
+        permissions_contains_explicit_overrides_only_a_missing_feature_uses_role_authorization.additional_properties = (
+            additional_properties
+        )
+        return permissions_contains_explicit_overrides_only_a_missing_feature_uses_role_authorization
 
     @property
     def additional_keys(self) -> list[str]:
@@ -61,13 +62,13 @@ class PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInher
 
     def __getitem__(
         self, key: str
-    ) -> PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty:
+    ) -> PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorizationAdditionalProperty:
         return self.additional_properties[key]
 
     def __setitem__(
         self,
         key: str,
-        value: PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty,
+        value: PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorizationAdditionalProperty,
     ) -> None:
         self.additional_properties[key] = value
 

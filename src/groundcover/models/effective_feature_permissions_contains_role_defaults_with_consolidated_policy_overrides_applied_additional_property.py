@@ -3,7 +3,7 @@ from __future__ import annotations
 from enum import Enum
 
 
-class PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty(
+class EffectiveFeaturePermissionsContainsRoleDefaultsWithConsolidatedPolicyOverridesAppliedAdditionalProperty(
     str, Enum
 ):
     EDIT = "edit"

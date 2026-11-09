@@ -591,6 +591,12 @@ from .distribution_split_value import DistributionSplitValue
 from .distribution_value import DistributionValue
 from .dns_request_defines_model_for_dns_request import DnsRequestDefinesModelForDnsRequest
 from .drop_config import DropConfig
+from .effective_feature_permissions_contains_role_defaults_with_consolidated_policy_overrides_applied import (
+    EffectiveFeaturePermissionsContainsRoleDefaultsWithConsolidatedPolicyOverridesApplied,
+)
+from .effective_feature_permissions_contains_role_defaults_with_consolidated_policy_overrides_applied_additional_property import (
+    EffectiveFeaturePermissionsContainsRoleDefaultsWithConsolidatedPolicyOverridesAppliedAdditionalProperty,
+)
 from .end_time_bounds import EndTimeBounds
 from .endpoint import Endpoint
 from .entities_search_request import EntitiesSearchRequest
@@ -1166,11 +1172,11 @@ from .pager_duty_data_severity_mapping import PagerDutyDataSeverityMapping
 from .pattern_data import PatternData
 from .pattern_data_additional_columns import PatternDataAdditionalColumns
 from .pattern_param_distribution_value import PatternParamDistributionValue
-from .permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization import (
-    PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization,
+from .permissions_contains_explicit_overrides_only_a_missing_feature_uses_role_authorization import (
+    PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorization,
 )
-from .permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization_additional_property import (
-    PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty,
+from .permissions_contains_explicit_overrides_only_a_missing_feature_uses_role_authorization_additional_property import (
+    PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorizationAdditionalProperty,
 )
 from .pin import Pin
 from .pinned_resource import PinnedResource
@@ -2188,6 +2194,8 @@ __all__ = (
     "DistributionValue",
     "DnsRequestDefinesModelForDnsRequest",
     "DropConfig",
+    "EffectiveFeaturePermissionsContainsRoleDefaultsWithConsolidatedPolicyOverridesApplied",
+    "EffectiveFeaturePermissionsContainsRoleDefaultsWithConsolidatedPolicyOverridesAppliedAdditionalProperty",
     "Endpoint",
     "EndTimeBounds",
     "EntitiesSearchRequest",
@@ -2595,8 +2603,8 @@ __all__ = (
     "PatternData",
     "PatternDataAdditionalColumns",
     "PatternParamDistributionValue",
-    "PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization",
-    "PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty",
+    "PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorization",
+    "PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorizationAdditionalProperty",
     "Pin",
     "PinnedResource",
     "PolicyDefinesAnAccessControlPolicy",

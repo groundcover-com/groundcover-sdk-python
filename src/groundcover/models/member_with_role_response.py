@@ -12,8 +12,8 @@ from attrs import field as _attrs_field
 from .._generated_types import UNSET, Unset
 
 if TYPE_CHECKING:
-    from ..models.permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization import (
-        PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization,
+    from ..models.effective_feature_permissions_contains_role_defaults_with_consolidated_policy_overrides_applied import (
+        EffectiveFeaturePermissionsContainsRoleDefaultsWithConsolidatedPolicyOverridesApplied,
     )
 
 
@@ -26,8 +26,8 @@ class MemberWithRoleResponse:
     Attributes:
         created (datetime.datetime | Unset):
         email (str | Unset):
-        feature_permissions
-            (PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization | Unset):
+        feature_permissions (EffectiveFeaturePermissionsContainsRoleDefaultsWithConsolidatedPolicyOverridesApplied |
+            Unset):
         first_login (datetime.datetime | Unset):
         last_seen (datetime.datetime | Unset):
         owner (bool | Unset):
@@ -37,7 +37,7 @@ class MemberWithRoleResponse:
     created: datetime.datetime | Unset = UNSET
     email: str | Unset = UNSET
     feature_permissions: (
-        PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization | Unset
+        EffectiveFeaturePermissionsContainsRoleDefaultsWithConsolidatedPolicyOverridesApplied | Unset
     ) = UNSET
     first_login: datetime.datetime | Unset = UNSET
     last_seen: datetime.datetime | Unset = UNSET
@@ -90,8 +90,8 @@ class MemberWithRoleResponse:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        from ..models.permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization import (
-            PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization,
+        from ..models.effective_feature_permissions_contains_role_defaults_with_consolidated_policy_overrides_applied import (
+            EffectiveFeaturePermissionsContainsRoleDefaultsWithConsolidatedPolicyOverridesApplied,
         )
 
         d = dict(src_dict)
@@ -106,13 +106,15 @@ class MemberWithRoleResponse:
 
         _feature_permissions = d.pop("FeaturePermissions", UNSET)
         feature_permissions: (
-            PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization | Unset
+            EffectiveFeaturePermissionsContainsRoleDefaultsWithConsolidatedPolicyOverridesApplied | Unset
         )
         if isinstance(_feature_permissions, Unset) or _feature_permissions is None:
             feature_permissions = UNSET
         else:
-            feature_permissions = PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization.from_dict(
-                _feature_permissions
+            feature_permissions = (
+                EffectiveFeaturePermissionsContainsRoleDefaultsWithConsolidatedPolicyOverridesApplied.from_dict(
+                    _feature_permissions
+                )
             )
 
         _first_login = d.pop("FirstLogin", UNSET)

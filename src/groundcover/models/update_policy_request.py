@@ -12,8 +12,8 @@ if TYPE_CHECKING:
     from ..models.data_scope_contains_either_simple_or_advanced_scope_definitions import (
         DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions,
     )
-    from ..models.permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization import (
-        PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization,
+    from ..models.permissions_contains_explicit_overrides_only_a_missing_feature_uses_role_authorization import (
+        PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorization,
     )
     from ..models.role_map_defines_the_mapping_of_roles_to_permissions import (
         RoleMapDefinesTheMappingOfRolesToPermissions,
@@ -33,8 +33,7 @@ class UpdatePolicyRequest:
             locking).
         data_scope (DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions | Unset):
         description (str | Unset): Optional new description for the policy.
-        feature_permissions
-            (PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization | Unset):
+        feature_permissions (PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorization | Unset):
         role (RoleMapDefinesTheMappingOfRolesToPermissions | Unset): It is used within a Policy.
         sensitive_access (bool | Unset): Whether this policy grants access to sensitive (access-controlled) attributes.
     """
@@ -44,9 +43,7 @@ class UpdatePolicyRequest:
     current_revision: int | Unset = UNSET
     data_scope: DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions | Unset = UNSET
     description: str | Unset = UNSET
-    feature_permissions: (
-        PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization | Unset
-    ) = UNSET
+    feature_permissions: PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorization | Unset = UNSET
     role: RoleMapDefinesTheMappingOfRolesToPermissions | Unset = UNSET
     sensitive_access: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -103,8 +100,8 @@ class UpdatePolicyRequest:
         from ..models.data_scope_contains_either_simple_or_advanced_scope_definitions import (
             DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions,
         )
-        from ..models.permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization import (
-            PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization,
+        from ..models.permissions_contains_explicit_overrides_only_a_missing_feature_uses_role_authorization import (
+            PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorization,
         )
         from ..models.role_map_defines_the_mapping_of_roles_to_permissions import (
             RoleMapDefinesTheMappingOfRolesToPermissions,
@@ -127,14 +124,14 @@ class UpdatePolicyRequest:
         description = d.pop("description", UNSET)
 
         _feature_permissions = d.pop("featurePermissions", UNSET)
-        feature_permissions: (
-            PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization | Unset
-        )
+        feature_permissions: PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorization | Unset
         if isinstance(_feature_permissions, Unset) or _feature_permissions is None:
             feature_permissions = UNSET
         else:
-            feature_permissions = PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization.from_dict(
-                _feature_permissions
+            feature_permissions = (
+                PermissionsContainsExplicitOverridesOnlyAMissingFeatureUsesRoleAuthorization.from_dict(
+                    _feature_permissions
+                )
             )
 
         _role = d.pop("role", UNSET)
