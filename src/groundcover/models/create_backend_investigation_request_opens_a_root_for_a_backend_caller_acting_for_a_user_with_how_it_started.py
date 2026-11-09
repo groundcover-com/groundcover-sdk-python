@@ -38,6 +38,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
             investigation's agents on. agent-service decides which
             models and efforts are allowed, and refuses a run whose selection it doesn't allow.
         scope (list[InvestigationScopeEntry] | Unset):
+        skip_investigator (bool | Unset): true opens the root without starting groundcover's investigator; start it
+            later with startInvestigator.
         time_range (InvestigationTimeRange | Unset):
     """
 
@@ -48,6 +50,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
     max_concurrent: int | Unset = UNSET
     model_selection: InvestigationModelSelection | Unset = UNSET
     scope: list[InvestigationScopeEntry] | Unset = UNSET
+    skip_investigator: bool | Unset = UNSET
     time_range: InvestigationTimeRange | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -73,6 +76,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
                 scope_item = scope_item_data.to_dict()
                 scope.append(scope_item)
 
+        skip_investigator = self.skip_investigator
+
         time_range: dict[str, Any] | Unset = UNSET
         if not isinstance(self.time_range, Unset):
             time_range = self.time_range.to_dict()
@@ -94,6 +99,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
             field_dict["modelSelection"] = model_selection
         if scope is not UNSET:
             field_dict["scope"] = scope
+        if skip_investigator is not UNSET:
+            field_dict["skipInvestigator"] = skip_investigator
         if time_range is not UNSET:
             field_dict["timeRange"] = time_range
 
@@ -136,6 +143,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
 
                 scope.append(scope_item)
 
+        skip_investigator = d.pop("skipInvestigator", UNSET)
+
         _time_range = d.pop("timeRange", UNSET)
         time_range: InvestigationTimeRange | Unset
         if isinstance(_time_range, Unset) or _time_range is None:
@@ -152,6 +161,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
                 max_concurrent=max_concurrent,
                 model_selection=model_selection,
                 scope=scope,
+                skip_investigator=skip_investigator,
                 time_range=time_range,
             )
         )
