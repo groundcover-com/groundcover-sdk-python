@@ -4,12 +4,18 @@ import datetime
 
 from .._datetime_compat import parse_datetime
 from collections.abc import Mapping
-from typing import Any, TypeVar
+from typing import TYPE_CHECKING, Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
 from .._generated_types import UNSET, Unset
+
+if TYPE_CHECKING:
+    from ..models.permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization import (
+        PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization,
+    )
+
 
 T = TypeVar("T", bound="MemberWithRoleResponse")
 
@@ -20,6 +26,8 @@ class MemberWithRoleResponse:
     Attributes:
         created (datetime.datetime | Unset):
         email (str | Unset):
+        feature_permissions
+            (PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization | Unset):
         first_login (datetime.datetime | Unset):
         last_seen (datetime.datetime | Unset):
         owner (bool | Unset):
@@ -28,6 +36,9 @@ class MemberWithRoleResponse:
 
     created: datetime.datetime | Unset = UNSET
     email: str | Unset = UNSET
+    feature_permissions: (
+        PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization | Unset
+    ) = UNSET
     first_login: datetime.datetime | Unset = UNSET
     last_seen: datetime.datetime | Unset = UNSET
     owner: bool | Unset = UNSET
@@ -40,6 +51,10 @@ class MemberWithRoleResponse:
             created = self.created.isoformat()
 
         email = self.email
+
+        feature_permissions: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.feature_permissions, Unset):
+            feature_permissions = self.feature_permissions.to_dict()
 
         first_login: str | Unset = UNSET
         if not isinstance(self.first_login, Unset):
@@ -60,6 +75,8 @@ class MemberWithRoleResponse:
             field_dict["Created"] = created
         if email is not UNSET:
             field_dict["Email"] = email
+        if feature_permissions is not UNSET:
+            field_dict["FeaturePermissions"] = feature_permissions
         if first_login is not UNSET:
             field_dict["FirstLogin"] = first_login
         if last_seen is not UNSET:
@@ -73,13 +90,10 @@ class MemberWithRoleResponse:
 
     @classmethod
     def from_dict(cls: type[T], src_dict: Mapping[str, Any]) -> T:
-        if isinstance(src_dict, str):
-            if not src_dict.strip():
-                src_dict = {}
-            else:
-                import json
+        from ..models.permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization import (
+            PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization,
+        )
 
-                src_dict = json.loads(src_dict)
         d = dict(src_dict)
         _created = d.pop("Created", UNSET)
         created: datetime.datetime | Unset
@@ -89,6 +103,17 @@ class MemberWithRoleResponse:
             created = parse_datetime(_created)
 
         email = d.pop("Email", UNSET)
+
+        _feature_permissions = d.pop("FeaturePermissions", UNSET)
+        feature_permissions: (
+            PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization | Unset
+        )
+        if isinstance(_feature_permissions, Unset) or _feature_permissions is None:
+            feature_permissions = UNSET
+        else:
+            feature_permissions = PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization.from_dict(
+                _feature_permissions
+            )
 
         _first_login = d.pop("FirstLogin", UNSET)
         first_login: datetime.datetime | Unset
@@ -111,6 +136,7 @@ class MemberWithRoleResponse:
         member_with_role_response = cls(
             created=created,
             email=email,
+            feature_permissions=feature_permissions,
             first_login=first_login,
             last_seen=last_seen,
             owner=owner,

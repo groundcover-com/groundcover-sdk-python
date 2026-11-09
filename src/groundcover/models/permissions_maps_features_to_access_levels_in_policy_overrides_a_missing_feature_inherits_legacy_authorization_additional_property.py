@@ -3,7 +3,9 @@ from __future__ import annotations
 from enum import Enum
 
 
-class PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty(str, Enum):
+class PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty(
+    str, Enum
+):
     EDIT = "edit"
     NO_ACCESS = "no_access"
     VIEW = "view"

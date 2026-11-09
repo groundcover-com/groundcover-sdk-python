@@ -15,8 +15,8 @@ if TYPE_CHECKING:
     from ..models.data_scope_contains_either_simple_or_advanced_scope_definitions import (
         DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions,
     )
-    from ..models.permissions_contains_explicit_overrides_only_a_missing_feature_inherits_legacy_authorization import (
-        PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization,
+    from ..models.permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization import (
+        PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization,
     )
     from ..models.role_map_defines_the_mapping_of_roles_to_permissions import (
         RoleMapDefinesTheMappingOfRolesToPermissions,
@@ -36,8 +36,8 @@ class PolicyWithEntityCountIncludesThePolicyDetailsAlongWithTheCountOfEntitiesIt
         created_timestamp (datetime.datetime | Unset): Timestamp when the policy was created.
         data_scope (DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions | Unset):
         description (str | Unset): Optional description of the policy.
-        feature_permissions (PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization |
-            Unset):
+        feature_permissions
+            (PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization | Unset):
         read_only (bool | Unset): Indicates if the policy is read-only (system managed).
         revision_number (int | Unset): Revision number for optimistic locking.
         role (RoleMapDefinesTheMappingOfRolesToPermissions | Unset): It is used within a Policy.
@@ -55,9 +55,9 @@ class PolicyWithEntityCountIncludesThePolicyDetailsAlongWithTheCountOfEntitiesIt
     created_timestamp: datetime.datetime | Unset = UNSET
     data_scope: DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions | Unset = UNSET
     description: str | Unset = UNSET
-    feature_permissions: PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization | Unset = (
-        UNSET
-    )
+    feature_permissions: (
+        PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization | Unset
+    ) = UNSET
     read_only: bool | Unset = UNSET
     revision_number: int | Unset = UNSET
     role: RoleMapDefinesTheMappingOfRolesToPermissions | Unset = UNSET
@@ -157,8 +157,8 @@ class PolicyWithEntityCountIncludesThePolicyDetailsAlongWithTheCountOfEntitiesIt
         from ..models.data_scope_contains_either_simple_or_advanced_scope_definitions import (
             DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions,
         )
-        from ..models.permissions_contains_explicit_overrides_only_a_missing_feature_inherits_legacy_authorization import (
-            PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization,
+        from ..models.permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization import (
+            PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization,
         )
         from ..models.role_map_defines_the_mapping_of_roles_to_permissions import (
             RoleMapDefinesTheMappingOfRolesToPermissions,
@@ -188,14 +188,14 @@ class PolicyWithEntityCountIncludesThePolicyDetailsAlongWithTheCountOfEntitiesIt
         description = d.pop("description", UNSET)
 
         _feature_permissions = d.pop("featurePermissions", UNSET)
-        feature_permissions: PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization | Unset
+        feature_permissions: (
+            PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization | Unset
+        )
         if isinstance(_feature_permissions, Unset) or _feature_permissions is None:
             feature_permissions = UNSET
         else:
-            feature_permissions = (
-                PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization.from_dict(
-                    _feature_permissions
-                )
+            feature_permissions = PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization.from_dict(
+                _feature_permissions
             )
 
         read_only = d.pop("readOnly", UNSET)

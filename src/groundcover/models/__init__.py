@@ -1166,11 +1166,11 @@ from .pager_duty_data_severity_mapping import PagerDutyDataSeverityMapping
 from .pattern_data import PatternData
 from .pattern_data_additional_columns import PatternDataAdditionalColumns
 from .pattern_param_distribution_value import PatternParamDistributionValue
-from .permissions_contains_explicit_overrides_only_a_missing_feature_inherits_legacy_authorization import (
-    PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization,
+from .permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization import (
+    PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization,
 )
-from .permissions_contains_explicit_overrides_only_a_missing_feature_inherits_legacy_authorization_additional_property import (
-    PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty,
+from .permissions_maps_features_to_access_levels_in_policy_overrides_a_missing_feature_inherits_legacy_authorization_additional_property import (
+    PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty,
 )
 from .pin import Pin
 from .pinned_resource import PinnedResource
@@ -2595,8 +2595,8 @@ __all__ = (
     "PatternData",
     "PatternDataAdditionalColumns",
     "PatternParamDistributionValue",
-    "PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorization",
-    "PermissionsContainsExplicitOverridesOnlyAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty",
+    "PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorization",
+    "PermissionsMapsFeaturesToAccessLevelsInPolicyOverridesAMissingFeatureInheritsLegacyAuthorizationAdditionalProperty",
     "Pin",
     "PinnedResource",
     "PolicyDefinesAnAccessControlPolicy",
