@@ -6,6 +6,8 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
+from .._generated_types import UNSET, Unset
+
 if TYPE_CHECKING:
     from ..models.evidence_request import EvidenceRequest
 
@@ -19,10 +21,12 @@ class SetAssessmentRequestReplacesTheCallersAssessmentOnTheNode:
     Attributes:
         details (str):
         evidence (list[EvidenceRequest]): The full set of citations, each finding at most once; [] means none.
+        title (str | Unset): Optional one-line plain-text heading for the assessment, at most 120 characters.
     """
 
     details: str
     evidence: list[EvidenceRequest]
+    title: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -33,6 +37,8 @@ class SetAssessmentRequestReplacesTheCallersAssessmentOnTheNode:
             evidence_item = evidence_item_data.to_dict()
             evidence.append(evidence_item)
 
+        title = self.title
+
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
@@ -41,6 +47,8 @@ class SetAssessmentRequestReplacesTheCallersAssessmentOnTheNode:
                 "evidence": evidence,
             }
         )
+        if title is not UNSET:
+            field_dict["title"] = title
 
         return field_dict
 
@@ -58,9 +66,12 @@ class SetAssessmentRequestReplacesTheCallersAssessmentOnTheNode:
 
             evidence.append(evidence_item)
 
+        title = d.pop("title", UNSET)
+
         set_assessment_request_replaces_the_callers_assessment_on_the_node = cls(
             details=details,
             evidence=evidence,
+            title=title,
         )
 
         set_assessment_request_replaces_the_callers_assessment_on_the_node.additional_properties = d

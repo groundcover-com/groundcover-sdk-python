@@ -39,6 +39,7 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
             on this revision; an update resets it to open.
         missing_groundcover_integrations (list[MissingGroundcoverIntegration] | Unset): Groundcover integrations
             recommended by this assessment.
+        title (str | Unset): The assessment's heading; absent when it has none.
         verdict_approved_by (InvestigationAuthor | Unset):
         verdict_proposal_id (UUID | Unset): The approved conclusion whose verdict set Verdict.
         verdict_reason (str | Unset):
@@ -55,6 +56,7 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
     updated_at: datetime.datetime
     verdict: AssessmentIsOneParticipantsCurrentConclusionOnANodeVerdict
     missing_groundcover_integrations: list[MissingGroundcoverIntegration] | Unset = UNSET
+    title: str | Unset = UNSET
     verdict_approved_by: InvestigationAuthor | Unset = UNSET
     verdict_proposal_id: UUID | Unset = UNSET
     verdict_reason: str | Unset = UNSET
@@ -88,6 +90,8 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
             for missing_groundcover_integrations_item_data in self.missing_groundcover_integrations:
                 missing_groundcover_integrations_item = missing_groundcover_integrations_item_data.to_dict()
                 missing_groundcover_integrations.append(missing_groundcover_integrations_item)
+
+        title = self.title
 
         verdict_approved_by: dict[str, Any] | Unset = UNSET
         if not isinstance(self.verdict_approved_by, Unset):
@@ -123,6 +127,8 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
         )
         if missing_groundcover_integrations is not UNSET:
             field_dict["missingGroundcoverIntegrations"] = missing_groundcover_integrations
+        if title is not UNSET:
+            field_dict["title"] = title
         if verdict_approved_by is not UNSET:
             field_dict["verdictApprovedBy"] = verdict_approved_by
         if verdict_proposal_id is not UNSET:
@@ -175,6 +181,8 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
 
                 missing_groundcover_integrations.append(missing_groundcover_integrations_item)
 
+        title = d.pop("title", UNSET)
+
         _verdict_approved_by = d.pop("verdictApprovedBy", UNSET)
         verdict_approved_by: InvestigationAuthor | Unset
         if isinstance(_verdict_approved_by, Unset) or _verdict_approved_by is None:
@@ -215,6 +223,7 @@ class AssessmentIsOneParticipantsCurrentConclusionOnANode:
             updated_at=updated_at,
             verdict=verdict,
             missing_groundcover_integrations=missing_groundcover_integrations,
+            title=title,
             verdict_approved_by=verdict_approved_by,
             verdict_proposal_id=verdict_proposal_id,
             verdict_reason=verdict_reason,
