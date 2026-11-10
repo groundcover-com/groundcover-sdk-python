@@ -24,7 +24,8 @@ T = TypeVar("T", bound="CreateFindingRequestUsesSignalAndQueryLanguageToIdentify
 @_attrs_define
 class CreateFindingRequestUsesSignalAndQueryLanguageToIdentifyTheMCPToolForRetrievingEvidence:
     """Queryable signals require a query: metrics uses metricsql, all other queryable signals use gcql.
-    Link and other findings require a URL and do not accept queries. A queryable finding may include a supplemental URL.
+    Code, link and other findings require a URL and do not accept queries; a code URL is a permalink pinned to a commit.
+    A queryable finding may include a supplemental URL.
 
         Attributes:
             details (str):
@@ -40,6 +41,7 @@ class CreateFindingRequestUsesSignalAndQueryLanguageToIdentifyTheMCPToolForRetri
                 profiling SignalProfiling
                 rum SignalRUM
                 db_measurements SignalDBMeasurements
+                code SignalCode
                 link SignalLink
                 other SignalOther
             query (str | Unset):

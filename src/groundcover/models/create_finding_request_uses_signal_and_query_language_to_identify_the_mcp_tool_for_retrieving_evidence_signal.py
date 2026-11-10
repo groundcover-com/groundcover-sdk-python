@@ -4,6 +4,7 @@ from enum import Enum
 
 
 class CreateFindingRequestUsesSignalAndQueryLanguageToIdentifyTheMCPToolForRetrievingEvidenceSignal(str, Enum):
+    CODE = "code"
     DB_MEASUREMENTS = "db_measurements"
     ENTITIES = "entities"
     EVENTS = "events"

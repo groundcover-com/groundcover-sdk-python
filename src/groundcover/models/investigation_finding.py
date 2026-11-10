@@ -39,6 +39,7 @@ class InvestigationFinding:
             profiling SignalProfiling
             rum SignalRUM
             db_measurements SignalDBMeasurements
+            code SignalCode
             link SignalLink
             other SignalOther
         created_at (datetime.datetime | Unset):
