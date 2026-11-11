@@ -23,8 +23,8 @@ class ListInvestigationFindingsResponse:
     """
     Attributes:
         done (bool): Whether this page exhausts the findings currently stored; not investigation completion.
-        findings (list[InvestigationFinding]): Full findings across the root investigation, ordered by createdAt,
-            ascending.
+        findings (list[InvestigationFinding]): Full findings across the root investigation, or the ones ids names,
+            ordered by createdAt, ascending.
         next_after_timestamp (datetime.datetime | Unset): Last returned finding's createdAt, to send as afterTimestamp;
             an empty page retains afterTimestamp.
     """
