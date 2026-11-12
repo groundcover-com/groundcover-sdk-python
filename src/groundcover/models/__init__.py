@@ -518,6 +518,8 @@ from .dashboard_list_response import DashboardListResponse
 from .dashboard_summary import DashboardSummary
 from .data_integration_config import DataIntegrationConfig
 from .data_integration_config_tags import DataIntegrationConfigTags
+from .data_integration_summary import DataIntegrationSummary
+from .data_integration_summary_tags import DataIntegrationSummaryTags
 from .data_scope_contains_either_simple_or_advanced_scope_definitions import (
     DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions,
 )
@@ -2136,6 +2138,8 @@ __all__ = (
     "DashboardSummary",
     "DataIntegrationConfig",
     "DataIntegrationConfigTags",
+    "DataIntegrationSummary",
+    "DataIntegrationSummaryTags",
     "DataScopeContainsEitherSimpleOrAdvancedScopeDefinitions",
     "DataSetAvailableBucketIsConvertedUnitsWhoseUnderlyingDatasetExistsInGC",
     "DatasourceKeyGapAggregatesMissingFieldKeysForOneSearchDatasource",
