@@ -180,6 +180,9 @@ from .batch_get_monitors_response_monitors import BatchGetMonitorsResponseMonito
 from .batch_read_monitors_v2_response import BatchReadMonitorsV2Response
 from .batch_read_monitors_v2_response_monitors import BatchReadMonitorsV2ResponseMonitors
 from .batch_update_dashboard_tags_request import BatchUpdateDashboardTagsRequest
+from .batch_update_monitor_tags_v2_error import BatchUpdateMonitorTagsV2Error
+from .batch_update_monitor_tags_v2_request import BatchUpdateMonitorTagsV2Request
+from .batch_update_monitor_tags_v2_response import BatchUpdateMonitorTagsV2Response
 from .catalog import Catalog
 from .catalog_install_request_is_the_optional_body_for_a_catalog_install import (
     CatalogInstallRequestIsTheOptionalBodyForACatalogInstall,
@@ -1939,6 +1942,9 @@ __all__ = (
     "BatchReadMonitorsV2Response",
     "BatchReadMonitorsV2ResponseMonitors",
     "BatchUpdateDashboardTagsRequest",
+    "BatchUpdateMonitorTagsV2Error",
+    "BatchUpdateMonitorTagsV2Request",
+    "BatchUpdateMonitorTagsV2Response",
     "Catalog",
     "CatalogInstallRequestIsTheOptionalBodyForACatalogInstall",
     "CatalogModelHoldsMetadataIfTheMonitorOriginatedFromACatalog",

@@ -63,7 +63,7 @@ class MonitorSpecIsTheV2MonitorDocumentValueRequiredOutrightPointerOptionalNilMe
                 renotification knobs apply to any mode.
             severity (str | Unset): Severity is "" when omitted; that intent is preserved, defaults are
                 applied on read.
-            tags (list[str] | Unset): Tags are free-form; items must not be blank.
+            tags (list[str] | Unset): Tags are free-form; items must not be blank. At most MaxTags (20).
             team (str | Unset):
             type_ (str | Unset): Type is the dataType; query language and datasource are inferred from it.
                 monitor_type defers to the registry — see registry.go for the set.
