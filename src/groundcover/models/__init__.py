@@ -405,6 +405,12 @@ from .create_notification_route_response_500 import CreateNotificationRouteRespo
 from .create_policy_request import CreatePolicyRequest
 from .create_policy_response_400 import CreatePolicyResponse400
 from .create_policy_response_500 import CreatePolicyResponse500
+from .create_profiling_rule_response_400 import CreateProfilingRuleResponse400
+from .create_profiling_rule_response_403 import CreateProfilingRuleResponse403
+from .create_profiling_rule_response_404 import CreateProfilingRuleResponse404
+from .create_profiling_rule_response_500 import CreateProfilingRuleResponse500
+from .create_profiling_rule_response_501 import CreateProfilingRuleResponse501
+from .create_profiling_rule_response_503 import CreateProfilingRuleResponse503
 from .create_proposal_request_submits_a_decision_for_later_approval_or_rejection import (
     CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejection,
 )
@@ -562,6 +568,10 @@ from .delete_notification_route_response_500 import DeleteNotificationRouteRespo
 from .delete_policy_response_400 import DeletePolicyResponse400
 from .delete_policy_response_404 import DeletePolicyResponse404
 from .delete_policy_response_500 import DeletePolicyResponse500
+from .delete_profiling_rule_response_403 import DeleteProfilingRuleResponse403
+from .delete_profiling_rule_response_404 import DeleteProfilingRuleResponse404
+from .delete_profiling_rule_response_500 import DeleteProfilingRuleResponse500
+from .delete_profiling_rule_response_503 import DeleteProfilingRuleResponse503
 from .delete_recurring_silence_response_400 import DeleteRecurringSilenceResponse400
 from .delete_recurring_silence_response_404 import DeleteRecurringSilenceResponse404
 from .delete_recurring_silence_response_500 import DeleteRecurringSilenceResponse500
@@ -786,6 +796,10 @@ from .get_profiling_flamegraph_response_404 import GetProfilingFlamegraphRespons
 from .get_profiling_flamegraph_response_422 import GetProfilingFlamegraphResponse422
 from .get_profiling_flamegraph_response_500 import GetProfilingFlamegraphResponse500
 from .get_profiling_flamegraph_response_504 import GetProfilingFlamegraphResponse504
+from .get_profiling_rule_response_403 import GetProfilingRuleResponse403
+from .get_profiling_rule_response_404 import GetProfilingRuleResponse404
+from .get_profiling_rule_response_500 import GetProfilingRuleResponse500
+from .get_profiling_rule_response_503 import GetProfilingRuleResponse503
 from .get_recurring_silence_response_400 import GetRecurringSilenceResponse400
 from .get_recurring_silence_response_404 import GetRecurringSilenceResponse404
 from .get_recurring_silence_response_500 import GetRecurringSilenceResponse500
@@ -987,6 +1001,12 @@ from .list_namespaces_response import ListNamespacesResponse
 from .list_notification_routes_request import ListNotificationRoutesRequest
 from .list_notification_routes_response_500 import ListNotificationRoutesResponse500
 from .list_policies_response_500 import ListPoliciesResponse500
+from .list_profiling_rules_response_400 import ListProfilingRulesResponse400
+from .list_profiling_rules_response_403 import ListProfilingRulesResponse403
+from .list_profiling_rules_response_404 import ListProfilingRulesResponse404
+from .list_profiling_rules_response_500 import ListProfilingRulesResponse500
+from .list_profiling_rules_response_503 import ListProfilingRulesResponse503
+from .list_profiling_rules_status import ListProfilingRulesStatus
 from .list_service_accounts_response_500 import ListServiceAccountsResponse500
 from .log_attributes_response import LogAttributesResponse
 from .log_attributes_response_attributes import LogAttributesResponseAttributes
@@ -1201,6 +1221,18 @@ from .profiling_diff_flame_node import ProfilingDiffFlameNode
 from .profiling_flamegraph_diff_response import ProfilingFlamegraphDiffResponse
 from .profiling_flamegraph_response import ProfilingFlamegraphResponse
 from .profiling_period import ProfilingPeriod
+from .profiling_rule_list_response_is_a_list_of_profiling_rules import ProfilingRuleListResponseIsAListOfProfilingRules
+from .profiling_rule_request_creates_or_replaces_a_profiling_rule import (
+    ProfilingRuleRequestCreatesOrReplacesAProfilingRule,
+)
+from .profiling_rule_request_creates_or_replaces_a_profiling_rule_tags import (
+    ProfilingRuleRequestCreatesOrReplacesAProfilingRuleTags,
+)
+from .profiling_rule_response_is_a_stored_profiling_rule import ProfilingRuleResponseIsAStoredProfilingRule
+from .profiling_rule_response_is_a_stored_profiling_rule_origin import ProfilingRuleResponseIsAStoredProfilingRuleOrigin
+from .profiling_rule_response_is_a_stored_profiling_rule_status import ProfilingRuleResponseIsAStoredProfilingRuleStatus
+from .profiling_rule_response_is_a_stored_profiling_rule_tags import ProfilingRuleResponseIsAStoredProfilingRuleTags
+from .profiling_rule_scope import ProfilingRuleScope
 from .promql_function_represents_a_function_call_in_a_prom_ql_query import (
     PromqlFunctionRepresentsAFunctionCallInAPromQLQuery,
 )
@@ -1666,6 +1698,11 @@ from .update_policy_request import UpdatePolicyRequest
 from .update_policy_response_400 import UpdatePolicyResponse400
 from .update_policy_response_404 import UpdatePolicyResponse404
 from .update_policy_response_500 import UpdatePolicyResponse500
+from .update_profiling_rule_response_400 import UpdateProfilingRuleResponse400
+from .update_profiling_rule_response_403 import UpdateProfilingRuleResponse403
+from .update_profiling_rule_response_404 import UpdateProfilingRuleResponse404
+from .update_profiling_rule_response_500 import UpdateProfilingRuleResponse500
+from .update_profiling_rule_response_503 import UpdateProfilingRuleResponse503
 from .update_recurring_silence_request import UpdateRecurringSilenceRequest
 from .update_recurring_silence_request_recurrence_type import UpdateRecurringSilenceRequestRecurrenceType
 from .update_recurring_silence_request_timeframes import UpdateRecurringSilenceRequestTimeframes
@@ -2077,6 +2114,12 @@ __all__ = (
     "CreatePolicyRequest",
     "CreatePolicyResponse400",
     "CreatePolicyResponse500",
+    "CreateProfilingRuleResponse400",
+    "CreateProfilingRuleResponse403",
+    "CreateProfilingRuleResponse404",
+    "CreateProfilingRuleResponse500",
+    "CreateProfilingRuleResponse501",
+    "CreateProfilingRuleResponse503",
     "CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejection",
     "CreateProposalRequestSubmitsADecisionForLaterApprovalOrRejectionType",
     "CreateRecurringSilenceRequest",
@@ -2174,6 +2217,10 @@ __all__ = (
     "DeletePolicyResponse400",
     "DeletePolicyResponse404",
     "DeletePolicyResponse500",
+    "DeleteProfilingRuleResponse403",
+    "DeleteProfilingRuleResponse404",
+    "DeleteProfilingRuleResponse500",
+    "DeleteProfilingRuleResponse503",
     "DeleteRecurringSilenceResponse400",
     "DeleteRecurringSilenceResponse404",
     "DeleteRecurringSilenceResponse500",
@@ -2332,6 +2379,10 @@ __all__ = (
     "GetProfilingFlamegraphResponse422",
     "GetProfilingFlamegraphResponse500",
     "GetProfilingFlamegraphResponse504",
+    "GetProfilingRuleResponse403",
+    "GetProfilingRuleResponse404",
+    "GetProfilingRuleResponse500",
+    "GetProfilingRuleResponse503",
     "GetRecurringSilenceResponse400",
     "GetRecurringSilenceResponse404",
     "GetRecurringSilenceResponse500",
@@ -2471,6 +2522,12 @@ __all__ = (
     "ListNotificationRoutesRequest",
     "ListNotificationRoutesResponse500",
     "ListPoliciesResponse500",
+    "ListProfilingRulesResponse400",
+    "ListProfilingRulesResponse403",
+    "ListProfilingRulesResponse404",
+    "ListProfilingRulesResponse500",
+    "ListProfilingRulesResponse503",
+    "ListProfilingRulesStatus",
     "ListServiceAccountsResponse500",
     "LogAttributesResponse",
     "LogAttributesResponseAttributes",
@@ -2627,6 +2684,14 @@ __all__ = (
     "ProfilingFlamegraphDiffResponse",
     "ProfilingFlamegraphResponse",
     "ProfilingPeriod",
+    "ProfilingRuleListResponseIsAListOfProfilingRules",
+    "ProfilingRuleRequestCreatesOrReplacesAProfilingRule",
+    "ProfilingRuleRequestCreatesOrReplacesAProfilingRuleTags",
+    "ProfilingRuleResponseIsAStoredProfilingRule",
+    "ProfilingRuleResponseIsAStoredProfilingRuleOrigin",
+    "ProfilingRuleResponseIsAStoredProfilingRuleStatus",
+    "ProfilingRuleResponseIsAStoredProfilingRuleTags",
+    "ProfilingRuleScope",
     "PromqlFunctionRepresentsAFunctionCallInAPromQLQuery",
     "PromqlPipelineRepresentsASegmentOfAPromQLQueryWhichCanBeAMetricWithConditionsAFunctionOrATemplate",
     "ProposalAssessmentVerdictIsAProposalsVerdictOnOneAssessmentAsReadsReturnIt",
@@ -2916,6 +2981,11 @@ __all__ = (
     "UpdatePolicyResponse400",
     "UpdatePolicyResponse404",
     "UpdatePolicyResponse500",
+    "UpdateProfilingRuleResponse400",
+    "UpdateProfilingRuleResponse403",
+    "UpdateProfilingRuleResponse404",
+    "UpdateProfilingRuleResponse500",
+    "UpdateProfilingRuleResponse503",
     "UpdateRecurringSilenceRequest",
     "UpdateRecurringSilenceRequestRecurrenceType",
     "UpdateRecurringSilenceRequestTimeframes",
