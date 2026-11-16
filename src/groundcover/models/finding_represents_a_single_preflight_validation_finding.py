@@ -37,6 +37,7 @@ class FindingRepresentsASinglePreflightValidationFinding:
         evidence (FindingRepresentsASinglePreflightValidationFindingEvidence | Unset):
         field_name (str | Unset):
         integration (str | Unset):
+        issue_id (str | Unset):
         issue_type (str | Unset):
         label_key (str | Unset):
         label_key_dd (str | Unset): LabelKeyDD is the Datadog-side name of LabelKey, set only when a mapping
@@ -64,6 +65,7 @@ class FindingRepresentsASinglePreflightValidationFinding:
     evidence: FindingRepresentsASinglePreflightValidationFindingEvidence | Unset = UNSET
     field_name: str | Unset = UNSET
     integration: str | Unset = UNSET
+    issue_id: str | Unset = UNSET
     issue_type: str | Unset = UNSET
     label_key: str | Unset = UNSET
     label_key_dd: str | Unset = UNSET
@@ -96,6 +98,8 @@ class FindingRepresentsASinglePreflightValidationFinding:
         field_name = self.field_name
 
         integration = self.integration
+
+        issue_id = self.issue_id
 
         issue_type = self.issue_type
 
@@ -155,6 +159,8 @@ class FindingRepresentsASinglePreflightValidationFinding:
             field_dict["field_name"] = field_name
         if integration is not UNSET:
             field_dict["integration"] = integration
+        if issue_id is not UNSET:
+            field_dict["issue_id"] = issue_id
         if issue_type is not UNSET:
             field_dict["issue_type"] = issue_type
         if label_key is not UNSET:
@@ -221,6 +227,8 @@ class FindingRepresentsASinglePreflightValidationFinding:
 
         integration = d.pop("integration", UNSET)
 
+        issue_id = d.pop("issue_id", UNSET)
+
         issue_type = d.pop("issue_type", UNSET)
 
         label_key = d.pop("label_key", UNSET)
@@ -274,6 +282,7 @@ class FindingRepresentsASinglePreflightValidationFinding:
             evidence=evidence,
             field_name=field_name,
             integration=integration,
+            issue_id=issue_id,
             issue_type=issue_type,
             label_key=label_key,
             label_key_dd=label_key_dd,
