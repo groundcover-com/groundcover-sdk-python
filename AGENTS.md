@@ -3,7 +3,7 @@
 The `sdk-python` entry in [`.github/signoff/products.yml`](../.github/signoff/products.yml) decides when this signoff applies, and most of its paths are outside this directory:
 
 - `signoff:` paths (this directory, `scripts/swagger/`, `docs/swagger.yaml`) need your signoff before merge, even when nothing under `sdk-python/` changed.
-- `queue-only:` paths (the root `Taskfile.yml`, `sdk-test.yml`) need none; the merge queue runs `task sdk-python:test` on them.
+- `queue-only:` paths (the root `Taskfile.yml`) need none; the merge queue runs `task sdk-python:test` on them.
 - Go changes reach the SDK only through the committed spec. The router's Go trees need `signoff/swagger-spec` instead (`task swagger-spec:signoff`), which fails until you commit the regenerated `docs/swagger.yaml`; committing it then requires this signoff.
 
 ## Signoff (mandatory)
