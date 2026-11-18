@@ -20,17 +20,22 @@ class DistibutedTraceResponse:
     """
     Attributes:
         count (int | Unset):
+        focused_span_id (str | Unset): FocusedSpanID is the span the UI opens in place of the clicked eBPF span when the
+            waterfall falls back to the trace's instrumented spans.
         limit_reached (bool | Unset):
         nodes (list[DistributedTraceNode] | Unset):
     """
 
     count: int | Unset = UNSET
+    focused_span_id: str | Unset = UNSET
     limit_reached: bool | Unset = UNSET
     nodes: list[DistributedTraceNode] | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         count = self.count
+
+        focused_span_id = self.focused_span_id
 
         limit_reached = self.limit_reached
 
@@ -46,6 +51,8 @@ class DistibutedTraceResponse:
         field_dict.update({})
         if count is not UNSET:
             field_dict["count"] = count
+        if focused_span_id is not UNSET:
+            field_dict["focusedSpanId"] = focused_span_id
         if limit_reached is not UNSET:
             field_dict["limitReached"] = limit_reached
         if nodes is not UNSET:
@@ -60,6 +67,8 @@ class DistibutedTraceResponse:
         d = dict(src_dict)
         count = d.pop("count", UNSET)
 
+        focused_span_id = d.pop("focusedSpanId", UNSET)
+
         limit_reached = d.pop("limitReached", UNSET)
 
         _nodes = d.pop("nodes", UNSET)
@@ -73,6 +82,7 @@ class DistibutedTraceResponse:
 
         distibuted_trace_response = cls(
             count=count,
+            focused_span_id=focused_span_id,
             limit_reached=limit_reached,
             nodes=nodes,
         )

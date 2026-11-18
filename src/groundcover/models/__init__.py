@@ -170,6 +170,8 @@ from .aws_cur_search_time_series_request import AwsCurSearchTimeSeriesRequest
 from .backend_settings import BackendSettings
 from .backend_settings_gcp_pubsub_topic import BackendSettingsGcpPubsubTopic
 from .base_query_is_the_base_struct_for_different_query_types import BaseQueryIsTheBaseStructForDifferentQueryTypes
+from .batch_create_monitors_v2_error import BatchCreateMonitorsV2Error
+from .batch_create_monitors_v2_response import BatchCreateMonitorsV2Response
 from .batch_dashboards_error import BatchDashboardsError
 from .batch_dashboards_request import BatchDashboardsRequest
 from .batch_dashboards_response import BatchDashboardsResponse
@@ -343,6 +345,7 @@ from .create_assets_response import CreateAssetsResponse
 from .create_backend_investigation_request_opens_a_root_for_a_backend_caller_acting_for_a_user_with_how_it_started import (
     CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUserWithHowItStarted,
 )
+from .create_body import CreateBody
 from .create_connected_app_request_is_the_request_body_for_creating_a_new_connected_app import (
     CreateConnectedAppRequestIsTheRequestBodyForCreatingANewConnectedApp,
 )
@@ -397,6 +400,7 @@ from .create_monitor_response_400 import CreateMonitorResponse400
 from .create_monitor_response_403 import CreateMonitorResponse403
 from .create_monitor_response_409 import CreateMonitorResponse409
 from .create_monitor_response_422 import CreateMonitorResponse422
+from .create_monitor_v2_request import CreateMonitorV2Request
 from .create_notification_route_request import CreateNotificationRouteRequest
 from .create_notification_route_response import CreateNotificationRouteResponse
 from .create_notification_route_response_400 import CreateNotificationRouteResponse400
@@ -1971,6 +1975,8 @@ __all__ = (
     "BackendSettings",
     "BackendSettingsGcpPubsubTopic",
     "BaseQueryIsTheBaseStructForDifferentQueryTypes",
+    "BatchCreateMonitorsV2Error",
+    "BatchCreateMonitorsV2Response",
     "BatchDashboardsError",
     "BatchDashboardsRequest",
     "BatchDashboardsResponse",
@@ -2068,6 +2074,7 @@ __all__ = (
     "CreateAssetsRequestSourceProvider",
     "CreateAssetsResponse",
     "CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUserWithHowItStarted",
+    "CreateBody",
     "CreateConnectedAppRequestIsTheRequestBodyForCreatingANewConnectedApp",
     "CreateConnectedAppRequestIsTheRequestBodyForCreatingANewConnectedAppData",
     "CreateConnectedAppRequestIsTheRequestBodyForCreatingANewConnectedAppType",
@@ -2106,6 +2113,7 @@ __all__ = (
     "CreateMonitorResponse403",
     "CreateMonitorResponse409",
     "CreateMonitorResponse422",
+    "CreateMonitorV2Request",
     "CreateNotificationRouteRequest",
     "CreateNotificationRouteResponse",
     "CreateNotificationRouteResponse400",

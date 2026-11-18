@@ -27,6 +27,8 @@ class DistributedTracesRequest:
         limit (int | Unset):
         source_type (str | Unset):
         sources (list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset):
+        span_id (str | Unset): SpanID is the clicked span. The waterfall returns it alone when the trace has no
+            instrumented spans and eBPF trace stitching is off.
         time (datetime.datetime | Unset):
         trace_id (str | Unset):
     """
@@ -34,6 +36,7 @@ class DistributedTracesRequest:
     limit: int | Unset = UNSET
     source_type: str | Unset = UNSET
     sources: list[ConditionSpecifiesASearchConditionBasedOnAColumnAndFilters] | Unset = UNSET
+    span_id: str | Unset = UNSET
     time: datetime.datetime | Unset = UNSET
     trace_id: str | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -50,6 +53,8 @@ class DistributedTracesRequest:
                 sources_item = sources_item_data.to_dict()
                 sources.append(sources_item)
 
+        span_id = self.span_id
+
         time: str | Unset = UNSET
         if not isinstance(self.time, Unset):
             time = self.time.isoformat()
@@ -65,6 +70,8 @@ class DistributedTracesRequest:
             field_dict["sourceType"] = source_type
         if sources is not UNSET:
             field_dict["sources"] = sources
+        if span_id is not UNSET:
+            field_dict["spanId"] = span_id
         if time is not UNSET:
             field_dict["time"] = time
         if trace_id is not UNSET:
@@ -92,6 +99,8 @@ class DistributedTracesRequest:
 
                 sources.append(sources_item)
 
+        span_id = d.pop("spanId", UNSET)
+
         _time = d.pop("time", UNSET)
         time: datetime.datetime | Unset
         if isinstance(_time, Unset) or _time is None:
@@ -105,6 +114,7 @@ class DistributedTracesRequest:
             limit=limit,
             source_type=source_type,
             sources=sources,
+            span_id=span_id,
             time=time,
             trace_id=trace_id,
         )
