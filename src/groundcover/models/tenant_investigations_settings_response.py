@@ -15,8 +15,8 @@ T = TypeVar("T", bound="TenantInvestigationsSettingsResponse")
 class TenantInvestigationsSettingsResponse:
     """
     Attributes:
-        investigations_enabled (bool | Unset): Whether the organization uses Investigations. Off until an admin turns it
-            on.
+        investigations_enabled (bool | Unset): Whether the organization uses Investigations. Off until an authorized
+            user turns it on.
     """
 
     investigations_enabled: bool | Unset = UNSET
