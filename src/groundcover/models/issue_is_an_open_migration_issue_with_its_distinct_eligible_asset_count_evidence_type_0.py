@@ -6,14 +6,14 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="SlackChatPostMessageRequestBlocks")
+T = TypeVar("T", bound="IssueIsAnOpenMigrationIssueWithItsDistinctEligibleAssetCountEvidenceType0")
 
 
 @_attrs_define
-class SlackChatPostMessageRequestBlocks:
-    """Optional Slack Block Kit payload."""
+class IssueIsAnOpenMigrationIssueWithItsDistinctEligibleAssetCountEvidenceType0:
+    """ """
 
-    additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
+    additional_properties: dict[str, str] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
 
@@ -32,19 +32,19 @@ class SlackChatPostMessageRequestBlocks:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        slack_chat_post_message_request_blocks = cls()
+        issue_is_an_open_migration_issue_with_its_distinct_eligible_asset_count_evidence_type_0 = cls()
 
-        slack_chat_post_message_request_blocks.additional_properties = d
-        return slack_chat_post_message_request_blocks
+        issue_is_an_open_migration_issue_with_its_distinct_eligible_asset_count_evidence_type_0.additional_properties = d
+        return issue_is_an_open_migration_issue_with_its_distinct_eligible_asset_count_evidence_type_0
 
     @property
     def additional_keys(self) -> list[str]:
         return list(self.additional_properties.keys())
 
-    def __getitem__(self, key: str) -> Any:
+    def __getitem__(self, key: str) -> str:
         return self.additional_properties[key]
 
-    def __setitem__(self, key: str, value: Any) -> None:
+    def __setitem__(self, key: str, value: str) -> None:
         self.additional_properties[key] = value
 
     def __delitem__(self, key: str) -> None:

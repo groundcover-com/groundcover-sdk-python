@@ -900,6 +900,21 @@ from .invitee_details import InviteeDetails
 from .issue_display_controls_how_the_resulting_issue_is_rendered import (
     IssueDisplayControlsHowTheResultingIssueIsRendered,
 )
+from .issue_is_an_open_migration_issue_with_its_distinct_eligible_asset_count import (
+    IssueIsAnOpenMigrationIssueWithItsDistinctEligibleAssetCount,
+)
+from .issue_is_an_open_migration_issue_with_its_distinct_eligible_asset_count_evidence_type_0 import (
+    IssueIsAnOpenMigrationIssueWithItsDistinctEligibleAssetCountEvidenceType0,
+)
+from .issue_is_an_open_migration_issue_with_its_distinct_eligible_asset_count_finding_type import (
+    IssueIsAnOpenMigrationIssueWithItsDistinctEligibleAssetCountFindingType,
+)
+from .issue_subject_identifies_the_subject_on_both_sides_of_the_migration import (
+    IssueSubjectIdentifiesTheSubjectOnBothSidesOfTheMigration,
+)
+from .issue_suggestion_is_a_candidate_mapping_for_a_migration_issue import (
+    IssueSuggestionIsACandidateMappingForAMigrationIssue,
+)
 from .issues_search_over_time_response import IssuesSearchOverTimeResponse
 from .issues_search_request import IssuesSearchRequest
 from .issues_search_time_series_request import IssuesSearchTimeSeriesRequest
@@ -995,6 +1010,9 @@ from .list_investigation_findings_response import ListInvestigationFindingsRespo
 from .list_investigation_proposals_response import ListInvestigationProposalsResponse
 from .list_investigation_triggers_response import ListInvestigationTriggersResponse
 from .list_investigations_response import ListInvestigationsResponse
+from .list_issues_response_is_an_ordered_page_and_the_exact_total_under_the_filters import (
+    ListIssuesResponseIsAnOrderedPageAndTheExactTotalUnderTheFilters,
+)
 from .list_migration_cloud_integrations_response import ListMigrationCloudIntegrationsResponse
 from .list_migration_data_sources_response import ListMigrationDataSourcesResponse
 from .list_migrations_response import ListMigrationsResponse
@@ -1422,15 +1440,6 @@ from .slack_channel_picker_channel_is_a_slack_channel_returned_by_the_channel_pi
 )
 from .slack_channels_response_contains_channel_picker_results_for_a_slack_connector import (
     SlackChannelsResponseContainsChannelPickerResultsForASlackConnector,
-)
-from .slack_chat_post_message_request import SlackChatPostMessageRequest
-from .slack_chat_post_message_request_attachments import SlackChatPostMessageRequestAttachments
-from .slack_chat_post_message_request_blocks import SlackChatPostMessageRequestBlocks
-from .slack_chat_post_message_response_is_the_proxied_slack_chat_post_message_response import (
-    SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponse,
-)
-from .slack_chat_post_message_response_is_the_proxied_slack_chat_post_message_response_message import (
-    SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponseMessage,
 )
 from .slack_delivery_options_requires_a_non_empty_channels_when_present import (
     SlackDeliveryOptionsRequiresANonEmptyChannelsWhenPresent,
@@ -2459,9 +2468,14 @@ __all__ = (
     "InviteeDetails",
     "InviteRequest",
     "IssueDisplayControlsHowTheResultingIssueIsRendered",
+    "IssueIsAnOpenMigrationIssueWithItsDistinctEligibleAssetCount",
+    "IssueIsAnOpenMigrationIssueWithItsDistinctEligibleAssetCountEvidenceType0",
+    "IssueIsAnOpenMigrationIssueWithItsDistinctEligibleAssetCountFindingType",
     "IssuesSearchOverTimeResponse",
     "IssuesSearchRequest",
     "IssuesSearchTimeSeriesRequest",
+    "IssueSubjectIdentifiesTheSubjectOnBothSidesOfTheMigration",
+    "IssueSuggestionIsACandidateMappingForAMigrationIssue",
     "JoinConditionDefinesHowTablesAreJoinedTogether",
     "JoinDefinesAJoinOperationBetweenTwoPipelines",
     "JsonUnpackDefinesAJSONUnpackPrefixRegistration",
@@ -2520,6 +2534,7 @@ __all__ = (
     "ListInvestigationProposalsResponse",
     "ListInvestigationsResponse",
     "ListInvestigationTriggersResponse",
+    "ListIssuesResponseIsAnOrderedPageAndTheExactTotalUnderTheFilters",
     "ListMigrationCloudIntegrationsResponse",
     "ListMigrationDataSourcesResponse",
     "ListMigrationsResponse",
@@ -2816,11 +2831,6 @@ __all__ = (
     "SlackAppDataResponse",
     "SlackChannelPickerChannelIsASlackChannelReturnedByTheChannelPickerAPI",
     "SlackChannelsResponseContainsChannelPickerResultsForASlackConnector",
-    "SlackChatPostMessageRequest",
-    "SlackChatPostMessageRequestAttachments",
-    "SlackChatPostMessageRequestBlocks",
-    "SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponse",
-    "SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponseMessage",
     "SlackDeliveryOptionsRequiresANonEmptyChannelsWhenPresent",
     "SlackDestinationIsASlackThreadTheAlertMessagesChannelAndTs",
     "SlackWebhookData",

@@ -5,6 +5,7 @@ import datetime
 from .._datetime_compat import parse_datetime
 from collections.abc import Mapping
 from typing import TYPE_CHECKING, Any, TypeVar, cast
+from uuid import UUID
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
@@ -28,6 +29,8 @@ T = TypeVar("T", bound="AssetListItem")
 class AssetListItem:
     """
     Attributes:
+        asset_id (UUID | Unset): UUID of this asset row in the migration. Rediscovery can assign a new UUID to the same
+            source asset.
         conversion_status (str | Unset): The conversion status of the asset.
         convert_errors (AssetListItemConvertErrors | Unset): Conversion errors encountered during processing.
         convert_warnings (AssetListItemConvertWarnings | Unset): Conversion warnings encountered during processing.
@@ -69,6 +72,7 @@ class AssetListItem:
         support_level (str | Unset): The support level for this asset type.
     """
 
+    asset_id: UUID | Unset = UNSET
     conversion_status: str | Unset = UNSET
     convert_errors: AssetListItemConvertErrors | Unset = UNSET
     convert_warnings: AssetListItemConvertWarnings | Unset = UNSET
@@ -95,6 +99,10 @@ class AssetListItem:
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        asset_id: str | Unset = UNSET
+        if not isinstance(self.asset_id, Unset):
+            asset_id = str(self.asset_id)
+
         conversion_status = self.conversion_status
 
         convert_errors: dict[str, Any] | Unset = UNSET
@@ -176,6 +184,8 @@ class AssetListItem:
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update({})
+        if asset_id is not UNSET:
+            field_dict["asset_id"] = asset_id
         if conversion_status is not UNSET:
             field_dict["conversion_status"] = conversion_status
         if convert_errors is not UNSET:
@@ -235,6 +245,13 @@ class AssetListItem:
         from ..models.asset_metadata import AssetMetadata
 
         d = dict(src_dict)
+        _asset_id = d.pop("asset_id", UNSET)
+        asset_id: UUID | Unset
+        if isinstance(_asset_id, Unset) or _asset_id is None:
+            asset_id = UNSET
+        else:
+            asset_id = UUID(_asset_id)
+
         conversion_status = d.pop("conversion_status", UNSET)
 
         _convert_errors = d.pop("convert_errors", UNSET)
@@ -354,6 +371,7 @@ class AssetListItem:
         support_level = d.pop("support_level", UNSET)
 
         asset_list_item = cls(
+            asset_id=asset_id,
             conversion_status=conversion_status,
             convert_errors=convert_errors,
             convert_warnings=convert_warnings,

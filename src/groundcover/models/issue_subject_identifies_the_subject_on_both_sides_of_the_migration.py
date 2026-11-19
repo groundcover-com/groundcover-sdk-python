@@ -6,19 +6,34 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="SlackChatPostMessageRequestAttachments")
+T = TypeVar("T", bound="IssueSubjectIdentifiesTheSubjectOnBothSidesOfTheMigration")
 
 
 @_attrs_define
-class SlackChatPostMessageRequestAttachments:
-    """Optional Slack attachments payload."""
+class IssueSubjectIdentifiesTheSubjectOnBothSidesOfTheMigration:
+    """
+    Attributes:
+        name_dd (str):
+        name_gc (str):
+    """
 
+    name_dd: str
+    name_gc: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        name_dd = self.name_dd
+
+        name_gc = self.name_gc
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update(
+            {
+                "name_dd": name_dd,
+                "name_gc": name_gc,
+            }
+        )
 
         return field_dict
 
@@ -32,10 +47,17 @@ class SlackChatPostMessageRequestAttachments:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        slack_chat_post_message_request_attachments = cls()
+        name_dd = d.pop("name_dd")
 
-        slack_chat_post_message_request_attachments.additional_properties = d
-        return slack_chat_post_message_request_attachments
+        name_gc = d.pop("name_gc")
+
+        issue_subject_identifies_the_subject_on_both_sides_of_the_migration = cls(
+            name_dd=name_dd,
+            name_gc=name_gc,
+        )
+
+        issue_subject_identifies_the_subject_on_both_sides_of_the_migration.additional_properties = d
+        return issue_subject_identifies_the_subject_on_both_sides_of_the_migration
 
     @property
     def additional_keys(self) -> list[str]:

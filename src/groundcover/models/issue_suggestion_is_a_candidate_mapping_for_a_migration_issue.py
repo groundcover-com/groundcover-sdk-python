@@ -6,19 +6,34 @@ from typing import Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponseMessage")
+T = TypeVar("T", bound="IssueSuggestionIsACandidateMappingForAMigrationIssue")
 
 
 @_attrs_define
-class SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponseMessage:
-    """ """
+class IssueSuggestionIsACandidateMappingForAMigrationIssue:
+    """
+    Attributes:
+        type_ (str):
+        value (str):
+    """
 
+    type_: str
+    value: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
+        type_ = self.type_
+
+        value = self.value
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
+        field_dict.update(
+            {
+                "type": type_,
+                "value": value,
+            }
+        )
 
         return field_dict
 
@@ -32,10 +47,17 @@ class SlackChatPostMessageResponseIsTheProxiedSlackChatPostMessageResponseMessag
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        slack_chat_post_message_response_is_the_proxied_slack_chat_post_message_response_message = cls()
+        type_ = d.pop("type")
 
-        slack_chat_post_message_response_is_the_proxied_slack_chat_post_message_response_message.additional_properties = d
-        return slack_chat_post_message_response_is_the_proxied_slack_chat_post_message_response_message
+        value = d.pop("value")
+
+        issue_suggestion_is_a_candidate_mapping_for_a_migration_issue = cls(
+            type_=type_,
+            value=value,
+        )
+
+        issue_suggestion_is_a_candidate_mapping_for_a_migration_issue.additional_properties = d
+        return issue_suggestion_is_a_candidate_mapping_for_a_migration_issue
 
     @property
     def additional_keys(self) -> list[str]:
