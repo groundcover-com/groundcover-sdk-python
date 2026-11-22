@@ -779,6 +779,9 @@ from .get_metric_values_response_400 import GetMetricValuesResponse400
 from .get_metric_values_response_500 import GetMetricValuesResponse500
 from .get_metrics_aggregator_config_response_204 import GetMetricsAggregatorConfigResponse204
 from .get_metrics_pipeline_config_response_204 import GetMetricsPipelineConfigResponse204
+from .get_migration_issue_context_response_400 import GetMigrationIssueContextResponse400
+from .get_migration_issue_context_response_404 import GetMigrationIssueContextResponse404
+from .get_migration_issue_context_response_500 import GetMigrationIssueContextResponse500
 from .get_monitor_response_400 import GetMonitorResponse400
 from .get_monitor_response_404 import GetMonitorResponse404
 from .get_monitor_response_500 import GetMonitorResponse500
@@ -897,6 +900,18 @@ from .investigator_run_is_the_start_of_a_roots_investigator_pending_until_agent_
 )
 from .invite_request import InviteRequest
 from .invitee_details import InviteeDetails
+from .issue_context_finding_contains_the_stored_query_pair_for_one_issue_occurrence import (
+    IssueContextFindingContainsTheStoredQueryPairForOneIssueOccurrence,
+)
+from .issue_context_response_extends_the_migration_issue_with_stored_member_query_pairs import (
+    IssueContextResponseExtendsTheMigrationIssueWithStoredMemberQueryPairs,
+)
+from .issue_context_response_extends_the_migration_issue_with_stored_member_query_pairs_evidence_type_0 import (
+    IssueContextResponseExtendsTheMigrationIssueWithStoredMemberQueryPairsEvidenceType0,
+)
+from .issue_context_response_extends_the_migration_issue_with_stored_member_query_pairs_finding_type import (
+    IssueContextResponseExtendsTheMigrationIssueWithStoredMemberQueryPairsFindingType,
+)
 from .issue_display_controls_how_the_resulting_issue_is_rendered import (
     IssueDisplayControlsHowTheResultingIssueIsRendered,
 )
@@ -1015,6 +1030,12 @@ from .list_issues_response_is_an_ordered_page_and_the_exact_total_under_the_filt
 )
 from .list_migration_cloud_integrations_response import ListMigrationCloudIntegrationsResponse
 from .list_migration_data_sources_response import ListMigrationDataSourcesResponse
+from .list_migration_issues_asset_type import ListMigrationIssuesAssetType
+from .list_migration_issues_datasource import ListMigrationIssuesDatasource
+from .list_migration_issues_kind import ListMigrationIssuesKind
+from .list_migration_issues_response_400 import ListMigrationIssuesResponse400
+from .list_migration_issues_response_404 import ListMigrationIssuesResponse404
+from .list_migration_issues_response_500 import ListMigrationIssuesResponse500
 from .list_migrations_response import ListMigrationsResponse
 from .list_monitors_response_400 import ListMonitorsResponse400
 from .list_monitors_response_500 import ListMonitorsResponse500
@@ -2375,6 +2396,9 @@ __all__ = (
     "GetMetricsPipelineConfigResponse204",
     "GetMetricValuesResponse400",
     "GetMetricValuesResponse500",
+    "GetMigrationIssueContextResponse400",
+    "GetMigrationIssueContextResponse404",
+    "GetMigrationIssueContextResponse500",
     "GetMonitorResponse400",
     "GetMonitorResponse404",
     "GetMonitorResponse500",
@@ -2467,6 +2491,10 @@ __all__ = (
     "InvestigatorRunIsTheStartOfARootsInvestigatorPendingUntilAgentServiceAcceptsOrRefusesItStatus",
     "InviteeDetails",
     "InviteRequest",
+    "IssueContextFindingContainsTheStoredQueryPairForOneIssueOccurrence",
+    "IssueContextResponseExtendsTheMigrationIssueWithStoredMemberQueryPairs",
+    "IssueContextResponseExtendsTheMigrationIssueWithStoredMemberQueryPairsEvidenceType0",
+    "IssueContextResponseExtendsTheMigrationIssueWithStoredMemberQueryPairsFindingType",
     "IssueDisplayControlsHowTheResultingIssueIsRendered",
     "IssueIsAnOpenMigrationIssueWithItsDistinctEligibleAssetCount",
     "IssueIsAnOpenMigrationIssueWithItsDistinctEligibleAssetCountEvidenceType0",
@@ -2537,6 +2565,12 @@ __all__ = (
     "ListIssuesResponseIsAnOrderedPageAndTheExactTotalUnderTheFilters",
     "ListMigrationCloudIntegrationsResponse",
     "ListMigrationDataSourcesResponse",
+    "ListMigrationIssuesAssetType",
+    "ListMigrationIssuesDatasource",
+    "ListMigrationIssuesKind",
+    "ListMigrationIssuesResponse400",
+    "ListMigrationIssuesResponse404",
+    "ListMigrationIssuesResponse500",
     "ListMigrationsResponse",
     "ListMonitorsResponse400",
     "ListMonitorsResponse500",
