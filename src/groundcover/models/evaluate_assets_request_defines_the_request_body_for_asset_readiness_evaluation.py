@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import datetime
+
+from .._datetime_compat import parse_datetime
 from collections.abc import Mapping
 from typing import Any, TypeVar, cast
 
@@ -18,6 +21,9 @@ class EvaluateAssetsRequestDefinesTheRequestBodyForAssetReadinessEvaluation:
         asset_ids (list[str] | Unset): Restrict evaluation to these source_resource_id values. Optional: empty means all
             assets.
         asset_types (list[str] | Unset): Asset types to evaluate. Optional: defaults to ["monitors", "dashboards"].
+        evaluated_before (datetime.datetime | Unset): When set, only evaluate assets with no saved evaluation or an
+            evaluation strictly before this time.
+            Format: date-time
         limit (int | Unset): Caps the number of assets evaluated (after asset_ids filtering): converted assets first,
             then
             skipped ones fill what is left. 0 means unlimited.
@@ -32,6 +38,7 @@ class EvaluateAssetsRequestDefinesTheRequestBodyForAssetReadinessEvaluation:
 
     asset_ids: list[str] | Unset = UNSET
     asset_types: list[str] | Unset = UNSET
+    evaluated_before: datetime.datetime | Unset = UNSET
     limit: int | Unset = UNSET
     monitor_lookback: str | Unset = UNSET
     persist: bool | Unset = UNSET
@@ -46,6 +53,10 @@ class EvaluateAssetsRequestDefinesTheRequestBodyForAssetReadinessEvaluation:
         asset_types: list[str] | Unset = UNSET
         if not isinstance(self.asset_types, Unset):
             asset_types = self.asset_types
+
+        evaluated_before: str | Unset = UNSET
+        if not isinstance(self.evaluated_before, Unset):
+            evaluated_before = self.evaluated_before.isoformat()
 
         limit = self.limit
 
@@ -62,6 +73,8 @@ class EvaluateAssetsRequestDefinesTheRequestBodyForAssetReadinessEvaluation:
             field_dict["asset_ids"] = asset_ids
         if asset_types is not UNSET:
             field_dict["asset_types"] = asset_types
+        if evaluated_before is not UNSET:
+            field_dict["evaluated_before"] = evaluated_before
         if limit is not UNSET:
             field_dict["limit"] = limit
         if monitor_lookback is not UNSET:
@@ -87,6 +100,13 @@ class EvaluateAssetsRequestDefinesTheRequestBodyForAssetReadinessEvaluation:
 
         asset_types = cast(list[str], d.pop("asset_types", UNSET))
 
+        _evaluated_before = d.pop("evaluated_before", UNSET)
+        evaluated_before: datetime.datetime | Unset
+        if isinstance(_evaluated_before, Unset) or _evaluated_before is None:
+            evaluated_before = UNSET
+        else:
+            evaluated_before = parse_datetime(_evaluated_before)
+
         limit = d.pop("limit", UNSET)
 
         monitor_lookback = d.pop("monitor_lookback", UNSET)
@@ -98,6 +118,7 @@ class EvaluateAssetsRequestDefinesTheRequestBodyForAssetReadinessEvaluation:
         evaluate_assets_request_defines_the_request_body_for_asset_readiness_evaluation = cls(
             asset_ids=asset_ids,
             asset_types=asset_types,
+            evaluated_before=evaluated_before,
             limit=limit,
             monitor_lookback=monitor_lookback,
             persist=persist,
