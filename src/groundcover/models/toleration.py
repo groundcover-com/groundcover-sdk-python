@@ -21,6 +21,8 @@ class Toleration:
             key (str | Unset): Key is the taint key that the toleration applies to. Empty means match all taint keys.
                 If the key is empty, operator must be Exists; this combination means to match all values and all keys.
                 +optional
+                +k8s:alpha(since: "1.37")=+k8s:optional
+                +k8s:alpha(since: "1.37")=+k8s:format=k8s-label-key
             operator (str | Unset): +enum
             toleration_seconds (int | Unset): TolerationSeconds represents the period of time the toleration (which must be
                 of effect NoExecute, otherwise this field is ignored) tolerates the taint. By default,
