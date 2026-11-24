@@ -22,6 +22,7 @@ class AdvancedDataScopeDefinesFineGrainedDataScopingRules:
         events (Group | Unset):
         logs (Group | Unset):
         metrics (Group | Unset):
+        rum (Group | Unset):
         traces (Group | Unset):
         workloads (Group | Unset):
     """
@@ -29,6 +30,7 @@ class AdvancedDataScopeDefinesFineGrainedDataScopingRules:
     events: Group | Unset = UNSET
     logs: Group | Unset = UNSET
     metrics: Group | Unset = UNSET
+    rum: Group | Unset = UNSET
     traces: Group | Unset = UNSET
     workloads: Group | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
@@ -45,6 +47,10 @@ class AdvancedDataScopeDefinesFineGrainedDataScopingRules:
         metrics: dict[str, Any] | Unset = UNSET
         if not isinstance(self.metrics, Unset):
             metrics = self.metrics.to_dict()
+
+        rum: dict[str, Any] | Unset = UNSET
+        if not isinstance(self.rum, Unset):
+            rum = self.rum.to_dict()
 
         traces: dict[str, Any] | Unset = UNSET
         if not isinstance(self.traces, Unset):
@@ -63,6 +69,8 @@ class AdvancedDataScopeDefinesFineGrainedDataScopingRules:
             field_dict["logs"] = logs
         if metrics is not UNSET:
             field_dict["metrics"] = metrics
+        if rum is not UNSET:
+            field_dict["rum"] = rum
         if traces is not UNSET:
             field_dict["traces"] = traces
         if workloads is not UNSET:
@@ -96,6 +104,13 @@ class AdvancedDataScopeDefinesFineGrainedDataScopingRules:
         else:
             metrics = Group.from_dict(_metrics)
 
+        _rum = d.pop("rum", UNSET)
+        rum: Group | Unset
+        if isinstance(_rum, Unset) or _rum is None:
+            rum = UNSET
+        else:
+            rum = Group.from_dict(_rum)
+
         _traces = d.pop("traces", UNSET)
         traces: Group | Unset
         if isinstance(_traces, Unset) or _traces is None:
@@ -114,6 +129,7 @@ class AdvancedDataScopeDefinesFineGrainedDataScopingRules:
             events=events,
             logs=logs,
             metrics=metrics,
+            rum=rum,
             traces=traces,
             workloads=workloads,
         )
