@@ -29,8 +29,8 @@ if TYPE_CHECKING:
     from ..models.source_is_how_a_root_started_manual_on_the_public_create_route_or_what_a_backend_caller_opened_it_from import (
         SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom,
     )
-    from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
-        SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime,
+    from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time import (
+        SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime,
     )
 
 
@@ -64,7 +64,7 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         parent_id (UUID | Unset): Parent node; omitted for roots.
         scope (list[InvestigationScopeEntry] | Unset):
         source (SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom | Unset):
-        subject (SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime | Unset):
+        subject (SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime | Unset):
         time_range (InvestigationTimeRange | Unset):
     """
 
@@ -88,7 +88,7 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
     parent_id: UUID | Unset = UNSET
     scope: list[InvestigationScopeEntry] | Unset = UNSET
     source: SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom | Unset = UNSET
-    subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime | Unset = UNSET
+    subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime | Unset = UNSET
     time_range: InvestigationTimeRange | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
@@ -212,8 +212,8 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
         from ..models.source_is_how_a_root_started_manual_on_the_public_create_route_or_what_a_backend_caller_opened_it_from import (
             SourceIsHowARootStartedManualOnThePublicCreateRouteOrWhatABackendCallerOpenedItFrom,
         )
-        from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
-            SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime,
+        from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time import (
+            SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime,
         )
 
         d = dict(src_dict)
@@ -307,11 +307,11 @@ class InvestigationIsOneNodeOfAnInvestigationTreeARootHasNoParentAndIsAlwaysAQue
             )
 
         _subject = d.pop("subject", UNSET)
-        subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime | Unset
+        subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime | Unset
         if isinstance(_subject, Unset) or _subject is None:
             subject = UNSET
         else:
-            subject = SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime.from_dict(_subject)
+            subject = SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime.from_dict(_subject)
 
         _time_range = d.pop("timeRange", UNSET)
         time_range: InvestigationTimeRange | Unset

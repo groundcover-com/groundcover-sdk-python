@@ -6,27 +6,27 @@ from typing import TYPE_CHECKING, Any, TypeVar
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time_type import (
-    SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATimeType,
+from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time_type import (
+    SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATimeType,
 )
 
 if TYPE_CHECKING:
     from ..models.investigation_subject_ref import InvestigationSubjectRef
 
 
-T = TypeVar("T", bound="SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime")
+T = TypeVar("T", bound="SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime")
 
 
 @_attrs_define
-class SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime:
+class SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime:
     """
     Attributes:
         ref (InvestigationSubjectRef):
-        type_ (SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATimeType):
+        type_ (SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATimeType):
     """
 
     ref: InvestigationSubjectRef
-    type_: SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATimeType
+    type_: SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATimeType
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -52,15 +52,15 @@ class SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime:
         d = dict(src_dict)
         ref = InvestigationSubjectRef.from_dict(d.pop("ref"))
 
-        type_ = SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATimeType(d.pop("type"))
+        type_ = SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATimeType(d.pop("type"))
 
-        subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time = cls(
+        subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time = cls(
             ref=ref,
             type_=type_,
         )
 
-        subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time.additional_properties = d
-        return subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time
+        subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time.additional_properties = d
+        return subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time
 
     @property
     def additional_keys(self) -> list[str]:

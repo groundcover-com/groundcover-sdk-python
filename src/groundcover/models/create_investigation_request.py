@@ -12,8 +12,8 @@ if TYPE_CHECKING:
     from ..models.investigation_model_selection import InvestigationModelSelection
     from ..models.investigation_scope_entry import InvestigationScopeEntry
     from ..models.investigation_time_range import InvestigationTimeRange
-    from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
-        SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime,
+    from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time import (
+        SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime,
     )
 
 
@@ -25,7 +25,7 @@ class CreateInvestigationRequest:
     """
     Attributes:
         statement (str):
-        subject (SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime):
+        subject (SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime):
         model_selection (InvestigationModelSelection | Unset): ModelSelection is the model agent-service runs an
             investigation's agents on. agent-service decides which
             models and efforts are allowed, and refuses a run whose selection it doesn't allow.
@@ -36,7 +36,7 @@ class CreateInvestigationRequest:
     """
 
     statement: str
-    subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime
+    subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime
     model_selection: InvestigationModelSelection | Unset = UNSET
     scope: list[InvestigationScopeEntry] | Unset = UNSET
     skip_investigator: bool | Unset = UNSET
@@ -89,14 +89,16 @@ class CreateInvestigationRequest:
         from ..models.investigation_model_selection import InvestigationModelSelection
         from ..models.investigation_scope_entry import InvestigationScopeEntry
         from ..models.investigation_time_range import InvestigationTimeRange
-        from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
-            SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime,
+        from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time import (
+            SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime,
         )
 
         d = dict(src_dict)
         statement = d.pop("statement")
 
-        subject = SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime.from_dict(d.pop("subject"))
+        subject = SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime.from_dict(
+            d.pop("subject")
+        )
 
         _model_selection = d.pop("modelSelection", UNSET)
         model_selection: InvestigationModelSelection | Unset

@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import datetime
+
+from .._datetime_compat import parse_datetime
 from collections.abc import Mapping
 from typing import Any, TypeVar
 from uuid import UUID
@@ -7,21 +10,32 @@ from uuid import UUID
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="InvestigationExistsDetailsIsTheDetailsOfA409INVESTIGATIONEXISTSTheRootToJoin")
+from .._generated_types import UNSET, Unset
+
+T = TypeVar("T", bound="InvestigationExistsDetails")
 
 
 @_attrs_define
-class InvestigationExistsDetailsIsTheDetailsOfA409INVESTIGATIONEXISTSTheRootToJoin:
-    """
-    Attributes:
-        investigation_id (UUID):
+class InvestigationExistsDetails:
+    """InvestigationExistsDetails is the details of a 409 INVESTIGATION_EXISTS, the root to join, or of a 409
+    TRIGGER_IN_COOLDOWN, the trigger's root of the issue from within its cooldown.
+
+        Attributes:
+            investigation_id (UUID):
+            issue_timestamp (datetime.datetime | Unset): The issue timestamp of the root to join, which names its firing
+                cycle; only on INVESTIGATION_EXISTS.
     """
 
     investigation_id: UUID
+    issue_timestamp: datetime.datetime | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
         investigation_id = str(self.investigation_id)
+
+        issue_timestamp: str | Unset = UNSET
+        if not isinstance(self.issue_timestamp, Unset):
+            issue_timestamp = self.issue_timestamp.isoformat()
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -30,6 +44,8 @@ class InvestigationExistsDetailsIsTheDetailsOfA409INVESTIGATIONEXISTSTheRootToJo
                 "investigationId": investigation_id,
             }
         )
+        if issue_timestamp is not UNSET:
+            field_dict["issueTimestamp"] = issue_timestamp
 
         return field_dict
 
@@ -45,12 +61,20 @@ class InvestigationExistsDetailsIsTheDetailsOfA409INVESTIGATIONEXISTSTheRootToJo
         d = dict(src_dict)
         investigation_id = UUID(d.pop("investigationId"))
 
-        investigation_exists_details_is_the_details_of_a409investigationexists_the_root_to_join = cls(
+        _issue_timestamp = d.pop("issueTimestamp", UNSET)
+        issue_timestamp: datetime.datetime | Unset
+        if isinstance(_issue_timestamp, Unset) or _issue_timestamp is None:
+            issue_timestamp = UNSET
+        else:
+            issue_timestamp = parse_datetime(_issue_timestamp)
+
+        investigation_exists_details = cls(
             investigation_id=investigation_id,
+            issue_timestamp=issue_timestamp,
         )
 
-        investigation_exists_details_is_the_details_of_a409investigationexists_the_root_to_join.additional_properties = d
-        return investigation_exists_details_is_the_details_of_a409investigationexists_the_root_to_join
+        investigation_exists_details.additional_properties = d
+        return investigation_exists_details
 
     @property
     def additional_keys(self) -> list[str]:

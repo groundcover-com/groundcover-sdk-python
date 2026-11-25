@@ -13,8 +13,8 @@ if TYPE_CHECKING:
     from ..models.investigation_model_selection import InvestigationModelSelection
     from ..models.investigation_scope_entry import InvestigationScopeEntry
     from ..models.investigation_time_range import InvestigationTimeRange
-    from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
-        SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime,
+    from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time import (
+        SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime,
     )
 
 
@@ -29,7 +29,11 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
             automation trigger, or the Slack thread whose
             Investigate button was clicked.
         statement (str):
-        subject (SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime):
+        subject (SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime):
+        cooldown_seconds (int | Unset): The trigger investigates an issue at most once per this many seconds: within it,
+            an open of a new firing
+            cycle is refused with 409 TRIGGER_IN_COOLDOWN, naming the trigger's latest root of the issue, open or closed.
+            Omitted: once per firing cycle. Only for an automation source.
         instructions (str | Unset): Sent to the root's investigator after the statement.
         max_concurrent (int | Unset): At most this many of the trigger's roots may be open: at the cap, a root for a new
             subject is refused
@@ -45,7 +49,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
 
     source: InvestigationBackendSource
     statement: str
-    subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime
+    subject: SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime
+    cooldown_seconds: int | Unset = UNSET
     instructions: str | Unset = UNSET
     max_concurrent: int | Unset = UNSET
     model_selection: InvestigationModelSelection | Unset = UNSET
@@ -60,6 +65,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         statement = self.statement
 
         subject = self.subject.to_dict()
+
+        cooldown_seconds = self.cooldown_seconds
 
         instructions = self.instructions
 
@@ -91,6 +98,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
                 "subject": subject,
             }
         )
+        if cooldown_seconds is not UNSET:
+            field_dict["cooldownSeconds"] = cooldown_seconds
         if instructions is not UNSET:
             field_dict["instructions"] = instructions
         if max_concurrent is not UNSET:
@@ -112,8 +121,8 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
         from ..models.investigation_model_selection import InvestigationModelSelection
         from ..models.investigation_scope_entry import InvestigationScopeEntry
         from ..models.investigation_time_range import InvestigationTimeRange
-        from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
-            SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime,
+        from ..models.subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time import (
+            SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime,
         )
 
         d = dict(src_dict)
@@ -121,7 +130,11 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
 
         statement = d.pop("statement")
 
-        subject = SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime.from_dict(d.pop("subject"))
+        subject = SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime.from_dict(
+            d.pop("subject")
+        )
+
+        cooldown_seconds = d.pop("cooldownSeconds", UNSET)
 
         instructions = d.pop("instructions", UNSET)
 
@@ -157,6 +170,7 @@ class CreateBackendInvestigationRequestOpensARootForABackendCallerActingForAUser
                 source=source,
                 statement=statement,
                 subject=subject,
+                cooldown_seconds=cooldown_seconds,
                 instructions=instructions,
                 max_concurrent=max_concurrent,
                 model_selection=model_selection,

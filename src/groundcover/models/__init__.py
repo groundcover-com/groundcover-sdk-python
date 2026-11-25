@@ -866,14 +866,12 @@ from .investigation_backend_source import InvestigationBackendSource
 from .investigation_backend_source_type import InvestigationBackendSourceType
 from .investigation_evidence import InvestigationEvidence
 from .investigation_evidence_relation import InvestigationEvidenceRelation
-from .investigation_exists_details_is_the_details_of_a409investigationexists_the_root_to_join import (
-    InvestigationExistsDetailsIsTheDetailsOfA409INVESTIGATIONEXISTSTheRootToJoin,
+from .investigation_exists_details import InvestigationExistsDetails
+from .investigation_exists_error_is_the_409_body_of_create_investigation_the_issues_firing_cycle_has_an_open_root_to_join import (
+    InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssuesFiringCycleHasAnOpenRootToJoin,
 )
-from .investigation_exists_error_is_the_409_body_of_create_investigation_the_issue_already_has_an_open_root_to_join import (
-    InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssueAlreadyHasAnOpenRootToJoin,
-)
-from .investigation_exists_error_is_the_409_body_of_create_investigation_the_issue_already_has_an_open_root_to_join_code import (
-    InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssueAlreadyHasAnOpenRootToJoinCode,
+from .investigation_exists_error_is_the_409_body_of_create_investigation_the_issues_firing_cycle_has_an_open_root_to_join_code import (
+    InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssuesFiringCycleHasAnOpenRootToJoinCode,
 )
 from .investigation_finding import InvestigationFinding
 from .investigation_finding_query_language import InvestigationFindingQueryLanguage
@@ -1509,11 +1507,11 @@ from .stream_response_base_provides_the_common_done_and_error_fields_for_all_str
 from .subject_holds_both_datadog_and_gc_names_for_explainability import (
     SubjectHoldsBothDatadogAndGCNamesForExplainability,
 )
-from .subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time import (
-    SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime,
+from .subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time import (
+    SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime,
 )
-from .subject_is_what_a_root_investigates_at_most_one_root_per_subject_is_open_at_a_time_type import (
-    SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATimeType,
+from .subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time_type import (
+    SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATimeType,
 )
 from .suggestion_proposes_an_alternative_for_a_missing_resource import (
     SuggestionProposesAnAlternativeForAMissingResource,
@@ -2473,9 +2471,9 @@ __all__ = (
     "InvestigationBackendSourceType",
     "InvestigationEvidence",
     "InvestigationEvidenceRelation",
-    "InvestigationExistsDetailsIsTheDetailsOfA409INVESTIGATIONEXISTSTheRootToJoin",
-    "InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssueAlreadyHasAnOpenRootToJoin",
-    "InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssueAlreadyHasAnOpenRootToJoinCode",
+    "InvestigationExistsDetails",
+    "InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssuesFiringCycleHasAnOpenRootToJoin",
+    "InvestigationExistsErrorIsThe409BodyOfCreateInvestigationTheIssuesFiringCycleHasAnOpenRootToJoinCode",
     "InvestigationFinding",
     "InvestigationFindingQueryLanguage",
     "InvestigationFindingScopeDetails",
@@ -2892,8 +2890,8 @@ __all__ = (
     "StorageManagementPolicyResponseIsTheAPIFacingPolicyRepresentation",
     "StreamResponseBaseProvidesTheCommonDoneAndErrorFieldsForAllStreamingResponses",
     "SubjectHoldsBothDatadogAndGCNamesForExplainability",
-    "SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATime",
-    "SubjectIsWhatARootInvestigatesAtMostOneRootPerSubjectIsOpenAtATimeType",
+    "SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime",
+    "SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATimeType",
     "SuggestionProposesAnAlternativeForAMissingResource",
     "SuggestionReasonIsOneScoringSignalThatContributedToASuggestion",
     "SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully",
