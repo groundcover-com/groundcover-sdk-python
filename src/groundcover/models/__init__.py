@@ -625,6 +625,18 @@ from .error_response_is_the_canonical_error_body_returned_by_http_handlers impor
 from .error_response_is_the_canonical_error_body_returned_by_http_handlers_code import (
     ErrorResponseIsTheCanonicalErrorBodyReturnedByHTTPHandlersCode,
 )
+from .eval_catalog_field_is_one_field_of_one_eval_in_the_backends_eval_catalog import (
+    EvalCatalogFieldIsOneFieldOfOneEvalInTheBackendsEvalCatalog,
+)
+from .eval_catalog_field_is_one_field_of_one_eval_in_the_backends_eval_catalog_origin import (
+    EvalCatalogFieldIsOneFieldOfOneEvalInTheBackendsEvalCatalogOrigin,
+)
+from .eval_catalog_field_is_one_field_of_one_eval_in_the_backends_eval_catalog_type import (
+    EvalCatalogFieldIsOneFieldOfOneEvalInTheBackendsEvalCatalogType,
+)
+from .eval_catalog_lists_the_eval_fields_of_a_backend_sorted_by_eval_id import (
+    EvalCatalogListsTheEvalFieldsOfABackendSortedByEvalID,
+)
 from .evaluate_assets_request_defines_the_request_body_for_asset_readiness_evaluation import (
     EvaluateAssetsRequestDefinesTheRequestBodyForAssetReadinessEvaluation,
 )
@@ -840,6 +852,15 @@ from .get_tenant_ai_settings_response_500 import GetTenantAISettingsResponse500
 from .get_traces_pipeline_config_response_204 import GetTracesPipelineConfigResponse204
 from .get_values_response_400 import GetValuesResponse400
 from .get_values_response_500 import GetValuesResponse500
+from .goals_error_body_is_the_gin_internal_error_response_the_goals_routes_write_with_type_narrowed_to_goal_error_type import (
+    GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorType,
+)
+from .goals_error_body_is_the_gin_internal_error_response_the_goals_routes_write_with_type_narrowed_to_goal_error_type_code import (
+    GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorTypeCode,
+)
+from .goals_error_body_is_the_gin_internal_error_response_the_goals_routes_write_with_type_narrowed_to_goal_error_type_type import (
+    GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorTypeType,
+)
 from .group import Group
 from .http_request_defines_model_for_http_request import HttpRequestDefinesModelForHttpRequest
 from .http_request_defines_model_for_http_request_auth import HttpRequestDefinesModelForHttpRequestAuth
@@ -2317,6 +2338,10 @@ __all__ = (
     "EntitiesSearchRequest",
     "ErrorResponseIsTheCanonicalErrorBodyReturnedByHTTPHandlers",
     "ErrorResponseIsTheCanonicalErrorBodyReturnedByHTTPHandlersCode",
+    "EvalCatalogFieldIsOneFieldOfOneEvalInTheBackendsEvalCatalog",
+    "EvalCatalogFieldIsOneFieldOfOneEvalInTheBackendsEvalCatalogOrigin",
+    "EvalCatalogFieldIsOneFieldOfOneEvalInTheBackendsEvalCatalogType",
+    "EvalCatalogListsTheEvalFieldsOfABackendSortedByEvalID",
     "EvaluateAssetsRequestDefinesTheRequestBodyForAssetReadinessEvaluation",
     "EvaluateAssetsResponseIsTheFullResponseOfTheEvaluateAssetsEndpoint",
     "EvaluateAssetsSummaryIsTheResponsesTopLevelRollup",
@@ -2468,6 +2493,9 @@ __all__ = (
     "GetTracesPipelineConfigResponse204",
     "GetValuesResponse400",
     "GetValuesResponse500",
+    "GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorType",
+    "GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorTypeCode",
+    "GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorTypeType",
     "Group",
     "HttpRequestDefinesModelForHttpRequest",
     "HttpRequestDefinesModelForHttpRequestAuth",
