@@ -19,12 +19,16 @@ class TenantAISettingsResponse:
         backend_name (str | Unset):
         customer_ai_features_opt_out (bool | Unset):
         effective_ai_features_enabled (bool | Unset):
+        semantic_intelligence_enabled (bool | Unset): The stored Semantic Intelligence switch. Whether Goals are served
+            also needs the backend's
+            semantic-intelligence feature; backend/list reports effectiveSemanticIntelligenceEnabled.
     """
 
     allow_ai_features: bool | Unset = UNSET
     backend_name: str | Unset = UNSET
     customer_ai_features_opt_out: bool | Unset = UNSET
     effective_ai_features_enabled: bool | Unset = UNSET
+    semantic_intelligence_enabled: bool | Unset = UNSET
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
@@ -35,6 +39,8 @@ class TenantAISettingsResponse:
         customer_ai_features_opt_out = self.customer_ai_features_opt_out
 
         effective_ai_features_enabled = self.effective_ai_features_enabled
+
+        semantic_intelligence_enabled = self.semantic_intelligence_enabled
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
@@ -47,6 +53,8 @@ class TenantAISettingsResponse:
             field_dict["customerAIFeaturesOptOut"] = customer_ai_features_opt_out
         if effective_ai_features_enabled is not UNSET:
             field_dict["effectiveAIFeaturesEnabled"] = effective_ai_features_enabled
+        if semantic_intelligence_enabled is not UNSET:
+            field_dict["semanticIntelligenceEnabled"] = semantic_intelligence_enabled
 
         return field_dict
 
@@ -68,11 +76,14 @@ class TenantAISettingsResponse:
 
         effective_ai_features_enabled = d.pop("effectiveAIFeaturesEnabled", UNSET)
 
+        semantic_intelligence_enabled = d.pop("semanticIntelligenceEnabled", UNSET)
+
         tenant_ai_settings_response = cls(
             allow_ai_features=allow_ai_features,
             backend_name=backend_name,
             customer_ai_features_opt_out=customer_ai_features_opt_out,
             effective_ai_features_enabled=effective_ai_features_enabled,
+            semantic_intelligence_enabled=semantic_intelligence_enabled,
         )
 
         tenant_ai_settings_response.additional_properties = d

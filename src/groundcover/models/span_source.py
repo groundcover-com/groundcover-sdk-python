@@ -1,32 +1,45 @@
 from __future__ import annotations
 
+import datetime
+
+from .._datetime_compat import parse_datetime
 from collections.abc import Mapping
 from typing import Any, TypeVar
 
 from attrs import define as _attrs_define
 from attrs import field as _attrs_field
 
-T = TypeVar("T", bound="UpdateTenantAISettingsRequest")
+T = TypeVar("T", bound="SpanSource")
 
 
 @_attrs_define
-class UpdateTenantAISettingsRequest:
+class SpanSource:
     """
     Attributes:
-        customer_ai_features_opt_out (bool):
+        span_id (str):
+        timestamp (datetime.datetime): Timestamp is the span's start; it keeps the lookup to the span's own partition.
+        trace_id (str):
     """
 
-    customer_ai_features_opt_out: bool
+    span_id: str
+    timestamp: datetime.datetime
+    trace_id: str
     additional_properties: dict[str, Any] = _attrs_field(init=False, factory=dict)
 
     def to_dict(self) -> dict[str, Any]:
-        customer_ai_features_opt_out = self.customer_ai_features_opt_out
+        span_id = self.span_id
+
+        timestamp = self.timestamp.isoformat()
+
+        trace_id = self.trace_id
 
         field_dict: dict[str, Any] = {}
         field_dict.update(self.additional_properties)
         field_dict.update(
             {
-                "customerAIFeaturesOptOut": customer_ai_features_opt_out,
+                "span_id": span_id,
+                "timestamp": timestamp,
+                "trace_id": trace_id,
             }
         )
 
@@ -42,14 +55,20 @@ class UpdateTenantAISettingsRequest:
 
                 src_dict = json.loads(src_dict)
         d = dict(src_dict)
-        customer_ai_features_opt_out = d.pop("customerAIFeaturesOptOut")
+        span_id = d.pop("span_id")
 
-        update_tenant_ai_settings_request = cls(
-            customer_ai_features_opt_out=customer_ai_features_opt_out,
+        timestamp = parse_datetime(d.pop("timestamp"))
+
+        trace_id = d.pop("trace_id")
+
+        span_source = cls(
+            span_id=span_id,
+            timestamp=timestamp,
+            trace_id=trace_id,
         )
 
-        update_tenant_ai_settings_request.additional_properties = d
-        return update_tenant_ai_settings_request
+        span_source.additional_properties = d
+        return span_source
 
     @property
     def additional_keys(self) -> list[str]:

@@ -8,7 +8,9 @@ import httpx
 from ... import _generated_errors as errors
 from ..._generated_client import AuthenticatedClient, Client
 from ...models.tenant_ai_settings_response import TenantAISettingsResponse
-from ...models.update_tenant_ai_settings_request import UpdateTenantAISettingsRequest
+from ...models.update_tenant_ai_settings_request_changes_the_backends_ai_settings_at_least_one_field_must_be_set_an_omitted_field_keeps_the_stored_value import (
+    UpdateTenantAISettingsRequestChangesTheBackendsAISettingsAtLeastOneFieldMustBeSetAnOmittedFieldKeepsTheStoredValue,
+)
 from ...models.update_tenant_ai_settings_response_400 import UpdateTenantAISettingsResponse400
 from ...models.update_tenant_ai_settings_response_500 import UpdateTenantAISettingsResponse500
 from ..._generated_types import Response
@@ -16,7 +18,7 @@ from ..._generated_types import Response
 
 def _get_kwargs(
     *,
-    body: UpdateTenantAISettingsRequest,
+    body: UpdateTenantAISettingsRequestChangesTheBackendsAISettingsAtLeastOneFieldMustBeSetAnOmittedFieldKeepsTheStoredValue,
     x_backend_id: str,
 ) -> dict[str, Any]:
     headers: dict[str, Any] = {}
@@ -73,14 +75,15 @@ def _build_response(
 def sync_detailed(
     *,
     client: AuthenticatedClient | Client,
-    body: UpdateTenantAISettingsRequest,
+    body: UpdateTenantAISettingsRequestChangesTheBackendsAISettingsAtLeastOneFieldMustBeSetAnOmittedFieldKeepsTheStoredValue,
     x_backend_id: str,
 ) -> Response[TenantAISettingsResponse | UpdateTenantAISettingsResponse400 | UpdateTenantAISettingsResponse500]:
     """Update tenant AI settings
 
     Args:
         x_backend_id (str):
-        body (UpdateTenantAISettingsRequest):
+        body (UpdateTenantAISettingsRequestChangesTheBackendsAISettingsAtLeastOneFieldMustBeSetAnO
+            mittedFieldKeepsTheStoredValue):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -105,14 +108,15 @@ def sync_detailed(
 def sync(
     *,
     client: AuthenticatedClient | Client,
-    body: UpdateTenantAISettingsRequest,
+    body: UpdateTenantAISettingsRequestChangesTheBackendsAISettingsAtLeastOneFieldMustBeSetAnOmittedFieldKeepsTheStoredValue,
     x_backend_id: str,
 ) -> TenantAISettingsResponse | UpdateTenantAISettingsResponse400 | UpdateTenantAISettingsResponse500 | None:
     """Update tenant AI settings
 
     Args:
         x_backend_id (str):
-        body (UpdateTenantAISettingsRequest):
+        body (UpdateTenantAISettingsRequestChangesTheBackendsAISettingsAtLeastOneFieldMustBeSetAnO
+            mittedFieldKeepsTheStoredValue):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -132,14 +136,15 @@ def sync(
 async def asyncio_detailed(
     *,
     client: AuthenticatedClient | Client,
-    body: UpdateTenantAISettingsRequest,
+    body: UpdateTenantAISettingsRequestChangesTheBackendsAISettingsAtLeastOneFieldMustBeSetAnOmittedFieldKeepsTheStoredValue,
     x_backend_id: str,
 ) -> Response[TenantAISettingsResponse | UpdateTenantAISettingsResponse400 | UpdateTenantAISettingsResponse500]:
     """Update tenant AI settings
 
     Args:
         x_backend_id (str):
-        body (UpdateTenantAISettingsRequest):
+        body (UpdateTenantAISettingsRequestChangesTheBackendsAISettingsAtLeastOneFieldMustBeSetAnO
+            mittedFieldKeepsTheStoredValue):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.
@@ -162,14 +167,15 @@ async def asyncio_detailed(
 async def asyncio(
     *,
     client: AuthenticatedClient | Client,
-    body: UpdateTenantAISettingsRequest,
+    body: UpdateTenantAISettingsRequestChangesTheBackendsAISettingsAtLeastOneFieldMustBeSetAnOmittedFieldKeepsTheStoredValue,
     x_backend_id: str,
 ) -> TenantAISettingsResponse | UpdateTenantAISettingsResponse400 | UpdateTenantAISettingsResponse500 | None:
     """Update tenant AI settings
 
     Args:
         x_backend_id (str):
-        body (UpdateTenantAISettingsRequest):
+        body (UpdateTenantAISettingsRequestChangesTheBackendsAISettingsAtLeastOneFieldMustBeSetAnO
+            mittedFieldKeepsTheStoredValue):
 
     Raises:
         errors.UnexpectedStatus: If the server returns an undocumented status code and Client.raise_on_unexpected_status is True.

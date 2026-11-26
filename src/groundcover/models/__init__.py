@@ -670,6 +670,23 @@ from .execution_policy_defines_model_for_execution_policy import ExecutionPolicy
 from .execution_policy_defines_model_for_execution_policy_retries import (
     ExecutionPolicyDefinesModelForExecutionPolicyRetries,
 )
+from .explain_db_error_is_the_error_the_database_returned_instead_of_a_plan import (
+    ExplainDBErrorIsTheErrorTheDatabaseReturnedInsteadOfAPlan,
+)
+from .explain_request_names_a_database_server_and_the_query_to_explain_on_it import (
+    ExplainRequestNamesADatabaseServerAndTheQueryToExplainOnIt,
+)
+from .explain_response_is_an_explains_state_result_is_set_once_the_status_is_succeeded import (
+    ExplainResponseIsAnExplainsStateResultIsSetOnceTheStatusIsSucceeded,
+)
+from .explain_response_is_an_explains_state_result_is_set_once_the_status_is_succeeded_status import (
+    ExplainResponseIsAnExplainsStateResultIsSetOnceTheStatusIsSucceededStatus,
+)
+from .explain_result import ExplainResult
+from .explain_result_plan_kind import ExplainResultPlanKind
+from .explain_source_is_where_the_query_comes_from_exactly_one_of_a_span_or_a_query import (
+    ExplainSourceIsWhereTheQueryComesFromExactlyOneOfASpanOrAQuery,
+)
 from .export_auth_body_represents_the_auth_mode_sent_to_export_service import (
     ExportAuthBodyRepresentsTheAuthModeSentToExportService,
 )
@@ -1323,6 +1340,9 @@ from .query_is_the_whole_expression_in_the_language_monitor_spec_type_implies im
 )
 from .query_request import QueryRequest
 from .query_request_query_type import QueryRequestQueryType
+from .query_source_is_a_query_the_caller_writes_it_need_not_have_run import (
+    QuerySourceIsAQueryTheCallerWritesItNeedNotHaveRun,
+)
 from .raw_config import RawConfig
 from .rbac_tenant_settings import RbacTenantSettings
 from .readiness_count import ReadinessCount
@@ -1490,6 +1510,7 @@ from .span_record_query_parameters import SpanRecordQueryParameters
 from .span_record_request_headers import SpanRecordRequestHeaders
 from .span_record_response_headers import SpanRecordResponseHeaders
 from .span_record_tags import SpanRecordTags
+from .span_source import SpanSource
 from .sql_pipeline_defines_a_pipeline_for_search_queries import SqlPipelineDefinesAPipelineForSearchQueries
 from .ssl_request_defines_model_for_ssl_request import SslRequestDefinesModelForSslRequest
 from .stack_counts_counts_aggregated_stacks_not_samples_or_rendered_tree_nodes import (
@@ -1754,7 +1775,9 @@ from .update_service_account_response_500 import UpdateServiceAccountResponse500
 from .update_silence_request import UpdateSilenceRequest
 from .update_silence_response_400 import UpdateSilenceResponse400
 from .update_silence_response_500 import UpdateSilenceResponse500
-from .update_tenant_ai_settings_request import UpdateTenantAISettingsRequest
+from .update_tenant_ai_settings_request_changes_the_backends_ai_settings_at_least_one_field_must_be_set_an_omitted_field_keeps_the_stored_value import (
+    UpdateTenantAISettingsRequestChangesTheBackendsAISettingsAtLeastOneFieldMustBeSetAnOmittedFieldKeepsTheStoredValue,
+)
 from .update_tenant_ai_settings_response_400 import UpdateTenantAISettingsResponse400
 from .update_tenant_ai_settings_response_500 import UpdateTenantAISettingsResponse500
 from .update_tenant_connector_settings_request import UpdateTenantConnectorSettingsRequest
@@ -2319,6 +2342,13 @@ __all__ = (
     "ExecutedQueryIsTheEvidenceForAUnitsWetOutcomeTheQueryThatRan",
     "ExecutionPolicyDefinesModelForExecutionPolicy",
     "ExecutionPolicyDefinesModelForExecutionPolicyRetries",
+    "ExplainDBErrorIsTheErrorTheDatabaseReturnedInsteadOfAPlan",
+    "ExplainRequestNamesADatabaseServerAndTheQueryToExplainOnIt",
+    "ExplainResponseIsAnExplainsStateResultIsSetOnceTheStatusIsSucceeded",
+    "ExplainResponseIsAnExplainsStateResultIsSetOnceTheStatusIsSucceededStatus",
+    "ExplainResult",
+    "ExplainResultPlanKind",
+    "ExplainSourceIsWhereTheQueryComesFromExactlyOneOfASpanOrAQuery",
     "ExportAuthBodyRepresentsTheAuthModeSentToExportService",
     "ExportAuthBodyRepresentsTheAuthModeSentToExportServiceType",
     "ExportBody",
@@ -2766,6 +2796,7 @@ __all__ = (
     "QueryIsTheWholeExpressionInTheLanguageMonitorSpecTypeImplies",
     "QueryRequest",
     "QueryRequestQueryType",
+    "QuerySourceIsAQueryTheCallerWritesItNeedNotHaveRun",
     "RawConfig",
     "RbacTenantSettings",
     "ReadinessCount",
@@ -2881,6 +2912,7 @@ __all__ = (
     "SpanRecordRequestHeaders",
     "SpanRecordResponseHeaders",
     "SpanRecordTags",
+    "SpanSource",
     "SqlPipelineDefinesAPipelineForSearchQueries",
     "SslRequestDefinesModelForSslRequest",
     "StackCountsCountsAggregatedStacksNotSamplesOrRenderedTreeNodes",
@@ -3055,7 +3087,7 @@ __all__ = (
     "UpdateSilenceRequest",
     "UpdateSilenceResponse400",
     "UpdateSilenceResponse500",
-    "UpdateTenantAISettingsRequest",
+    "UpdateTenantAISettingsRequestChangesTheBackendsAISettingsAtLeastOneFieldMustBeSetAnOmittedFieldKeepsTheStoredValue",
     "UpdateTenantAISettingsResponse400",
     "UpdateTenantAISettingsResponse500",
     "UpdateTenantConnectorSettingsRequest",
