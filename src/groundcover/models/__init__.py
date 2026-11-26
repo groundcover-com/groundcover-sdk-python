@@ -852,6 +852,17 @@ from .get_tenant_ai_settings_response_500 import GetTenantAISettingsResponse500
 from .get_traces_pipeline_config_response_204 import GetTracesPipelineConfigResponse204
 from .get_values_response_400 import GetValuesResponse400
 from .get_values_response_500 import GetValuesResponse500
+from .goal_agent_is_one_participant_attributed_to_the_goal import GoalAgentIsOneParticipantAttributedToTheGoal
+from .goal_drilldown import GoalDrilldown
+from .goal_eval_result import GoalEvalResult
+from .goal_eval_result_state import GoalEvalResultState
+from .goal_eval_value import GoalEvalValue
+from .goal_list_page_is_one_page_and_the_cursor_for_the_page_after_it import (
+    GoalListPageIsOnePageAndTheCursorForThePageAfterIt,
+)
+from .goal_row_is_one_published_goal_on_the_list import GoalRowIsOnePublishedGoalOnTheList
+from .goal_row_is_one_published_goal_on_the_list_evals import GoalRowIsOnePublishedGoalOnTheListEvals
+from .goal_row_is_one_published_goal_on_the_list_goal_state import GoalRowIsOnePublishedGoalOnTheListGoalState
 from .goals_error_body_is_the_gin_internal_error_response_the_goals_routes_write_with_type_narrowed_to_goal_error_type import (
     GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorType,
 )
@@ -861,6 +872,8 @@ from .goals_error_body_is_the_gin_internal_error_response_the_goals_routes_write
 from .goals_error_body_is_the_gin_internal_error_response_the_goals_routes_write_with_type_narrowed_to_goal_error_type_type import (
     GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorTypeType,
 )
+from .goals_search_request_is_one_page_of_the_goals_tab import GoalsSearchRequestIsOnePageOfTheGoalsTab
+from .goals_search_request_is_one_page_of_the_goals_tab_sort import GoalsSearchRequestIsOnePageOfTheGoalsTabSort
 from .group import Group
 from .http_request_defines_model_for_http_request import HttpRequestDefinesModelForHttpRequest
 from .http_request_defines_model_for_http_request_auth import HttpRequestDefinesModelForHttpRequestAuth
@@ -1554,6 +1567,9 @@ from .subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycl
 )
 from .subject_is_what_a_root_investigates_at_most_one_root_per_issue_firing_cycle_is_open_at_a_time_type import (
     SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATimeType,
+)
+from .subject_step_is_one_node_on_the_current_root_to_assigned_path import (
+    SubjectStepIsOneNodeOnTheCurrentRootToAssignedPath,
 )
 from .suggestion_proposes_an_alternative_for_a_missing_resource import (
     SuggestionProposesAnAlternativeForAMissingResource,
@@ -2493,9 +2509,20 @@ __all__ = (
     "GetTracesPipelineConfigResponse204",
     "GetValuesResponse400",
     "GetValuesResponse500",
+    "GoalAgentIsOneParticipantAttributedToTheGoal",
+    "GoalDrilldown",
+    "GoalEvalResult",
+    "GoalEvalResultState",
+    "GoalEvalValue",
+    "GoalListPageIsOnePageAndTheCursorForThePageAfterIt",
+    "GoalRowIsOnePublishedGoalOnTheList",
+    "GoalRowIsOnePublishedGoalOnTheListEvals",
+    "GoalRowIsOnePublishedGoalOnTheListGoalState",
     "GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorType",
     "GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorTypeCode",
     "GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorTypeType",
+    "GoalsSearchRequestIsOnePageOfTheGoalsTab",
+    "GoalsSearchRequestIsOnePageOfTheGoalsTabSort",
     "Group",
     "HttpRequestDefinesModelForHttpRequest",
     "HttpRequestDefinesModelForHttpRequestAuth",
@@ -2952,6 +2979,7 @@ __all__ = (
     "SubjectHoldsBothDatadogAndGCNamesForExplainability",
     "SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime",
     "SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATimeType",
+    "SubjectStepIsOneNodeOnTheCurrentRootToAssignedPath",
     "SuggestionProposesAnAlternativeForAMissingResource",
     "SuggestionReasonIsOneScoringSignalThatContributedToASuggestion",
     "SupportedConvertedBucketCoversUnitsThatConvertedSuccessfully",
