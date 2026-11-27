@@ -185,6 +185,7 @@ from .batch_update_dashboard_tags_request import BatchUpdateDashboardTagsRequest
 from .batch_update_monitor_tags_v2_error import BatchUpdateMonitorTagsV2Error
 from .batch_update_monitor_tags_v2_request import BatchUpdateMonitorTagsV2Request
 from .batch_update_monitor_tags_v2_response import BatchUpdateMonitorTagsV2Response
+from .blocker_count import BlockerCount
 from .catalog import Catalog
 from .catalog_install_request_is_the_optional_body_for_a_catalog_install import (
     CatalogInstallRequestIsTheOptionalBodyForACatalogInstall,
@@ -863,6 +864,11 @@ from .goal_list_page_is_one_page_and_the_cursor_for_the_page_after_it import (
 from .goal_row_is_one_published_goal_on_the_list import GoalRowIsOnePublishedGoalOnTheList
 from .goal_row_is_one_published_goal_on_the_list_evals import GoalRowIsOnePublishedGoalOnTheListEvals
 from .goal_row_is_one_published_goal_on_the_list_goal_state import GoalRowIsOnePublishedGoalOnTheListGoalState
+from .goal_suggestion import GoalSuggestion
+from .goal_suggestions_has_the_shape_of_the_search_values_response import (
+    GoalSuggestionsHasTheShapeOfTheSearchValuesResponse,
+)
+from .goals_autocomplete_request import GoalsAutocompleteRequest
 from .goals_error_body_is_the_gin_internal_error_response_the_goals_routes_write_with_type_narrowed_to_goal_error_type import (
     GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorType,
 )
@@ -889,6 +895,18 @@ from .incident_io_data_severity_mapping import IncidentIODataSeverityMapping
 from .ingestion_key_result import IngestionKeyResult
 from .ingestion_measurements_search_request import IngestionMeasurementsSearchRequest
 from .ingestion_measurements_search_time_series_request import IngestionMeasurementsSearchTimeSeriesRequest
+from .insights_charts import InsightsCharts
+from .insights_charts_request_is_the_remaining_insights_panels_for_one_window import (
+    InsightsChartsRequestIsTheRemainingInsightsPanelsForOneWindow,
+)
+from .insights_ratio_is_akpi_numerator_and_its_evaluable_count_always_present import (
+    InsightsRatioIsAKPINumeratorAndItsEvaluableCountAlwaysPresent,
+)
+from .insights_summary import InsightsSummary
+from .insights_summary_request import InsightsSummaryRequest
+from .insights_totals_are_the_published_goals_the_filters_selected import (
+    InsightsTotalsAreThePublishedGoalsTheFiltersSelected,
+)
 from .install_all_assets_response import InstallAllAssetsResponse
 from .install_assets_request import InstallAssetsRequest
 from .install_assets_response import InstallAssetsResponse
@@ -1466,6 +1484,7 @@ from .seats_usage_item import SeatsUsageItem
 from .secret_hash_response import SecretHashResponse
 from .secret_response import SecretResponse
 from .selector import Selector
+from .sentiment_point import SentimentPoint
 from .service_account_create_payload import ServiceAccountCreatePayload
 from .service_account_policy_ref import ServiceAccountPolicyRef
 from .service_accounts_with_policy import ServiceAccountsWithPolicy
@@ -1559,6 +1578,7 @@ from .storage_management_policy_response_is_the_api_facing_policy_representation
 from .stream_response_base_provides_the_common_done_and_error_fields_for_all_streaming_responses import (
     StreamResponseBaseProvidesTheCommonDoneAndErrorFieldsForAllStreamingResponses,
 )
+from .subject_bucket import SubjectBucket
 from .subject_holds_both_datadog_and_gc_names_for_explainability import (
     SubjectHoldsBothDatadogAndGCNamesForExplainability,
 )
@@ -2078,6 +2098,7 @@ __all__ = (
     "BatchUpdateMonitorTagsV2Error",
     "BatchUpdateMonitorTagsV2Request",
     "BatchUpdateMonitorTagsV2Response",
+    "BlockerCount",
     "Catalog",
     "CatalogInstallRequestIsTheOptionalBodyForACatalogInstall",
     "CatalogModelHoldsMetadataIfTheMonitorOriginatedFromACatalog",
@@ -2518,11 +2539,14 @@ __all__ = (
     "GoalRowIsOnePublishedGoalOnTheList",
     "GoalRowIsOnePublishedGoalOnTheListEvals",
     "GoalRowIsOnePublishedGoalOnTheListGoalState",
+    "GoalsAutocompleteRequest",
     "GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorType",
     "GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorTypeCode",
     "GoalsErrorBodyIsTheGinInternalErrorResponseTheGoalsRoutesWriteWithTypeNarrowedToGoalErrorTypeType",
     "GoalsSearchRequestIsOnePageOfTheGoalsTab",
     "GoalsSearchRequestIsOnePageOfTheGoalsTabSort",
+    "GoalSuggestion",
+    "GoalSuggestionsHasTheShapeOfTheSearchValuesResponse",
     "Group",
     "HttpRequestDefinesModelForHttpRequest",
     "HttpRequestDefinesModelForHttpRequestAuth",
@@ -2538,6 +2562,12 @@ __all__ = (
     "IngestionKeyResult",
     "IngestionMeasurementsSearchRequest",
     "IngestionMeasurementsSearchTimeSeriesRequest",
+    "InsightsCharts",
+    "InsightsChartsRequestIsTheRemainingInsightsPanelsForOneWindow",
+    "InsightsRatioIsAKPINumeratorAndItsEvaluableCountAlwaysPresent",
+    "InsightsSummary",
+    "InsightsSummaryRequest",
+    "InsightsTotalsAreThePublishedGoalsTheFiltersSelected",
     "InstallAllAssetsResponse",
     "InstallAssetsRequest",
     "InstallAssetsResponse",
@@ -2917,6 +2947,7 @@ __all__ = (
     "SecretHashResponse",
     "SecretResponse",
     "Selector",
+    "SentimentPoint",
     "ServiceAccountCreatePayload",
     "ServiceAccountPolicyRef",
     "ServiceAccountsWithPolicy",
@@ -2976,6 +3007,7 @@ __all__ = (
     "StorageManagementPolicyRequest",
     "StorageManagementPolicyResponseIsTheAPIFacingPolicyRepresentation",
     "StreamResponseBaseProvidesTheCommonDoneAndErrorFieldsForAllStreamingResponses",
+    "SubjectBucket",
     "SubjectHoldsBothDatadogAndGCNamesForExplainability",
     "SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATime",
     "SubjectIsWhatARootInvestigatesAtMostOneRootPerIssueFiringCycleIsOpenAtATimeType",
